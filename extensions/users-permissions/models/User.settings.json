@@ -85,6 +85,10 @@
     "type": {
       "type": "integer",
       "default": 3
+    },
+    "orders": {
+      "via": "customer",
+      "collection": "order"
     }
   }
 }

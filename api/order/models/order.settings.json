@@ -1,0 +1,73 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "name": "Order"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "from_address": {
+      "type": "text",
+      "required": true
+    },
+    "to_address": {
+      "type": "text",
+      "required": true
+    },
+    "fee": {
+      "type": "decimal",
+      "required": true
+    },
+    "remain_fee": {
+      "type": "decimal",
+      "required": true
+    },
+    "state": {
+      "type": "integer",
+      "default": 0,
+      "required": true
+    },
+    "note": {
+      "type": "text"
+    },
+    "sender_name": {
+      "type": "string",
+      "required": true
+    },
+    "sender_phone": {
+      "type": "string",
+      "required": true
+    },
+    "receiver_name": {
+      "type": "string",
+      "required": true
+    },
+    "receiver_phone": {
+      "type": "string",
+      "required": true
+    },
+    "rating_point": {
+      "type": "integer"
+    },
+    "rating_note": {
+      "type": "text"
+    },
+    "voucher": {
+      "model": "voucher"
+    },
+    "customer": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "orders"
+    },
+    "packages": {
+      "via": "order",
+      "collection": "package"
+    }
+  }
+}

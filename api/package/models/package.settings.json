@@ -1,0 +1,72 @@
+{
+  "kind": "collectionType",
+  "collectionName": "packages",
+  "info": {
+    "name": "package",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "code": {
+      "type": "string",
+      "required": false
+    },
+    "quantity": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "weight": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "len": {
+      "type": "decimal",
+      "required": true
+    },
+    "width": {
+      "type": "decimal",
+      "required": true
+    },
+    "height": {
+      "type": "decimal",
+      "required": true
+    },
+    "state": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "current_address": {
+      "type": "string"
+    },
+    "order": {
+      "model": "order",
+      "via": "packages"
+    },
+    "package_type": {
+      "type": "enumeration",
+      "enum": [
+        "fragile",
+        "smelly",
+        "explosion"
+      ]
+    },
+    "images": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    }
+  }
+}

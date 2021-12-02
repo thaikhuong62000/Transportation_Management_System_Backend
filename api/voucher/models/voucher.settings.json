@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vouchers",
+  "info": {
+    "name": "Voucher"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "sale": {
+      "type": "decimal",
+      "required": true
+    },
+    "sale_max": {
+      "type": "float",
+      "required": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "expired": {
+      "type": "datetime"
+    }
+  }
+}
