@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/car-brokens",
+      "handler": "car-broken.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/car-brokens/count",
+      "handler": "car-broken.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/car-brokens/:id",
+      "handler": "car-broken.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/car-brokens",
+      "handler": "car-broken.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/car-brokens/:id",
+      "handler": "car-broken.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/car-brokens/:id",
+      "handler": "car-broken.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

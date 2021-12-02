@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "car_brokens",
+  "info": {
+    "name": "Car Broken"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "time": {
+      "required": true,
+      "type": "datetime"
+    },
+    "note": {
+      "type": "text"
+    },
+    "car": {
+      "model": "car",
+      "via": "car_brokens"
+    }
+  }
+}

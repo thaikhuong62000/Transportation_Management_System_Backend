@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cars",
+  "info": {
+    "name": "Car"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "licence": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "load": {
+      "type": "float",
+      "required": true
+    },
+    "len": {
+      "type": "float",
+      "required": true
+    },
+    "width": {
+      "type": "float",
+      "required": true
+    },
+    "height": {
+      "type": "float",
+      "required": true
+    },
+    "manager": {
+      "via": "car",
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "car_brokens": {
+      "via": "car",
+      "collection": "car-broken"
+    }
+  }
+}
