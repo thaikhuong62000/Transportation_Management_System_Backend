@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "exports",
+  "info": {
+    "name": "export"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "code": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "integer",
+      "required": true
+    },
+    "store_manager": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "package": {
+      "model": "package",
+      "via": "exports"
+    },
+    "storage": {
+      "model": "storage",
+      "via": "exports"
+    }
+  }
+}

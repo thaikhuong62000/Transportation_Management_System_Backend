@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "storages",
+  "info": {
+    "name": "storage"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
+    },
+    "size": {
+      "type": "decimal"
+    },
+    "store_managers": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "storage"
+    },
+    "imports": {
+      "via": "storage",
+      "collection": "import"
+    },
+    "exports": {
+      "via": "storage",
+      "collection": "export"
+    }
+  }
+}

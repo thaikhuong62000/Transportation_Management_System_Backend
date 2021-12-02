@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shipments",
+  "info": {
+    "name": "shipment",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "arrived_time": {
+      "type": "datetime"
+    },
+    "car": {
+      "model": "car"
+    },
+    "driver": {
+      "via": "shipments",
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "assistance": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "from_address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
+    },
+    "to_address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
+    }
+  }
+}

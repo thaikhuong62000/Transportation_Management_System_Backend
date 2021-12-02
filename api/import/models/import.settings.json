@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "imports",
+  "info": {
+    "name": "import"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "code": {
+      "type": "string",
+      "required": true
+    },
+    "quantity": {
+      "type": "integer",
+      "default": 0,
+      "required": true
+    },
+    "storage_manager": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "package": {
+      "model": "package",
+      "via": "imports"
+    },
+    "storage": {
+      "model": "storage",
+      "via": "imports"
+    }
+  }
+}

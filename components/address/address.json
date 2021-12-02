@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_address_addresses",
+  "info": {
+    "name": "Address",
+    "icon": "map-marked-alt"
+  },
+  "options": {},
+  "attributes": {
+    "street": {
+      "type": "string"
+    },
+    "ward": {
+      "type": "string"
+    },
+    "province": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "float"
+    },
+    "longtitude": {
+      "type": "float"
+    }
+  }
+}

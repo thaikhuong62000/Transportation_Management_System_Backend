@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "orders",
   "info": {
-    "name": "Order"
+    "name": "Order",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -11,14 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "from_address": {
-      "type": "text",
-      "required": true
-    },
-    "to_address": {
-      "type": "text",
-      "required": true
-    },
     "fee": {
       "type": "decimal",
       "required": true
@@ -61,13 +54,23 @@
       "model": "voucher"
     },
     "customer": {
+      "via": "orders",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "orders"
+      "model": "user"
     },
     "packages": {
       "via": "order",
       "collection": "package"
+    },
+    "from_address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
+    },
+    "to_address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
     }
   }
 }

@@ -71,9 +71,6 @@
       "type": "string",
       "required": true
     },
-    "address": {
-      "type": "text"
-    },
     "birthday": {
       "type": "date"
     },
@@ -89,6 +86,19 @@
     "orders": {
       "via": "customer",
       "collection": "order"
+    },
+    "shipments": {
+      "via": "driver",
+      "collection": "shipment"
+    },
+    "address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
+    },
+    "storage": {
+      "via": "store_managers",
+      "model": "storage"
     }
   }
 }

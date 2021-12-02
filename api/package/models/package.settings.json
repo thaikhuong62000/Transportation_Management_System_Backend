@@ -43,12 +43,9 @@
       "required": true,
       "default": 0
     },
-    "current_address": {
-      "type": "string"
-    },
     "order": {
-      "model": "order",
-      "via": "packages"
+      "via": "packages",
+      "model": "order"
     },
     "package_type": {
       "type": "enumeration",
@@ -67,6 +64,19 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "current_address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
+    },
+    "imports": {
+      "via": "package",
+      "collection": "import"
+    },
+    "exports": {
+      "via": "package",
+      "collection": "export"
     }
   }
 }
