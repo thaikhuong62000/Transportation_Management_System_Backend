@@ -24,9 +24,9 @@
       "type": "decimal"
     },
     "store_managers": {
+      "via": "storage",
       "plugin": "users-permissions",
-      "collection": "user",
-      "via": "storage"
+      "collection": "user"
     },
     "imports": {
       "via": "storage",

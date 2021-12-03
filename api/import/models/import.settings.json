@@ -25,8 +25,8 @@
       "model": "user"
     },
     "package": {
-      "model": "package",
-      "via": "imports"
+      "via": "imports",
+      "model": "package"
     },
     "storage": {
       "model": "storage",

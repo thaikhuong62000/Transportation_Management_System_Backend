@@ -1319,10 +1319,6 @@
             "type": "integer",
             "default": 0
           },
-          "type": {
-            "type": "integer",
-            "default": 3
-          },
           "orders": {
             "type": "array",
             "items": {
@@ -1387,6 +1383,9 @@
                 },
                 "to_address": {
                   "type": "component"
+                },
+                "name": {
+                  "type": "string"
                 },
                 "published_at": {
                   "type": "string"
@@ -1515,6 +1514,19 @@
                 "type": "string"
               }
             }
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Admin",
+              "Stocker",
+              "Driver",
+              "Assistance",
+              "User",
+              "Iron",
+              "Gold",
+              "Diamond"
+            ]
           }
         }
       },
@@ -1576,10 +1588,6 @@
             "type": "integer",
             "default": 0
           },
-          "type": {
-            "type": "integer",
-            "default": 3
-          },
           "orders": {
             "type": "array",
             "items": {
@@ -1623,6 +1631,19 @@
           },
           "storage": {
             "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Admin",
+              "Stocker",
+              "Driver",
+              "Assistance",
+              "User",
+              "Iron",
+              "Gold",
+              "Diamond"
+            ]
           },
           "created_by": {
             "type": "string"

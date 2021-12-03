@@ -79,10 +79,6 @@
       "default": 0,
       "required": false
     },
-    "type": {
-      "type": "integer",
-      "default": 3
-    },
     "orders": {
       "via": "customer",
       "collection": "order"
@@ -99,6 +95,19 @@
     "storage": {
       "via": "store_managers",
       "model": "storage"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Admin",
+        "Stocker",
+        "Driver",
+        "Assistance",
+        "User",
+        "Iron",
+        "Gold",
+        "Diamond"
+      ]
     }
   }
 }

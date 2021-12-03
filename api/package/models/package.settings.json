@@ -50,10 +50,12 @@
     "package_type": {
       "type": "enumeration",
       "enum": [
+        "normal",
         "fragile",
         "smelly",
         "explosion"
-      ]
+      ],
+      "default": "normal"
     },
     "images": {
       "collection": "file",
@@ -77,6 +79,9 @@
     "exports": {
       "via": "package",
       "collection": "export"
+    },
+    "name": {
+      "type": "string"
     }
   }
 }

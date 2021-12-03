@@ -23,8 +23,8 @@
       "model": "user"
     },
     "package": {
-      "model": "package",
-      "via": "exports"
+      "via": "exports",
+      "model": "package"
     },
     "storage": {
       "model": "storage",

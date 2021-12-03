@@ -600,9 +600,6 @@
               "point": {
                 "type": "integer"
               },
-              "type": {
-                "type": "integer"
-              },
               "orders": {
                 "type": "array",
                 "items": {
@@ -620,6 +617,19 @@
               },
               "storage": {
                 "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Admin",
+                  "Stocker",
+                  "Driver",
+                  "Assistance",
+                  "User",
+                  "Iron",
+                  "Gold",
+                  "Diamond"
+                ]
               },
               "created_by": {
                 "type": "string"

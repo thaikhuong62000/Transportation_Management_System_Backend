@@ -615,6 +615,9 @@
               "to_address": {
                 "type": "component"
               },
+              "name": {
+                "type": "string"
+              },
               "published_at": {
                 "type": "string"
               },
@@ -628,7 +631,9 @@
           },
           "package_type": {
             "type": "string",
+            "default": "normal",
             "enum": [
+              "normal",
               "fragile",
               "smelly",
               "explosion"
@@ -810,6 +815,9 @@
               }
             }
           },
+          "name": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -855,7 +863,9 @@
           },
           "package_type": {
             "type": "string",
+            "default": "normal",
             "enum": [
+              "normal",
               "fragile",
               "smelly",
               "explosion"
@@ -901,6 +911,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "name": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

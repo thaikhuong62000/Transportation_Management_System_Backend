@@ -71,6 +71,9 @@
       "type": "component",
       "repeatable": false,
       "component": "address.address"
+    },
+    "name": {
+      "type": "string"
     }
   }
 }
