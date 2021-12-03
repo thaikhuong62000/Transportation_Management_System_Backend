@@ -843,6 +843,52 @@
               }
             }
           },
+          "shipments": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "arrived_time": {
+                  "type": "string"
+                },
+                "car": {
+                  "type": "string"
+                },
+                "driver": {
+                  "type": "string"
+                },
+                "assistance": {
+                  "type": "string"
+                },
+                "from_address": {
+                  "type": "component"
+                },
+                "to_address": {
+                  "type": "component"
+                },
+                "packages": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -957,6 +1003,12 @@
                   "smell"
                 ]
               }
+            }
+          },
+          "shipments": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
           "published_at": {

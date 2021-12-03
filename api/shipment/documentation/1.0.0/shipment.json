@@ -849,6 +849,82 @@
               }
             }
           },
+          "packages": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "quantity",
+                "weight",
+                "state"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "quantity": {
+                  "type": "integer"
+                },
+                "weight": {
+                  "type": "number"
+                },
+                "state": {
+                  "type": "integer"
+                },
+                "order": {
+                  "type": "string"
+                },
+                "images": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "current_address": {
+                  "type": "component"
+                },
+                "imports": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "exports": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "name": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "component"
+                },
+                "package_type": {
+                  "type": "component"
+                },
+                "shipments": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -926,6 +1002,12 @@
               "longtitude": {
                 "type": "number"
               }
+            }
+          },
+          "packages": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
           "published_at": {

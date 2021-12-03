@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "12/03/2021 1:09:18 PM"
+    "x-generation-date": "12/03/2021 6:27:12 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -9476,6 +9476,12 @@
               "package_type": {
                 "type": "component"
               },
+              "shipments": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "published_at": {
                 "type": "string"
               },
@@ -9937,6 +9943,12 @@
               },
               "package_type": {
                 "type": "component"
+              },
+              "shipments": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "published_at": {
                 "type": "string"
@@ -10564,6 +10576,12 @@
                 },
                 "package_type": {
                   "type": "component"
+                },
+                "shipments": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "published_at": {
                   "type": "string"
@@ -11399,6 +11417,52 @@
               }
             }
           },
+          "shipments": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "arrived_time": {
+                  "type": "string"
+                },
+                "car": {
+                  "type": "string"
+                },
+                "driver": {
+                  "type": "string"
+                },
+                "assistance": {
+                  "type": "string"
+                },
+                "from_address": {
+                  "type": "component"
+                },
+                "to_address": {
+                  "type": "component"
+                },
+                "packages": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -11513,6 +11577,12 @@
                   "smell"
                 ]
               }
+            }
+          },
+          "shipments": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
           "published_at": {
@@ -12020,6 +12090,82 @@
               }
             }
           },
+          "packages": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "quantity",
+                "weight",
+                "state"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "quantity": {
+                  "type": "integer"
+                },
+                "weight": {
+                  "type": "number"
+                },
+                "state": {
+                  "type": "integer"
+                },
+                "order": {
+                  "type": "string"
+                },
+                "images": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "current_address": {
+                  "type": "component"
+                },
+                "imports": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "exports": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "name": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "component"
+                },
+                "package_type": {
+                  "type": "component"
+                },
+                "shipments": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -12097,6 +12243,12 @@
               "longtitude": {
                 "type": "number"
               }
+            }
+          },
+          "packages": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
           "published_at": {
@@ -12942,6 +13094,12 @@
                 },
                 "to_address": {
                   "type": "component"
+                },
+                "packages": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "published_at": {
                   "type": "string"

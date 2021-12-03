@@ -70,6 +70,10 @@
       "type": "component",
       "repeatable": false,
       "component": "package.package-type"
+    },
+    "shipments": {
+      "via": "packages",
+      "collection": "shipment"
     }
   }
 }

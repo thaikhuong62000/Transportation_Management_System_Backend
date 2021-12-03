@@ -36,6 +36,11 @@
       "type": "component",
       "repeatable": false,
       "component": "address.address"
+    },
+    "packages": {
+      "collection": "package",
+      "via": "shipments",
+      "dominant": true
     }
   }
 }

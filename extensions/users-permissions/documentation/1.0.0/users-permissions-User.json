@@ -1424,6 +1424,12 @@
                 "to_address": {
                   "type": "component"
                 },
+                "packages": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "published_at": {
                   "type": "string"
                 },
