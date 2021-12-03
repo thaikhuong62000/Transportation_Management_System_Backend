@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "cars",
   "info": {
-    "name": "Car"
+    "name": "Car",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -24,18 +25,6 @@
       "type": "float",
       "required": true
     },
-    "len": {
-      "type": "float",
-      "required": true
-    },
-    "width": {
-      "type": "float",
-      "required": true
-    },
-    "height": {
-      "type": "float",
-      "required": true
-    },
     "manager": {
       "via": "car",
       "plugin": "users-permissions",
@@ -44,6 +33,11 @@
     "car_brokens": {
       "via": "car",
       "collection": "car-broken"
+    },
+    "size": {
+      "type": "component",
+      "repeatable": false,
+      "component": "package.size"
     }
   }
 }

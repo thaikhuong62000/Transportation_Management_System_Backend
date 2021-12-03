@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "order_templates",
+  "info": {
+    "name": "Order Template",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "receiver_name": {
+      "type": "string"
+    },
+    "receiver_phone": {
+      "type": "string"
+    },
+    "from_address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
+    },
+    "to_address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "order_templates"
+    }
+  }
+}

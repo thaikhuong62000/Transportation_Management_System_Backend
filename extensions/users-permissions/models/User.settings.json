@@ -108,6 +108,18 @@
         "Gold",
         "Diamond"
       ]
+    },
+    "furloughs": {
+      "via": "driver",
+      "collection": "furlough"
+    },
+    "package_templates": {
+      "via": "user",
+      "collection": "package-template"
+    },
+    "order_templates": {
+      "via": "user",
+      "collection": "order-template"
     }
   }
 }

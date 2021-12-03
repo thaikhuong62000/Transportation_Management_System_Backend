@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "furloughs",
+  "info": {
+    "name": "furlough"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "state": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "accepted",
+        "canceled"
+      ],
+      "default": "pending"
+    },
+    "reason": {
+      "type": "text"
+    },
+    "start_time": {
+      "type": "datetime"
+    },
+    "end_time": {
+      "type": "datetime"
+    },
+    "driver": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "furloughs"
+    }
+  }
+}

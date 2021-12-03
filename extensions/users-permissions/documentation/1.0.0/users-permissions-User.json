@@ -1258,10 +1258,7 @@
               "id",
               "licence",
               "type",
-              "load",
-              "len",
-              "width",
-              "height"
+              "load"
             ],
             "properties": {
               "id": {
@@ -1276,15 +1273,6 @@
               "load": {
                 "type": "number"
               },
-              "len": {
-                "type": "number"
-              },
-              "width": {
-                "type": "number"
-              },
-              "height": {
-                "type": "number"
-              },
               "manager": {
                 "type": "string"
               },
@@ -1293,6 +1281,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "size": {
+                "type": "component"
               },
               "published_at": {
                 "type": "string"
@@ -1386,6 +1377,12 @@
                 },
                 "name": {
                   "type": "string"
+                },
+                "payments": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "published_at": {
                   "type": "string"
@@ -1527,6 +1524,131 @@
               "Gold",
               "Diamond"
             ]
+          },
+          "furloughs": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string",
+                  "enum": [
+                    "pending",
+                    "accepted",
+                    "canceled"
+                  ]
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "start_time": {
+                  "type": "string"
+                },
+                "end_time": {
+                  "type": "string"
+                },
+                "driver": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "package_templates": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "Package_Type": {
+                  "type": "component"
+                },
+                "quantity": {
+                  "type": "integer"
+                },
+                "weight": {
+                  "type": "number"
+                },
+                "size": {
+                  "type": "component"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "order_templates": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "receiver_name": {
+                  "type": "string"
+                },
+                "receiver_phone": {
+                  "type": "string"
+                },
+                "from_address": {
+                  "type": "component"
+                },
+                "to_address": {
+                  "type": "component"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1644,6 +1766,24 @@
               "Gold",
               "Diamond"
             ]
+          },
+          "furloughs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "package_templates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "order_templates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

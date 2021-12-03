@@ -74,6 +74,10 @@
     },
     "name": {
       "type": "string"
+    },
+    "payments": {
+      "via": "order",
+      "collection": "payment"
     }
   }
 }

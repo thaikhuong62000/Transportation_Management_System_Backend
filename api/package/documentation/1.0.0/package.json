@@ -519,9 +519,6 @@
           "id",
           "quantity",
           "weight",
-          "len",
-          "width",
-          "height",
           "state"
         ],
         "properties": {
@@ -538,15 +535,6 @@
           "weight": {
             "type": "number",
             "default": 0
-          },
-          "len": {
-            "type": "number"
-          },
-          "width": {
-            "type": "number"
-          },
-          "height": {
-            "type": "number"
           },
           "state": {
             "type": "integer",
@@ -618,6 +606,12 @@
               "name": {
                 "type": "string"
               },
+              "payments": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "published_at": {
                 "type": "string"
               },
@@ -628,16 +622,6 @@
                 "type": "string"
               }
             }
-          },
-          "package_type": {
-            "type": "string",
-            "default": "normal",
-            "enum": [
-              "normal",
-              "fragile",
-              "smelly",
-              "explosion"
-            ]
           },
           "images": {
             "type": "array",
@@ -818,6 +802,47 @@
           "name": {
             "type": "string"
           },
+          "size": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "len": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              },
+              "height": {
+                "type": "number"
+              }
+            }
+          },
+          "package_type": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "package_type": {
+                "type": "string",
+                "default": "normal",
+                "enum": [
+                  "normal",
+                  "fragile",
+                  "explosive",
+                  "smell"
+                ]
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -828,9 +853,6 @@
         "required": [
           "quantity",
           "weight",
-          "len",
-          "width",
-          "height",
           "state"
         ],
         "properties": {
@@ -845,31 +867,12 @@
             "type": "number",
             "default": 0
           },
-          "len": {
-            "type": "number"
-          },
-          "width": {
-            "type": "number"
-          },
-          "height": {
-            "type": "number"
-          },
           "state": {
             "type": "integer",
             "default": 0
           },
           "order": {
             "type": "string"
-          },
-          "package_type": {
-            "type": "string",
-            "default": "normal",
-            "enum": [
-              "normal",
-              "fragile",
-              "smelly",
-              "explosion"
-            ]
           },
           "current_address": {
             "type": "object",
@@ -914,6 +917,47 @@
           },
           "name": {
             "type": "string"
+          },
+          "size": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "len": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              },
+              "height": {
+                "type": "number"
+              }
+            }
+          },
+          "package_type": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "package_type": {
+                "type": "string",
+                "default": "normal",
+                "enum": [
+                  "normal",
+                  "fragile",
+                  "explosive",
+                  "smell"
+                ]
+              }
+            }
           },
           "published_at": {
             "type": "string",

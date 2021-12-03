@@ -519,10 +519,7 @@
           "id",
           "licence",
           "type",
-          "load",
-          "len",
-          "width",
-          "height"
+          "load"
         ],
         "properties": {
           "id": {
@@ -535,15 +532,6 @@
             "type": "string"
           },
           "load": {
-            "type": "number"
-          },
-          "len": {
-            "type": "number"
-          },
-          "width": {
-            "type": "number"
-          },
-          "height": {
             "type": "number"
           },
           "manager": {
@@ -631,6 +619,24 @@
                   "Diamond"
                 ]
               },
+              "furloughs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "package_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "order_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -671,6 +677,26 @@
               }
             }
           },
+          "size": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "len": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              },
+              "height": {
+                "type": "number"
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -681,10 +707,7 @@
         "required": [
           "licence",
           "type",
-          "load",
-          "len",
-          "width",
-          "height"
+          "load"
         ],
         "properties": {
           "licence": {
@@ -696,15 +719,6 @@
           "load": {
             "type": "number"
           },
-          "len": {
-            "type": "number"
-          },
-          "width": {
-            "type": "number"
-          },
-          "height": {
-            "type": "number"
-          },
           "manager": {
             "type": "string"
           },
@@ -712,6 +726,26 @@
             "type": "array",
             "items": {
               "type": "string"
+            }
+          },
+          "size": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "len": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              },
+              "height": {
+                "type": "number"
+              }
             }
           },
           "published_at": {

@@ -645,6 +645,24 @@
                     "Diamond"
                   ]
                 },
+                "furloughs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "package_templates": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "order_templates": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },

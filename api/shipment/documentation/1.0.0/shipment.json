@@ -531,10 +531,7 @@
               "id",
               "licence",
               "type",
-              "load",
-              "len",
-              "width",
-              "height"
+              "load"
             ],
             "properties": {
               "id": {
@@ -549,15 +546,6 @@
               "load": {
                 "type": "number"
               },
-              "len": {
-                "type": "number"
-              },
-              "width": {
-                "type": "number"
-              },
-              "height": {
-                "type": "number"
-              },
               "manager": {
                 "type": "string"
               },
@@ -566,6 +554,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "size": {
+                "type": "component"
               },
               "published_at": {
                 "type": "string"
@@ -663,6 +654,24 @@
                   "Diamond"
                 ]
               },
+              "furloughs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "package_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "order_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -755,6 +764,24 @@
                   "Gold",
                   "Diamond"
                 ]
+              },
+              "furloughs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "package_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "order_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"

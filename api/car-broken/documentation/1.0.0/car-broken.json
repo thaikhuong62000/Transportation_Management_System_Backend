@@ -548,10 +548,7 @@
               "id",
               "licence",
               "type",
-              "load",
-              "len",
-              "width",
-              "height"
+              "load"
             ],
             "properties": {
               "id": {
@@ -566,15 +563,6 @@
               "load": {
                 "type": "number"
               },
-              "len": {
-                "type": "number"
-              },
-              "width": {
-                "type": "number"
-              },
-              "height": {
-                "type": "number"
-              },
               "manager": {
                 "type": "string"
               },
@@ -583,6 +571,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "size": {
+                "type": "component"
               },
               "published_at": {
                 "type": "string"

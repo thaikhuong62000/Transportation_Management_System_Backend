@@ -19,8 +19,8 @@
       "type": "text"
     },
     "car": {
-      "model": "car",
-      "via": "car_brokens"
+      "via": "car_brokens",
+      "model": "car"
     }
   }
 }

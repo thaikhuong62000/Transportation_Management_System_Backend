@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "package_templates",
+  "info": {
+    "name": "package template",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "Package_Type": {
+      "type": "component",
+      "repeatable": false,
+      "component": "package.package-type"
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "weight": {
+      "type": "decimal"
+    },
+    "size": {
+      "type": "component",
+      "repeatable": false,
+      "component": "package.size"
+    },
+    "note": {
+      "type": "text"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "package_templates"
+    }
+  }
+}

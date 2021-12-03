@@ -683,6 +683,24 @@
                   "Diamond"
                 ]
               },
+              "furloughs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "package_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "order_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -698,9 +716,6 @@
                 "id",
                 "quantity",
                 "weight",
-                "len",
-                "width",
-                "height",
                 "state"
               ],
               "properties": {
@@ -716,29 +731,11 @@
                 "weight": {
                   "type": "number"
                 },
-                "len": {
-                  "type": "number"
-                },
-                "width": {
-                  "type": "number"
-                },
-                "height": {
-                  "type": "number"
-                },
                 "state": {
                   "type": "integer"
                 },
                 "order": {
                   "type": "string"
-                },
-                "package_type": {
-                  "type": "string",
-                  "enum": [
-                    "normal",
-                    "fragile",
-                    "smelly",
-                    "explosion"
-                  ]
                 },
                 "images": {
                   "type": "array",
@@ -763,6 +760,12 @@
                 },
                 "name": {
                   "type": "string"
+                },
+                "size": {
+                  "type": "component"
+                },
+                "package_type": {
+                  "type": "component"
                 },
                 "published_at": {
                   "type": "string"
@@ -836,6 +839,51 @@
           },
           "name": {
             "type": "string"
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "payer_name": {
+                  "type": "string"
+                },
+                "payer_phone": {
+                  "type": "string"
+                },
+                "paid": {
+                  "type": "number"
+                },
+                "time": {
+                  "type": "string"
+                },
+                "order": {
+                  "type": "string"
+                },
+                "method": {
+                  "type": "string",
+                  "enum": [
+                    "direct",
+                    "momo",
+                    "banking"
+                  ]
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "published_at": {
             "type": "string",
@@ -957,6 +1005,12 @@
           },
           "name": {
             "type": "string"
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "published_at": {
             "type": "string",

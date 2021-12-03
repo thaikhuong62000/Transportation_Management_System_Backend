@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/furloughs",
+      "handler": "furlough.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/furloughs/count",
+      "handler": "furlough.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/furloughs/:id",
+      "handler": "furlough.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/furloughs",
+      "handler": "furlough.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/furloughs/:id",
+      "handler": "furlough.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/furloughs/:id",
+      "handler": "furlough.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

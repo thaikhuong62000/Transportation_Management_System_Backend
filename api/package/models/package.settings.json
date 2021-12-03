@@ -26,18 +26,6 @@
       "required": true,
       "default": 0
     },
-    "len": {
-      "type": "decimal",
-      "required": true
-    },
-    "width": {
-      "type": "decimal",
-      "required": true
-    },
-    "height": {
-      "type": "decimal",
-      "required": true
-    },
     "state": {
       "type": "integer",
       "required": true,
@@ -46,16 +34,6 @@
     "order": {
       "via": "packages",
       "model": "order"
-    },
-    "package_type": {
-      "type": "enumeration",
-      "enum": [
-        "normal",
-        "fragile",
-        "smelly",
-        "explosion"
-      ],
-      "default": "normal"
     },
     "images": {
       "collection": "file",
@@ -82,6 +60,16 @@
     },
     "name": {
       "type": "string"
+    },
+    "size": {
+      "type": "component",
+      "repeatable": false,
+      "component": "package.size"
+    },
+    "package_type": {
+      "type": "component",
+      "repeatable": false,
+      "component": "package.package-type"
     }
   }
 }
