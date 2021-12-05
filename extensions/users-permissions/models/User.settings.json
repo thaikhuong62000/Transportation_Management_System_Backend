@@ -120,6 +120,16 @@
     "order_templates": {
       "via": "user",
       "collection": "order-template"
+    },
+    "avatar": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
     }
   }
 }

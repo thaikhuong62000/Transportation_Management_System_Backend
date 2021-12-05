@@ -35,9 +35,9 @@
       "type": "text"
     },
     "user": {
+      "via": "package_templates",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "package_templates"
+      "model": "user"
     }
   }
 }

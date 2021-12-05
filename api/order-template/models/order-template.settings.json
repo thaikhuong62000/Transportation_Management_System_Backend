@@ -32,9 +32,9 @@
       "component": "address.address"
     },
     "user": {
+      "via": "order_templates",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "order_templates"
+      "model": "user"
     }
   }
 }
