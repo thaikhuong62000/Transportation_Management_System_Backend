@@ -1,0 +1,18 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/auth/local",
+      "handler": "Auth.callback",
+      "config": {
+        "policies": ["plugins::users-permissions.ratelimit", "plugins::users-permissions.sanitize-userdata"],
+        "prefix": "",
+        "description": "Login a user using the identifiers email and password",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
+    }
+  ]
+}
