@@ -13,6 +13,16 @@
           "name": "User"
         }
       }
+    },
+    {
+      "method": "GET",
+      "path": "/driver/status",
+      "handler": "CustomUser.getDriverStatus",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Get current status for Driver's Homepage"
+      }
     }
   ]
 }

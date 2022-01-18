@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+      {
+      "method": "GET",
+      "path": "/current-shipments",
+      "handler": "shipment.getCurrentShipment",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
