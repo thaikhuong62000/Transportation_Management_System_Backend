@@ -1,4 +1,6 @@
 "use strict";
+const { sanitizeEntity } = require("strapi-utils");
+var moment = require("moment");
 
 module.exports = {
   async getDriverStatus(ctx) {
@@ -9,14 +11,15 @@ module.exports = {
 
     let finishedShip =
       await strapi.services.shipment.getFinishedShipmentByDriverByMonth(
-        ctx.state.user.id
+        ctx.state.user.id,
+        parseInt(moment().format("MM"))
       );
 
     let car = await strapi.services.car.findOne({ id: ctx.state.user.car }, []);
 
     return [
       {
-        name: "Đơn hàng đã nhận",
+        name: "Đơn hàng hiện tại",
         iconName: "assignment",
         count: unfinishedShip.length,
         color: "#f0b432",
