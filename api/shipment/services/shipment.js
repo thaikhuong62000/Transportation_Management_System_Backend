@@ -17,7 +17,6 @@ module.exports = {
     return entities;
   },
   async getFinishedShipmentByDriverByMonth(driverId, month = 1) {
-    console.log("Driver ID: " + driverId);
     let entities = strapi
       .query("shipment")
       .model.aggregate()

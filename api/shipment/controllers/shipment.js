@@ -16,7 +16,7 @@ module.exports = {
     return shipments.map((entity) =>
       sanitizeEntity(entity, {
         model: strapi.models.shipment,
-        // includeFields: ["load", "manager"],
+        includeFields: ["to_address"],
       })
     );
   },
