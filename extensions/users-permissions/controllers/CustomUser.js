@@ -33,7 +33,7 @@ module.exports = {
       {
         name: "Trạng thái xe",
         iconName: "local-shipping",
-        count: car ? 1 : 0,
+        count: car ? "Tốt" : "Không tốt",
         color: "#1cacff",
       },
     ];
