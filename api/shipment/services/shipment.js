@@ -25,4 +25,17 @@ module.exports = {
       .match({ month: month });
     return entities;
   },
+  async getFinishedShipmentByDriver(driverId, skip, limit) {
+    let entities = strapi
+      .query("shipment")
+      .model.find()
+      .where("driver")
+      .eq(driverId)
+      .where("arrived_time")
+      .ne(null)
+      .sort("-arrived_time")
+      .skip(skip)
+      .limit(limit);
+    return entities;
+  },
 };

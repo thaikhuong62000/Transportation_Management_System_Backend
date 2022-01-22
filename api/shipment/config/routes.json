@@ -48,10 +48,18 @@
         "policies": []
       }
     },
-      {
+    {
       "method": "GET",
       "path": "/current-shipments",
       "handler": "shipment.getCurrentShipment",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/finished-shipments",
+      "handler": "shipment.getFinishedShipment",
       "config": {
         "policies": []
       }
