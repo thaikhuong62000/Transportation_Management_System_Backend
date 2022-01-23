@@ -8,6 +8,24 @@ var moment = require("moment");
  */
 
 module.exports = {
+  async findOne(ctx) {
+    const { id } = ctx.params;
+
+    let shipment = await strapi.services.shipment.findOne({ id }, ["packages"]);
+    shipment = sanitizeEntity(shipment, {
+      model: strapi.models.shipment,
+      includeFields: ["packages"],
+    });
+
+    if (shipment.packages.length > 0) {
+      const order = await strapi.services.order.findOne(
+        { id: shipment.packages[0].order },
+        []
+      );
+      return { ...shipment, ...order };
+    } else return shipment;
+  },
+
   async getCurrentShipment(ctx) {
     let shipments =
       await strapi.services.shipment.getUnfinishedShipmentByDriver(
@@ -21,6 +39,7 @@ module.exports = {
       })
     );
   },
+
   async getFinishedShipment(ctx) {
     const { pageIndex = 0 } = ctx.query;
     let shipments = await strapi.services.shipment.getFinishedShipmentByDriver(
