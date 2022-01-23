@@ -17,7 +17,7 @@ module.exports = {
     return shipments.map((entity) =>
       sanitizeEntity(entity, {
         model: strapi.models.shipment,
-        includeFields: ["to_address"],
+        includeFields: ["to_address", "arrived_time"],
       })
     );
   },
@@ -32,7 +32,7 @@ module.exports = {
     return shipments.map((entity) =>
       sanitizeEntity(entity, {
         model: strapi.models.shipment,
-        includeFields: ["to_address"],
+        includeFields: ["to_address", "arrived_time"],
       })
     );
   },
