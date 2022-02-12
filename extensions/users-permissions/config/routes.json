@@ -23,6 +23,15 @@
         "prefix": "",
         "description": "Get current status for Driver's Homepage"
       }
+    },
+    {
+      "method": "GET",
+      "path": "/driver/user/:id",
+      "handler": "User.getCustomerInfo",
+      "config": {
+        "policies": [],
+        "prefix": ""
+      }
     }
   ]
 }
