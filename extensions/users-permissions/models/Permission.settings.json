@@ -1,5 +1,4 @@
 {
-  "connection": "local_db",
   "info": {
     "name": "permission",
     "description": ""

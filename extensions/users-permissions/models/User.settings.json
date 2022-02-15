@@ -1,6 +1,5 @@
 {
   "kind": "collectionType",
-  "connection": "local_db",
   "collectionName": "users-permissions_user",
   "info": {
     "name": "user",
