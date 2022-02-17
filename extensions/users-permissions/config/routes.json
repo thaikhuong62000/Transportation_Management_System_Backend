@@ -5,7 +5,10 @@
       "path": "/auth/local",
       "handler": "Auth.callback",
       "config": {
-        "policies": ["plugins::users-permissions.ratelimit", "plugins::users-permissions.sanitize-userdata"],
+        "policies": [
+          "plugins::users-permissions.ratelimit",
+          "plugins::users-permissions.sanitize-userdata"
+        ],
         "prefix": "",
         "description": "Login a user using the identifiers email and password",
         "tag": {
@@ -25,9 +28,9 @@
       }
     },
     {
-      "method": "GET",
-      "path": "/driver/user/:id",
-      "handler": "User.getCustomerInfo",
+      "method": "POST",
+      "path": "/auth/password/update/:id",
+      "handler": "User.updatePassword",
       "config": {
         "policies": [],
         "prefix": ""

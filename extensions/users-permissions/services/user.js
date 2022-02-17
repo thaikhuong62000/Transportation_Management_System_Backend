@@ -14,4 +14,15 @@ module.exports = {
       .eq(id);
     return customer;
   },
+
+  async updatePassword(id, password) {
+    let user = strapi
+      .query("user", "users-permissions")
+      .model.findOneAndUpdate(
+        { _id: mongoose.Types.ObjectId(id) },
+        { password: password },
+        { new: true }
+      );
+    return user;
+  },
 };
