@@ -1,7 +1,7 @@
 module.exports = ({ env }) => ({
   defaultConnection: "default",
   connections: {
-    not_default: {
+    default: {
       connector: "mongoose",
       settings: {
         host: env("DATABASE_HOST", "cluster0.t5q90.mongodb.net"),
@@ -16,7 +16,7 @@ module.exports = ({ env }) => ({
         ssl: env.bool("DATABASE_SSL", true),
       },
     },
-    default: {
+    not_default: {
       connector: "mongoose",
       settings: {
         host: env("DATABASE_HOST", "127.0.0.1"),
