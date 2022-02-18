@@ -38,7 +38,7 @@ module.exports = {
       .limit(limit);
     return entities;
   },
-  async getTotalPackageNeedImport(storageId, storageName) {
+  async getTotalPackageNeedImport(storageName) {
     let packageIdList = await strapi.query("shipment").model.aggregate([
       {
         $match: {

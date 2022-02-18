@@ -47,10 +47,7 @@ module.exports = {
     });
 
     const totalPackage =
-      await strapi.services.shipment.getTotalPackageNeedImport(
-        storageId,
-        storage[0].name
-      );
+      await strapi.services.shipment.getTotalPackageNeedImport(storage[0].name);
 
     return {
       ...totalPackage,
