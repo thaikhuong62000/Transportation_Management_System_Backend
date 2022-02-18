@@ -39,7 +39,8 @@ module.exports = {
     return sanitizeEntity(updatedPassword, {
       model: strapi.query("user", "users-permissions").model,
     });
-    
+  },
+
   /**
    * Uploading new Image, remove old image
    * Set new Image to current user.
