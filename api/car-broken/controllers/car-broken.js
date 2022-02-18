@@ -1,8 +1,32 @@
-'use strict';
+"use strict";
 
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
- * to customize this controller
- */
+module.exports = {
+  /**
+   * Create a record in table car_broken.
+   *
+   * @return {Object}
+   */
+  async create(ctx) {
+    // Validation
+    const data = ctx.request.body;
+    const timestamp = Date.parse(data.time);
+    if (isNaN(timestamp)) {
+      // Wrong time format
+      return ctx.badRequest("Wrong time format");
+    }
 
-module.exports = {};
+    try {
+      if (data.car === undefined) {
+        throw "Car id undefined";
+      }
+      await strapi.services.car.findOne({ id: data.car });
+    } catch (error) {
+      // Car not found
+      return ctx.badRequest("Car not found");
+    }
+
+    // Add Car_broken
+    await strapi.services["car-broken"].create(data);
+    return ctx.created("Car_broken created.");
+  },
+};
