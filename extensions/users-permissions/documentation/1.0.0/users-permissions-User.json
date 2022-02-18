@@ -1430,6 +1430,12 @@
                     "type": "string"
                   }
                 },
+                "from_storage": {
+                  "type": "string"
+                },
+                "to_storage": {
+                  "type": "string"
+                },
                 "published_at": {
                   "type": "string"
                 },

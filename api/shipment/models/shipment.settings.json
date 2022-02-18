@@ -41,6 +41,12 @@
       "collection": "package",
       "via": "shipments",
       "dominant": true
+    },
+    "from_storage": {
+      "type": "string"
+    },
+    "to_storage": {
+      "type": "string"
     }
   }
 }
