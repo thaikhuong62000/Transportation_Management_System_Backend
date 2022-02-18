@@ -63,6 +63,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/shipments/vehicle-detail/:id",
+      "handler": "shipment.getVehicleDetailByShipment",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
