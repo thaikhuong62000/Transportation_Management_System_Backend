@@ -35,6 +35,15 @@
         "policies": [],
         "prefix": ""
       }
+    },
+    {
+      "method": "GET",
+      "path": "/storekeeper/status",
+      "handler": "CustomUser.getStorekeeperStatus",
+      "config": {
+        "policies": [],
+        "prefix": ""
+      }
     }
   ]
 }

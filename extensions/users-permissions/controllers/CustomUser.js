@@ -38,4 +38,23 @@ module.exports = {
       },
     ];
   },
+
+  async getStorekeeperStatus(ctx) {
+    const storageId = ctx.state.user.storage;
+
+    const storage = await strapi.query("storage").model.find({
+      _id: storageId,
+    });
+
+    const totalPackage =
+      await strapi.services.shipment.getTotalPackageNeedImport(
+        storageId,
+        storage[0].name
+      );
+
+    return {
+      ...totalPackage,
+      storage_status: "Đầy",
+    };
+  },
 };
