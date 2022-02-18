@@ -6,39 +6,32 @@
  */
 
 module.exports = {
+  /**
+   *  Create a furlough
+   */
   async create(ctx) {
-    const {
-      id,
-      start_time,
-      end_time,
-      reason = "",
-      state = "pending",
-    } = ctx.request.body;
+    let { start_time, end_time, reason } = ctx.request.body;
 
-    if (new Date(start_time) > new Date(end_time)) {
+    start_time = Date.parse(start_time);
+    end_time = Date.parse(end_time);
+    if (isNaN(start_time) || isNaN(end_time)) {
+      // Wrong time format
+      return ctx.badRequest("Wrong start time format");
+    }
+    
+    if (start_time > end_time) {
       return ctx.badRequest("Start time must not be larger than end time!");
     }
 
-    if (new Date(start_time) < new Date()) {
-      return ctx.badRequest("Invalid start time!");
-    }
-
-    const user = await strapi
-      .query("user", "users-permissions")
-      .findOne({ _id: id });
-
-    if (!user) {
-      return ctx.badRequest(null, "Driver not found");
-    }
-
-    const furlough = await strapi.query("furlough").create({
-      state,
-      start_time,
-      end_time,
-      reason,
-      driver: user,
+    const furlough = await strapi.services.furlough.create({
+      // create a furlough
+      state: "pending",
+      reason: reason,
+      start_time: start_time, //start_time,
+      end_time: end_time, //end_time,
+      driver: ctx.state.user.id,
     });
 
-    return furlough;
+    return ctx.created();
   },
 };

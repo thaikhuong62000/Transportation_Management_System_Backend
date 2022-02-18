@@ -44,6 +44,21 @@
         "policies": [],
         "prefix": ""
       }
+    },
+    {
+      "method": "PUT",
+      "path": "/users/avatar",
+      "handler": "User.updateAvatar",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Update avatar of an existing user",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User",
+          "actionType": "update"
+        }
+      }
     }
   ]
 }
