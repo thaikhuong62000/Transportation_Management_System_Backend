@@ -523,10 +523,12 @@
             "type": "string"
           },
           "total_import": {
-            "type": "integer"
+            "type": "integer",
+            "default": 0
           },
           "total_export": {
-            "type": "integer"
+            "type": "integer",
+            "default": 0
           },
           "note": {
             "type": "string"
@@ -707,10 +709,12 @@
       "NewReport": {
         "properties": {
           "total_import": {
-            "type": "integer"
+            "type": "integer",
+            "default": 0
           },
           "total_export": {
-            "type": "integer"
+            "type": "integer",
+            "default": 0
           },
           "note": {
             "type": "string"

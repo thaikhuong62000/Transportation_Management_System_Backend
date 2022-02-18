@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "reports",
   "info": {
-    "name": "Report"
+    "name": "Report",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -12,10 +13,14 @@
   "pluginOptions": {},
   "attributes": {
     "total_import": {
-      "type": "integer"
+      "type": "integer",
+      "min": 0,
+      "default": 0
     },
     "total_export": {
-      "type": "integer"
+      "type": "integer",
+      "min": 0,
+      "default": 0
     },
     "note": {
       "type": "text"
