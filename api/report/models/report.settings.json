@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reports",
+  "info": {
+    "name": "Report"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "total_import": {
+      "type": "integer"
+    },
+    "total_export": {
+      "type": "integer"
+    },
+    "note": {
+      "type": "text"
+    },
+    "storage": {
+      "model": "storage",
+      "via": "report"
+    },
+    "stocker": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "report"
+    }
+  }
+}

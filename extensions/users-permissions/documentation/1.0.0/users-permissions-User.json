@@ -1577,6 +1577,9 @@
                   "type": "string"
                 }
               },
+              "report": {
+                "type": "string"
+              },
               "published_at": {
                 "type": "string"
               },
@@ -1792,6 +1795,40 @@
                 "type": "string"
               }
             }
+          },
+          "report": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "total_import": {
+                "type": "integer"
+              },
+              "total_export": {
+                "type": "integer"
+              },
+              "note": {
+                "type": "string"
+              },
+              "storage": {
+                "type": "string"
+              },
+              "stocker": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -1927,6 +1964,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "report": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"

@@ -35,6 +35,10 @@
     "exports": {
       "via": "storage",
       "collection": "export"
+    },
+    "report": {
+      "via": "storage",
+      "model": "report"
     }
   }
 }
