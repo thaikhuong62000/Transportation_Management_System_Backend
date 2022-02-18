@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
@@ -6,11 +6,10 @@
  */
 
 module.exports = {
-    
-      /**
+  /**
    *  Create a furlough
    */
-  async furlough(ctx) {
+  async create(ctx) {
     let { start_time, end_time, reason } = ctx.request.body;
 
     start_time = Date.parse(start_time);

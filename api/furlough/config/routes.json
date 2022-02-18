@@ -47,14 +47,6 @@
       "config": {
         "policies": []
       }
-    },
-    {
-      "method": "POST",
-      "path": "/furlough",
-      "handler": "furlough.furlough",
-      "config": {
-        "policies": []
-      }
     }
   ]
 }
