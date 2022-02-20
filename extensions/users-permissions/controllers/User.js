@@ -50,9 +50,13 @@ module.exports = {
   async updateAvatar(ctx) {
     // Validate
     const {
-      request: { body, files: { avatar } = {} },
+      request: {
+        body = {},
+        files: { avatar: _avatar },
+      },
     } = ctx;
-    if (avatar === undefined) {
+
+    if (_avatar === undefined) {
       return ctx.badRequest(null, {
         errors: [
           {
@@ -62,7 +66,7 @@ module.exports = {
         ],
       });
     }
-    if (Array.isArray(avatar)) {
+    if (Array.isArray(_avatar)) {
       return ctx.badRequest(null, {
         errors: [
           {
@@ -72,7 +76,10 @@ module.exports = {
         ],
       });
     }
-    if (avatar.type.split("/")[0] === "image") {
+
+    const mime = require("mime");
+    const type = mime.getType(_avatar.name);
+    if (type.split("/")[0] !== "image") {
       return ctx.badRequest(null, {
         errors: [
           {
@@ -83,6 +90,7 @@ module.exports = {
       });
     }
 
+    const avatar = { ..._avatar, type: type };
     const userId = ctx.state.user.id;
     const avatarExist = ctx.state.user.avatar && ctx.state.user.avatar.id;
 
@@ -106,5 +114,6 @@ module.exports = {
         { avatar: image[0].id }
       );
     }
+    return ctx.created("Avatar uploaded!");
   },
 };
