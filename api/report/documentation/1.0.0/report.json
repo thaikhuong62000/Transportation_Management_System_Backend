@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/orders": {
+    "/reports": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Order"
+                    "$ref": "#/components/schemas/Report"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Order"
+          "Report"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Order"
+                  "$ref": "#/components/schemas/Report"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Order"
+          "Report"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewOrder"
+                "$ref": "#/components/schemas/NewReport"
               }
             }
           }
         }
       }
     },
-    "/orders/count": {
+    "/reports/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Order"
+          "Report"
         ],
         "parameters": []
       }
     },
-    "/orders/{id}": {
+    "/reports/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Order"
+                  "$ref": "#/components/schemas/Report"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Order"
+          "Report"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Order"
+                  "$ref": "#/components/schemas/Report"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Order"
+          "Report"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewOrder"
+                "$ref": "#/components/schemas/NewReport"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Order"
+          "Report"
         ],
         "parameters": [
           {
@@ -514,59 +514,29 @@
   },
   "components": {
     "schemas": {
-      "Order": {
+      "Report": {
         "required": [
-          "id",
-          "fee",
-          "remain_fee",
-          "state",
-          "sender_name",
-          "sender_phone",
-          "receiver_name",
-          "receiver_phone"
+          "id"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "fee": {
-            "type": "number"
+          "total_import": {
+            "type": "integer",
+            "default": 0
           },
-          "remain_fee": {
-            "type": "number"
-          },
-          "state": {
+          "total_export": {
             "type": "integer",
             "default": 0
           },
           "note": {
             "type": "string"
           },
-          "sender_name": {
-            "type": "string"
-          },
-          "sender_phone": {
-            "type": "string"
-          },
-          "receiver_name": {
-            "type": "string"
-          },
-          "receiver_phone": {
-            "type": "string"
-          },
-          "rating_point": {
-            "type": "integer"
-          },
-          "rating_note": {
-            "type": "string"
-          },
-          "voucher": {
+          "storage": {
             "required": [
               "id",
-              "name",
-              "sale",
-              "sale_max",
-              "type"
+              "name"
             ],
             "properties": {
               "id": {
@@ -575,16 +545,31 @@
               "name": {
                 "type": "string"
               },
-              "sale": {
+              "address": {
+                "type": "component"
+              },
+              "size": {
                 "type": "number"
               },
-              "sale_max": {
-                "type": "number"
+              "store_managers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
-              "type": {
-                "type": "string"
+              "imports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
-              "expired": {
+              "exports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "report": {
                 "type": "string"
               },
               "published_at": {
@@ -598,7 +583,7 @@
               }
             }
           },
-          "customer": {
+          "stocker": {
             "required": [
               "id",
               "username",
@@ -715,314 +700,30 @@
               }
             }
           },
-          "packages": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "quantity",
-                "weight",
-                "state"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "code": {
-                  "type": "string"
-                },
-                "quantity": {
-                  "type": "integer"
-                },
-                "weight": {
-                  "type": "number"
-                },
-                "state": {
-                  "type": "integer"
-                },
-                "order": {
-                  "type": "string"
-                },
-                "images": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "current_address": {
-                  "type": "component"
-                },
-                "imports": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "exports": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "name": {
-                  "type": "string"
-                },
-                "size": {
-                  "type": "component"
-                },
-                "package_type": {
-                  "type": "component"
-                },
-                "shipments": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "from_address": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "street": {
-                "type": "string"
-              },
-              "ward": {
-                "type": "string"
-              },
-              "province": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "number"
-              },
-              "longtitude": {
-                "type": "number"
-              }
-            }
-          },
-          "to_address": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "street": {
-                "type": "string"
-              },
-              "ward": {
-                "type": "string"
-              },
-              "province": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "number"
-              },
-              "longtitude": {
-                "type": "number"
-              }
-            }
-          },
-          "name": {
-            "type": "string"
-          },
-          "payments": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "payer_name": {
-                  "type": "string"
-                },
-                "payer_phone": {
-                  "type": "string"
-                },
-                "paid": {
-                  "type": "number"
-                },
-                "time": {
-                  "type": "string"
-                },
-                "order": {
-                  "type": "string"
-                },
-                "method": {
-                  "type": "string",
-                  "enum": [
-                    "direct",
-                    "momo",
-                    "banking"
-                  ]
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "published_at": {
             "type": "string",
             "format": "date-time"
           }
         }
       },
-      "NewOrder": {
-        "required": [
-          "fee",
-          "remain_fee",
-          "state",
-          "sender_name",
-          "sender_phone",
-          "receiver_name",
-          "receiver_phone"
-        ],
+      "NewReport": {
         "properties": {
-          "fee": {
-            "type": "number"
+          "total_import": {
+            "type": "integer",
+            "default": 0
           },
-          "remain_fee": {
-            "type": "number"
-          },
-          "state": {
+          "total_export": {
             "type": "integer",
             "default": 0
           },
           "note": {
             "type": "string"
           },
-          "sender_name": {
+          "storage": {
             "type": "string"
           },
-          "sender_phone": {
+          "stocker": {
             "type": "string"
-          },
-          "receiver_name": {
-            "type": "string"
-          },
-          "receiver_phone": {
-            "type": "string"
-          },
-          "rating_point": {
-            "type": "integer"
-          },
-          "rating_note": {
-            "type": "string"
-          },
-          "voucher": {
-            "type": "string"
-          },
-          "customer": {
-            "type": "string"
-          },
-          "packages": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "from_address": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "street": {
-                "type": "string"
-              },
-              "ward": {
-                "type": "string"
-              },
-              "province": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "number"
-              },
-              "longtitude": {
-                "type": "number"
-              }
-            }
-          },
-          "to_address": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "street": {
-                "type": "string"
-              },
-              "ward": {
-                "type": "string"
-              },
-              "province": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "number"
-              },
-              "longtitude": {
-                "type": "number"
-              }
-            }
-          },
-          "name": {
-            "type": "string"
-          },
-          "payments": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "published_at": {
             "type": "string",
@@ -1040,7 +741,7 @@
   },
   "tags": [
     {
-      "name": "Order"
+      "name": "Report"
     }
   ]
 }
