@@ -97,23 +97,27 @@ module.exports = {
     // Replace Or Upload image
     if (avatarExist) {
       ctx.query.id = ctx.state.user.avatar.id;
-      const replacedFiles = await strapi.plugins.upload.services.upload.replace(
+      const image = await strapi.plugins.upload.services.upload.replace(
         ctx.state.user.avatar.id,
         {
           data: await validateUploadBody(body),
           file: avatar,
         }
       );
+      const sanitizedImage = sanitizeEntity(image, {
+        model: strapi.getModel("file", "upload"),
+        includeFields: ["name", "url", "formats"],
+      });
+      return { ...ctx.state.user, avatar: sanitizedImage };
     } else {
       const image = await strapi.plugins.upload.services.upload.upload({
         data: await validateUploadBody(body),
         files: avatar,
       });
-      const user = await strapi.plugins["users-permissions"].services.user.edit(
+      return await strapi.plugins["users-permissions"].services.user.edit(
         { id: userId },
         { avatar: image[0].id }
       );
     }
-    return ctx.created("Avatar uploaded!");
   },
 };
