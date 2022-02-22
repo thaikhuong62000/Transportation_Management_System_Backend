@@ -13,6 +13,7 @@
   "dependencies": {
     "mime": "^3.0.0",
     "moment": "^2.29.1",
+    "socket.io": "^4.4.1",
     "strapi": "3.6.8",
     "strapi-admin": "3.6.8",
     "strapi-connector-mongoose": "3.6.8",
