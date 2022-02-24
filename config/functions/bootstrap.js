@@ -22,13 +22,67 @@ module.exports = () => {
     //   },
     // }
   );
+
+  async function loop(socket, room, time) {
+    console.log(`Emit message time ${time}`);
+    socket.to(`${room}`).emit("chat", {
+      user: "bot",
+      text: `A`,
+    });
+    new Promise((resolve) => setTimeout(resolve, 4000)).then(() =>
+      loop(socket, room, time + 1)
+    );
+  }
+
   // https://strapi.io/blog/how-to-build-a-real-time-chat-forum-using-strapi-socket-io-react-and-mongo-db
   // https://dev.to/kris/buiding-chat-app-with-react-native-and-socket-io-4p8l
   io.on("connection", function (socket) {
-    socket.on("chat", ({ username, room }) => {
-      console.log("user connected");
-      console.log("username is ", username);
-      console.log("room is...", room);
-    });
+    // On Join room event
+    socket.on(
+      "join",
+      async ({ userId = "userID", anotherId = "userID", roomId = false }) => {
+        try {
+          let room;
+          if (roomId) {
+            room = await strapi.services["room-chat"].findOne({ id: roomId });
+          } else {
+            room = await strapi.services["room-chat"].findRoomByUsers(
+              userId,
+              anotherId
+            );
+            if (room === null) {
+              room = await strapi.services["room-chat"].create({
+                user1: userId,
+                user2: anotherId,
+              });
+            }
+          }
+          console.log(`User connected on room ${room.id}`);
+          socket.emit("join", room.id);
+
+          // Join if not in room
+          if (socket.rooms.indexOf(room) < 0) {
+            socket.join(room.id);
+
+            // Add listener
+            socket.on("chat", (data) => {
+              strapi.services.create({
+                subID: data._id,
+                text: data.text,
+                user: data.user._id,
+                room: room.id,
+              });
+              io.to(`${data.room}`).emit(
+                // TODO: Change io to socket later
+                "chat",
+                data.message[0].text + socket.id
+              );
+            });
+          }
+        } catch (error) {
+          console.log("Something bruh at join socket", error);
+        }
+      }
+    );
   });
 };

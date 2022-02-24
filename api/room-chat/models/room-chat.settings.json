@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "room_chats",
+  "info": {
+    "name": "Room Chat"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user1": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "user2": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "messages": {
+      "via": "room",
+      "collection": "message"
+    }
+  }
+}
