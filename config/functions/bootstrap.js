@@ -61,7 +61,7 @@ module.exports = () => {
           socket.emit("join", room.id);
 
           // Join if not in room
-          if (socket.rooms.indexOf(room) < 0) {
+          if (socket.rooms.has(room.id)) {
             socket.join(room.id);
 
             // Add listener
