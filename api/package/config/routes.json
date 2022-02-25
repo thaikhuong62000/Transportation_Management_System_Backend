@@ -49,7 +49,7 @@
       }
     },
     {
-      "method": "PUT",
+      "method": "POST",
       "path": "/packages/images/:packagesId",
       "handler": "package.updatePackageImage",
       "config": {

@@ -1,6 +1,5 @@
 const { sanitizeEntity } = require("strapi-utils");
 const validateUploadBody = require("strapi-plugin-upload/controllers/validation/upload");
-
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
  * to customize this controller
@@ -55,22 +54,10 @@ module.exports = {
 
   async updatePackageImage(ctx) {
     const { packagesId } = ctx.params;
-
-    let {
-      request: {
-        body: body,
-        files: { upload: _upload },
-      },
-    } = ctx;
-
-    let data = "";
-    try {
-      data = JSON.parse(ctx.request.body.data);
-    } catch (error) {
-      console.log(error);
-    }
-
-    let { _delete } = data;
+    const files = ctx.request.files;
+    const data = JSON.parse(ctx.request.body.data);
+    const { _delete } = data;
+    let _upload = Object.values(files)[0];
 
     if (!Array.isArray(_upload)) {
       _upload = _upload ? [_upload] : [];
@@ -100,21 +87,16 @@ module.exports = {
     }
 
     if (_upload.length) {
-      const image = await strapi.plugins.upload.services.upload.upload({
-        data: await validateUploadBody(body),
+      await strapi.plugins.upload.services.upload.upload({
+        data: await validateUploadBody(ctx.request.body),
         files: _upload,
       });
-
-      await strapi.query("package").model.findOneAndUpdate(
-        { _id: packagesId },
-        {
-          $push: {
-            images: image.id,
-          },
-        }
-      );
     }
+    let entities = await strapi.query("package").findOne({ id: packagesId });
 
-    return await strapi.query("package").findOne({ id: packagesId });
+    return sanitizeEntity(entities, {
+      model: strapi.models.package,
+      includeFields: ["images"],
+    });
   },
 };
