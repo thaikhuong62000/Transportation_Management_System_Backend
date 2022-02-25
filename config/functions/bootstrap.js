@@ -57,25 +57,24 @@ module.exports = () => {
               });
             }
           }
-          console.log(`User connected on room ${room.id}`);
-          socket.emit("join", room.id);
 
           // Join if not in room
-          if (socket.rooms.has(room.id)) {
+          if (!socket.rooms.has(room.id)) {
             socket.join(room.id);
 
             // Add listener
-            socket.on("chat", (data) => {
-              strapi.services.create({
+            socket.on("chat", (data, room) => {
+              strapi.services.message.create({
                 subID: data._id,
                 text: data.text,
                 user: data.user._id,
                 room: room.id,
               });
-              io.to(`${data.room}`).emit(
+              io.to(`${room}`).emit(
                 // TODO: Change io to socket later
                 "chat",
-                data.message[0].text + socket.id
+                data,
+                room
               );
             });
           }
