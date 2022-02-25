@@ -122,4 +122,20 @@ module.exports = {
       );
     }
   },
+
+  async getAssistanceInfo(ctx) {
+    let shipments =
+      await strapi.services.shipment.getUnfinishedShipmentByDriver(
+        ctx.state.user.id
+      );
+
+    let assistance = await strapi
+      .query("user", "users-permissions")
+      .findOne({ id: shipments[0].assistance });
+
+    return sanitizeEntity(assistance, {
+      model: strapi.query("user", "users-permissions").model,
+      includeFields: ["name", "phone"],
+    });
+  },
 };
