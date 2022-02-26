@@ -811,7 +811,7 @@
                 "quantity": {
                   "type": "integer"
                 },
-                "storage_manager": {
+                "store_manager": {
                   "type": "string"
                 },
                 "package": {

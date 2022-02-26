@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "02/25/2022 9:07:44 PM"
+    "x-generation-date": "02/26/2022 10:18:51 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -10116,8 +10116,11 @@
               "avatar": {
                 "type": "string"
               },
-              "report": {
-                "type": "string"
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
@@ -10363,8 +10366,11 @@
               "avatar": {
                 "type": "string"
               },
-              "report": {
-                "type": "string"
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
@@ -10483,8 +10489,11 @@
                   "type": "string"
                 }
               },
-              "report": {
-                "type": "string"
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "published_at": {
                 "type": "string"
@@ -10669,8 +10678,11 @@
               "avatar": {
                 "type": "string"
               },
-              "report": {
-                "type": "string"
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
@@ -10740,7 +10752,7 @@
             "type": "integer",
             "default": 0
           },
-          "storage_manager": {
+          "store_manager": {
             "required": [
               "id",
               "username",
@@ -10846,8 +10858,11 @@
               "avatar": {
                 "type": "string"
               },
-              "report": {
-                "type": "string"
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
@@ -10966,8 +10981,11 @@
                   "type": "string"
                 }
               },
-              "report": {
-                "type": "string"
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "published_at": {
                 "type": "string"
@@ -10999,7 +11017,7 @@
             "type": "integer",
             "default": 0
           },
-          "storage_manager": {
+          "store_manager": {
             "type": "string"
           },
           "package": {
@@ -11201,8 +11219,11 @@
               "avatar": {
                 "type": "string"
               },
-              "report": {
-                "type": "string"
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
@@ -11492,8 +11513,11 @@
               "avatar": {
                 "type": "string"
               },
-              "report": {
-                "type": "string"
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
@@ -11991,8 +12015,11 @@
               "avatar": {
                 "type": "string"
               },
-              "report": {
-                "type": "string"
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
@@ -12304,7 +12331,7 @@
                 "quantity": {
                   "type": "integer"
                 },
-                "storage_manager": {
+                "store_manager": {
                   "type": "string"
                 },
                 "package": {
@@ -12770,56 +12797,6 @@
           "note": {
             "type": "string"
           },
-          "storage": {
-            "required": [
-              "id",
-              "name"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "address": {
-                "type": "component"
-              },
-              "size": {
-                "type": "number"
-              },
-              "store_managers": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "imports": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "exports": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "report": {
-                "type": "string"
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
           "stocker": {
             "required": [
               "id",
@@ -12926,7 +12903,133 @@
               "avatar": {
                 "type": "string"
               },
-              "report": {
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "report_file": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name",
+                "hash",
+                "mime",
+                "size",
+                "url",
+                "provider"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "alternativeText": {
+                  "type": "string"
+                },
+                "caption": {
+                  "type": "string"
+                },
+                "width": {
+                  "type": "integer"
+                },
+                "height": {
+                  "type": "integer"
+                },
+                "formats": {
+                  "type": "object"
+                },
+                "hash": {
+                  "type": "string"
+                },
+                "ext": {
+                  "type": "string"
+                },
+                "mime": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "previewUrl": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "provider_metadata": {
+                  "type": "object"
+                },
+                "related": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "storage": {
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "address": {
+                "type": "component"
+              },
+              "size": {
+                "type": "number"
+              },
+              "store_managers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "imports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "exports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "published_at": {
                 "type": "string"
               },
               "created_by": {
@@ -12956,10 +13059,10 @@
           "note": {
             "type": "string"
           },
-          "storage": {
+          "stocker": {
             "type": "string"
           },
-          "stocker": {
+          "storage": {
             "type": "string"
           },
           "published_at": {
@@ -13135,8 +13238,11 @@
               "avatar": {
                 "type": "string"
               },
-              "report": {
-                "type": "string"
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
@@ -13252,8 +13358,11 @@
               "avatar": {
                 "type": "string"
               },
-              "report": {
-                "type": "string"
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
@@ -13658,8 +13767,11 @@
                 "avatar": {
                   "type": "string"
                 },
-                "report": {
-                  "type": "string"
+                "reports": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "created_by": {
                   "type": "string"
@@ -13688,7 +13800,7 @@
                 "quantity": {
                   "type": "integer"
                 },
-                "storage_manager": {
+                "store_manager": {
                   "type": "string"
                 },
                 "package": {
@@ -13747,37 +13859,46 @@
               }
             }
           },
-          "report": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "total_import": {
-                "type": "integer"
-              },
-              "total_export": {
-                "type": "integer"
-              },
-              "note": {
-                "type": "string"
-              },
-              "storage": {
-                "type": "string"
-              },
-              "stocker": {
-                "type": "string"
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
+          "reports": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "total_import": {
+                  "type": "integer"
+                },
+                "total_export": {
+                  "type": "integer"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "stocker": {
+                  "type": "string"
+                },
+                "report_file": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "storage": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -13845,8 +13966,11 @@
               "type": "string"
             }
           },
-          "report": {
-            "type": "string"
+          "reports": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "published_at": {
             "type": "string",
@@ -14098,8 +14222,11 @@
                 "avatar": {
                   "type": "string"
                 },
-                "report": {
-                  "type": "string"
+                "reports": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "created_by": {
                   "type": "string"
@@ -14476,8 +14603,11 @@
                   "type": "string"
                 }
               },
-              "report": {
-                "type": "string"
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "published_at": {
                 "type": "string"
@@ -14695,37 +14825,46 @@
               }
             }
           },
-          "report": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "total_import": {
-                "type": "integer"
-              },
-              "total_export": {
-                "type": "integer"
-              },
-              "note": {
-                "type": "string"
-              },
-              "storage": {
-                "type": "string"
-              },
-              "stocker": {
-                "type": "string"
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
+          "reports": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "total_import": {
+                  "type": "integer"
+                },
+                "total_export": {
+                  "type": "integer"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "stocker": {
+                  "type": "string"
+                },
+                "report_file": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "storage": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
               }
             }
           }
@@ -14864,8 +15003,11 @@
               "type": "string"
             }
           },
-          "report": {
-            "type": "string"
+          "reports": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

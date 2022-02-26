@@ -131,9 +131,9 @@
       "required": false,
       "pluginOptions": {}
     },
-    "report": {
+    "reports": {
       "via": "stocker",
-      "model": "report"
+      "collection": "report"
     }
   }
 }
