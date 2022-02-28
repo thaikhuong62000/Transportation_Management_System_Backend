@@ -59,6 +59,20 @@
           "actionType": "update"
         }
       }
+    },
+    {
+      "method": "GET",
+      "path": "/assistance/status",
+      "handler": "User.getAssistanceInfo",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Get assistance information",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
     }
   ]
 }

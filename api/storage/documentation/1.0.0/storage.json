@@ -666,8 +666,11 @@
                 "avatar": {
                   "type": "string"
                 },
-                "report": {
-                  "type": "string"
+                "reports": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "created_by": {
                   "type": "string"
@@ -696,7 +699,7 @@
                 "quantity": {
                   "type": "integer"
                 },
-                "storage_manager": {
+                "store_manager": {
                   "type": "string"
                 },
                 "package": {
@@ -755,37 +758,46 @@
               }
             }
           },
-          "report": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "total_import": {
-                "type": "integer"
-              },
-              "total_export": {
-                "type": "integer"
-              },
-              "note": {
-                "type": "string"
-              },
-              "storage": {
-                "type": "string"
-              },
-              "stocker": {
-                "type": "string"
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
+          "reports": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "total_import": {
+                  "type": "integer"
+                },
+                "total_export": {
+                  "type": "integer"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "stocker": {
+                  "type": "string"
+                },
+                "report_file": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "storage": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -853,8 +865,11 @@
               "type": "string"
             }
           },
-          "report": {
-            "type": "string"
+          "reports": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "published_at": {
             "type": "string",
