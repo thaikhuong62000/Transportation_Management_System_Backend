@@ -29,7 +29,7 @@
     },
     {
       "method": "POST",
-      "path": "/auth/password/update/:id",
+      "path": "/auth/password/update",
       "handler": "User.updatePassword",
       "config": {
         "policies": [],
