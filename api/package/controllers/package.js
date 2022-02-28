@@ -15,11 +15,14 @@ module.exports = {
       height,
       weight,
       quantity,
-      state,
+      state = 0,
       street = "",
       ward = "",
       province = "",
       city = "",
+      position = "",
+      current_address,
+      size,
     } = ctx.request.body;
 
     if (!len || !width || !height || !weight || !quantity) {
@@ -30,25 +33,41 @@ module.exports = {
       return ctx.badRequest("Invalid package state!");
     }
 
-    let size = { len, width, height };
-
-    let current_address = { street, ward, province, city };
-
     const package = await strapi.query("package").update(
-      { id: id },
+      { _id: id },
       {
         name,
-        size,
         weight,
         quantity,
-        current_address,
         state,
-      }
+        position,
+        size: {
+          ...size,
+          len,
+          width,
+          height,
+        },
+        current_address: {
+          ...current_address,
+          street,
+          ward,
+          province,
+          city,
+        },
+      },
+      { new: true }
     );
 
     return sanitizeEntity(package, {
-      model: strapi.models.package,
-      includeFields: ["size", "current_address"],
+      model: strapi.query("package").model,
+      includeFields: [
+        "size",
+        "current_address",
+        "images",
+        "name",
+        "package_type",
+        "position",
+      ],
     });
   },
 
@@ -98,5 +117,29 @@ module.exports = {
       model: strapi.models.package,
       includeFields: ["images"],
     });
+  },
+
+  async getPackagesInStorage(ctx) {
+    const { storage } = ctx.state.user;
+    const { page = 0 } = ctx.params;
+
+    let packages = await strapi.services.package.getPackagesInStorage(
+      storage,
+      5,
+      page * 5
+    );
+
+    return packages.map((package) =>
+      sanitizeEntity(package, {
+        model: strapi.query("import").model,
+        includeFields: [
+          "package",
+          "quantity",
+          "size",
+          "current_address",
+          "note",
+        ],
+      })
+    );
   },
 };
