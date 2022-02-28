@@ -22,6 +22,8 @@ module.exports = {
       city = "",
       position = "",
       current_address,
+      package_type,
+      type,
       size,
     } = ctx.request.body;
 
@@ -53,6 +55,10 @@ module.exports = {
           ward,
           province,
           city,
+        },
+        package_type: {
+          ...package_type,
+          package_type: type,
         },
       },
       { new: true }
