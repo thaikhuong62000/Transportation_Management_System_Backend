@@ -15,7 +15,6 @@ module.exports = {
   },
 
   async updatePassword(ctx) {
-    const { id } = ctx.params;
     const { password, newPassword } = ctx.request.body;
 
     const validPassword = await strapi.plugins[
@@ -34,7 +33,7 @@ module.exports = {
 
     const updatedPassword = await strapi.plugins[
       "users-permissions"
-    ].services.user.updatePassword(id, hashedPassword);
+    ].services.user.updatePassword(ctx.state.user.id, hashedPassword);
 
     return sanitizeEntity(updatedPassword, {
       model: strapi.query("user", "users-permissions").model,
