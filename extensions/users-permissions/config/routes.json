@@ -29,7 +29,7 @@
     },
     {
       "method": "POST",
-      "path": "/auth/password/update/:id",
+      "path": "/auth/password/update",
       "handler": "User.updatePassword",
       "config": {
         "policies": [],
@@ -57,6 +57,20 @@
           "plugin": "users-permissions",
           "name": "User",
           "actionType": "update"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/assistance/status",
+      "handler": "User.getAssistanceInfo",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Get assistance information",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
         }
       }
     }

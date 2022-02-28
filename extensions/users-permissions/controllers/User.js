@@ -15,7 +15,6 @@ module.exports = {
   },
 
   async updatePassword(ctx) {
-    const { id } = ctx.params;
     const { password, newPassword } = ctx.request.body;
 
     const validPassword = await strapi.plugins[
@@ -34,7 +33,7 @@ module.exports = {
 
     const updatedPassword = await strapi.plugins[
       "users-permissions"
-    ].services.user.updatePassword(id, hashedPassword);
+    ].services.user.updatePassword(ctx.state.user.id, hashedPassword);
 
     return sanitizeEntity(updatedPassword, {
       model: strapi.query("user", "users-permissions").model,
@@ -55,6 +54,8 @@ module.exports = {
         files: { avatar: _avatar },
       },
     } = ctx;
+
+    console.log(_avatar);
 
     if (_avatar === undefined) {
       return ctx.badRequest(null, {
@@ -119,5 +120,21 @@ module.exports = {
         { avatar: image[0].id }
       );
     }
+  },
+
+  async getAssistanceInfo(ctx) {
+    let shipments =
+      await strapi.services.shipment.getUnfinishedShipmentByDriver(
+        ctx.state.user.id
+      );
+
+    let assistance = await strapi
+      .query("user", "users-permissions")
+      .findOne({ id: shipments[0].assistance });
+
+    return sanitizeEntity(assistance, {
+      model: strapi.query("user", "users-permissions").model,
+      includeFields: ["name", "phone"],
+    });
   },
 };

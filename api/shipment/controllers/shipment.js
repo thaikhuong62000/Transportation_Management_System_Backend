@@ -67,7 +67,7 @@ module.exports = {
     });
 
     const totalWeight = shipmentDetail.packages.reduce((total, item) => {
-      return total + item.weight;
+      return total + item.weight * item.quantity;
     }, 0);
 
     return {

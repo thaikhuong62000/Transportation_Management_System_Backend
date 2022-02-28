@@ -635,8 +635,11 @@
               "avatar": {
                 "type": "string"
               },
-              "report": {
-                "type": "string"
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
@@ -755,8 +758,11 @@
                   "type": "string"
                 }
               },
-              "report": {
-                "type": "string"
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "published_at": {
                 "type": "string"

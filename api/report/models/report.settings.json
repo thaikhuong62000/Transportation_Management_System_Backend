@@ -25,14 +25,26 @@
     "note": {
       "type": "text"
     },
-    "storage": {
-      "model": "storage",
-      "via": "report"
-    },
     "stocker": {
       "plugin": "users-permissions",
       "model": "user",
-      "via": "report"
+      "via": "reports"
+    },
+    "report_file": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "storage": {
+      "via": "reports",
+      "model": "storage"
     }
   }
 }

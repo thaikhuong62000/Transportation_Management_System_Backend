@@ -27,8 +27,8 @@
       "model": "package"
     },
     "storage": {
-      "model": "storage",
-      "via": "exports"
+      "via": "exports",
+      "model": "storage"
     }
   }
 }

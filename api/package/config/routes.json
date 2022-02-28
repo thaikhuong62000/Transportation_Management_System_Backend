@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "POST",
+      "path": "/packages/images/:packagesId",
+      "handler": "package.updatePackageImage",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
