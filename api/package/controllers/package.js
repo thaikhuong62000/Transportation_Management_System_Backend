@@ -144,6 +144,7 @@ module.exports = {
           "size",
           "current_address",
           "note",
+          "code",
         ],
       })
     );
