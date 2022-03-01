@@ -587,6 +587,12 @@
               "expired": {
                 "type": "string"
               },
+              "users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "published_at": {
                 "type": "string"
               },
@@ -705,6 +711,12 @@
                 "type": "string"
               },
               "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
                 "type": "array",
                 "items": {
                   "type": "string"

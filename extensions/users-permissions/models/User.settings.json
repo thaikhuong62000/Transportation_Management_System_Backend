@@ -134,6 +134,10 @@
     "reports": {
       "via": "stocker",
       "collection": "report"
+    },
+    "vouchers": {
+      "via": "users",
+      "collection": "voucher"
     }
   }
 }

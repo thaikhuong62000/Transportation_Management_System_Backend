@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/01/2022 10:20:00 AM"
+    "x-generation-date": "03/01/2022 8:42:55 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -11225,6 +11225,12 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -11470,6 +11476,12 @@
                 "type": "string"
               },
               "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -11787,6 +11799,12 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -11962,6 +11980,12 @@
                 "type": "string"
               },
               "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -12267,6 +12291,12 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -12514,6 +12544,12 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -12685,6 +12721,12 @@
               "expired": {
                 "type": "string"
               },
+              "users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "published_at": {
                 "type": "string"
               },
@@ -12803,6 +12845,12 @@
                 "type": "string"
               },
               "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -13305,6 +13353,12 @@
                 "type": "string"
               },
               "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -14198,6 +14252,12 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -14486,6 +14546,12 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -14601,6 +14667,12 @@
                 "type": "string"
               },
               "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -14836,6 +14908,12 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -14951,6 +15029,12 @@
                 "type": "string"
               },
               "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -15365,6 +15449,12 @@
                     "type": "string"
                   }
                 },
+                "vouchers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -15604,6 +15694,135 @@
             "type": "string",
             "format": "date-time"
           },
+          "users": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "username",
+                "email",
+                "name",
+                "phone"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "resetPasswordToken": {
+                  "type": "string"
+                },
+                "confirmationToken": {
+                  "type": "string"
+                },
+                "confirmed": {
+                  "type": "boolean"
+                },
+                "blocked": {
+                  "type": "boolean"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "car": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "birthday": {
+                  "type": "string"
+                },
+                "point": {
+                  "type": "integer"
+                },
+                "orders": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "shipments": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "address": {
+                  "type": "component"
+                },
+                "storage": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "Admin",
+                    "Stocker",
+                    "Driver",
+                    "Assistance",
+                    "User",
+                    "Iron",
+                    "Gold",
+                    "Diamond"
+                  ]
+                },
+                "furloughs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "package_templates": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "order_templates": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "avatar": {
+                  "type": "string"
+                },
+                "reports": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "vouchers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -15633,6 +15852,12 @@
           "expired": {
             "type": "string",
             "format": "date-time"
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "published_at": {
             "type": "string",
@@ -15815,6 +16040,12 @@
                   "type": "string"
                 },
                 "reports": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "vouchers": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -16459,6 +16690,53 @@
                 }
               }
             }
+          },
+          "vouchers": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name",
+                "sale",
+                "sale_max",
+                "type"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "sale": {
+                  "type": "number"
+                },
+                "sale_max": {
+                  "type": "number"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "expired": {
+                  "type": "string"
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -16596,6 +16874,12 @@
             }
           },
           "reports": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "vouchers": {
             "type": "array",
             "items": {
               "type": "string"
