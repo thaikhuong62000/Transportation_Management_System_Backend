@@ -28,6 +28,16 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/customer/:id",
+      "handler": "User.getCustomerInfo",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": ""
+      }
+    },
+    {
       "method": "POST",
       "path": "/auth/password/update",
       "handler": "User.updatePassword",

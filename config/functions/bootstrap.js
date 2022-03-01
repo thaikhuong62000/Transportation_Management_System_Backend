@@ -58,6 +58,13 @@ module.exports = () => {
             }
           }
 
+          socket.emit("join", room.id, {
+            id: room.user2._id,
+            name: room.user2.name,
+            phone: room.user2.phone,
+            avatar: room.user2.avatar,
+          });
+
           // Join if not in room
           if (!socket.rooms.has(room.id)) {
             socket.join(room.id);
@@ -70,7 +77,7 @@ module.exports = () => {
                 user: data.user._id,
                 room: room.id,
               });
-              io.to(`${room}`).emit(
+              socket.to(`${room}`).emit(
                 // TODO: Change io to socket later
                 "chat",
                 data,
