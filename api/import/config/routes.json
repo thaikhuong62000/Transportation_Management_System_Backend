@@ -34,6 +34,15 @@
     },
     {
       "method": "PUT",
+      "path": "/imports/update-quantity",
+      "handler": "import.updateImportQuantityByPackage",
+      "config": {
+        "policies": [],
+        "description": "Update import quantity by package id"
+      }
+    },
+    {
+      "method": "PUT",
       "path": "/imports/:id",
       "handler": "import.update",
       "config": {
