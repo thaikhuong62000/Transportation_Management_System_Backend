@@ -149,4 +149,39 @@ module.exports = {
       })
     );
   },
+
+  async getPackagesAfterScan(ctx) {
+    const { id } = ctx.params;
+    const { storage } = ctx.state.user;
+
+    let package = await strapi.query("package").findOne({
+      id: id,
+    });
+
+    let storedPackage = await strapi.query("import").findOne({
+      storage: storage,
+      package: id,
+    });
+
+    let remainingPackage = storedPackage
+      ? package.quantity - storedPackage.quantity
+      : package.quantity;
+
+    package = sanitizeEntity(package, {
+      model: strapi.query("package").model,
+      includeFields: [
+        "name",
+        "weight",
+        "size",
+        "note",
+        "package_type",
+        "quantity",
+      ],
+    });
+
+    return {
+      remainingPackage,
+      ...package,
+    };
+  },
 };

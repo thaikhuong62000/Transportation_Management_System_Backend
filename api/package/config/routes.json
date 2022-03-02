@@ -27,6 +27,15 @@
     },
     {
       "method": "GET",
+      "path": "/packages/scanned/:id",
+      "handler": "package.getPackagesAfterScan",
+      "config": {
+        "policies": [],
+        "description": "Get packages that is scanned barcode"
+      }
+    },
+    {
+      "method": "GET",
       "path": "/packages/:id",
       "handler": "package.findOne",
       "config": {
