@@ -5,7 +5,10 @@
       "path": "/auth/local",
       "handler": "Auth.callback",
       "config": {
-        "policies": ["plugins::users-permissions.ratelimit", "plugins::users-permissions.sanitize-userdata"],
+        "policies": [
+          "plugins::users-permissions.ratelimit",
+          "plugins::users-permissions.sanitize-userdata"
+        ],
         "prefix": "",
         "description": "Login a user using the identifiers email and password",
         "tag": {
@@ -25,9 +28,18 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/auth/password/update/:id",
+      "handler": "User.updatePassword",
+      "config": {
+        "policies": [],
+        "prefix": ""
+      }
+    },
+    {
       "method": "GET",
-      "path": "/driver/user/:id",
-      "handler": "User.getCustomerInfo",
+      "path": "/storekeeper/status",
+      "handler": "CustomUser.getStorekeeperStatus",
       "config": {
         "policies": [],
         "prefix": ""
@@ -45,6 +57,20 @@
           "plugin": "users-permissions",
           "name": "User",
           "actionType": "update"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/assistance/status",
+      "handler": "User.getAssistanceInfo",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Get assistance information",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
         }
       }
     }

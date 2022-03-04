@@ -18,6 +18,10 @@ module.exports = {
       // Wrong time format
       return ctx.badRequest("Wrong start time format");
     }
+    
+    if (start_time > end_time) {
+      return ctx.badRequest("Start time must not be larger than end time!");
+    }
 
     const furlough = await strapi.services.furlough.create({
       // create a furlough

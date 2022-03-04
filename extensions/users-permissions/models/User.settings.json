@@ -130,6 +130,10 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "reports": {
+      "via": "stocker",
+      "collection": "report"
     }
   }
 }

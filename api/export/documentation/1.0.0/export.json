@@ -635,6 +635,12 @@
               "avatar": {
                 "type": "string"
               },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -705,6 +711,9 @@
                   "type": "string"
                 }
               },
+              "position": {
+                "type": "string"
+              },
               "published_at": {
                 "type": "string"
               },
@@ -747,6 +756,12 @@
                 }
               },
               "exports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "reports": {
                 "type": "array",
                 "items": {
                   "type": "string"

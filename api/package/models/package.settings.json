@@ -74,6 +74,9 @@
     "shipments": {
       "via": "packages",
       "collection": "shipment"
+    },
+    "position": {
+      "type": "string"
     }
   }
 }

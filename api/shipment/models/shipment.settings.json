@@ -38,9 +38,15 @@
       "component": "address.address"
     },
     "packages": {
-      "collection": "package",
       "via": "shipments",
+      "collection": "package",
       "dominant": true
+    },
+    "from_storage": {
+      "type": "string"
+    },
+    "to_storage": {
+      "type": "string"
     }
   }
 }

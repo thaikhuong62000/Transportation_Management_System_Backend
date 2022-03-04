@@ -7,14 +7,14 @@ var mongoose = require("mongoose");
  */
 
 module.exports = {
-  async getImportByStorage(id, limit, skip) {
+  async getReportByStorage(id, limit, skip) {
     let entities = await strapi
-      .query("import")
+      .query("report")
       .model.find({
         storage: mongoose.Types.ObjectId(id),
       })
-      .populate("store_manager")
-      .populate("package")
+      .populate("storage")
+      .populate("stocker")
       .limit(limit)
       .skip(skip);
 

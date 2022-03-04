@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reports",
+  "info": {
+    "name": "Report",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "total_import": {
+      "type": "integer",
+      "min": 0,
+      "default": 0
+    },
+    "total_export": {
+      "type": "integer",
+      "min": 0,
+      "default": 0
+    },
+    "note": {
+      "type": "text"
+    },
+    "stocker": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "reports"
+    },
+    "report_file": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "storage": {
+      "via": "reports",
+      "model": "storage"
+    }
+  }
+}

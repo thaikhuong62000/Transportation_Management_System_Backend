@@ -55,4 +55,24 @@ module.exports = {
       })
     );
   },
+
+  async getVehicleDetailByShipment(ctx) {
+    const { id } = ctx.params;
+
+    let shipmentDetail = await strapi.query("shipment").findOne({ id: id });
+
+    shipmentDetail = sanitizeEntity(shipmentDetail, {
+      model: strapi.models.shipment,
+      includeFields: ["packages", "to_address", "driver", "assistance"],
+    });
+
+    const totalWeight = shipmentDetail.packages.reduce((total, item) => {
+      return total + item.weight * item.quantity;
+    }, 0);
+
+    return {
+      total_weight: totalWeight,
+      ...shipmentDetail,
+    };
+  },
 };
