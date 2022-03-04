@@ -16,6 +16,10 @@ function getUser(room, userId) {
   return String(room.user1._id) === userId ? room.user1 : room.user2;
 }
 
+function getReceiver(room, userId) {
+  return String(room.user1._id) === userId ? room.user2 : room.user1;
+}
+
 module.exports = (strapi, io) => {
   function initSocket(strapi, io) {
     io.on("connection", function (socket) {
@@ -23,7 +27,7 @@ module.exports = (strapi, io) => {
       socket.on("room", async ({ senderId, receiverId }) => {
         try {
           // Get room, create if not found
-          let room = await getRoomChat(senderId, receiverId, false);
+          const room = await getRoomChat(senderId, receiverId, false);
 
           // Send room info to both user on create room
           if (senderId && receiverId) {
@@ -41,7 +45,7 @@ module.exports = (strapi, io) => {
       });
 
       // On user chat
-      socket.on("chat", (data, room) => {
+      socket.on("chat", async (data, room) => {
         strapi.services.message.create({
           subID: data._id,
           text: data.text,
@@ -49,20 +53,13 @@ module.exports = (strapi, io) => {
           room: room,
         });
         socket.to(`${room}`).emit("chat", data, room);
-        strapi.plugins["users-permissions"].services.user
-          .fetch(
-            {
-              id: data.user._id,
-            },
-            []
-          )
-          .then((user) =>
-            sendCloudMessage(user.device_token, {
-              data: JSON.stringify(data),
-              room: room,
-              type: "CHAT",
-            })
-          );
+        const _room = await getRoomChat("", "", room);
+        const receiver = getReceiver(_room, data.user._id);
+        sendCloudMessage(receiver.device_token, {
+          data: JSON.stringify(data),
+          room: room,
+          type: "CHAT",
+        });
       });
     });
   }
