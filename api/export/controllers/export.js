@@ -8,13 +8,13 @@ const { sanitizeEntity } = require("strapi-utils");
 
 module.exports = {
   async find(ctx) {
-    const { page = 0 } = ctx.query;
+    const { page = 0, size = 5 } = ctx.query;
     const { storage } = ctx.state.user;
 
     let exports = await strapi.services.export.getExportByStorage(
       storage,
-      5,
-      page * 5
+      size,
+      page * size
     );
 
     return exports.map((item) =>
