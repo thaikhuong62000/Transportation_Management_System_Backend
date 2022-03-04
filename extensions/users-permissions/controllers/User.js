@@ -150,19 +150,14 @@ module.exports = {
     const { token, data } = ctx.request.body;
     const message = {
       data: JSON.parse(data),
-      token,
+    };
+    const options = {
       contentAvailable: true,
       priority: "high",
+      timeToLive: 60 * 60 * 24,
     };
     const { getMessaging } = require("firebase-admin/messaging");
     const messaging = getMessaging();
-    return messaging.sendToDevice(message);
-    // .then((response) => {
-    //   // Response is a message ID string.
-    //   console.log("Successfully sent message:", response);
-    // })
-    // .catch((error) => {
-    //   console.log("Error sending message:", error);
-    // });
+    return messaging.sendToDevice(token, message, options);
   },
 };
