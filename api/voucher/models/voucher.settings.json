@@ -32,9 +32,9 @@
       "type": "datetime"
     },
     "users": {
+      "via": "vouchers",
       "plugin": "users-permissions",
       "collection": "user",
-      "via": "vouchers",
       "dominant": true
     }
   }

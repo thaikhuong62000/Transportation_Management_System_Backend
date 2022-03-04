@@ -1,5 +1,6 @@
 "use strict";
-
+const { initializeApp } = require("firebase-admin/app");
+const { getMessaging } = require("firebase-admin/messaging");
 /**
  * An asynchronous bootstrap function that runs before
  * your application gets started.
@@ -11,84 +12,33 @@
  */
 
 module.exports = () => {
-  var io = require("socket.io")(
-    strapi.server
-    // , {
-    //   cors: {
-    //     origin: "http://localhost:3000",
-    //     methods: ["GET", "POST"],
-    //     allowedHeaders: ["my-custom-header"],
-    //     credentials: true,
-    //   },
-    // }
-  );
+  // Init socket
+  var io = require("socket.io")(strapi.server);
+  require("./socket")(strapi, io);
 
-  async function loop(socket, room, time) {
-    console.log(`Emit message time ${time}`);
-    socket.to(`${room}`).emit("chat", {
-      user: "bot",
-      text: `A`,
+  // Init firebase
+  const fbm = initializeApp();
+  // Init Message App
+  const messaging = getMessaging();
+  const message = {
+    data: {
+      text: "bo` ra'",
+      score: "850",
+      time: "2:45",
+    },
+    token:
+      "e5CvA8ZsRTOjtT9QM29FyB:APA91bG5qrDugyjCr6eayyttd-QG4AYhgiACf5fZEYEHPYP_Ot5I1keSF_bWI8NkFzoqzhokwqQy0N9atVfr8r50GlOeCroDVJk4XJdPGC_Z4RpXozBcL-bEJMQSZoOcv2RDBd81E5Sz",
+  };
+
+  // Send a message to the device corresponding to the provided
+  // registration token.
+  messaging
+    .send(message)
+    .then((response) => {
+      // Response is a message ID string.
+      console.log("Successfully sent message:", response);
+    })
+    .catch((error) => {
+      console.log("Error sending message:", error);
     });
-    new Promise((resolve) => setTimeout(resolve, 4000)).then(() =>
-      loop(socket, room, time + 1)
-    );
-  }
-
-  // https://strapi.io/blog/how-to-build-a-real-time-chat-forum-using-strapi-socket-io-react-and-mongo-db
-  // https://dev.to/kris/buiding-chat-app-with-react-native-and-socket-io-4p8l
-  io.on("connection", function (socket) {
-    // On Join room event
-    socket.on(
-      "join",
-      async ({ userId = "userID", anotherId = "userID", roomId = false }) => {
-        try {
-          let room;
-          if (roomId) {
-            room = await strapi.services["room-chat"].findOne({ id: roomId });
-          } else {
-            room = await strapi.services["room-chat"].findRoomByUsers(
-              userId,
-              anotherId
-            );
-            if (room === null) {
-              room = await strapi.services["room-chat"].create({
-                user1: userId,
-                user2: anotherId,
-              });
-            }
-          }
-
-          socket.emit("join", room.id, {
-            id: room.user2._id,
-            name: room.user2.name,
-            phone: room.user2.phone,
-            avatar: room.user2.avatar,
-          });
-
-          // Join if not in room
-          if (!socket.rooms.has(room.id)) {
-            socket.join(room.id);
-
-            // Add listener
-            socket.on("chat", (data, room) => {
-              strapi.services.message.create({
-                subID: data._id,
-                text: data.text,
-                user: data.user._id,
-                room: room.id,
-              });
-              socket.to(`${room}`).emit(
-                // TODO: Change io to socket later
-                "chat",
-                data,
-                room
-              );
-            });
-          }
-        } catch (error) {
-          console.log("Something bruh at join socket", error);
-        }
-      }
-    );
-  });
 };

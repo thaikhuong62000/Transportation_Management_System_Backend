@@ -706,6 +706,9 @@
                   "type": "string"
                 }
               },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },

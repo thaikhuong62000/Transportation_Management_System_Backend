@@ -138,6 +138,10 @@
     "vouchers": {
       "via": "users",
       "collection": "voucher"
+    },
+    "device_token": {
+      "type": "string",
+      "private": true
     }
   }
 }

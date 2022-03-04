@@ -137,4 +137,32 @@ module.exports = {
       includeFields: ["name", "phone"],
     });
   },
+
+  async updateDeviceToken(ctx) {
+    const { device_token } = ctx.request.body;
+    return await strapi.plugins["users-permissions"].services.user.edit(
+      { id: ctx.state.user.id },
+      { device_token: device_token }
+    );
+  },
+
+  async sendMessage(ctx) {
+    const { token, data } = ctx.request.body;
+    const message = {
+      data: JSON.parse(data),
+      token,
+      contentAvailable: true,
+      priority: "high",
+    };
+    const { getMessaging } = require("firebase-admin/messaging");
+    const messaging = getMessaging();
+    return messaging.sendToDevice(message);
+    // .then((response) => {
+    //   // Response is a message ID string.
+    //   console.log("Successfully sent message:", response);
+    // })
+    // .catch((error) => {
+    //   console.log("Error sending message:", error);
+    // });
+  },
 };

@@ -83,6 +83,33 @@
           "name": "User"
         }
       }
+    },
+    {
+      "method": "PUT",
+      "path": "/users/device_token",
+      "handler": "User.updateDeviceToken",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User",
+          "actionType": "update"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/send-message",
+      "handler": "User.sendMessage",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
     }
   ]
 }

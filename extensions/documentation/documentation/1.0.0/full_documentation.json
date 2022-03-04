@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/01/2022 8:42:55 PM"
+    "x-generation-date": "03/03/2022 8:46:55 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -11231,6 +11231,9 @@
                   "type": "string"
                 }
               },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -11486,6 +11489,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "device_token": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -11805,6 +11811,9 @@
                   "type": "string"
                 }
               },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -11990,6 +11999,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "device_token": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -12297,6 +12309,9 @@
                   "type": "string"
                 }
               },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -12549,6 +12564,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "device_token": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -12855,6 +12873,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "device_token": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -13363,6 +13384,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "device_token": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -14258,6 +14282,9 @@
                   "type": "string"
                 }
               },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -14552,6 +14579,9 @@
                   "type": "string"
                 }
               },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -14677,6 +14707,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "device_token": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -14914,6 +14947,9 @@
                   "type": "string"
                 }
               },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -15039,6 +15075,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "device_token": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -15455,6 +15494,9 @@
                     "type": "string"
                   }
                 },
+                "device_token": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -15814,6 +15856,9 @@
                     "type": "string"
                   }
                 },
+                "device_token": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -16050,6 +16095,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "device_token": {
+                  "type": "string"
                 },
                 "created_by": {
                   "type": "string"
@@ -16884,6 +16932,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "device_token": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"
