@@ -863,6 +863,15 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -982,6 +991,15 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"

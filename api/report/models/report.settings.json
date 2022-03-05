@@ -26,9 +26,9 @@
       "type": "text"
     },
     "stocker": {
+      "via": "reports",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "reports"
+      "model": "user"
     },
     "report_file": {
       "collection": "file",
