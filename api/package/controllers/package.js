@@ -127,12 +127,12 @@ module.exports = {
 
   async getPackagesInStorage(ctx) {
     const { storage } = ctx.state.user;
-    const { page = 0 } = ctx.params;
+    const { page = 0, size = 5 } = ctx.query;
 
     let packages = await strapi.services.package.getPackagesInStorage(
       storage,
-      5,
-      page * 5
+      size,
+      page * size
     );
 
     return packages.map((package) =>
