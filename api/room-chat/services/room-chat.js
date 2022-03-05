@@ -8,7 +8,7 @@ var mongoose = require("mongoose");
 
 module.exports = {
   async findRoomByUsers(user1, user2) {
-    const room = strapi
+    return strapi
       .query("room-chat")
       .model.findOne()
       .where("user1")
@@ -17,6 +17,12 @@ module.exports = {
       .in([user1, user2])
       .populate("user1")
       .populate("user2");
-    return room;
+  },
+
+  async findRoomsByUser(user) {
+    return strapi
+      .query("room-chat")
+      .model.find()
+      .or([{ user1: user }, { user2: user }]);
   },
 };

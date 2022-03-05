@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/03/2022 8:46:55 PM"
+    "x-generation-date": "03/05/2022 12:34:40 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3113,6 +3113,74 @@
         "parameters": [
           {
             "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/messages/room/{room}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Message"
+        ],
+        "parameters": [
+          {
+            "name": "room",
             "in": "path",
             "description": "",
             "deprecated": false,
@@ -6809,6 +6877,63 @@
             }
           }
         ]
+      }
+    },
+    "/room-chats/user/rooms": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Room-chat"
+        ],
+        "parameters": []
       }
     },
     "/shipments": {
@@ -12334,12 +12459,6 @@
               "user2": {
                 "type": "string"
               },
-              "messages": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "created_by": {
                 "type": "string"
               },
@@ -14718,37 +14837,6 @@
                 "type": "string"
               }
             }
-          },
-          "messages": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "subID": {
-                  "type": "string"
-                },
-                "text": {
-                  "type": "string"
-                },
-                "user": {
-                  "type": "string"
-                },
-                "room": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
           }
         }
       },
@@ -14759,12 +14847,6 @@
           },
           "user2": {
             "type": "string"
-          },
-          "messages": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "created_by": {
             "type": "string"

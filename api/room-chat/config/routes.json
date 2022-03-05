@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/room-chats/user/rooms",
+      "handler": "room-chat.getRooms",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/messages/room/:room",
+      "handler": "message.getMessageByRoom",
+      "config": {
+        "policies": ["message.isUserHaveRoom"]
+      }
     }
   ]
 }

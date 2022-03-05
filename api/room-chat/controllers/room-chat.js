@@ -5,4 +5,10 @@
  * to customize this controller
  */
 
-module.exports = {};
+module.exports = {
+  async getRooms(ctx) {
+    return await strapi.services["room-chat"].findRoomsByUser(
+      ctx.state.user.id
+    );
+  },
+};
