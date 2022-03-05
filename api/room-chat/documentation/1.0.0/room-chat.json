@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/vouchers": {
+    "/room-chats": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -10,9 +10,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Voucher"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -51,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Voucher"
+          "Room-chat"
         ],
         "parameters": [
           {
@@ -201,72 +202,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Voucher"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Voucher"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewVoucher"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/vouchers/count": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
                   "properties": {
-                    "count": {
-                      "type": "integer"
+                    "foo": {
+                      "type": "string"
                     }
                   }
                 }
@@ -306,12 +244,22 @@
         },
         "summary": "",
         "tags": [
-          "Voucher"
+          "Room-chat"
         ],
-        "parameters": []
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewRoom-chat"
+              }
+            }
+          }
+        }
       }
     },
-    "/vouchers/{id}": {
+    "/room-chats/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +269,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Voucher"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -359,7 +311,64 @@
         },
         "summary": "",
         "tags": [
-          "Voucher"
+          "Room-chat"
+        ],
+        "parameters": []
+      }
+    },
+    "/room-chats/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Room-chat"
         ],
         "parameters": [
           {
@@ -383,7 +392,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Voucher"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -421,7 +434,7 @@
         },
         "summary": "",
         "tags": [
-          "Voucher"
+          "Room-chat"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +442,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewVoucher"
+                "$ref": "#/components/schemas/NewRoom-chat"
               }
             }
           }
@@ -495,7 +508,7 @@
         },
         "summary": "",
         "tags": [
-          "Voucher"
+          "Room-chat"
         ],
         "parameters": [
           {
@@ -510,209 +523,342 @@
           }
         ]
       }
+    },
+    "/room-chats/user/rooms": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Room-chat"
+        ],
+        "parameters": []
+      }
     }
   },
   "components": {
     "schemas": {
-      "Voucher": {
+      "Room-chat": {
         "required": [
-          "id",
-          "name",
-          "sale",
-          "sale_max",
-          "type"
+          "id"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "name": {
-            "type": "string"
-          },
-          "sale": {
-            "type": "number"
-          },
-          "sale_max": {
-            "type": "number"
-          },
-          "type": {
-            "type": "string"
-          },
-          "expired": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "users": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "username",
-                "email",
-                "name",
-                "phone"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "username": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "provider": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                },
-                "resetPasswordToken": {
-                  "type": "string"
-                },
-                "confirmationToken": {
-                  "type": "string"
-                },
-                "confirmed": {
-                  "type": "boolean"
-                },
-                "blocked": {
-                  "type": "boolean"
-                },
-                "role": {
-                  "type": "string"
-                },
-                "car": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "phone": {
-                  "type": "string"
-                },
-                "birthday": {
-                  "type": "string"
-                },
-                "point": {
-                  "type": "integer"
-                },
-                "orders": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "shipments": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "address": {
-                  "type": "component"
-                },
-                "storage": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "Admin",
-                    "Stocker",
-                    "Driver",
-                    "Assistance",
-                    "User",
-                    "Iron",
-                    "Gold",
-                    "Diamond"
-                  ]
-                },
-                "furloughs": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "package_templates": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "order_templates": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "avatar": {
-                  "type": "string"
-                },
-                "reports": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "vouchers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "device_token": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
+          "user1": {
+            "required": [
+              "id",
+              "username",
+              "email",
+              "name",
+              "phone"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "car": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "birthday": {
+                "type": "string"
+              },
+              "point": {
+                "type": "integer"
+              },
+              "orders": {
+                "type": "array",
+                "items": {
                   "type": "string"
                 }
+              },
+              "shipments": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "address": {
+                "type": "component"
+              },
+              "storage": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Admin",
+                  "Stocker",
+                  "Driver",
+                  "Assistance",
+                  "User",
+                  "Iron",
+                  "Gold",
+                  "Diamond"
+                ]
+              },
+              "furloughs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "package_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "order_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "avatar": {
+                "type": "string"
+              },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
               }
             }
           },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
+          "user2": {
+            "required": [
+              "id",
+              "username",
+              "email",
+              "name",
+              "phone"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "car": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "birthday": {
+                "type": "string"
+              },
+              "point": {
+                "type": "integer"
+              },
+              "orders": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "shipments": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "address": {
+                "type": "component"
+              },
+              "storage": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Admin",
+                  "Stocker",
+                  "Driver",
+                  "Assistance",
+                  "User",
+                  "Iron",
+                  "Gold",
+                  "Diamond"
+                ]
+              },
+              "furloughs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "package_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "order_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "avatar": {
+                "type": "string"
+              },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
-      "NewVoucher": {
-        "required": [
-          "name",
-          "sale",
-          "sale_max",
-          "type"
-        ],
+      "NewRoom-chat": {
         "properties": {
-          "name": {
+          "user1": {
             "type": "string"
           },
-          "sale": {
-            "type": "number"
-          },
-          "sale_max": {
-            "type": "number"
-          },
-          "type": {
+          "user2": {
             "type": "string"
-          },
-          "expired": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "users": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
           },
           "created_by": {
             "type": "string"
@@ -724,9 +870,5 @@
       }
     }
   },
-  "tags": [
-    {
-      "name": "Voucher"
-    }
-  ]
+  "tags": []
 }
