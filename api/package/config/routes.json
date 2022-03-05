@@ -18,6 +18,24 @@
     },
     {
       "method": "GET",
+      "path": "/packages/in-storage",
+      "handler": "package.getPackagesInStorage",
+      "config": {
+        "policies": [],
+        "description": "Get packages that is imported in storage"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/packages/scanned/:id",
+      "handler": "package.getPackagesAfterScan",
+      "config": {
+        "policies": [],
+        "description": "Get packages that is scanned barcode"
+      }
+    },
+    {
+      "method": "GET",
       "path": "/packages/:id",
       "handler": "package.findOne",
       "config": {
