@@ -18,10 +18,10 @@ module.exports = {
       const { text, createdAt, subID: _id, user } = message;
       return {
         text,
-        createdAt,
+        createdAt: new Date(createdAt),
         _id,
         user: {
-          id: user.id,
+          _id: user.id,
           name: user.name,
           avatar: user.avatar?.url,
         },

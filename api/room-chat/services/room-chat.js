@@ -23,6 +23,8 @@ module.exports = {
     return strapi
       .query("room-chat")
       .model.find()
-      .or([{ user1: user }, { user2: user }]);
+      .or([{ user1: user }, { user2: user }])
+      .populate("user1")
+      .populate("user2");
   },
 };
