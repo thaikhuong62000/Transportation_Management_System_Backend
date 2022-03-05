@@ -15,7 +15,6 @@ module.exports = {
   },
 
   async updatePassword(ctx) {
-    const { id } = ctx.params;
     const { password, newPassword } = ctx.request.body;
 
     const validPassword = await strapi.plugins[
@@ -34,7 +33,7 @@ module.exports = {
 
     const updatedPassword = await strapi.plugins[
       "users-permissions"
-    ].services.user.updatePassword(id, hashedPassword);
+    ].services.user.updatePassword(ctx.state.user.id, hashedPassword);
 
     return sanitizeEntity(updatedPassword, {
       model: strapi.query("user", "users-permissions").model,
@@ -137,5 +136,28 @@ module.exports = {
       model: strapi.query("user", "users-permissions").model,
       includeFields: ["name", "phone"],
     });
+  },
+
+  async updateDeviceToken(ctx) {
+    const { device_token } = ctx.request.body;
+    return await strapi.plugins["users-permissions"].services.user.edit(
+      { id: ctx.state.user.id },
+      { device_token: device_token }
+    );
+  },
+
+  async sendMessage(ctx) {
+    const { token, data } = ctx.request.body;
+    const message = {
+      data: JSON.parse(data),
+    };
+    const options = {
+      contentAvailable: true,
+      priority: "high",
+      timeToLive: 60 * 60 * 24,
+    };
+    const { getMessaging } = require("firebase-admin/messaging");
+    const messaging = getMessaging();
+    return messaging.sendToDevice(token, message, options);
   },
 };

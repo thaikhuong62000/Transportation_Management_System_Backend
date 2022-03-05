@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "vouchers",
   "info": {
-    "name": "Voucher"
+    "name": "Voucher",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -29,6 +30,12 @@
     },
     "expired": {
       "type": "datetime"
+    },
+    "users": {
+      "via": "vouchers",
+      "plugin": "users-permissions",
+      "collection": "user",
+      "dominant": true
     }
   }
 }

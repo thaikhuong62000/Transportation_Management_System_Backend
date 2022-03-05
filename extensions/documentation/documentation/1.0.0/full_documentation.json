@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/05/2022 4:27:14 PM"
+    "x-generation-date": "03/05/2022 4:55:23 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -96,9 +96,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car-broken"
-        ],
+        "tags": ["Car-broken"],
         "parameters": [
           {
             "name": "_limit",
@@ -288,9 +286,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car-broken"
-        ],
+        "tags": ["Car-broken"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -355,9 +351,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car-broken"
-        ],
+        "tags": ["Car-broken"],
         "parameters": []
       }
     },
@@ -412,9 +406,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car-broken"
-        ],
+        "tags": ["Car-broken"],
         "parameters": [
           {
             "name": "id",
@@ -478,9 +470,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car-broken"
-        ],
+        "tags": ["Car-broken"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -552,9 +542,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car-broken"
-        ],
+        "tags": ["Car-broken"],
         "parameters": [
           {
             "name": "id",
@@ -619,9 +607,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car"
-        ],
+        "tags": ["Car"],
         "parameters": [
           {
             "name": "_limit",
@@ -807,9 +793,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car"
-        ],
+        "tags": ["Car"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -874,9 +858,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car"
-        ],
+        "tags": ["Car"],
         "parameters": []
       }
     },
@@ -927,9 +909,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car"
-        ],
+        "tags": ["Car"],
         "parameters": [
           {
             "name": "id",
@@ -989,9 +969,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car"
-        ],
+        "tags": ["Car"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1063,9 +1041,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car"
-        ],
+        "tags": ["Car"],
         "parameters": [
           {
             "name": "id",
@@ -1130,9 +1106,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Export"
-        ],
+        "tags": ["Export"],
         "parameters": [
           {
             "name": "_limit",
@@ -1318,9 +1292,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Export"
-        ],
+        "tags": ["Export"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1385,9 +1357,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Export"
-        ],
+        "tags": ["Export"],
         "parameters": []
       }
     },
@@ -1438,9 +1408,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Export"
-        ],
+        "tags": ["Export"],
         "parameters": [
           {
             "name": "id",
@@ -1500,9 +1468,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Export"
-        ],
+        "tags": ["Export"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1574,9 +1540,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Export"
-        ],
+        "tags": ["Export"],
         "parameters": [
           {
             "name": "id",
@@ -1642,9 +1606,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Export"
-        ],
+        "tags": ["Export"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1713,9 +1675,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Furlough"
-        ],
+        "tags": ["Furlough"],
         "parameters": [
           {
             "name": "_limit",
@@ -1901,9 +1861,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Furlough"
-        ],
+        "tags": ["Furlough"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1968,9 +1926,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Furlough"
-        ],
+        "tags": ["Furlough"],
         "parameters": []
       }
     },
@@ -2021,9 +1977,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Furlough"
-        ],
+        "tags": ["Furlough"],
         "parameters": [
           {
             "name": "id",
@@ -2083,9 +2037,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Furlough"
-        ],
+        "tags": ["Furlough"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2157,9 +2109,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Furlough"
-        ],
+        "tags": ["Furlough"],
         "parameters": [
           {
             "name": "id",
@@ -2224,9 +2174,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Import"
-        ],
+        "tags": ["Import"],
         "parameters": [
           {
             "name": "_limit",
@@ -2412,9 +2360,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Import"
-        ],
+        "tags": ["Import"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2479,9 +2425,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Import"
-        ],
+        "tags": ["Import"],
         "parameters": []
       }
     },
@@ -2532,9 +2476,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Import"
-        ],
+        "tags": ["Import"],
         "parameters": [
           {
             "name": "id",
@@ -2594,9 +2536,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Import"
-        ],
+        "tags": ["Import"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2668,9 +2608,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Import"
-        ],
+        "tags": ["Import"],
         "parameters": [
           {
             "name": "id",
@@ -2736,9 +2674,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Import"
-        ],
+        "tags": ["Import"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2755,6 +2691,571 @@
           }
         },
         "parameters": []
+      }
+    },
+    "/messages": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Message"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Message"],
+        "parameters": [
+          {
+            "name": "_limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of results possible",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_sort",
+            "in": "query",
+            "required": false,
+            "description": "Sort according to a specific field.",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_start",
+            "in": "query",
+            "required": false,
+            "description": "Skip a specific number of entries (especially useful for pagination)",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "=",
+            "in": "query",
+            "required": false,
+            "description": "Get entries that matches exactly your input",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_ne",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are not equals to something",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lt",
+            "in": "query",
+            "required": false,
+            "description": "Get record that are lower than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are lower than or equal to a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gt",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than  or equal a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_contains",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_containss",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains (case sensitive) a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_in",
+            "in": "query",
+            "required": false,
+            "description": "Get records that matches any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_nin",
+            "in": "query",
+            "required": false,
+            "description": "Get records that doesn't match any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          }
+        ]
+      },
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Message"],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessage"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messages/count": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Message"],
+        "parameters": []
+      }
+    },
+    "/messages/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Message"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "deprecated": false,
+        "description": "Update a record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Message"],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessage"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "deprecated": false,
+        "description": "Delete a record",
+        "responses": {
+          "200": {
+            "description": "deletes a single record based on the ID supplied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Message"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/messages/room/{room}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Message"],
+        "parameters": [
+          {
+            "name": "room",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     },
     "/order-templates": {
@@ -2808,9 +3309,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order-template"
-        ],
+        "tags": ["Order-template"],
         "parameters": [
           {
             "name": "_limit",
@@ -3000,9 +3499,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order-template"
-        ],
+        "tags": ["Order-template"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3067,9 +3564,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order-template"
-        ],
+        "tags": ["Order-template"],
         "parameters": []
       }
     },
@@ -3124,9 +3619,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order-template"
-        ],
+        "tags": ["Order-template"],
         "parameters": [
           {
             "name": "id",
@@ -3190,9 +3683,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order-template"
-        ],
+        "tags": ["Order-template"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3264,9 +3755,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order-template"
-        ],
+        "tags": ["Order-template"],
         "parameters": [
           {
             "name": "id",
@@ -3331,9 +3820,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order"
-        ],
+        "tags": ["Order"],
         "parameters": [
           {
             "name": "_limit",
@@ -3519,9 +4006,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order"
-        ],
+        "tags": ["Order"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3586,135 +4071,8 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order"
-        ],
+        "tags": ["Order"],
         "parameters": []
-      }
-    },
-    "/orders/delivered": {
-      "get": {
-        "deprecated": false,
-        "description": "Get delivered order",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Order"
-        ],
-        "parameters": []
-      }
-    },
-    "/orders/tracing/{id}": {
-      "get": {
-        "deprecated": false,
-        "description": "Get order's trace through storage, return trace status",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Order"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
       }
     },
     "/orders/{id}": {
@@ -3764,9 +4122,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order"
-        ],
+        "tags": ["Order"],
         "parameters": [
           {
             "name": "id",
@@ -3826,9 +4182,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order"
-        ],
+        "tags": ["Order"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3900,9 +4254,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order"
-        ],
+        "tags": ["Order"],
         "parameters": [
           {
             "name": "id",
@@ -3968,9 +4320,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package-template"
-        ],
+        "tags": ["Package-template"],
         "parameters": [
           {
             "name": "_limit",
@@ -4160,9 +4510,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package-template"
-        ],
+        "tags": ["Package-template"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -4227,9 +4575,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package-template"
-        ],
+        "tags": ["Package-template"],
         "parameters": []
       }
     },
@@ -4284,9 +4630,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package-template"
-        ],
+        "tags": ["Package-template"],
         "parameters": [
           {
             "name": "id",
@@ -4350,9 +4694,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package-template"
-        ],
+        "tags": ["Package-template"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -4424,9 +4766,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package-template"
-        ],
+        "tags": ["Package-template"],
         "parameters": [
           {
             "name": "id",
@@ -4491,9 +4831,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "parameters": [
           {
             "name": "_limit",
@@ -4679,9 +5017,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -4746,9 +5082,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "parameters": []
       }
     },
@@ -4803,9 +5137,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "parameters": []
       }
     },
@@ -4860,9 +5192,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "parameters": [
           {
             "name": "id",
@@ -4924,9 +5254,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "parameters": [
           {
             "name": "id",
@@ -4986,9 +5314,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -5060,9 +5386,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "parameters": [
           {
             "name": "id",
@@ -5128,9 +5452,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -5198,9 +5520,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Payment"
-        ],
+        "tags": ["Payment"],
         "parameters": [
           {
             "name": "_limit",
@@ -5386,9 +5706,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Payment"
-        ],
+        "tags": ["Payment"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -5453,9 +5771,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Payment"
-        ],
+        "tags": ["Payment"],
         "parameters": []
       }
     },
@@ -5506,9 +5822,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Payment"
-        ],
+        "tags": ["Payment"],
         "parameters": [
           {
             "name": "id",
@@ -5568,9 +5882,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Payment"
-        ],
+        "tags": ["Payment"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -5642,9 +5954,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Payment"
-        ],
+        "tags": ["Payment"],
         "parameters": [
           {
             "name": "id",
@@ -5709,9 +6019,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "parameters": [
           {
             "name": "_limit",
@@ -5897,9 +6205,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -5964,9 +6270,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "parameters": []
       }
     },
@@ -6017,9 +6321,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "parameters": [
           {
             "name": "id",
@@ -6079,9 +6381,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -6153,9 +6453,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "parameters": [
           {
             "name": "id",
@@ -6168,6 +6466,573 @@
             }
           }
         ]
+      }
+    },
+    "/room-chats": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Room-chat"],
+        "parameters": [
+          {
+            "name": "_limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of results possible",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_sort",
+            "in": "query",
+            "required": false,
+            "description": "Sort according to a specific field.",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_start",
+            "in": "query",
+            "required": false,
+            "description": "Skip a specific number of entries (especially useful for pagination)",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "=",
+            "in": "query",
+            "required": false,
+            "description": "Get entries that matches exactly your input",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_ne",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are not equals to something",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lt",
+            "in": "query",
+            "required": false,
+            "description": "Get record that are lower than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are lower than or equal to a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gt",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than  or equal a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_contains",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_containss",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains (case sensitive) a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_in",
+            "in": "query",
+            "required": false,
+            "description": "Get records that matches any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_nin",
+            "in": "query",
+            "required": false,
+            "description": "Get records that doesn't match any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          }
+        ]
+      },
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Room-chat"],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewRoom-chat"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/room-chats/count": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Room-chat"],
+        "parameters": []
+      }
+    },
+    "/room-chats/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Room-chat"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "deprecated": false,
+        "description": "Update a record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Room-chat"],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewRoom-chat"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "deprecated": false,
+        "description": "Delete a record",
+        "responses": {
+          "200": {
+            "description": "deletes a single record based on the ID supplied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Room-chat"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/room-chats/user/rooms": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Room-chat"],
+        "parameters": []
       }
     },
     "/shipments": {
@@ -6220,9 +7085,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "parameters": [
           {
             "name": "_limit",
@@ -6408,9 +7271,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -6475,9 +7336,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "parameters": []
       }
     },
@@ -6528,9 +7387,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "parameters": [
           {
             "name": "id",
@@ -6590,9 +7447,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -6664,9 +7519,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "parameters": [
           {
             "name": "id",
@@ -6732,9 +7585,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "parameters": []
       }
     },
@@ -6789,9 +7640,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "parameters": []
       }
     },
@@ -6846,9 +7695,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "parameters": [
           {
             "name": "id",
@@ -6913,9 +7760,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Storage"
-        ],
+        "tags": ["Storage"],
         "parameters": [
           {
             "name": "_limit",
@@ -7101,9 +7946,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Storage"
-        ],
+        "tags": ["Storage"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -7168,9 +8011,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Storage"
-        ],
+        "tags": ["Storage"],
         "parameters": []
       }
     },
@@ -7221,9 +8062,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Storage"
-        ],
+        "tags": ["Storage"],
         "parameters": [
           {
             "name": "id",
@@ -7283,9 +8122,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Storage"
-        ],
+        "tags": ["Storage"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -7357,9 +8194,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Storage"
-        ],
+        "tags": ["Storage"],
         "parameters": [
           {
             "name": "id",
@@ -7424,9 +8259,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Voucher"
-        ],
+        "tags": ["Voucher"],
         "parameters": [
           {
             "name": "_limit",
@@ -7612,9 +8445,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Voucher"
-        ],
+        "tags": ["Voucher"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -7679,9 +8510,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Voucher"
-        ],
+        "tags": ["Voucher"],
         "parameters": []
       }
     },
@@ -7732,9 +8561,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Voucher"
-        ],
+        "tags": ["Voucher"],
         "parameters": [
           {
             "name": "id",
@@ -7794,9 +8621,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Voucher"
-        ],
+        "tags": ["Voucher"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -7868,9 +8693,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Voucher"
-        ],
+        "tags": ["Voucher"],
         "parameters": [
           {
             "name": "id",
@@ -7936,9 +8759,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Email - Email"
-        ],
+        "tags": ["Email - Email"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -8007,9 +8828,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Email - Email"
-        ],
+        "tags": ["Email - Email"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -8078,9 +8897,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Email - Email"
-        ],
+        "tags": ["Email - Email"],
         "parameters": []
       }
     },
@@ -8135,9 +8952,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -8206,9 +9021,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": []
       }
     },
@@ -8263,9 +9076,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": []
       }
     },
@@ -8320,9 +9131,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": [
           {
             "name": "id",
@@ -8386,9 +9195,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": [
           {
             "name": "id",
@@ -8454,9 +9261,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": [
           {
             "name": "id",
@@ -8522,10 +9327,74 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Unclassified"
-        ],
+        "tags": ["Unclassified"],
         "parameters": []
+      }
+    },
+    "/customer/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Unclassified"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     },
     "/users-permissions/roles/{id}": {
@@ -8575,9 +9444,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
+        "tags": ["UsersPermissions - Role"],
         "parameters": [
           {
             "name": "id",
@@ -8642,9 +9509,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
+        "tags": ["UsersPermissions - Role"],
         "parameters": [
           {
             "name": "_limit",
@@ -8830,9 +9695,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
+        "tags": ["UsersPermissions - Role"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -8893,9 +9756,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
+        "tags": ["UsersPermissions - Role"],
         "parameters": [
           {
             "name": "role",
@@ -8970,9 +9831,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
+        "tags": ["UsersPermissions - Role"],
         "parameters": [
           {
             "name": "role",
@@ -9038,9 +9897,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -9105,9 +9962,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [],
         "requestBody": {
           "description": "",
@@ -9173,9 +10028,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": []
       }
     },
@@ -9229,9 +10082,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -9433,9 +10284,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": []
       }
     },
@@ -9486,9 +10335,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -9553,9 +10400,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "provider",
@@ -9621,9 +10466,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -9692,9 +10535,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -9763,9 +10604,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": []
       }
     },
@@ -9820,9 +10659,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -9890,9 +10727,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "_limit",
@@ -10080,9 +10915,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": []
       }
     },
@@ -10133,9 +10966,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -10195,9 +11026,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -10272,9 +11101,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -10293,10 +11120,7 @@
   "components": {
     "schemas": {
       "Car-broken": {
-        "required": [
-          "id",
-          "time"
-        ],
+        "required": ["id", "time"],
         "properties": {
           "id": {
             "type": "string"
@@ -10309,12 +11133,7 @@
             "type": "string"
           },
           "car": {
-            "required": [
-              "id",
-              "licence",
-              "type",
-              "load"
-            ],
+            "required": ["id", "licence", "type", "load"],
             "properties": {
               "id": {
                 "type": "string"
@@ -10358,9 +11177,7 @@
         }
       },
       "NewCar-broken": {
-        "required": [
-          "time"
-        ],
+        "required": ["time"],
         "properties": {
           "time": {
             "type": "string",
@@ -10385,12 +11202,7 @@
         }
       },
       "Car": {
-        "required": [
-          "id",
-          "licence",
-          "type",
-          "load"
-        ],
+        "required": ["id", "licence", "type", "load"],
         "properties": {
           "id": {
             "type": "string"
@@ -10405,13 +11217,7 @@
             "type": "number"
           },
           "manager": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -10516,6 +11322,15 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -10527,10 +11342,7 @@
           "car_brokens": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "time"
-              ],
+              "required": ["id", "time"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -10558,9 +11370,7 @@
           },
           "size": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -10583,11 +11393,7 @@
         }
       },
       "NewCar": {
-        "required": [
-          "licence",
-          "type",
-          "load"
-        ],
+        "required": ["licence", "type", "load"],
         "properties": {
           "licence": {
             "type": "string"
@@ -10609,9 +11415,7 @@
           },
           "size": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -10640,10 +11444,7 @@
         }
       },
       "Export": {
-        "required": [
-          "id",
-          "quantity"
-        ],
+        "required": ["id", "quantity"],
         "properties": {
           "id": {
             "type": "string"
@@ -10655,13 +11456,7 @@
             "type": "integer"
           },
           "store_manager": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -10766,6 +11561,15 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -10775,12 +11579,7 @@
             }
           },
           "package": {
-            "required": [
-              "id",
-              "quantity",
-              "weight",
-              "state"
-            ],
+            "required": ["id", "quantity", "weight", "state"],
             "properties": {
               "id": {
                 "type": "string"
@@ -10851,10 +11650,7 @@
             }
           },
           "storage": {
-            "required": [
-              "id",
-              "name"
-            ],
+            "required": ["id", "name"],
             "properties": {
               "id": {
                 "type": "string"
@@ -10910,9 +11706,7 @@
         }
       },
       "NewExport": {
-        "required": [
-          "quantity"
-        ],
+        "required": ["quantity"],
         "properties": {
           "code": {
             "type": "string"
@@ -10942,9 +11736,7 @@
         }
       },
       "Furlough": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
@@ -10952,11 +11744,7 @@
           "state": {
             "type": "string",
             "default": "pending",
-            "enum": [
-              "pending",
-              "accepted",
-              "canceled"
-            ]
+            "enum": ["pending", "accepted", "canceled"]
           },
           "reason": {
             "type": "string"
@@ -10970,13 +11758,7 @@
             "format": "date-time"
           },
           "driver": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -11081,6 +11863,15 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -11100,11 +11891,7 @@
           "state": {
             "type": "string",
             "default": "pending",
-            "enum": [
-              "pending",
-              "accepted",
-              "canceled"
-            ]
+            "enum": ["pending", "accepted", "canceled"]
           },
           "reason": {
             "type": "string"
@@ -11133,16 +11920,9 @@
         }
       },
       "Import": {
-        "required": [
-          "id",
-          "code",
-          "quantity"
-        ],
+        "required": ["id", "quantity"],
         "properties": {
           "id": {
-            "type": "string"
-          },
-          "code": {
             "type": "string"
           },
           "quantity": {
@@ -11150,13 +11930,7 @@
             "default": 0
           },
           "store_manager": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -11261,6 +12035,15 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -11270,12 +12053,7 @@
             }
           },
           "package": {
-            "required": [
-              "id",
-              "quantity",
-              "weight",
-              "state"
-            ],
+            "required": ["id", "quantity", "weight", "state"],
             "properties": {
               "id": {
                 "type": "string"
@@ -11346,10 +12124,7 @@
             }
           },
           "storage": {
-            "required": [
-              "id",
-              "name"
-            ],
+            "required": ["id", "name"],
             "properties": {
               "id": {
                 "type": "string"
@@ -11405,14 +12180,8 @@
         }
       },
       "NewImport": {
-        "required": [
-          "code",
-          "quantity"
-        ],
+        "required": ["quantity"],
         "properties": {
-          "code": {
-            "type": "string"
-          },
           "quantity": {
             "type": "integer",
             "default": 0
@@ -11438,89 +12207,20 @@
           }
         }
       },
-      "Order-template": {
-        "required": [
-          "id"
-        ],
+      "Message": {
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
           },
-          "name": {
+          "subID": {
             "type": "string"
           },
-          "receiver_name": {
+          "text": {
             "type": "string"
-          },
-          "receiver_phone": {
-            "type": "string"
-          },
-          "from_address": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "street": {
-                "type": "string"
-              },
-              "ward": {
-                "type": "string"
-              },
-              "province": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "number"
-              },
-              "longtitude": {
-                "type": "number"
-              }
-            }
-          },
-          "to_address": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "street": {
-                "type": "string"
-              },
-              "ward": {
-                "type": "string"
-              },
-              "province": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "number"
-              },
-              "longtitude": {
-                "type": "number"
-              }
-            }
           },
           "user": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -11625,6 +12325,251 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "room": {
+            "required": ["id"],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "user1": {
+                "type": "string"
+              },
+              "user2": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "NewMessage": {
+        "properties": {
+          "subID": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "user": {
+            "type": "string"
+          },
+          "room": {
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
+          }
+        }
+      },
+      "Order-template": {
+        "required": ["id"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "receiver_name": {
+            "type": "string"
+          },
+          "receiver_phone": {
+            "type": "string"
+          },
+          "from_address": {
+            "type": "object",
+            "required": ["id"],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "ward": {
+                "type": "string"
+              },
+              "province": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "latitude": {
+                "type": "number"
+              },
+              "longtitude": {
+                "type": "number"
+              }
+            }
+          },
+          "to_address": {
+            "type": "object",
+            "required": ["id"],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "ward": {
+                "type": "string"
+              },
+              "province": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "latitude": {
+                "type": "number"
+              },
+              "longtitude": {
+                "type": "number"
+              }
+            }
+          },
+          "user": {
+            "required": ["id", "username", "email", "name", "phone"],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "car": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "birthday": {
+                "type": "string"
+              },
+              "point": {
+                "type": "integer"
+              },
+              "orders": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "shipments": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "address": {
+                "type": "component"
+              },
+              "storage": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Admin",
+                  "Stocker",
+                  "Driver",
+                  "Assistance",
+                  "User",
+                  "Iron",
+                  "Gold",
+                  "Diamond"
+                ]
+              },
+              "furloughs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "package_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "order_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "avatar": {
+                "type": "string"
+              },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -11652,9 +12597,7 @@
           },
           "from_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -11681,9 +12624,7 @@
           },
           "to_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -11770,13 +12711,7 @@
             "type": "string"
           },
           "voucher": {
-            "required": [
-              "id",
-              "name",
-              "sale",
-              "sale_max",
-              "type"
-            ],
+            "required": ["id", "name", "sale", "sale_max", "type"],
             "properties": {
               "id": {
                 "type": "string"
@@ -11796,6 +12731,12 @@
               "expired": {
                 "type": "string"
               },
+              "users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "published_at": {
                 "type": "string"
               },
@@ -11808,13 +12749,7 @@
             }
           },
           "customer": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -11919,6 +12854,15 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -11930,12 +12874,7 @@
           "packages": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "quantity",
-                "weight",
-                "state"
-              ],
+              "required": ["id", "quantity", "weight", "state"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -12008,9 +12947,7 @@
           },
           "from_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12037,9 +12974,7 @@
           },
           "to_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12070,9 +13005,7 @@
           "payments": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -12094,11 +13027,7 @@
                 },
                 "method": {
                   "type": "string",
-                  "enum": [
-                    "direct",
-                    "momo",
-                    "banking"
-                  ]
+                  "enum": ["direct", "momo", "banking"]
                 },
                 "published_at": {
                   "type": "string"
@@ -12174,9 +13103,7 @@
           },
           "from_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12203,9 +13130,7 @@
           },
           "to_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12252,9 +13177,7 @@
         }
       },
       "Package-template": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
@@ -12264,9 +13187,7 @@
           },
           "Package_Type": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12274,12 +13195,7 @@
               "package_type": {
                 "type": "string",
                 "default": "normal",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
+                "enum": ["normal", "fragile", "explosive", "smell"]
               }
             }
           },
@@ -12291,9 +13207,7 @@
           },
           "size": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12313,13 +13227,7 @@
             "type": "string"
           },
           "user": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12424,6 +13332,15 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -12445,9 +13362,7 @@
           },
           "Package_Type": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12455,12 +13370,7 @@
               "package_type": {
                 "type": "string",
                 "default": "normal",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
+                "enum": ["normal", "fragile", "explosive", "smell"]
               }
             }
           },
@@ -12472,9 +13382,7 @@
           },
           "size": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12509,12 +13417,7 @@
         }
       },
       "Package": {
-        "required": [
-          "id",
-          "quantity",
-          "weight",
-          "state"
-        ],
+        "required": ["id", "quantity", "weight", "state"],
         "properties": {
           "id": {
             "type": "string"
@@ -12689,9 +13592,7 @@
           },
           "current_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12719,16 +13620,9 @@
           "imports": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "code",
-                "quantity"
-              ],
+              "required": ["id", "quantity"],
               "properties": {
                 "id": {
-                  "type": "string"
-                },
-                "code": {
                   "type": "string"
                 },
                 "quantity": {
@@ -12758,10 +13652,7 @@
           "exports": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "quantity"
-              ],
+              "required": ["id", "quantity"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -12798,9 +13689,7 @@
           },
           "size": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12818,9 +13707,7 @@
           },
           "package_type": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12828,21 +13715,14 @@
               "package_type": {
                 "type": "string",
                 "default": "normal",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
+                "enum": ["normal", "fragile", "explosive", "smell"]
               }
             }
           },
           "shipments": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -12899,11 +13779,7 @@
         }
       },
       "NewPackage": {
-        "required": [
-          "quantity",
-          "weight",
-          "state"
-        ],
+        "required": ["quantity", "weight", "state"],
         "properties": {
           "code": {
             "type": "string"
@@ -12925,9 +13801,7 @@
           },
           "current_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12969,9 +13843,7 @@
           },
           "size": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12989,9 +13861,7 @@
           },
           "package_type": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12999,12 +13869,7 @@
               "package_type": {
                 "type": "string",
                 "default": "normal",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
+                "enum": ["normal", "fragile", "explosive", "smell"]
               }
             }
           },
@@ -13030,9 +13895,7 @@
         }
       },
       "Payment": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
@@ -13136,11 +13999,7 @@
           "method": {
             "type": "string",
             "default": "direct",
-            "enum": [
-              "direct",
-              "momo",
-              "banking"
-            ]
+            "enum": ["direct", "momo", "banking"]
           },
           "published_at": {
             "type": "string",
@@ -13169,11 +14028,7 @@
           "method": {
             "type": "string",
             "default": "direct",
-            "enum": [
-              "direct",
-              "momo",
-              "banking"
-            ]
+            "enum": ["direct", "momo", "banking"]
           },
           "published_at": {
             "type": "string",
@@ -13188,9 +14043,7 @@
         }
       },
       "Report": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
@@ -13207,13 +14060,7 @@
             "type": "string"
           },
           "stocker": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13318,6 +14165,15 @@
                   "type": "string"
                 }
               },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -13397,10 +14253,7 @@
             }
           },
           "storage": {
-            "required": [
-              "id",
-              "name"
-            ],
+            "required": ["id", "name"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13486,10 +14339,278 @@
           }
         }
       },
+      "Room-chat": {
+        "required": ["id"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "user1": {
+            "required": ["id", "username", "email", "name", "phone"],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "car": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "birthday": {
+                "type": "string"
+              },
+              "point": {
+                "type": "integer"
+              },
+              "orders": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "shipments": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "address": {
+                "type": "component"
+              },
+              "storage": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Admin",
+                  "Stocker",
+                  "Driver",
+                  "Assistance",
+                  "User",
+                  "Iron",
+                  "Gold",
+                  "Diamond"
+                ]
+              },
+              "furloughs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "package_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "order_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "avatar": {
+                "type": "string"
+              },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "user2": {
+            "required": ["id", "username", "email", "name", "phone"],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "car": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "birthday": {
+                "type": "string"
+              },
+              "point": {
+                "type": "integer"
+              },
+              "orders": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "shipments": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "address": {
+                "type": "component"
+              },
+              "storage": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Admin",
+                  "Stocker",
+                  "Driver",
+                  "Assistance",
+                  "User",
+                  "Iron",
+                  "Gold",
+                  "Diamond"
+                ]
+              },
+              "furloughs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "package_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "order_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "avatar": {
+                "type": "string"
+              },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "NewRoom-chat": {
+        "properties": {
+          "user1": {
+            "type": "string"
+          },
+          "user2": {
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
+          }
+        }
+      },
       "Shipment": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
@@ -13499,12 +14620,7 @@
             "format": "date-time"
           },
           "car": {
-            "required": [
-              "id",
-              "licence",
-              "type",
-              "load"
-            ],
+            "required": ["id", "licence", "type", "load"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13542,13 +14658,7 @@
             }
           },
           "driver": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13652,6 +14762,15 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -13662,13 +14781,7 @@
             }
           },
           "assistance": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13772,6 +14885,15 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -13783,9 +14905,7 @@
           },
           "from_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13812,9 +14932,7 @@
           },
           "to_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13842,12 +14960,7 @@
           "packages": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "quantity",
-                "weight",
-                "state"
-              ],
+              "required": ["id", "quantity", "weight", "state"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -13947,9 +15060,7 @@
           },
           "from_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13976,9 +15087,7 @@
           },
           "to_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -14028,10 +15137,7 @@
         }
       },
       "Storage": {
-        "required": [
-          "id",
-          "name"
-        ],
+        "required": ["id", "name"],
         "properties": {
           "id": {
             "type": "string"
@@ -14041,9 +15147,7 @@
           },
           "address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -14074,13 +15178,7 @@
           "store_managers": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "username",
-                "email",
-                "name",
-                "phone"
-              ],
+              "required": ["id", "username", "email", "name", "phone"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -14185,6 +15283,15 @@
                     "type": "string"
                   }
                 },
+                "vouchers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "device_token": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -14197,16 +15304,9 @@
           "imports": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "code",
-                "quantity"
-              ],
+              "required": ["id", "quantity"],
               "properties": {
                 "id": {
-                  "type": "string"
-                },
-                "code": {
                   "type": "string"
                 },
                 "quantity": {
@@ -14236,10 +15336,7 @@
           "exports": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "quantity"
-              ],
+              "required": ["id", "quantity"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -14274,9 +15371,7 @@
           "reports": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -14321,18 +15416,14 @@
         }
       },
       "NewStorage": {
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "type": "string"
           },
           "address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -14397,13 +15488,7 @@
         }
       },
       "Voucher": {
-        "required": [
-          "id",
-          "name",
-          "sale",
-          "sale_max",
-          "type"
-        ],
+        "required": ["id", "name", "sale", "sale_max", "type"],
         "properties": {
           "id": {
             "type": "string"
@@ -14423,119 +15508,11 @@
           "expired": {
             "type": "string",
             "format": "date-time"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "NewVoucher": {
-        "required": [
-          "name",
-          "sale",
-          "sale_max",
-          "type"
-        ],
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "sale": {
-            "type": "number"
-          },
-          "sale_max": {
-            "type": "number"
-          },
-          "type": {
-            "type": "string"
-          },
-          "expired": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
-            "type": "string"
-          }
-        }
-      },
-      "UsersPermissionsRole": {
-        "required": [
-          "id",
-          "name"
-        ],
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string",
-            "minLength": 3
-          },
-          "description": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "permissions": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "type",
-                "controller",
-                "action",
-                "enabled"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                },
-                "controller": {
-                  "type": "string"
-                },
-                "action": {
-                  "type": "string"
-                },
-                "enabled": {
-                  "type": "boolean"
-                },
-                "policy": {
-                  "type": "string"
-                },
-                "role": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
           },
           "users": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "username",
-                "email",
-                "name",
-                "phone"
-              ],
+              "required": ["id", "username", "email", "name", "phone"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -14640,6 +15617,235 @@
                     "type": "string"
                   }
                 },
+                "vouchers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "device_token": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "NewVoucher": {
+        "required": ["name", "sale", "sale_max", "type"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "sale": {
+            "type": "number"
+          },
+          "sale_max": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string"
+          },
+          "expired": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
+          }
+        }
+      },
+      "UsersPermissionsRole": {
+        "required": ["id", "name"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 3
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "required": ["id", "type", "controller", "action", "enabled"],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "controller": {
+                  "type": "string"
+                },
+                "action": {
+                  "type": "string"
+                },
+                "enabled": {
+                  "type": "boolean"
+                },
+                "policy": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "required": ["id", "username", "email", "name", "phone"],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "resetPasswordToken": {
+                  "type": "string"
+                },
+                "confirmationToken": {
+                  "type": "string"
+                },
+                "confirmed": {
+                  "type": "boolean"
+                },
+                "blocked": {
+                  "type": "boolean"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "car": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "birthday": {
+                  "type": "string"
+                },
+                "point": {
+                  "type": "integer"
+                },
+                "orders": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "shipments": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "address": {
+                  "type": "component"
+                },
+                "storage": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "Admin",
+                    "Stocker",
+                    "Driver",
+                    "Assistance",
+                    "User",
+                    "Iron",
+                    "Gold",
+                    "Diamond"
+                  ]
+                },
+                "furloughs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "package_templates": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "order_templates": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "avatar": {
+                  "type": "string"
+                },
+                "reports": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "vouchers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "device_token": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -14652,9 +15858,7 @@
         }
       },
       "NewUsersPermissionsRole": {
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "type": "string",
@@ -14687,13 +15891,7 @@
         }
       },
       "UsersPermissionsUser": {
-        "required": [
-          "id",
-          "username",
-          "email",
-          "name",
-          "phone"
-        ],
+        "required": ["id", "username", "email", "name", "phone"],
         "properties": {
           "id": {
             "type": "string"
@@ -14718,10 +15916,7 @@
             "default": false
           },
           "role": {
-            "required": [
-              "id",
-              "name"
-            ],
+            "required": ["id", "name"],
             "properties": {
               "id": {
                 "type": "string"
@@ -14756,12 +15951,7 @@
             }
           },
           "car": {
-            "required": [
-              "id",
-              "licence",
-              "type",
-              "load"
-            ],
+            "required": ["id", "licence", "type", "load"],
             "properties": {
               "id": {
                 "type": "string"
@@ -14901,9 +16091,7 @@
           "shipments": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -14952,9 +16140,7 @@
           },
           "address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -14980,10 +16166,7 @@
             }
           },
           "storage": {
-            "required": [
-              "id",
-              "name"
-            ],
+            "required": ["id", "name"],
             "properties": {
               "id": {
                 "type": "string"
@@ -15048,20 +16231,14 @@
           "furloughs": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
                 },
                 "state": {
                   "type": "string",
-                  "enum": [
-                    "pending",
-                    "accepted",
-                    "canceled"
-                  ]
+                  "enum": ["pending", "accepted", "canceled"]
                 },
                 "reason": {
                   "type": "string"
@@ -15090,9 +16267,7 @@
           "package_templates": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -15133,9 +16308,7 @@
           "order_templates": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -15240,9 +16413,7 @@
           "reports": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -15279,16 +16450,52 @@
                 }
               }
             }
+          },
+          "vouchers": {
+            "type": "array",
+            "items": {
+              "required": ["id", "name", "sale", "sale_max", "type"],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "sale": {
+                  "type": "number"
+                },
+                "sale_max": {
+                  "type": "number"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "expired": {
+                  "type": "string"
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
       "NewUsersPermissionsUser": {
-        "required": [
-          "username",
-          "email",
-          "name",
-          "phone"
-        ],
+        "required": ["username", "email", "name", "phone"],
         "properties": {
           "username": {
             "type": "string",
@@ -15354,9 +16561,7 @@
           },
           "address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -15421,6 +16626,15 @@
               "type": "string"
             }
           },
+          "vouchers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "device_token": {
+            "type": "string"
+          },
           "created_by": {
             "type": "string"
           },
@@ -15430,10 +16644,7 @@
         }
       },
       "Error": {
-        "required": [
-          "code",
-          "message"
-        ],
+        "required": ["code", "message"],
         "properties": {
           "code": {
             "type": "integer",
@@ -15465,6 +16676,9 @@
     },
     {
       "name": "Import"
+    },
+    {
+      "name": "Message"
     },
     {
       "name": "Order"

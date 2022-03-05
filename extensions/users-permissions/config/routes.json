@@ -28,8 +28,18 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/customer/:id",
+      "handler": "User.getCustomerInfo",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": ""
+      }
+    },
+    {
       "method": "POST",
-      "path": "/auth/password/update/:id",
+      "path": "/auth/password/update",
       "handler": "User.updatePassword",
       "config": {
         "policies": [],
@@ -68,6 +78,33 @@
         "policies": [],
         "prefix": "",
         "description": "Get assistance information",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/users/device_token",
+      "handler": "User.updateDeviceToken",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User",
+          "actionType": "update"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/send-message",
+      "handler": "User.sendMessage",
+      "config": {
+        "policies": [],
+        "prefix": "",
         "tag": {
           "plugin": "users-permissions",
           "name": "User"

@@ -1898,6 +1898,53 @@
                 }
               }
             }
+          },
+          "vouchers": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name",
+                "sale",
+                "sale_max",
+                "type"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "sale": {
+                  "type": "number"
+                },
+                "sale_max": {
+                  "type": "number"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "expired": {
+                  "type": "string"
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -2039,6 +2086,15 @@
             "items": {
               "type": "string"
             }
+          },
+          "vouchers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "device_token": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"

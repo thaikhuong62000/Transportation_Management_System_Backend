@@ -589,14 +589,10 @@
       "Import": {
         "required": [
           "id",
-          "code",
           "quantity"
         ],
         "properties": {
           "id": {
-            "type": "string"
-          },
-          "code": {
             "type": "string"
           },
           "quantity": {
@@ -714,6 +710,15 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -860,13 +865,9 @@
       },
       "NewImport": {
         "required": [
-          "code",
           "quantity"
         ],
         "properties": {
-          "code": {
-            "type": "string"
-          },
           "quantity": {
             "type": "integer",
             "default": 0
