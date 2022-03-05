@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/02/2022 10:31:27 PM"
+    "x-generation-date": "03/05/2022 2:03:01 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -2685,7 +2685,7 @@
         "parameters": []
       }
     },
-    "/order-templates": {
+    "/messages": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -4615,132 +4615,7 @@
         "parameters": []
       }
     },
-    "/packages/in-storage": {
-      "get": {
-        "deprecated": false,
-        "description": "Get packages that is imported in storage",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Package"
-        ],
-        "parameters": []
-      }
-    },
-    "/packages/scanned/{id}": {
-      "get": {
-        "deprecated": false,
-        "description": "Get packages that is scanned barcode",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Package"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/packages/{id}": {
+    "/package-templates/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -5257,6 +5132,131 @@
           "Package"
         ],
         "parameters": []
+      }
+    },
+    "/packages/in-storage": {
+      "get": {
+        "deprecated": false,
+        "description": "Get packages that is imported in storage",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Package"
+        ],
+        "parameters": []
+      }
+    },
+    "/packages/scanned/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "Get packages that is scanned barcode",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Package"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     },
     "/packages/{id}": {
@@ -11885,6 +11885,9 @@
                   "type": "string"
                 }
               },
+              "position": {
+                "type": "string"
+              },
               "published_at": {
                 "type": "string"
               },
@@ -13193,10 +13196,7 @@
                   "type": "string"
                 }
               },
-              "position": {
-                "type": "string"
-              },
-              "published_at": {
+              "device_token": {
                 "type": "string"
               },
               "created_by": {
@@ -13270,6 +13270,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "position": {
+                  "type": "string"
                 },
                 "published_at": {
                   "type": "string"
@@ -14067,9 +14070,6 @@
                 "storage": {
                   "type": "string"
                 },
-                "position": {
-                  "type": "string"
-                },
                 "published_at": {
                   "type": "string"
                 },
@@ -14177,6 +14177,9 @@
                 }
               }
             }
+          },
+          "position": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -14299,6 +14302,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "position": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -14688,168 +14694,7 @@
               }
             }
           },
-          "position": {
-            "type": "string"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "NewPackage": {
-        "required": [
-          "quantity",
-          "weight",
-          "state"
-        ],
-        "properties": {
-          "code": {
-            "type": "string"
-          },
-          "quantity": {
-            "type": "integer",
-            "default": 0
-          },
-          "weight": {
-            "type": "number",
-            "default": 0
-          },
-          "state": {
-            "type": "integer",
-            "default": 0
-          },
-          "order": {
-            "type": "string"
-          },
-          "current_address": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "street": {
-                "type": "string"
-              },
-              "ward": {
-                "type": "string"
-              },
-              "province": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "number"
-              },
-              "longtitude": {
-                "type": "number"
-              }
-            }
-          },
-          "imports": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "exports": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "name": {
-            "type": "string"
-          },
-          "size": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "len": {
-                "type": "number"
-              },
-              "width": {
-                "type": "number"
-              },
-              "height": {
-                "type": "number"
-              }
-            }
-          },
-          "package_type": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "package_type": {
-                "type": "string",
-                "default": "normal",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
-              }
-            }
-          },
-          "shipments": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "position": {
-            "type": "string"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
-            "type": "string"
-          }
-        }
-      },
-      "Payment": {
-        "required": [
-          "id"
-        ],
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "payer_name": {
-            "type": "string"
-          },
-          "payer_phone": {
-            "type": "string"
-          },
-          "paid": {
-            "type": "number"
-          },
-          "time": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "order": {
+          "storage": {
             "required": [
               "id",
               "name"
