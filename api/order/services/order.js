@@ -29,6 +29,7 @@ module.exports = {
           $in: Array.from({ length: 5 }, (_, index) => index),
         },
       })
+      .populate("packages", "current_address weight quantity name")
       .limit(limit)
       .skip(skip);
 
