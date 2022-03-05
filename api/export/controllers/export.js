@@ -23,4 +23,45 @@ module.exports = {
       })
     );
   },
+
+  async updateExportQuantityByPackage(ctx) {
+    const { packageId, quantity } = ctx.request.body;
+    const { id, storage } = ctx.state.user;
+
+    if (!quantity && quantity < 0) {
+      return ctx.badRequest([
+        {
+          id: "export.updateExportQuantityByPackage",
+          message: "Invalid package quantity",
+        },
+      ]);
+    }
+
+    let exportedPackage = await strapi
+      .query("export")
+      .model.findOneAndUpdate(
+        { package: packageId },
+        { quantity: quantity },
+        { new: true }
+      );
+
+    if (!exportedPackage) {
+      let newExport = await strapi.query("export").create({
+        package: packageId,
+        quantity: quantity,
+        store_manager: id,
+        storage: storage,
+      });
+
+      return sanitizeEntity(newExport, {
+        model: strapi.query("export").model,
+        includeFields: ["quantity"],
+      });
+    }
+
+    return sanitizeEntity(exportedPackage, {
+      model: strapi.query("export").model,
+      includeFields: ["quantity"],
+    });
+  },
 };
