@@ -47,7 +47,11 @@ module.exports = {
     });
 
     const totalPackage =
-      await strapi.services.shipment.getTotalPackageNeedImport(storage[0].name);
+      storage.length > 0
+        ? await strapi.services.shipment.getTotalPackageNeedImport(
+            storage[0].name
+          )
+        : { total_packages: 0 };
 
     const isNight =
       new Date().getHours() > 20 || new Date().getHours < 5
