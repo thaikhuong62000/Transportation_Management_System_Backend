@@ -17,12 +17,15 @@ module.exports = {
           { arrived_time_null: true },
         ],
       },
-      []
+      [{ path: "car" }]
     );
-
     return shipments.map((entity) => {
-      const { from_address, id } = entity;
-      return { id, from_address };
+      const {
+        from_address,
+        id,
+        car: { licence },
+      } = entity;
+      return { id, from_address, licence };
     });
   },
 
