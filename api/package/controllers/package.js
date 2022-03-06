@@ -127,12 +127,12 @@ module.exports = {
 
   async getPackagesInStorage(ctx) {
     const { storage } = ctx.state.user;
-    const { page = 0 } = ctx.params;
+    const { page = 0, size = 5 } = ctx.query;
 
     let packages = await strapi.services.package.getPackagesInStorage(
       storage,
-      5,
-      page * 5
+      size,
+      page * size
     );
 
     return packages.map((package) =>
@@ -151,21 +151,38 @@ module.exports = {
   },
 
   async getPackagesAfterScan(ctx) {
+    // type: 0 - import
+    // type: 1 - export
+
     const { id } = ctx.params;
     const { storage } = ctx.state.user;
+    const { type } = ctx.request.query;
+
+    let remainingPackage = "";
 
     let package = await strapi.query("package").findOne({
       id: id,
     });
 
-    let storedPackage = await strapi.query("import").findOne({
-      storage: storage,
-      package: id,
-    });
+    if (type === "0") {
+      let storedPackage = await strapi.query("import").findOne({
+        storage: storage,
+        package: id,
+      });
 
-    let remainingPackage = storedPackage
-      ? package.quantity - storedPackage.quantity
-      : package.quantity;
+      remainingPackage = storedPackage
+        ? package.quantity - storedPackage.quantity
+        : package.quantity;
+    } else if (type === "1") {
+      let awaitExportPackage = await strapi.query("export").findOne({
+        storage: storage,
+        package: id,
+      });
+
+      remainingPackage = awaitExportPackage
+        ? package.quantity - awaitExportPackage.quantity
+        : package.quantity;
+    }
 
     package = sanitizeEntity(package, {
       model: strapi.query("package").model,

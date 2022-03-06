@@ -9,13 +9,13 @@ var mongoose = require("mongoose");
 
 module.exports = {
   async find(ctx) {
-    const { page = 0 } = ctx.query;
+    const { page = 0, size = 5 } = ctx.query;
     const { storage } = ctx.state.user;
 
     let imports = await strapi.services.import.getImportByStorage(
       storage,
-      5,
-      page * 5
+      size,
+      page * size
     );
 
     return imports.map((item) =>
@@ -29,8 +29,6 @@ module.exports = {
     const { storage } = ctx.state.user;
     const { quantity, code, packageId } = ctx.request.body;
     const importedId = ctx.params.id;
-
-    console.log(importedId, quantity, packageId, storage, code);
 
     if (quantity < 0 || !quantity) {
       return ctx.badRequest([
