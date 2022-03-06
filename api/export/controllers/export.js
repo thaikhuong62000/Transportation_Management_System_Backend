@@ -7,6 +7,24 @@ const { sanitizeEntity } = require("strapi-utils");
  */
 
 module.exports = {
+  async getCurrentExport(ctx) {
+    let shipments = await strapi.services.shipment.find(
+      {
+        _where: [
+          { from_storage: ctx.state.user.storage },
+          { to_storage_null: true },
+          { arrived_time_null: true },
+        ],
+      },
+      []
+    );
+
+    return shipments.map((entity) => {
+      const { from_address, id } = entity;
+      return { id, from_address };
+    });
+  },
+
   async find(ctx) {
     const { page = 0 } = ctx.query;
     const { storage } = ctx.state.user;

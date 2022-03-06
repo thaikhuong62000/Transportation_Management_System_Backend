@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/current-export",
+      "handler": "export.getCurrentExport",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
