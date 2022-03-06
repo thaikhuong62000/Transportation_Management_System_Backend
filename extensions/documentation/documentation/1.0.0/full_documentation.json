@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/06/2022 2:42:33 PM"
+    "x-generation-date": "03/06/2022 3:32:06 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -11948,9 +11948,6 @@
               "id": {
                 "type": "string"
               },
-              "code": {
-                "type": "string"
-              },
               "quantity": {
                 "type": "integer"
               },
@@ -11968,9 +11965,6 @@
                 "items": {
                   "type": "string"
                 }
-              },
-              "current_address": {
-                "type": "component"
               },
               "imports": {
                 "type": "array",
@@ -11990,9 +11984,6 @@
               "size": {
                 "type": "component"
               },
-              "package_type": {
-                "type": "component"
-              },
               "shipments": {
                 "type": "array",
                 "items": {
@@ -12001,6 +11992,15 @@
               },
               "position": {
                 "type": "string"
+              },
+              "package_type": {
+                "type": "string",
+                "enum": [
+                  "normal",
+                  "fragile",
+                  "explosive",
+                  "smell"
+                ]
               },
               "published_at": {
                 "type": "string"
@@ -12461,9 +12461,6 @@
               "id": {
                 "type": "string"
               },
-              "code": {
-                "type": "string"
-              },
               "quantity": {
                 "type": "integer"
               },
@@ -12481,9 +12478,6 @@
                 "items": {
                   "type": "string"
                 }
-              },
-              "current_address": {
-                "type": "component"
               },
               "imports": {
                 "type": "array",
@@ -12503,9 +12497,6 @@
               "size": {
                 "type": "component"
               },
-              "package_type": {
-                "type": "component"
-              },
               "shipments": {
                 "type": "array",
                 "items": {
@@ -12514,6 +12505,15 @@
               },
               "position": {
                 "type": "string"
+              },
+              "package_type": {
+                "type": "string",
+                "enum": [
+                  "normal",
+                  "fragile",
+                  "explosive",
+                  "smell"
+                ]
               },
               "published_at": {
                 "type": "string"
@@ -13334,9 +13334,6 @@
                 "id": {
                   "type": "string"
                 },
-                "code": {
-                  "type": "string"
-                },
                 "quantity": {
                   "type": "integer"
                 },
@@ -13354,9 +13351,6 @@
                   "items": {
                     "type": "string"
                   }
-                },
-                "current_address": {
-                  "type": "component"
                 },
                 "imports": {
                   "type": "array",
@@ -13376,9 +13370,6 @@
                 "size": {
                   "type": "component"
                 },
-                "package_type": {
-                  "type": "component"
-                },
                 "shipments": {
                   "type": "array",
                   "items": {
@@ -13387,6 +13378,15 @@
                 },
                 "position": {
                   "type": "string"
+                },
+                "package_type": {
+                  "type": "string",
+                  "enum": [
+                    "normal",
+                    "fragile",
+                    "explosive",
+                    "smell"
+                  ]
                 },
                 "published_at": {
                   "type": "string"
@@ -13922,9 +13922,6 @@
           "id": {
             "type": "string"
           },
-          "code": {
-            "type": "string"
-          },
           "quantity": {
             "type": "integer",
             "default": 0
@@ -14090,35 +14087,6 @@
               }
             }
           },
-          "current_address": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "street": {
-                "type": "string"
-              },
-              "ward": {
-                "type": "string"
-              },
-              "province": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "number"
-              },
-              "longtitude": {
-                "type": "number"
-              }
-            }
-          },
           "imports": {
             "type": "array",
             "items": {
@@ -14219,27 +14187,6 @@
               }
             }
           },
-          "package_type": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "package_type": {
-                "type": "string",
-                "default": "normal",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
-              }
-            }
-          },
           "shipments": {
             "type": "array",
             "items": {
@@ -14295,6 +14242,15 @@
           "position": {
             "type": "string"
           },
+          "package_type": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "fragile",
+              "explosive",
+              "smell"
+            ]
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -14308,9 +14264,6 @@
           "state"
         ],
         "properties": {
-          "code": {
-            "type": "string"
-          },
           "quantity": {
             "type": "integer",
             "default": 0
@@ -14325,35 +14278,6 @@
           },
           "order": {
             "type": "string"
-          },
-          "current_address": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "street": {
-                "type": "string"
-              },
-              "ward": {
-                "type": "string"
-              },
-              "province": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "number"
-              },
-              "longtitude": {
-                "type": "number"
-              }
-            }
           },
           "imports": {
             "type": "array",
@@ -14390,27 +14314,6 @@
               }
             }
           },
-          "package_type": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "package_type": {
-                "type": "string",
-                "default": "normal",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
-              }
-            }
-          },
           "shipments": {
             "type": "array",
             "items": {
@@ -14419,6 +14322,15 @@
           },
           "position": {
             "type": "string"
+          },
+          "package_type": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "fragile",
+              "explosive",
+              "smell"
+            ]
           },
           "published_at": {
             "type": "string",
@@ -15566,9 +15478,6 @@
                 "id": {
                   "type": "string"
                 },
-                "code": {
-                  "type": "string"
-                },
                 "quantity": {
                   "type": "integer"
                 },
@@ -15586,9 +15495,6 @@
                   "items": {
                     "type": "string"
                   }
-                },
-                "current_address": {
-                  "type": "component"
                 },
                 "imports": {
                   "type": "array",
@@ -15608,9 +15514,6 @@
                 "size": {
                   "type": "component"
                 },
-                "package_type": {
-                  "type": "component"
-                },
                 "shipments": {
                   "type": "array",
                   "items": {
@@ -15619,6 +15522,15 @@
                 },
                 "position": {
                   "type": "string"
+                },
+                "package_type": {
+                  "type": "string",
+                  "enum": [
+                    "normal",
+                    "fragile",
+                    "explosive",
+                    "smell"
+                  ]
                 },
                 "published_at": {
                   "type": "string"
