@@ -8,6 +8,24 @@ var mongoose = require("mongoose");
  */
 
 module.exports = {
+  async getCurrentImport(ctx) {
+    let shipments = await strapi.services.shipment.find(
+      {
+        _where: [
+          { from_storage_null: true },
+          { to_storage: ctx.state.user.storage },
+          { arrived_time_null: true },
+        ],
+      },
+      []
+    );
+
+    return shipments.map((entity) => {
+      const { from_address, id } = entity;
+      return { id, from_address };
+    });
+  },
+
   async find(ctx) {
     const { page = 0 } = ctx.query;
     const { storage } = ctx.state.user;
