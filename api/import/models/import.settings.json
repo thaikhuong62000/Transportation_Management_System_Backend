@@ -12,6 +12,10 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "code": {
+      "type": "string",
+      "required": true
+    },
     "quantity": {
       "type": "integer",
       "default": 0,
