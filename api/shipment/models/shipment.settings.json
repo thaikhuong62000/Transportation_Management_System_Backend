@@ -43,10 +43,10 @@
       "dominant": true
     },
     "from_storage": {
-      "type": "string"
+      "model": "storage"
     },
     "to_storage": {
-      "type": "string"
+      "model": "storage"
     }
   }
 }

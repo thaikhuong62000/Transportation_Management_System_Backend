@@ -721,9 +721,6 @@
           "id": {
             "type": "string"
           },
-          "code": {
-            "type": "string"
-          },
           "quantity": {
             "type": "integer",
             "default": 0
@@ -889,35 +886,6 @@
               }
             }
           },
-          "current_address": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "street": {
-                "type": "string"
-              },
-              "ward": {
-                "type": "string"
-              },
-              "province": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "number"
-              },
-              "longtitude": {
-                "type": "number"
-              }
-            }
-          },
           "imports": {
             "type": "array",
             "items": {
@@ -1018,27 +986,6 @@
               }
             }
           },
-          "package_type": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "package_type": {
-                "type": "string",
-                "default": "normal",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
-              }
-            }
-          },
           "shipments": {
             "type": "array",
             "items": {
@@ -1094,6 +1041,15 @@
           "position": {
             "type": "string"
           },
+          "package_type": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "fragile",
+              "explosive",
+              "smell"
+            ]
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -1107,9 +1063,6 @@
           "state"
         ],
         "properties": {
-          "code": {
-            "type": "string"
-          },
           "quantity": {
             "type": "integer",
             "default": 0
@@ -1124,35 +1077,6 @@
           },
           "order": {
             "type": "string"
-          },
-          "current_address": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "street": {
-                "type": "string"
-              },
-              "ward": {
-                "type": "string"
-              },
-              "province": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "number"
-              },
-              "longtitude": {
-                "type": "number"
-              }
-            }
           },
           "imports": {
             "type": "array",
@@ -1189,27 +1113,6 @@
               }
             }
           },
-          "package_type": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "package_type": {
-                "type": "string",
-                "default": "normal",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
-              }
-            }
-          },
           "shipments": {
             "type": "array",
             "items": {
@@ -1218,6 +1121,15 @@
           },
           "position": {
             "type": "string"
+          },
+          "package_type": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "fragile",
+              "explosive",
+              "smell"
+            ]
           },
           "published_at": {
             "type": "string",

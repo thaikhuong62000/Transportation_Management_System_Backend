@@ -1080,9 +1080,6 @@
                 "id": {
                   "type": "string"
                 },
-                "code": {
-                  "type": "string"
-                },
                 "quantity": {
                   "type": "integer"
                 },
@@ -1100,9 +1097,6 @@
                   "items": {
                     "type": "string"
                   }
-                },
-                "current_address": {
-                  "type": "component"
                 },
                 "imports": {
                   "type": "array",
@@ -1122,9 +1116,6 @@
                 "size": {
                   "type": "component"
                 },
-                "package_type": {
-                  "type": "component"
-                },
                 "shipments": {
                   "type": "array",
                   "items": {
@@ -1133,6 +1124,15 @@
                 },
                 "position": {
                   "type": "string"
+                },
+                "package_type": {
+                  "type": "string",
+                  "enum": [
+                    "normal",
+                    "fragile",
+                    "explosive",
+                    "smell"
+                  ]
                 },
                 "published_at": {
                   "type": "string"
@@ -1147,10 +1147,110 @@
             }
           },
           "from_storage": {
-            "type": "string"
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "address": {
+                "type": "component"
+              },
+              "size": {
+                "type": "number"
+              },
+              "store_managers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "imports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "exports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           },
           "to_storage": {
-            "type": "string"
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "address": {
+                "type": "component"
+              },
+              "size": {
+                "type": "number"
+              },
+              "store_managers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "imports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "exports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           },
           "published_at": {
             "type": "string",
