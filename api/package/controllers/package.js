@@ -43,6 +43,7 @@ module.exports = {
         quantity,
         state,
         position,
+        package_type,
         size: {
           ...size,
           len,
@@ -55,10 +56,6 @@ module.exports = {
           ward,
           province,
           city,
-        },
-        package_type: {
-          ...package_type,
-          package_type: type,
         },
       },
       { new: true }

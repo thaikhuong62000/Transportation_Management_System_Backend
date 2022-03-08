@@ -12,7 +12,6 @@ module.exports = {
       {
         _where: [
           { from_storage: ctx.state.user.storage },
-          { to_storage_null: true },
           { arrived_time_null: true },
         ],
       },

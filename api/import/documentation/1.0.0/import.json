@@ -646,14 +646,10 @@
       "Import": {
         "required": [
           "id",
-          "code",
           "quantity"
         ],
         "properties": {
           "id": {
-            "type": "string"
-          },
-          "code": {
             "type": "string"
           },
           "quantity": {
@@ -929,13 +925,9 @@
       },
       "NewImport": {
         "required": [
-          "code",
           "quantity"
         ],
         "properties": {
-          "code": {
-            "type": "string"
-          },
           "quantity": {
             "type": "integer",
             "default": 0
