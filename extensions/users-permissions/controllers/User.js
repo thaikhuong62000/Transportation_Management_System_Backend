@@ -3,17 +3,6 @@ const { sanitizeEntity } = require("strapi-utils");
 const validateUploadBody = require("strapi-plugin-upload/controllers/validation/upload");
 
 module.exports = {
-  async getCustomerInfo(ctx) {
-    const { id } = ctx.params;
-    const customer = await strapi.plugins[
-      "users-permissions"
-    ].services.user.getCustomer(id); // Get user info
-    return sanitizeEntity(customer, {
-      model: strapi.query("user", "users-permissions").model,
-      includeFields: ["name", "phone"],
-    });
-  },
-
   async updatePassword(ctx) {
     const { password, newPassword } = ctx.request.body;
 
@@ -122,42 +111,11 @@ module.exports = {
     }
   },
 
-  async getAssistanceInfo(ctx) {
-    let shipments =
-      await strapi.services.shipment.getUnfinishedShipmentByDriver(
-        ctx.state.user.id
-      );
-
-    let assistance = await strapi
-      .query("user", "users-permissions")
-      .findOne({ id: shipments[0].assistance });
-
-    return sanitizeEntity(assistance, {
-      model: strapi.query("user", "users-permissions").model,
-      includeFields: ["name", "phone"],
-    });
-  },
-
   async updateDeviceToken(ctx) {
     const { device_token } = ctx.request.body;
     return await strapi.plugins["users-permissions"].services.user.edit(
       { id: ctx.state.user.id },
       { device_token: device_token }
     );
-  },
-
-  async sendMessage(ctx) {
-    const { token, data } = ctx.request.body;
-    const message = {
-      data: JSON.parse(data),
-    };
-    const options = {
-      contentAvailable: true,
-      priority: "high",
-      timeToLive: 60 * 60 * 24,
-    };
-    const { getMessaging } = require("firebase-admin/messaging");
-    const messaging = getMessaging();
-    return messaging.sendToDevice(token, message, options);
   },
 };

@@ -72,6 +72,11 @@
         "explosive",
         "smell"
       ]
+    },
+    "current_address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
     }
   }
 }

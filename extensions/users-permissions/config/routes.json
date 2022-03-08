@@ -28,16 +28,6 @@
       }
     },
     {
-      "method": "GET",
-      "path": "/customer/:id",
-      "handler": "User.getCustomerInfo",
-      "config": {
-        "policies": [],
-        "prefix": "",
-        "description": ""
-      }
-    },
-    {
       "method": "POST",
       "path": "/auth/password/update",
       "handler": "User.updatePassword",
@@ -73,7 +63,7 @@
     {
       "method": "GET",
       "path": "/assistance/status",
-      "handler": "User.getAssistanceInfo",
+      "handler": "CustomUser.getAssistanceInfo",
       "config": {
         "policies": [],
         "prefix": "",
@@ -95,19 +85,6 @@
           "plugin": "users-permissions",
           "name": "User",
           "actionType": "update"
-        }
-      }
-    },
-    {
-      "method": "POST",
-      "path": "/send-message",
-      "handler": "User.sendMessage",
-      "config": {
-        "policies": [],
-        "prefix": "",
-        "tag": {
-          "plugin": "users-permissions",
-          "name": "User"
         }
       }
     }

@@ -1134,6 +1134,9 @@
                     "smell"
                   ]
                 },
+                "current_address": {
+                  "type": "component"
+                },
                 "published_at": {
                   "type": "string"
                 },
