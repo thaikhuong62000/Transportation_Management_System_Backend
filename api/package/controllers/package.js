@@ -23,7 +23,6 @@ module.exports = {
       position = "",
       current_address,
       package_type,
-      type,
       size,
     } = ctx.request.body;
 
@@ -70,6 +69,8 @@ module.exports = {
         "name",
         "package_type",
         "position",
+        "weight",
+        "quantity",
       ],
     });
   },
