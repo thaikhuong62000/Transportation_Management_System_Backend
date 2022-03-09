@@ -137,8 +137,9 @@ module.exports = {
       }
     }
 
-    let isLastStage =
-      packages[0].current_address.city === packages[0].order.to_address.city;
+    let isLastStage = packages[0]?.current_address?.city
+      ? packages[0].current_address.city === packages[0].order.to_address.city
+      : false;
 
     return {
       tracingResult,
@@ -170,5 +171,83 @@ module.exports = {
     );
 
     return orders;
+  },
+
+  async create(ctx) {
+    const { id } = ctx.state.user;
+    const {
+      sender_phone,
+      sender_name,
+      receiver_phone,
+      receiver_name,
+      method,
+      fee,
+      remain_fee,
+      from_address,
+      to_address,
+      name,
+      packages,
+      payer_name,
+      payer_phone,
+      note = "",
+    } = ctx.request.body;
+
+    if (!remain_fee || remain_fee < 0 || !fee || fee < 0) {
+      return ctx.badRequest([
+        {
+          id: "order.create",
+          message: "Invalid order fee",
+        },
+      ]);
+    }
+
+    if (
+      !sender_phone ||
+      !sender_name ||
+      !receiver_phone ||
+      !receiver_name ||
+      !payer_name ||
+      !payer_phone ||
+      !packages.length ||
+      typeof from_address !== "object" ||
+      typeof to_address !== "object"
+    ) {
+      return ctx.badRequest([
+        {
+          id: "order.create",
+          message: "Invalid order information",
+        },
+      ]);
+    }
+
+    let order = await strapi.query("order").create({
+      fee,
+      remain_fee,
+      sender_name,
+      sender_phone,
+      receiver_name,
+      receiver_phone,
+      from_address,
+      to_address,
+      name,
+      note,
+      customer: id,
+    });
+
+    let payment = await strapi.query("payment").create({
+      method,
+      payer_name,
+      payer_phone,
+      order: order.id,
+    });
+
+    for (let pack of packages) {
+      await strapi.query("package").create({
+        ...pack,
+        order: order.id,
+      });
+    }
+
+    return order;
   },
 };
