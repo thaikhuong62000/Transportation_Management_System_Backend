@@ -16,7 +16,7 @@ module.exports = {
   async phoneAuth(ctx) {
     const { code } = ctx.query;
     try {
-      const decodedToken = await strapi.firebase.verifyIdToken(token);
+      const decodedToken = await strapi.firebase.verifyIdToken(code);
       if (decodedToken.phone_number) {
         let jwt;
         let user = await strapi.plugins[
