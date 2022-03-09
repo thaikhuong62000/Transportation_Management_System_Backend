@@ -87,6 +87,15 @@
           "actionType": "update"
         }
       }
+    },
+    {
+      "method": "GET",
+      "path": "/auth/phone",
+      "handler": "Auth.phoneAuth",
+      "config": {
+        "policies": [],
+        "prefix": ""
+      }
     }
   ]
 }

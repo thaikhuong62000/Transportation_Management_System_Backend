@@ -1,6 +1,7 @@
 "use strict";
 const { initializeApp } = require("firebase-admin/app");
-const { getMessaging } = require("firebase-admin/messaging");
+const { getAuth } = require("firebase-admin/auth");
+
 /**
  * An asynchronous bootstrap function that runs before
  * your application gets started.
@@ -14,6 +15,8 @@ const { getMessaging } = require("firebase-admin/messaging");
 module.exports = () => {
   // Init firebase
   const firebaseApp = initializeApp();
+
+  strapi.firebase = getAuth();
 
   // Init socket
   var io = require("socket.io")(strapi.server);
