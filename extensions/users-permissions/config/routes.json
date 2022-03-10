@@ -1,16 +1,13 @@
 {
   "routes": [
     {
-      "method": "POST",
-      "path": "/auth/local",
+      "method": "GET",
+      "path": "/auth/:provider/callback",
       "handler": "Auth.callback",
       "config": {
-        "policies": [
-          "plugins::users-permissions.ratelimit",
-          "plugins::users-permissions.sanitize-userdata"
-        ],
+        "policies": ["plugins::users-permissions.ratelimit"],
         "prefix": "",
-        "description": "Login a user using the identifiers email and password",
+        "description": "Successfull redirection after approving a provider",
         "tag": {
           "plugin": "users-permissions",
           "name": "User"
