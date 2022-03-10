@@ -81,4 +81,65 @@ module.exports = {
       return ctx.badRequest(null, [{ messages: [{ id: "unauthorized" }] }]);
     }
   },
+
+  async updatePassword(ctx) {
+    const { password, newPassword } = ctx.request.body;
+
+    const validPassword = await strapi.plugins[
+      "users-permissions"
+    ].services.user.validatePassword(password, ctx.state.user.password);
+
+    if (!validPassword) {
+      return ctx.badRequest("Current password invalid!");
+    }
+
+    const hashedPassword = await strapi.plugins[
+      "users-permissions"
+    ].services.user.hashPassword({
+      password: newPassword,
+    });
+
+    const updatedPassword = await strapi.plugins[
+      "users-permissions"
+    ].services.user.updatePassword(ctx.state.user.id, hashedPassword);
+
+    return sanitizeEntity(updatedPassword, {
+      model: strapi.query("user", "users-permissions").model,
+    });
+  },
+
+  async resetPasswordPhone(ctx) {
+    const { token, newPassword } = ctx.request.body;
+    try {
+      const decodedToken = await strapi.firebase.verifyIdToken(token);
+      if (decodedToken.phone_number) {
+        let user = await strapi.plugins[
+          "users-permissions"
+        ].services.user.fetch({
+          phone: formatPhone(decodedToken.phone_number),
+        });
+        if (user) {
+          const hashedPassword = await strapi.plugins[
+            "users-permissions"
+          ].services.user.hashPassword({
+            password: newPassword,
+          });
+          await strapi.plugins[
+            "users-permissions"
+          ].services.user.updatePassword(user.id, hashedPassword);
+          return {
+            statue: 205,
+            message: "Password reset",
+          };
+        } else {
+          throw "User empty";
+        }
+      } else {
+        throw "Phone missing";
+      }
+    } catch (error) {
+      console.log(error);
+      return ctx.badRequest(null, [{ messages: [{ id: "unauthorized" }] }]);
+    }
+  },
 };

@@ -3,32 +3,6 @@ const { sanitizeEntity } = require("strapi-utils");
 const validateUploadBody = require("strapi-plugin-upload/controllers/validation/upload");
 
 module.exports = {
-  async updatePassword(ctx) {
-    const { password, newPassword } = ctx.request.body;
-
-    const validPassword = await strapi.plugins[
-      "users-permissions"
-    ].services.user.validatePassword(password, ctx.state.user.password);
-
-    if (!validPassword) {
-      return ctx.badRequest("Current password invalid!");
-    }
-
-    const hashedPassword = await strapi.plugins[
-      "users-permissions"
-    ].services.user.hashPassword({
-      password: newPassword,
-    });
-
-    const updatedPassword = await strapi.plugins[
-      "users-permissions"
-    ].services.user.updatePassword(ctx.state.user.id, hashedPassword);
-
-    return sanitizeEntity(updatedPassword, {
-      model: strapi.query("user", "users-permissions").model,
-    });
-  },
-
   /**
    * Uploading new Image, remove old image
    * Set new Image to current user.

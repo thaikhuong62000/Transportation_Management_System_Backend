@@ -27,7 +27,16 @@
     {
       "method": "POST",
       "path": "/auth/password/update",
-      "handler": "User.updatePassword",
+      "handler": "Auth.updatePassword",
+      "config": {
+        "policies": [],
+        "prefix": ""
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/auth/password/reset",
+      "handler": "Auth.resetPasswordPhone",
       "config": {
         "policies": [],
         "prefix": ""
