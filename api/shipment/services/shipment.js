@@ -38,14 +38,12 @@ module.exports = {
       .limit(limit);
     return entities;
   },
-  async getTotalPackageNeedImport(storageName) {
+
+  async getTotalPackageNeedImport(storage) {
     let packageIdList = await strapi.query("shipment").model.aggregate([
       {
         $match: {
-          to_storage: storageName,
-          from_storage: {
-            $ne: "",
-          },
+          to_storage: mongoose.Types.ObjectId(storage),
         },
       },
       {

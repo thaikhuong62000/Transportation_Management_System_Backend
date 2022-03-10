@@ -12,13 +12,13 @@ module.exports = {
     let shipments = await strapi.services.shipment.find(
       {
         _where: [
-          { from_storage_null: true },
           { to_storage: ctx.state.user.storage },
           { arrived_time_null: true },
         ],
       },
       [{ path: "car" }]
     );
+
     return shipments.map((entity) => {
       const {
         from_address,

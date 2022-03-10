@@ -891,14 +891,10 @@
             "items": {
               "required": [
                 "id",
-                "code",
                 "quantity"
               ],
               "properties": {
                 "id": {
-                  "type": "string"
-                },
-                "code": {
                   "type": "string"
                 },
                 "quantity": {
@@ -934,9 +930,6 @@
               ],
               "properties": {
                 "id": {
-                  "type": "string"
-                },
-                "code": {
                   "type": "string"
                 },
                 "quantity": {
