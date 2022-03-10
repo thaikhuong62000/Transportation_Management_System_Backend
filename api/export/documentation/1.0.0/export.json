@@ -652,9 +652,6 @@
           "id": {
             "type": "string"
           },
-          "code": {
-            "type": "string"
-          },
           "quantity": {
             "type": "integer"
           },
@@ -930,9 +927,6 @@
           "quantity"
         ],
         "properties": {
-          "code": {
-            "type": "string"
-          },
           "quantity": {
             "type": "integer"
           },

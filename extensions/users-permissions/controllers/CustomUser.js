@@ -40,14 +40,10 @@ module.exports = {
   },
 
   async getStorekeeperStatus(ctx) {
-    const storageId = ctx.state.user.storage;
-
-    const storage = await strapi.query("storage").model.find({
-      _id: storageId,
-    });
+    const { storage } = ctx.state.user;
 
     const totalPackage =
-      await strapi.services.shipment.getTotalPackageNeedImport(storage[0].name);
+      await strapi.services.shipment.getTotalPackageNeedImport(storage);
 
     const isNight =
       new Date().getHours() > 20 || new Date().getHours < 5
@@ -55,8 +51,8 @@ module.exports = {
         : "Đang hoạt động";
 
     return {
-      ...totalPackage,
       storage_status: isNight,
+      total_packages: totalPackage ? totalPackage["total_packages"] : 0,
     };
   },
 
