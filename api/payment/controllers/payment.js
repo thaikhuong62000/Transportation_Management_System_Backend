@@ -11,6 +11,8 @@ module.exports = {
     // TODO: Response to momo ipn post and check for payment status
     // TODO: Validate amount and currency in database and momo body
 
+    console.log(ctx.request.body);
+
     return ctx.send(
       {
         resultCode: resultCode,
