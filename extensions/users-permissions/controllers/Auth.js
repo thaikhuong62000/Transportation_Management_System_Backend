@@ -16,7 +16,7 @@ module.exports = {
   async phoneAuth(ctx) {
     const { code } = ctx.query;
     try {
-      const decodedToken = await strapi.firebase.verifyIdToken(code);
+      const decodedToken = await strapi.firebase.auth.verifyIdToken(code);
       if (decodedToken.phone_number) {
         let jwt;
         let user = await strapi.plugins[
@@ -111,7 +111,7 @@ module.exports = {
   async resetPasswordPhone(ctx) {
     const { token, newPassword } = ctx.request.body;
     try {
-      const decodedToken = await strapi.firebase.verifyIdToken(token);
+      const decodedToken = await strapi.firebase.auth.verifyIdToken(token);
       if (decodedToken.phone_number) {
         let user = await strapi.plugins[
           "users-permissions"
@@ -138,7 +138,6 @@ module.exports = {
         throw "Phone missing";
       }
     } catch (error) {
-      console.log(error);
       return ctx.badRequest(null, [{ messages: [{ id: "unauthorized" }] }]);
     }
   },

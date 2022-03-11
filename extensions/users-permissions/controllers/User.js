@@ -92,4 +92,9 @@ module.exports = {
       { device_token: device_token }
     );
   },
+
+  async sendNoti(ctx) {
+    const { device_token, ...message } = ctx.request.body;
+    return await strapi.firebase.sendCloudMessage(device_token, message);
+  },
 };
