@@ -311,6 +311,131 @@
         "parameters": []
       }
     },
+    "/orders/delivered": {
+      "get": {
+        "deprecated": false,
+        "description": "Get delivered order",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Order"
+        ],
+        "parameters": []
+      }
+    },
+    "/orders/tracing/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "Get order's trace through storage, return trace status",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Order"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/orders/{id}": {
       "get": {
         "deprecated": false,
@@ -587,6 +712,12 @@
               "expired": {
                 "type": "string"
               },
+              "users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "published_at": {
                 "type": "string"
               },
@@ -704,6 +835,21 @@
               "avatar": {
                 "type": "string"
               },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -725,9 +871,6 @@
                 "id": {
                   "type": "string"
                 },
-                "code": {
-                  "type": "string"
-                },
                 "quantity": {
                   "type": "integer"
                 },
@@ -745,9 +888,6 @@
                   "items": {
                     "type": "string"
                   }
-                },
-                "current_address": {
-                  "type": "component"
                 },
                 "imports": {
                   "type": "array",
@@ -767,14 +907,26 @@
                 "size": {
                   "type": "component"
                 },
-                "package_type": {
-                  "type": "component"
-                },
                 "shipments": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
+                },
+                "position": {
+                  "type": "string"
+                },
+                "package_type": {
+                  "type": "string",
+                  "enum": [
+                    "normal",
+                    "fragile",
+                    "explosive",
+                    "smell"
+                  ]
+                },
+                "current_address": {
+                  "type": "component"
                 },
                 "published_at": {
                   "type": "string"

@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "storages",
   "info": {
-    "name": "storage"
+    "name": "storage",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -35,6 +36,10 @@
     "exports": {
       "via": "storage",
       "collection": "export"
+    },
+    "reports": {
+      "via": "storage",
+      "collection": "report"
     }
   }
 }

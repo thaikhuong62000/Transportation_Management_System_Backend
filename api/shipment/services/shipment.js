@@ -38,4 +38,48 @@ module.exports = {
       .limit(limit);
     return entities;
   },
+
+  async getTotalPackageNeedImport(storage) {
+    let packageIdList = await strapi.query("shipment").model.aggregate([
+      {
+        $match: {
+          to_storage: mongoose.Types.ObjectId(storage),
+        },
+      },
+      {
+        $unwind: "$packages",
+      },
+      {
+        $group: {
+          _id: "$packages",
+        },
+      },
+    ]);
+
+    let totalPackage = await strapi.query("package").model.aggregate([
+      {
+        $match: {
+          _id: {
+            $in: packageIdList.map((item) => mongoose.Types.ObjectId(item._id)),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          total_packages: {
+            $sum: "$quantity",
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          total_packages: 1,
+        },
+      },
+    ]);
+
+    return totalPackage[0];
+  },
 };

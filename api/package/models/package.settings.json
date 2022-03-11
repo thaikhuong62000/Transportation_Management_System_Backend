@@ -12,10 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "code": {
-      "type": "string",
-      "required": false
-    },
     "quantity": {
       "type": "integer",
       "required": true,
@@ -45,11 +41,6 @@
       "required": false,
       "pluginOptions": {}
     },
-    "current_address": {
-      "type": "component",
-      "repeatable": false,
-      "component": "address.address"
-    },
     "imports": {
       "via": "package",
       "collection": "import"
@@ -66,14 +57,26 @@
       "repeatable": false,
       "component": "package.size"
     },
-    "package_type": {
-      "type": "component",
-      "repeatable": false,
-      "component": "package.package-type"
-    },
     "shipments": {
       "via": "packages",
       "collection": "shipment"
+    },
+    "position": {
+      "type": "string"
+    },
+    "package_type": {
+      "type": "enumeration",
+      "enum": [
+        "normal",
+        "fragile",
+        "explosive",
+        "smell"
+      ]
+    },
+    "current_address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
     }
   }
 }

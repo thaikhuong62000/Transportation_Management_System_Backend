@@ -5,7 +5,10 @@
       "path": "/auth/local",
       "handler": "Auth.callback",
       "config": {
-        "policies": ["plugins::users-permissions.ratelimit", "plugins::users-permissions.sanitize-userdata"],
+        "policies": [
+          "plugins::users-permissions.ratelimit",
+          "plugins::users-permissions.sanitize-userdata"
+        ],
         "prefix": "",
         "description": "Login a user using the identifiers email and password",
         "tag": {
@@ -25,12 +28,64 @@
       }
     },
     {
-      "method": "GET",
-      "path": "/driver/user/:id",
-      "handler": "User.getCustomerInfo",
+      "method": "POST",
+      "path": "/auth/password/update",
+      "handler": "User.updatePassword",
       "config": {
         "policies": [],
         "prefix": ""
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/storekeeper/status",
+      "handler": "CustomUser.getStorekeeperStatus",
+      "config": {
+        "policies": [],
+        "prefix": ""
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/users/avatar",
+      "handler": "User.updateAvatar",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Update avatar of an existing user",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User",
+          "actionType": "update"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/assistance/status",
+      "handler": "CustomUser.getAssistanceInfo",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Get assistance information",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/users/device_token",
+      "handler": "User.updateDeviceToken",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User",
+          "actionType": "update"
+        }
       }
     }
   ]

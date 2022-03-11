@@ -130,6 +130,18 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "reports": {
+      "via": "stocker",
+      "collection": "report"
+    },
+    "vouchers": {
+      "via": "users",
+      "collection": "voucher"
+    },
+    "device_token": {
+      "type": "string",
+      "private": true
     }
   }
 }

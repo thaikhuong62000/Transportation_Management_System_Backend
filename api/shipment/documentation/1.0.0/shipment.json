@@ -624,6 +624,74 @@
         ],
         "parameters": []
       }
+    },
+    "/shipments/vehicle-detail/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Shipment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -789,6 +857,21 @@
               "avatar": {
                 "type": "string"
               },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -903,6 +986,21 @@
               "avatar": {
                 "type": "string"
               },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -982,9 +1080,6 @@
                 "id": {
                   "type": "string"
                 },
-                "code": {
-                  "type": "string"
-                },
                 "quantity": {
                   "type": "integer"
                 },
@@ -1002,9 +1097,6 @@
                   "items": {
                     "type": "string"
                   }
-                },
-                "current_address": {
-                  "type": "component"
                 },
                 "imports": {
                   "type": "array",
@@ -1024,14 +1116,26 @@
                 "size": {
                   "type": "component"
                 },
-                "package_type": {
-                  "type": "component"
-                },
                 "shipments": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
+                },
+                "position": {
+                  "type": "string"
+                },
+                "package_type": {
+                  "type": "string",
+                  "enum": [
+                    "normal",
+                    "fragile",
+                    "explosive",
+                    "smell"
+                  ]
+                },
+                "current_address": {
+                  "type": "component"
                 },
                 "published_at": {
                   "type": "string"
@@ -1042,6 +1146,112 @@
                 "updated_by": {
                   "type": "string"
                 }
+              }
+            }
+          },
+          "from_storage": {
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "address": {
+                "type": "component"
+              },
+              "size": {
+                "type": "number"
+              },
+              "store_managers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "imports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "exports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "to_storage": {
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "address": {
+                "type": "component"
+              },
+              "size": {
+                "type": "number"
+              },
+              "store_managers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "imports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "exports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
               }
             }
           },
@@ -1129,6 +1339,12 @@
             "items": {
               "type": "string"
             }
+          },
+          "from_storage": {
+            "type": "string"
+          },
+          "to_storage": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

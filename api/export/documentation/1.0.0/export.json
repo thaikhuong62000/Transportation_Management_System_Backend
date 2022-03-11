@@ -510,6 +510,135 @@
           }
         ]
       }
+    },
+    "/exports/update-quantity": {
+      "put": {
+        "deprecated": false,
+        "description": "Update export quantity by package id",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Export"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/current-export": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Export"
+        ],
+        "parameters": []
+      }
     }
   },
   "components": {
@@ -521,9 +650,6 @@
         ],
         "properties": {
           "id": {
-            "type": "string"
-          },
-          "code": {
             "type": "string"
           },
           "quantity": {
@@ -635,6 +761,21 @@
               "avatar": {
                 "type": "string"
               },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -652,9 +793,6 @@
             ],
             "properties": {
               "id": {
-                "type": "string"
-              },
-              "code": {
                 "type": "string"
               },
               "quantity": {
@@ -675,9 +813,6 @@
                   "type": "string"
                 }
               },
-              "current_address": {
-                "type": "component"
-              },
               "imports": {
                 "type": "array",
                 "items": {
@@ -696,14 +831,26 @@
               "size": {
                 "type": "component"
               },
-              "package_type": {
-                "type": "component"
-              },
               "shipments": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
+              },
+              "position": {
+                "type": "string"
+              },
+              "package_type": {
+                "type": "string",
+                "enum": [
+                  "normal",
+                  "fragile",
+                  "explosive",
+                  "smell"
+                ]
+              },
+              "current_address": {
+                "type": "component"
               },
               "published_at": {
                 "type": "string"
@@ -752,6 +899,12 @@
                   "type": "string"
                 }
               },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "published_at": {
                 "type": "string"
               },
@@ -774,9 +927,6 @@
           "quantity"
         ],
         "properties": {
-          "code": {
-            "type": "string"
-          },
           "quantity": {
             "type": "integer"
           },

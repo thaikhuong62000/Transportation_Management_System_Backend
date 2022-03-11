@@ -34,6 +34,15 @@
     },
     {
       "method": "PUT",
+      "path": "/exports/update-quantity",
+      "handler": "export.updateExportQuantityByPackage",
+      "config": {
+        "policies": [],
+        "description": "Update export quantity by package id"
+      }
+    },
+    {
+      "method": "PUT",
       "path": "/exports/:id",
       "handler": "export.update",
       "config": {
@@ -44,6 +53,14 @@
       "method": "DELETE",
       "path": "/exports/:id",
       "handler": "export.delete",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/current-export",
+      "handler": "export.getCurrentExport",
       "config": {
         "policies": []
       }

@@ -18,6 +18,24 @@
     },
     {
       "method": "GET",
+      "path": "/orders/delivered",
+      "handler": "order.getDeliveredOrder",
+      "config": {
+        "policies": [],
+        "description": "Get delivered order"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/orders/tracing/:id",
+      "handler": "order.getOrderTracing",
+      "config": {
+        "policies": [],
+        "description": "Get order's trace through storage, return trace status"
+      }
+    },
+    {
+      "method": "GET",
       "path": "/orders/:id",
       "handler": "order.findOne",
       "config": {

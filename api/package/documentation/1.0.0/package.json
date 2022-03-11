@@ -311,6 +311,131 @@
         "parameters": []
       }
     },
+    "/packages/in-storage": {
+      "get": {
+        "deprecated": false,
+        "description": "Get packages that is imported in storage",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Package"
+        ],
+        "parameters": []
+      }
+    },
+    "/packages/scanned/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "Get packages that is scanned barcode",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Package"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/packages/{id}": {
       "get": {
         "deprecated": false,
@@ -510,6 +635,77 @@
           }
         ]
       }
+    },
+    "/packages/images/{packagesId}": {
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Package"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -523,9 +719,6 @@
         ],
         "properties": {
           "id": {
-            "type": "string"
-          },
-          "code": {
             "type": "string"
           },
           "quantity": {
@@ -693,54 +886,21 @@
               }
             }
           },
-          "current_address": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "street": {
-                "type": "string"
-              },
-              "ward": {
-                "type": "string"
-              },
-              "province": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "number"
-              },
-              "longtitude": {
-                "type": "number"
-              }
-            }
-          },
           "imports": {
             "type": "array",
             "items": {
               "required": [
                 "id",
-                "code",
                 "quantity"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "code": {
-                  "type": "string"
-                },
                 "quantity": {
                   "type": "integer"
                 },
-                "storage_manager": {
+                "store_manager": {
                   "type": "string"
                 },
                 "package": {
@@ -770,9 +930,6 @@
               ],
               "properties": {
                 "id": {
-                  "type": "string"
-                },
-                "code": {
                   "type": "string"
                 },
                 "quantity": {
@@ -822,27 +979,6 @@
               }
             }
           },
-          "package_type": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "package_type": {
-                "type": "string",
-                "default": "normal",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
-              }
-            }
-          },
           "shipments": {
             "type": "array",
             "items": {
@@ -877,6 +1013,12 @@
                     "type": "string"
                   }
                 },
+                "from_storage": {
+                  "type": "string"
+                },
+                "to_storage": {
+                  "type": "string"
+                },
                 "published_at": {
                   "type": "string"
                 },
@@ -889,36 +1031,17 @@
               }
             }
           },
-          "published_at": {
+          "position": {
+            "type": "string"
+          },
+          "package_type": {
             "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "NewPackage": {
-        "required": [
-          "quantity",
-          "weight",
-          "state"
-        ],
-        "properties": {
-          "code": {
-            "type": "string"
-          },
-          "quantity": {
-            "type": "integer",
-            "default": 0
-          },
-          "weight": {
-            "type": "number",
-            "default": 0
-          },
-          "state": {
-            "type": "integer",
-            "default": 0
-          },
-          "order": {
-            "type": "string"
+            "enum": [
+              "normal",
+              "fragile",
+              "explosive",
+              "smell"
+            ]
           },
           "current_address": {
             "type": "object",
@@ -948,6 +1071,34 @@
                 "type": "number"
               }
             }
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "NewPackage": {
+        "required": [
+          "quantity",
+          "weight",
+          "state"
+        ],
+        "properties": {
+          "quantity": {
+            "type": "integer",
+            "default": 0
+          },
+          "weight": {
+            "type": "number",
+            "default": 0
+          },
+          "state": {
+            "type": "integer",
+            "default": 0
+          },
+          "order": {
+            "type": "string"
           },
           "imports": {
             "type": "array",
@@ -984,7 +1135,25 @@
               }
             }
           },
+          "shipments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "position": {
+            "type": "string"
+          },
           "package_type": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "fragile",
+              "explosive",
+              "smell"
+            ]
+          },
+          "current_address": {
             "type": "object",
             "required": [
               "id"
@@ -993,22 +1162,24 @@
               "id": {
                 "type": "string"
               },
-              "package_type": {
-                "type": "string",
-                "default": "normal",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
+              "street": {
+                "type": "string"
+              },
+              "ward": {
+                "type": "string"
+              },
+              "province": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "latitude": {
+                "type": "number"
+              },
+              "longtitude": {
+                "type": "number"
               }
-            }
-          },
-          "shipments": {
-            "type": "array",
-            "items": {
-              "type": "string"
             }
           },
           "published_at": {

@@ -38,4 +38,37 @@ module.exports = {
       },
     ];
   },
+
+  async getStorekeeperStatus(ctx) {
+    const { storage } = ctx.state.user;
+
+    const totalPackage =
+      await strapi.services.shipment.getTotalPackageNeedImport(storage);
+
+    const isNight =
+      new Date().getHours() > 20 || new Date().getHours < 5
+        ? "Ngưng hoạt động"
+        : "Đang hoạt động";
+
+    return {
+      storage_status: isNight,
+      total_packages: totalPackage ? totalPackage["total_packages"] : 0,
+    };
+  },
+
+  async getAssistanceInfo(ctx) {
+    let shipments =
+      await strapi.services.shipment.getUnfinishedShipmentByDriver(
+        ctx.state.user.id
+      );
+
+    let assistance = await strapi
+      .query("user", "users-permissions")
+      .findOne({ id: shipments[0].assistance });
+
+    return sanitizeEntity(assistance, {
+      model: strapi.query("user", "users-permissions").model,
+      includeFields: ["name", "phone"],
+    });
+  },
 };
