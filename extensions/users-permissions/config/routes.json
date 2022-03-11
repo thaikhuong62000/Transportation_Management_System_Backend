@@ -102,6 +102,15 @@
         "policies": [],
         "prefix": ""
       }
+    },
+    {
+      "method": "POST",
+      "path": "/send-noti",
+      "handler": "User.sendNoti",
+      "config": {
+        "policies": [],
+        "prefix": ""
+      }
     }
   ]
 }
