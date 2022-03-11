@@ -24,8 +24,8 @@
       "type": "datetime"
     },
     "order": {
-      "model": "order",
-      "via": "payments"
+      "via": "payments",
+      "model": "order"
     },
     "method": {
       "type": "enumeration",

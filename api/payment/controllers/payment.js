@@ -7,16 +7,38 @@
 
 module.exports = {
   async momoNotification(ctx) {
-    const { resultCode, message } = ctx.request.body;
-    // TODO: Response to momo ipn post and check for payment status
-    // TODO: Validate amount and currency in database and momo body
+    const {
+      amount = 0,
+      extraData = "",
+      message = "",
+      resultCode = 0,
+    } = ctx.request.body;
 
-    return ctx.send(
-      {
-        resultCode: resultCode,
-        message: message,
-      },
-      204
-    );
+    let rawData = Buffer.from(extraData, "base64").toString("ascii");
+    let parsedId = JSON.parse(rawData).id;
+
+    let order = await strapi.query("order").findOne({
+      id: parsedId,
+    });
+
+    if (resultCode === 0) {
+      if (order.fee >= amount) {
+        await strapi
+          .query("order")
+          .update({ id: parsedId }, { remain_fee: order.fee - amount });
+
+        await strapi.query("payment").update(
+          { order: parsedId },
+          {
+            paid: amount,
+            time: new Date(),
+          }
+        );
+      }
+    } else {
+      await strapi.query("order").delete({ id: parsedId });
+      await strapi.query("payment").delete({ _id: order.payments[0]._id });
+    }
+    return ctx.send(204);
   },
 };
