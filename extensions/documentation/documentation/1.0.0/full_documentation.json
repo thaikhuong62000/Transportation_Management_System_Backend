@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/11/2022 9:45:40 PM"
+    "x-generation-date": "03/14/2022 5:22:53 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3974,6 +3974,77 @@
         ]
       }
     },
+    "/order-templates/delete": {
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Order-template"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/orders": {
       "get": {
         "deprecated": false,
@@ -5132,6 +5203,77 @@
             }
           }
         ]
+      }
+    },
+    "/package-templates/delete": {
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Package-template"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/packages": {
@@ -13851,27 +13993,6 @@
           "name": {
             "type": "string"
           },
-          "Package_Type": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "package_type": {
-                "type": "string",
-                "default": "normal",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
-              }
-            }
-          },
           "quantity": {
             "type": "integer"
           },
@@ -14030,6 +14151,15 @@
               }
             }
           },
+          "package_type": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "fragile",
+              "explosive",
+              "smell"
+            ]
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -14040,27 +14170,6 @@
         "properties": {
           "name": {
             "type": "string"
-          },
-          "Package_Type": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "package_type": {
-                "type": "string",
-                "default": "normal",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
-              }
-            }
           },
           "quantity": {
             "type": "integer"
@@ -14093,6 +14202,15 @@
           },
           "user": {
             "type": "string"
+          },
+          "package_type": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "fragile",
+              "explosive",
+              "smell"
+            ]
           },
           "published_at": {
             "type": "string",
@@ -17224,9 +17342,6 @@
                 "name": {
                   "type": "string"
                 },
-                "Package_Type": {
-                  "type": "component"
-                },
                 "quantity": {
                   "type": "integer"
                 },
@@ -17241,6 +17356,15 @@
                 },
                 "user": {
                   "type": "string"
+                },
+                "package_type": {
+                  "type": "string",
+                  "enum": [
+                    "normal",
+                    "fragile",
+                    "explosive",
+                    "smell"
+                  ]
                 },
                 "published_at": {
                   "type": "string"
