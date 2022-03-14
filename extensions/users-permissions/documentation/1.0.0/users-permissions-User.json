@@ -1734,6 +1734,15 @@
                 "user": {
                   "type": "string"
                 },
+                "package_type": {
+                  "type": "string",
+                  "enum": [
+                    "normal",
+                    "fragile",
+                    "explosive",
+                    "smell"
+                  ]
+                },
                 "published_at": {
                   "type": "string"
                 },

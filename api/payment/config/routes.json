@@ -33,6 +33,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/payments/momo-notify",
+      "handler": "payment.momoNotification",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/payments/:id",
       "handler": "payment.update",

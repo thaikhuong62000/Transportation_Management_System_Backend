@@ -33,6 +33,15 @@
       "via": "package_templates",
       "plugin": "users-permissions",
       "model": "user"
+    },
+    "package_type": {
+      "type": "enumeration",
+      "enum": [
+        "normal",
+        "fragile",
+        "explosive",
+        "smell"
+      ]
     }
   }
 }
