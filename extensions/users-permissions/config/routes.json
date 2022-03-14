@@ -15,6 +15,21 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/auth/local/register",
+      "handler": "Auth.register",
+      "config": {
+        "policies": ["plugins::users-permissions.ratelimit", "plugins::users-permissions.prepare-register-user"],
+        "prefix": "",
+        "description": "Register a new user with the default role",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User",
+          "actionType": "create"
+        }
+      }
+    },
+    {
       "method": "GET",
       "path": "/driver/status",
       "handler": "CustomUser.getDriverStatus",
