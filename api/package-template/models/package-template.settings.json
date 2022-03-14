@@ -15,11 +15,6 @@
     "name": {
       "type": "string"
     },
-    "Package_Type": {
-      "type": "component",
-      "repeatable": false,
-      "component": "package.package-type"
-    },
     "quantity": {
       "type": "integer"
     },

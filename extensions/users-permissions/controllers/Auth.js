@@ -14,7 +14,7 @@ const formatPhone = (phone) => {
 
 module.exports = {
   async phoneAuth(ctx) {
-    const { code } = ctx.query;
+    const { code, create } = ctx.query;
     try {
       const decodedToken = await strapi.firebase.auth.verifyIdToken(code);
       if (decodedToken.phone_number) {
@@ -35,7 +35,7 @@ module.exports = {
             user,
             jwt,
           };
-        } else {
+        } else if (create) {
           const pluginStore = await strapi.store({
             environment: "",
             type: "plugin",
@@ -73,6 +73,8 @@ module.exports = {
           } else {
             throw "User empty";
           }
+        } else {
+          throw "Cannot create user";
         }
       } else {
         throw "Phone missing";
