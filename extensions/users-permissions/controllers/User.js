@@ -18,8 +18,6 @@ module.exports = {
       },
     } = ctx;
 
-    console.log(_avatar);
-
     if (_avatar === undefined) {
       return ctx.badRequest(null, {
         errors: [

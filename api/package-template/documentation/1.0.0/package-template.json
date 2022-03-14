@@ -538,27 +538,6 @@
           "name": {
             "type": "string"
           },
-          "Package_Type": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "package_type": {
-                "type": "string",
-                "default": "normal",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
-              }
-            }
-          },
           "quantity": {
             "type": "integer"
           },
@@ -727,27 +706,6 @@
         "properties": {
           "name": {
             "type": "string"
-          },
-          "Package_Type": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "package_type": {
-                "type": "string",
-                "default": "normal",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
-              }
-            }
           },
           "quantity": {
             "type": "integer"
