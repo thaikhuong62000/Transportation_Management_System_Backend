@@ -1719,9 +1719,6 @@
                 "name": {
                   "type": "string"
                 },
-                "Package_Type": {
-                  "type": "component"
-                },
                 "quantity": {
                   "type": "integer"
                 },
@@ -1736,6 +1733,15 @@
                 },
                 "user": {
                   "type": "string"
+                },
+                "package_type": {
+                  "type": "string",
+                  "enum": [
+                    "normal",
+                    "fragile",
+                    "explosive",
+                    "smell"
+                  ]
                 },
                 "published_at": {
                   "type": "string"
