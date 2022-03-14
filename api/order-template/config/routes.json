@@ -26,6 +26,14 @@
     },
     {
       "method": "POST",
+      "path": "/order-templates/delete",
+      "handler": "order-template.deleteTemplates",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
       "path": "/order-templates",
       "handler": "order-template.create",
       "config": {

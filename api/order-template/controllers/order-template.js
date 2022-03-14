@@ -82,4 +82,19 @@ module.exports = {
 
     return template;
   },
+
+  async deleteTemplates(ctx) {
+    const { deleteList } = ctx.request.body;
+    const { id } = ctx.state.user;
+
+    for (let item of deleteList) {
+      await strapi.query("order-template").delete({
+        id: item,
+      });
+    }
+
+    return await strapi.query("order-template").find({
+      user: id,
+    });
+  },
 };
