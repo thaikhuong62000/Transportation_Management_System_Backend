@@ -30,9 +30,7 @@ module.exports = (strapi, io) => {
           const room = await getRoomChat(senderId, receiverId, false);
 
           // Send room info to both user on create room
-          if (senderId && receiverId) {
-            notifyUser(socket, senderId, receiverId, room);
-          }
+          notifyUser(socket, senderId, receiverId, room);
         } catch (error) {
           console.log("Something bruh at room socket", error);
         }
@@ -53,9 +51,10 @@ module.exports = (strapi, io) => {
           room: room,
         });
         socket.to(`${room}`).emit("chat", data, room);
+        // Fallback
         const _room = await getRoomChat("", "", room);
         const receiver = getReceiver(_room, data.user._id);
-        sendCloudMessage(receiver.device_token, {
+        strapi.firebase.sendCloudMessage(receiver.device_token, {
           data: JSON.stringify(data),
           room: room,
           type: "CHAT",
@@ -95,7 +94,7 @@ module.exports = (strapi, io) => {
     });
 
     // Send sender info to receiver
-    sendCloudMessage(receiver.device_token, {
+    strapi.firebase.sendCloudMessage(receiver.device_token, {
       id: String(sender._id),
       name: sender.name,
       phone: sender.phone,
@@ -103,16 +102,6 @@ module.exports = (strapi, io) => {
       room: room.id,
       type: "ROOM",
     });
-  }
-
-  function sendCloudMessage(token, message) {
-    const options = {
-      contentAvailable: true,
-      priority: "high",
-      timeToLive: 7 * 60 * 60 * 24,
-    };
-    const { getMessaging } = require("firebase-admin/messaging");
-    getMessaging().sendToDevice(token, { data: message }, options);
   }
 
   initSocket(strapi, io);

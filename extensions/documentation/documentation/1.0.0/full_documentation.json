@@ -96,9 +96,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car-broken"
-        ],
+        "tags": ["Car-broken"],
         "parameters": [
           {
             "name": "_limit",
@@ -288,9 +286,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car-broken"
-        ],
+        "tags": ["Car-broken"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -355,9 +351,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car-broken"
-        ],
+        "tags": ["Car-broken"],
         "parameters": []
       }
     },
@@ -412,9 +406,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car-broken"
-        ],
+        "tags": ["Car-broken"],
         "parameters": [
           {
             "name": "id",
@@ -478,9 +470,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car-broken"
-        ],
+        "tags": ["Car-broken"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -552,9 +542,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car-broken"
-        ],
+        "tags": ["Car-broken"],
         "parameters": [
           {
             "name": "id",
@@ -619,9 +607,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car"
-        ],
+        "tags": ["Car"],
         "parameters": [
           {
             "name": "_limit",
@@ -807,9 +793,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car"
-        ],
+        "tags": ["Car"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -874,9 +858,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car"
-        ],
+        "tags": ["Car"],
         "parameters": []
       }
     },
@@ -927,9 +909,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car"
-        ],
+        "tags": ["Car"],
         "parameters": [
           {
             "name": "id",
@@ -989,9 +969,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car"
-        ],
+        "tags": ["Car"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1063,9 +1041,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Car"
-        ],
+        "tags": ["Car"],
         "parameters": [
           {
             "name": "id",
@@ -1130,9 +1106,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Export"
-        ],
+        "tags": ["Export"],
         "parameters": [
           {
             "name": "_limit",
@@ -1318,9 +1292,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Export"
-        ],
+        "tags": ["Export"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1385,9 +1357,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Export"
-        ],
+        "tags": ["Export"],
         "parameters": []
       }
     },
@@ -1438,9 +1408,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Export"
-        ],
+        "tags": ["Export"],
         "parameters": [
           {
             "name": "id",
@@ -1500,9 +1468,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Export"
-        ],
+        "tags": ["Export"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1574,9 +1540,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Export"
-        ],
+        "tags": ["Export"],
         "parameters": [
           {
             "name": "id",
@@ -1642,9 +1606,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Export"
-        ],
+        "tags": ["Export"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1714,9 +1676,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Export"
-        ],
+        "tags": ["Export"],
         "parameters": []
       }
     },
@@ -1771,9 +1731,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Import"
-        ],
+        "tags": ["Import"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1842,9 +1800,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Furlough"
-        ],
+        "tags": ["Furlough"],
         "parameters": [
           {
             "name": "_limit",
@@ -2030,9 +1986,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Furlough"
-        ],
+        "tags": ["Furlough"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2097,9 +2051,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Furlough"
-        ],
+        "tags": ["Furlough"],
         "parameters": []
       }
     },
@@ -2150,9 +2102,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Furlough"
-        ],
+        "tags": ["Furlough"],
         "parameters": [
           {
             "name": "id",
@@ -2212,9 +2162,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Furlough"
-        ],
+        "tags": ["Furlough"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2286,9 +2234,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Furlough"
-        ],
+        "tags": ["Furlough"],
         "parameters": [
           {
             "name": "id",
@@ -2353,9 +2299,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Import"
-        ],
+        "tags": ["Import"],
         "parameters": [
           {
             "name": "_limit",
@@ -2541,9 +2485,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Import"
-        ],
+        "tags": ["Import"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2608,9 +2550,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Import"
-        ],
+        "tags": ["Import"],
         "parameters": []
       }
     },
@@ -2661,9 +2601,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Import"
-        ],
+        "tags": ["Import"],
         "parameters": [
           {
             "name": "id",
@@ -2723,9 +2661,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Import"
-        ],
+        "tags": ["Import"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2797,9 +2733,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Import"
-        ],
+        "tags": ["Import"],
         "parameters": [
           {
             "name": "id",
@@ -2865,9 +2799,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Import"
-        ],
+        "tags": ["Import"],
         "parameters": []
       }
     },
@@ -2921,9 +2853,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Message"
-        ],
+        "tags": ["Message"],
         "parameters": [
           {
             "name": "_limit",
@@ -3109,9 +3039,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Message"
-        ],
+        "tags": ["Message"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3176,9 +3104,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Message"
-        ],
+        "tags": ["Message"],
         "parameters": []
       }
     },
@@ -3229,9 +3155,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Message"
-        ],
+        "tags": ["Message"],
         "parameters": [
           {
             "name": "id",
@@ -3291,9 +3215,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Message"
-        ],
+        "tags": ["Message"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3365,9 +3287,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Message"
-        ],
+        "tags": ["Message"],
         "parameters": [
           {
             "name": "id",
@@ -3433,9 +3353,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Message"
-        ],
+        "tags": ["Message"],
         "parameters": [
           {
             "name": "room",
@@ -3501,9 +3419,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order-template"
-        ],
+        "tags": ["Order-template"],
         "parameters": [
           {
             "name": "_limit",
@@ -3693,9 +3609,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order-template"
-        ],
+        "tags": ["Order-template"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3760,9 +3674,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order-template"
-        ],
+        "tags": ["Order-template"],
         "parameters": []
       }
     },
@@ -3817,9 +3729,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order-template"
-        ],
+        "tags": ["Order-template"],
         "parameters": [
           {
             "name": "id",
@@ -3883,9 +3793,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order-template"
-        ],
+        "tags": ["Order-template"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3957,9 +3865,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order-template"
-        ],
+        "tags": ["Order-template"],
         "parameters": [
           {
             "name": "id",
@@ -4025,9 +3931,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order-template"
-        ],
+        "tags": ["Order-template"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -4095,9 +3999,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order"
-        ],
+        "tags": ["Order"],
         "parameters": [
           {
             "name": "_limit",
@@ -4283,9 +4185,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order"
-        ],
+        "tags": ["Order"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -4350,9 +4250,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order"
-        ],
+        "tags": ["Order"],
         "parameters": []
       }
     },
@@ -4407,9 +4305,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order"
-        ],
+        "tags": ["Order"],
         "parameters": []
       }
     },
@@ -4464,9 +4360,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order"
-        ],
+        "tags": ["Order"],
         "parameters": [
           {
             "name": "id",
@@ -4528,9 +4422,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order"
-        ],
+        "tags": ["Order"],
         "parameters": [
           {
             "name": "id",
@@ -4590,9 +4482,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order"
-        ],
+        "tags": ["Order"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -4664,9 +4554,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Order"
-        ],
+        "tags": ["Order"],
         "parameters": [
           {
             "name": "id",
@@ -4732,9 +4620,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package-template"
-        ],
+        "tags": ["Package-template"],
         "parameters": [
           {
             "name": "_limit",
@@ -4924,9 +4810,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package-template"
-        ],
+        "tags": ["Package-template"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -4991,9 +4875,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package-template"
-        ],
+        "tags": ["Package-template"],
         "parameters": []
       }
     },
@@ -5048,9 +4930,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package-template"
-        ],
+        "tags": ["Package-template"],
         "parameters": [
           {
             "name": "id",
@@ -5114,9 +4994,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package-template"
-        ],
+        "tags": ["Package-template"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -5188,9 +5066,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package-template"
-        ],
+        "tags": ["Package-template"],
         "parameters": [
           {
             "name": "id",
@@ -5256,9 +5132,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package-template"
-        ],
+        "tags": ["Package-template"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -5326,9 +5200,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "parameters": [
           {
             "name": "_limit",
@@ -5514,9 +5386,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -5581,9 +5451,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "parameters": []
       }
     },
@@ -5638,9 +5506,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "parameters": []
       }
     },
@@ -5695,9 +5561,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "parameters": [
           {
             "name": "id",
@@ -5759,9 +5623,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "parameters": [
           {
             "name": "id",
@@ -5821,9 +5683,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -5895,9 +5755,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "parameters": [
           {
             "name": "id",
@@ -5963,9 +5821,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Package"
-        ],
+        "tags": ["Package"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -6033,9 +5889,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Payment"
-        ],
+        "tags": ["Payment"],
         "parameters": [
           {
             "name": "_limit",
@@ -6221,9 +6075,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Payment"
-        ],
+        "tags": ["Payment"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -6288,9 +6140,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Payment"
-        ],
+        "tags": ["Payment"],
         "parameters": []
       }
     },
@@ -6341,9 +6191,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Payment"
-        ],
+        "tags": ["Payment"],
         "parameters": [
           {
             "name": "id",
@@ -6403,9 +6251,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Payment"
-        ],
+        "tags": ["Payment"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -6477,9 +6323,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Payment"
-        ],
+        "tags": ["Payment"],
         "parameters": [
           {
             "name": "id",
@@ -6545,9 +6389,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Payment"
-        ],
+        "tags": ["Payment"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -6615,9 +6457,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "parameters": [
           {
             "name": "_limit",
@@ -6803,9 +6643,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -6870,9 +6708,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "parameters": []
       }
     },
@@ -6923,9 +6759,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "parameters": [
           {
             "name": "id",
@@ -6985,9 +6819,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -7059,9 +6891,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "parameters": [
           {
             "name": "id",
@@ -7127,9 +6957,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Room-chat"
-        ],
+        "tags": ["Room-chat"],
         "parameters": [
           {
             "name": "_limit",
@@ -7319,9 +7147,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Room-chat"
-        ],
+        "tags": ["Room-chat"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -7386,9 +7212,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Room-chat"
-        ],
+        "tags": ["Room-chat"],
         "parameters": []
       }
     },
@@ -7443,9 +7267,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Room-chat"
-        ],
+        "tags": ["Room-chat"],
         "parameters": [
           {
             "name": "id",
@@ -7509,9 +7331,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Room-chat"
-        ],
+        "tags": ["Room-chat"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -7583,9 +7403,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Room-chat"
-        ],
+        "tags": ["Room-chat"],
         "parameters": [
           {
             "name": "id",
@@ -7651,9 +7469,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Room-chat"
-        ],
+        "tags": ["Room-chat"],
         "parameters": []
       }
     },
@@ -7707,9 +7523,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "parameters": [
           {
             "name": "_limit",
@@ -7895,9 +7709,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -7962,9 +7774,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "parameters": []
       }
     },
@@ -8015,9 +7825,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "parameters": [
           {
             "name": "id",
@@ -8077,9 +7885,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -8151,9 +7957,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "parameters": [
           {
             "name": "id",
@@ -8219,9 +8023,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "parameters": []
       }
     },
@@ -8276,9 +8078,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "parameters": []
       }
     },
@@ -8333,9 +8133,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Shipment"
-        ],
+        "tags": ["Shipment"],
         "parameters": [
           {
             "name": "id",
@@ -8400,9 +8198,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Storage"
-        ],
+        "tags": ["Storage"],
         "parameters": [
           {
             "name": "_limit",
@@ -8588,9 +8384,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Storage"
-        ],
+        "tags": ["Storage"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -8655,9 +8449,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Storage"
-        ],
+        "tags": ["Storage"],
         "parameters": []
       }
     },
@@ -8708,9 +8500,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Storage"
-        ],
+        "tags": ["Storage"],
         "parameters": [
           {
             "name": "id",
@@ -8770,9 +8560,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Storage"
-        ],
+        "tags": ["Storage"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -8844,9 +8632,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Storage"
-        ],
+        "tags": ["Storage"],
         "parameters": [
           {
             "name": "id",
@@ -8911,9 +8697,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Voucher"
-        ],
+        "tags": ["Voucher"],
         "parameters": [
           {
             "name": "_limit",
@@ -9099,9 +8883,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Voucher"
-        ],
+        "tags": ["Voucher"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -9166,9 +8948,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Voucher"
-        ],
+        "tags": ["Voucher"],
         "parameters": []
       }
     },
@@ -9219,9 +8999,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Voucher"
-        ],
+        "tags": ["Voucher"],
         "parameters": [
           {
             "name": "id",
@@ -9281,9 +9059,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Voucher"
-        ],
+        "tags": ["Voucher"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -9355,9 +9131,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Voucher"
-        ],
+        "tags": ["Voucher"],
         "parameters": [
           {
             "name": "id",
@@ -9423,9 +9197,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Email - Email"
-        ],
+        "tags": ["Email - Email"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -9494,9 +9266,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Email - Email"
-        ],
+        "tags": ["Email - Email"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -9565,9 +9335,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Email - Email"
-        ],
+        "tags": ["Email - Email"],
         "parameters": []
       }
     },
@@ -9622,9 +9390,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -9693,9 +9459,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": []
       }
     },
@@ -9750,9 +9514,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": []
       }
     },
@@ -9807,9 +9569,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": [
           {
             "name": "id",
@@ -9873,9 +9633,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": [
           {
             "name": "id",
@@ -9941,9 +9699,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "parameters": [
           {
             "name": "id",
@@ -10009,9 +9765,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Unclassified"
-        ],
+        "tags": ["Unclassified"],
         "parameters": []
       }
     },
@@ -10062,9 +9816,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
+        "tags": ["UsersPermissions - Role"],
         "parameters": [
           {
             "name": "id",
@@ -10129,9 +9881,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
+        "tags": ["UsersPermissions - Role"],
         "parameters": [
           {
             "name": "_limit",
@@ -10317,9 +10067,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
+        "tags": ["UsersPermissions - Role"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -10380,9 +10128,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
+        "tags": ["UsersPermissions - Role"],
         "parameters": [
           {
             "name": "role",
@@ -10457,9 +10203,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
+        "tags": ["UsersPermissions - Role"],
         "parameters": [
           {
             "name": "role",
@@ -10474,10 +10218,10 @@
         ]
       }
     },
-    "/auth/local": {
-      "post": {
+    "/auth/{provider}/callback": {
+      "get": {
         "deprecated": false,
-        "description": "Login a user using the identifiers email and password",
+        "description": "Successfull redirection after approving a provider",
         "responses": {
           "200": {
             "description": "response",
@@ -10525,20 +10269,76 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/auth/local/register": {
+      "post": {
+        "deprecated": false,
+        "description": "Register a new user with the default role",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersPermissionsUser"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["UsersPermissions - User"],
         "requestBody": {
           "description": "",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
+                "$ref": "#/components/schemas/NewUsersPermissionsUser"
               }
             }
           }
@@ -10592,9 +10392,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [],
         "requestBody": {
           "description": "",
@@ -10660,9 +10458,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": []
       }
     },
@@ -10716,9 +10512,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -10920,79 +10714,14 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": []
       }
     },
-    "/auth/local/register": {
+    "/auth/local": {
       "post": {
         "deprecated": false,
-        "description": "Register a new user with the default role",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UsersPermissionsUser"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewUsersPermissionsUser"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/auth/{provider}/callback": {
-      "get": {
-        "deprecated": false,
-        "description": "Successfull redirection after approving a provider",
+        "description": "Login a user using the identifiers email and password",
         "responses": {
           "200": {
             "description": "response",
@@ -11040,21 +10769,22 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
-        "parameters": [
-          {
-            "name": "provider",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
+        "tags": ["UsersPermissions - User"],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
             }
           }
-        ]
+        }
       }
     },
     "/auth/forgot-password": {
@@ -11108,9 +10838,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -11179,9 +10907,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -11250,9 +10976,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": []
       }
     },
@@ -11307,9 +11031,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -11377,9 +11099,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "_limit",
@@ -11567,9 +11287,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": []
       }
     },
@@ -11620,9 +11338,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -11682,9 +11398,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -11759,9 +11473,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -11780,10 +11492,7 @@
   "components": {
     "schemas": {
       "Car-broken": {
-        "required": [
-          "id",
-          "time"
-        ],
+        "required": ["id", "time"],
         "properties": {
           "id": {
             "type": "string"
@@ -11796,12 +11505,7 @@
             "type": "string"
           },
           "car": {
-            "required": [
-              "id",
-              "licence",
-              "type",
-              "load"
-            ],
+            "required": ["id", "licence", "type", "load"],
             "properties": {
               "id": {
                 "type": "string"
@@ -11845,9 +11549,7 @@
         }
       },
       "NewCar-broken": {
-        "required": [
-          "time"
-        ],
+        "required": ["time"],
         "properties": {
           "time": {
             "type": "string",
@@ -11872,12 +11574,7 @@
         }
       },
       "Car": {
-        "required": [
-          "id",
-          "licence",
-          "type",
-          "load"
-        ],
+        "required": ["id", "licence", "type", "load"],
         "properties": {
           "id": {
             "type": "string"
@@ -11892,13 +11589,7 @@
             "type": "number"
           },
           "manager": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12023,10 +11714,7 @@
           "car_brokens": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "time"
-              ],
+              "required": ["id", "time"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -12054,9 +11742,7 @@
           },
           "size": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12079,11 +11765,7 @@
         }
       },
       "NewCar": {
-        "required": [
-          "licence",
-          "type",
-          "load"
-        ],
+        "required": ["licence", "type", "load"],
         "properties": {
           "licence": {
             "type": "string"
@@ -12105,9 +11787,7 @@
           },
           "size": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12136,10 +11816,7 @@
         }
       },
       "Export": {
-        "required": [
-          "id",
-          "quantity"
-        ],
+        "required": ["id", "quantity"],
         "properties": {
           "id": {
             "type": "string"
@@ -12148,13 +11825,7 @@
             "type": "integer"
           },
           "store_manager": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12277,12 +11948,7 @@
             }
           },
           "package": {
-            "required": [
-              "id",
-              "quantity",
-              "weight",
-              "state"
-            ],
+            "required": ["id", "quantity", "weight", "state"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12334,12 +12000,7 @@
               },
               "package_type": {
                 "type": "string",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
+                "enum": ["normal", "fragile", "explosive", "smell"]
               },
               "current_address": {
                 "type": "component"
@@ -12356,10 +12017,7 @@
             }
           },
           "storage": {
-            "required": [
-              "id",
-              "name"
-            ],
+            "required": ["id", "name"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12415,9 +12073,7 @@
         }
       },
       "NewExport": {
-        "required": [
-          "quantity"
-        ],
+        "required": ["quantity"],
         "properties": {
           "quantity": {
             "type": "integer"
@@ -12444,9 +12100,7 @@
         }
       },
       "Furlough": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
@@ -12454,11 +12108,7 @@
           "state": {
             "type": "string",
             "default": "pending",
-            "enum": [
-              "pending",
-              "accepted",
-              "canceled"
-            ]
+            "enum": ["pending", "accepted", "canceled"]
           },
           "reason": {
             "type": "string"
@@ -12472,13 +12122,7 @@
             "format": "date-time"
           },
           "driver": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12611,11 +12255,7 @@
           "state": {
             "type": "string",
             "default": "pending",
-            "enum": [
-              "pending",
-              "accepted",
-              "canceled"
-            ]
+            "enum": ["pending", "accepted", "canceled"]
           },
           "reason": {
             "type": "string"
@@ -12644,10 +12284,7 @@
         }
       },
       "Import": {
-        "required": [
-          "id",
-          "quantity"
-        ],
+        "required": ["id", "quantity"],
         "properties": {
           "id": {
             "type": "string"
@@ -12657,13 +12294,7 @@
             "default": 0
           },
           "store_manager": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12786,12 +12417,7 @@
             }
           },
           "package": {
-            "required": [
-              "id",
-              "quantity",
-              "weight",
-              "state"
-            ],
+            "required": ["id", "quantity", "weight", "state"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12843,12 +12469,7 @@
               },
               "package_type": {
                 "type": "string",
-                "enum": [
-                  "normal",
-                  "fragile",
-                  "explosive",
-                  "smell"
-                ]
+                "enum": ["normal", "fragile", "explosive", "smell"]
               },
               "current_address": {
                 "type": "component"
@@ -12865,10 +12486,7 @@
             }
           },
           "storage": {
-            "required": [
-              "id",
-              "name"
-            ],
+            "required": ["id", "name"],
             "properties": {
               "id": {
                 "type": "string"
@@ -12924,9 +12542,7 @@
         }
       },
       "NewImport": {
-        "required": [
-          "quantity"
-        ],
+        "required": ["quantity"],
         "properties": {
           "quantity": {
             "type": "integer",
@@ -12954,9 +12570,7 @@
         }
       },
       "Message": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
@@ -12968,13 +12582,7 @@
             "type": "string"
           },
           "user": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13097,9 +12705,7 @@
             }
           },
           "room": {
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13143,9 +12749,7 @@
         }
       },
       "Order-template": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
@@ -13161,9 +12765,7 @@
           },
           "from_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13190,9 +12792,7 @@
           },
           "to_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13218,13 +12818,7 @@
             }
           },
           "user": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13365,9 +12959,7 @@
           },
           "from_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13394,9 +12986,7 @@
           },
           "to_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13483,13 +13073,7 @@
             "type": "string"
           },
           "voucher": {
-            "required": [
-              "id",
-              "name",
-              "sale",
-              "sale_max",
-              "type"
-            ],
+            "required": ["id", "name", "sale", "sale_max", "type"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13527,13 +13111,7 @@
             }
           },
           "customer": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13658,12 +13236,7 @@
           "packages": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "quantity",
-                "weight",
-                "state"
-              ],
+              "required": ["id", "quantity", "weight", "state"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -13715,12 +13288,7 @@
                 },
                 "package_type": {
                   "type": "string",
-                  "enum": [
-                    "normal",
-                    "fragile",
-                    "explosive",
-                    "smell"
-                  ]
+                  "enum": ["normal", "fragile", "explosive", "smell"]
                 },
                 "current_address": {
                   "type": "component"
@@ -13739,9 +13307,7 @@
           },
           "from_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13768,9 +13334,7 @@
           },
           "to_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13801,9 +13365,7 @@
           "payments": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -13825,11 +13387,7 @@
                 },
                 "method": {
                   "type": "string",
-                  "enum": [
-                    "direct",
-                    "momo",
-                    "banking"
-                  ]
+                  "enum": ["direct", "momo", "banking"]
                 },
                 "published_at": {
                   "type": "string"
@@ -13905,9 +13463,7 @@
           },
           "from_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13934,9 +13490,7 @@
           },
           "to_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -13983,9 +13537,7 @@
         }
       },
       "Package-template": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
@@ -14001,9 +13553,7 @@
           },
           "size": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -14023,13 +13573,7 @@
             "type": "string"
           },
           "user": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -14153,12 +13697,7 @@
           },
           "package_type": {
             "type": "string",
-            "enum": [
-              "normal",
-              "fragile",
-              "explosive",
-              "smell"
-            ]
+            "enum": ["normal", "fragile", "explosive", "smell"]
           },
           "published_at": {
             "type": "string",
@@ -14179,9 +13718,7 @@
           },
           "size": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -14205,12 +13742,7 @@
           },
           "package_type": {
             "type": "string",
-            "enum": [
-              "normal",
-              "fragile",
-              "explosive",
-              "smell"
-            ]
+            "enum": ["normal", "fragile", "explosive", "smell"]
           },
           "published_at": {
             "type": "string",
@@ -14225,12 +13757,7 @@
         }
       },
       "Package": {
-        "required": [
-          "id",
-          "quantity",
-          "weight",
-          "state"
-        ],
+        "required": ["id", "quantity", "weight", "state"],
         "properties": {
           "id": {
             "type": "string"
@@ -14403,10 +13930,7 @@
           "imports": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "quantity"
-              ],
+              "required": ["id", "quantity"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -14438,10 +13962,7 @@
           "exports": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "quantity"
-              ],
+              "required": ["id", "quantity"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -14475,9 +13996,7 @@
           },
           "size": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -14496,9 +14015,7 @@
           "shipments": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -14550,18 +14067,11 @@
           },
           "package_type": {
             "type": "string",
-            "enum": [
-              "normal",
-              "fragile",
-              "explosive",
-              "smell"
-            ]
+            "enum": ["normal", "fragile", "explosive", "smell"]
           },
           "current_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -14593,11 +14103,7 @@
         }
       },
       "NewPackage": {
-        "required": [
-          "quantity",
-          "weight",
-          "state"
-        ],
+        "required": ["quantity", "weight", "state"],
         "properties": {
           "quantity": {
             "type": "integer",
@@ -14631,9 +14137,7 @@
           },
           "size": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -14660,18 +14164,11 @@
           },
           "package_type": {
             "type": "string",
-            "enum": [
-              "normal",
-              "fragile",
-              "explosive",
-              "smell"
-            ]
+            "enum": ["normal", "fragile", "explosive", "smell"]
           },
           "current_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -14709,9 +14206,7 @@
         }
       },
       "Payment": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
@@ -14815,11 +14310,7 @@
           "method": {
             "type": "string",
             "default": "direct",
-            "enum": [
-              "direct",
-              "momo",
-              "banking"
-            ]
+            "enum": ["direct", "momo", "banking"]
           },
           "published_at": {
             "type": "string",
@@ -14848,11 +14339,7 @@
           "method": {
             "type": "string",
             "default": "direct",
-            "enum": [
-              "direct",
-              "momo",
-              "banking"
-            ]
+            "enum": ["direct", "momo", "banking"]
           },
           "published_at": {
             "type": "string",
@@ -14867,9 +14354,7 @@
         }
       },
       "Report": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
@@ -14886,13 +14371,7 @@
             "type": "string"
           },
           "stocker": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -15085,10 +14564,7 @@
             }
           },
           "storage": {
-            "required": [
-              "id",
-              "name"
-            ],
+            "required": ["id", "name"],
             "properties": {
               "id": {
                 "type": "string"
@@ -15175,21 +14651,13 @@
         }
       },
       "Room-chat": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
           },
           "user1": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -15312,13 +14780,7 @@
             }
           },
           "user2": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -15459,9 +14921,7 @@
         }
       },
       "Shipment": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
@@ -15471,12 +14931,7 @@
             "format": "date-time"
           },
           "car": {
-            "required": [
-              "id",
-              "licence",
-              "type",
-              "load"
-            ],
+            "required": ["id", "licence", "type", "load"],
             "properties": {
               "id": {
                 "type": "string"
@@ -15514,13 +14969,7 @@
             }
           },
           "driver": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -15643,13 +15092,7 @@
             }
           },
           "assistance": {
-            "required": [
-              "id",
-              "username",
-              "email",
-              "name",
-              "phone"
-            ],
+            "required": ["id", "username", "email", "name", "phone"],
             "properties": {
               "id": {
                 "type": "string"
@@ -15773,9 +15216,7 @@
           },
           "from_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -15802,9 +15243,7 @@
           },
           "to_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -15832,12 +15271,7 @@
           "packages": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "quantity",
-                "weight",
-                "state"
-              ],
+              "required": ["id", "quantity", "weight", "state"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -15889,12 +15323,7 @@
                 },
                 "package_type": {
                   "type": "string",
-                  "enum": [
-                    "normal",
-                    "fragile",
-                    "explosive",
-                    "smell"
-                  ]
+                  "enum": ["normal", "fragile", "explosive", "smell"]
                 },
                 "current_address": {
                   "type": "component"
@@ -15912,10 +15341,7 @@
             }
           },
           "from_storage": {
-            "required": [
-              "id",
-              "name"
-            ],
+            "required": ["id", "name"],
             "properties": {
               "id": {
                 "type": "string"
@@ -15965,10 +15391,7 @@
             }
           },
           "to_storage": {
-            "required": [
-              "id",
-              "name"
-            ],
+            "required": ["id", "name"],
             "properties": {
               "id": {
                 "type": "string"
@@ -16040,9 +15463,7 @@
           },
           "from_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -16069,9 +15490,7 @@
           },
           "to_address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -16121,10 +15540,7 @@
         }
       },
       "Storage": {
-        "required": [
-          "id",
-          "name"
-        ],
+        "required": ["id", "name"],
         "properties": {
           "id": {
             "type": "string"
@@ -16134,9 +15550,7 @@
           },
           "address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -16167,13 +15581,7 @@
           "store_managers": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "username",
-                "email",
-                "name",
-                "phone"
-              ],
+              "required": ["id", "username", "email", "name", "phone"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -16299,10 +15707,7 @@
           "imports": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "quantity"
-              ],
+              "required": ["id", "quantity"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -16334,10 +15739,7 @@
           "exports": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "quantity"
-              ],
+              "required": ["id", "quantity"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -16369,9 +15771,7 @@
           "reports": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -16416,18 +15816,14 @@
         }
       },
       "NewStorage": {
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "type": "string"
           },
           "address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -16492,13 +15888,7 @@
         }
       },
       "Voucher": {
-        "required": [
-          "id",
-          "name",
-          "sale",
-          "sale_max",
-          "type"
-        ],
+        "required": ["id", "name", "sale", "sale_max", "type"],
         "properties": {
           "id": {
             "type": "string"
@@ -16522,13 +15912,7 @@
           "users": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "username",
-                "email",
-                "name",
-                "phone"
-              ],
+              "required": ["id", "username", "email", "name", "phone"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -16658,12 +16042,7 @@
         }
       },
       "NewVoucher": {
-        "required": [
-          "name",
-          "sale",
-          "sale_max",
-          "type"
-        ],
+        "required": ["name", "sale", "sale_max", "type"],
         "properties": {
           "name": {
             "type": "string"
@@ -16700,10 +16079,7 @@
         }
       },
       "UsersPermissionsRole": {
-        "required": [
-          "id",
-          "name"
-        ],
+        "required": ["id", "name"],
         "properties": {
           "id": {
             "type": "string"
@@ -16721,13 +16097,7 @@
           "permissions": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "type",
-                "controller",
-                "action",
-                "enabled"
-              ],
+              "required": ["id", "type", "controller", "action", "enabled"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -16762,13 +16132,7 @@
           "users": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "username",
-                "email",
-                "name",
-                "phone"
-              ],
+              "required": ["id", "username", "email", "name", "phone"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -16894,9 +16258,7 @@
         }
       },
       "NewUsersPermissionsRole": {
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "type": "string",
@@ -16929,13 +16291,7 @@
         }
       },
       "UsersPermissionsUser": {
-        "required": [
-          "id",
-          "username",
-          "email",
-          "name",
-          "phone"
-        ],
+        "required": ["id", "username", "email", "name", "phone"],
         "properties": {
           "id": {
             "type": "string"
@@ -16960,10 +16316,7 @@
             "default": false
           },
           "role": {
-            "required": [
-              "id",
-              "name"
-            ],
+            "required": ["id", "name"],
             "properties": {
               "id": {
                 "type": "string"
@@ -16998,12 +16351,7 @@
             }
           },
           "car": {
-            "required": [
-              "id",
-              "licence",
-              "type",
-              "load"
-            ],
+            "required": ["id", "licence", "type", "load"],
             "properties": {
               "id": {
                 "type": "string"
@@ -17143,9 +16491,7 @@
           "shipments": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -17194,9 +16540,7 @@
           },
           "address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -17222,10 +16566,7 @@
             }
           },
           "storage": {
-            "required": [
-              "id",
-              "name"
-            ],
+            "required": ["id", "name"],
             "properties": {
               "id": {
                 "type": "string"
@@ -17290,20 +16631,14 @@
           "furloughs": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
                 },
                 "state": {
                   "type": "string",
-                  "enum": [
-                    "pending",
-                    "accepted",
-                    "canceled"
-                  ]
+                  "enum": ["pending", "accepted", "canceled"]
                 },
                 "reason": {
                   "type": "string"
@@ -17332,9 +16667,7 @@
           "package_templates": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -17359,12 +16692,7 @@
                 },
                 "package_type": {
                   "type": "string",
-                  "enum": [
-                    "normal",
-                    "fragile",
-                    "explosive",
-                    "smell"
-                  ]
+                  "enum": ["normal", "fragile", "explosive", "smell"]
                 },
                 "published_at": {
                   "type": "string"
@@ -17381,9 +16709,7 @@
           "order_templates": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -17488,9 +16814,7 @@
           "reports": {
             "type": "array",
             "items": {
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -17531,13 +16855,7 @@
           "vouchers": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "name",
-                "sale",
-                "sale_max",
-                "type"
-              ],
+              "required": ["id", "name", "sale", "sale_max", "type"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -17578,12 +16896,7 @@
         }
       },
       "NewUsersPermissionsUser": {
-        "required": [
-          "username",
-          "email",
-          "name",
-          "phone"
-        ],
+        "required": ["username", "email", "name", "phone"],
         "properties": {
           "username": {
             "type": "string",
@@ -17649,9 +16962,7 @@
           },
           "address": {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string"
@@ -17734,10 +17045,7 @@
         }
       },
       "Error": {
-        "required": [
-          "code",
-          "message"
-        ],
+        "required": ["code", "message"],
         "properties": {
           "code": {
             "type": "integer",
