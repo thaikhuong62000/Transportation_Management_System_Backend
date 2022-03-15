@@ -48,7 +48,7 @@ module.exports = {
 
   async update(ctx) {
     const { storage } = ctx.state.user;
-    const { quantity, code, packageId } = ctx.request.body;
+    const { quantity, packageId } = ctx.request.body;
     const importedId = ctx.params.id;
 
     if (quantity < 0 || !quantity) {
@@ -70,7 +70,6 @@ module.exports = {
     // If imported package not exist, then create a new one
     if (!importedPackage) {
       let newImport = await strapi.query("import").create({
-        code: code,
         package: packageId,
         quantity: quantity,
         store_manager: ctx.state.user.id,
@@ -103,6 +102,7 @@ module.exports = {
 
   async updateImportQuantityByPackage(ctx) {
     const { packageId, quantity } = ctx.request.body;
+    const { storage, id } = ctx.state.user;
 
     if (!quantity && quantity < 0) {
       return ctx.badRequest([
@@ -120,6 +120,20 @@ module.exports = {
         { quantity: quantity },
         { new: true }
       );
+
+    if (!importedPackage) {
+      let newImport = await strapi.query("import").create({
+        package: packageId,
+        quantity: quantity,
+        store_manager: id,
+        storage: storage,
+      });
+
+      return sanitizeEntity(newImport, {
+        model: strapi.query("import").model,
+        includeFields: ["quantity"],
+      });
+    }
 
     return sanitizeEntity(importedPackage, {
       model: strapi.query("import").model,
