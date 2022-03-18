@@ -7,12 +7,15 @@
 
 module.exports = {
   async find(ctx) {
-    const { page = 0, size = 5 } = ctx.query;
+    const { _start = 0, _limit = 5 } = ctx.query;
     const { id } = ctx.state.user;
 
-    let templates = await strapi.services[
-      "order-template"
-    ].getOrderTemplatesByUser(id, page * size, size);
+    let templates = await strapi.services["order-template"].search({
+      ...ctx.query,
+      _limit: _limit,
+      _start: _start * _limit,
+      user: id,
+    });
 
     return templates;
   },
