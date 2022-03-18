@@ -21,7 +21,7 @@
       "path": "/cars/:id",
       "handler": "car.findOne",
       "config": {
-        "policies": []
+        "policies": ["handle-find-one"]
       }
     },
     {

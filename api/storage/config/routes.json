@@ -21,7 +21,7 @@
       "path": "/storages/:id",
       "handler": "storage.findOne",
       "config": {
-        "policies": []
+        "policies": ["handle-find-one"]
       }
     },
     {

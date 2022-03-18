@@ -47,7 +47,7 @@
       "path": "/orders/:id",
       "handler": "order.findOne",
       "config": {
-        "policies": []
+        "policies": ["handle-find-one"]
       }
     },
     {
