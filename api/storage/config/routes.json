@@ -5,7 +5,7 @@
       "path": "/storages",
       "handler": "storage.find",
       "config": {
-        "policies": []
+        "policies": ["handle-user"]
       }
     },
     {
