@@ -160,22 +160,17 @@ module.exports = {
     return orders;
   },
 
-  async find(ctx) {
-    const { _start = 0, _limit = 5 } = ctx.query;
+  async getDeliveringOrder(ctx) {
+    const { page = 0, size = 10 } = ctx.query;
     const { id } = ctx.state.user;
 
-    if (ctx.state.user.role.name === "Customer") {
-      return await strapi.services.order.getDeliveringOrder(
-        id,
-        _limit,
-        _start * _limit
-      );
-    } else if (ctx.state.user.role.name === "Admin") {
-      return await strapi.services.order.search({
-        ...ctx.query,
-        _start: _start * _limit,
-      });
-    }
+    let orders = await strapi.services.order.getDeliveringOrder(
+      id,
+      size,
+      page * size
+    );
+
+    return orders;
   },
 
   async create(ctx) {

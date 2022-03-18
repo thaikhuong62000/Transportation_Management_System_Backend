@@ -5,13 +5,21 @@
       "path": "/orders",
       "handler": "order.find",
       "config": {
-        "policies": []
+        "policies": ["handle-user"]
       }
     },
     {
       "method": "GET",
       "path": "/orders/count",
       "handler": "order.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/orders/delivering",
+      "handler": "order.getDeliveringOrder",
       "config": {
         "policies": []
       }
