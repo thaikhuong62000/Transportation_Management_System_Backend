@@ -28,23 +28,6 @@ module.exports = {
     });
   },
 
-  async find(ctx) {
-    const { page = 0, size = 5 } = ctx.query;
-    const { storage } = ctx.state.user;
-
-    let exports = await strapi.services.export.getExportByStorage(
-      storage,
-      size,
-      page * size
-    );
-
-    return exports.map((item) =>
-      sanitizeEntity(item, {
-        model: strapi.query("export").model,
-      })
-    );
-  },
-
   async updateExportQuantityByPackage(ctx) {
     const { packageId, quantity } = ctx.request.body;
     const { id, storage } = ctx.state.user;
