@@ -29,23 +29,6 @@ module.exports = {
     });
   },
 
-  async find(ctx) {
-    const { page = 0, size = 5 } = ctx.query;
-    const { storage } = ctx.state.user;
-
-    let imports = await strapi.services.import.getImportByStorage(
-      storage,
-      size,
-      page * size
-    );
-
-    return imports.map((item) =>
-      sanitizeEntity(item, {
-        model: strapi.query("import").model,
-      })
-    );
-  },
-
   async update(ctx) {
     const { storage } = ctx.state.user;
     const { quantity, packageId } = ctx.request.body;
