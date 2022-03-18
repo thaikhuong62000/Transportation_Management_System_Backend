@@ -5,7 +5,7 @@
       "path": "/orders",
       "handler": "order.find",
       "config": {
-        "policies": ["handle-user"]
+        "policies": ["handle-find"]
       }
     },
     {

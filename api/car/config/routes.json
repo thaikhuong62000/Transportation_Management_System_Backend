@@ -5,7 +5,7 @@
       "path": "/cars",
       "handler": "car.find",
       "config": {
-        "policies": ["handle-user"]
+        "policies": ["handle-find"]
       }
     },
     {

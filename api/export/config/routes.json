@@ -5,7 +5,7 @@
       "path": "/exports",
       "handler": "export.find",
       "config": {
-        "policies": ["handle-user"]
+        "policies": ["handle-find"]
       }
     },
     {
