@@ -71,4 +71,32 @@ module.exports = {
       includeFields: ["name", "phone"],
     });
   },
+
+  async getCustomerList(ctx) {
+    const { _start = 0, _limit = 5 } = ctx.query;
+
+    let customers = await strapi.query("user", "users-permissions").search({
+      ...ctx.query,
+      _start: _start * _limit,
+      _limit: _limit,
+      "role.name": "Customer",
+    });
+
+    return customers;
+  },
+
+  async getStaffList(ctx) {
+    const { _start = 0, _limit = 5 } = ctx.query;
+
+    let staffs = await strapi.query("user", "users-permissions").search({
+      ...ctx.query,
+      _start: _start * _limit,
+      _limit: _limit,
+      "role.name": {
+        $in: ["Driver", "Assistance", "Stocker"],
+      },
+    });
+
+    return staffs;
+  },
 };

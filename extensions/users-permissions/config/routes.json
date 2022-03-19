@@ -19,7 +19,10 @@
       "path": "/auth/local/register",
       "handler": "Auth.register",
       "config": {
-        "policies": ["plugins::users-permissions.ratelimit", "plugins::users-permissions.prepare-register-user"],
+        "policies": [
+          "plugins::users-permissions.ratelimit",
+          "plugins::users-permissions.prepare-register-user"
+        ],
         "prefix": "",
         "description": "Register a new user with the default role",
         "tag": {
@@ -89,6 +92,32 @@
         "policies": [],
         "prefix": "",
         "description": "Get assistance information",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/staffs",
+      "handler": "CustomUser.getStaffList",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/customers",
+      "handler": "CustomUser.getCustomerList",
+      "config": {
+        "policies": [],
+        "prefix": "",
         "tag": {
           "plugin": "users-permissions",
           "name": "User"

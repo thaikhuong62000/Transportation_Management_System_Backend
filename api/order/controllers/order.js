@@ -160,8 +160,8 @@ module.exports = {
     return orders;
   },
 
-  async find(ctx) {
-    const { page = 0, size = 5 } = ctx.query;
+  async getDeliveringOrder(ctx) {
+    const { page = 0, size = 10 } = ctx.query;
     const { id } = ctx.state.user;
 
     let orders = await strapi.services.order.getDeliveringOrder(

@@ -523,6 +523,77 @@
           }
         ]
       }
+    },
+    "/package-templates/delete": {
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Package-template"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -696,6 +767,15 @@
               }
             }
           },
+          "package_type": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "fragile",
+              "explosive",
+              "smell"
+            ]
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -738,6 +818,15 @@
           },
           "user": {
             "type": "string"
+          },
+          "package_type": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "fragile",
+              "explosive",
+              "smell"
+            ]
           },
           "published_at": {
             "type": "string",
