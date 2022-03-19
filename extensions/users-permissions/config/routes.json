@@ -125,6 +125,19 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/feedbacks",
+      "handler": "Feedback.getFeedback",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
+    },
+    {
       "method": "PUT",
       "path": "/users/device_token",
       "handler": "User.updateDeviceToken",
