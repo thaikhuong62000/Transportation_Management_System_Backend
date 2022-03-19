@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/14/2022 8:53:50 PM"
+    "x-generation-date": "03/19/2022 11:01:04 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -12970,7 +12970,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -12999,7 +12999,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -13174,7 +13174,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -13203,7 +13203,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -13548,7 +13548,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -13577,7 +13577,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -13714,7 +13714,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -13743,7 +13743,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -14350,7 +14350,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -14460,7 +14460,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -15564,7 +15564,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -15593,7 +15593,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -15831,7 +15831,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -15860,7 +15860,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -15925,7 +15925,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -16216,7 +16216,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -16985,7 +16985,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -17431,7 +17431,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }

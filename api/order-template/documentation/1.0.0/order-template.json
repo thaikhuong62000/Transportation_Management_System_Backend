@@ -568,7 +568,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -597,7 +597,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -772,7 +772,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -801,7 +801,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
