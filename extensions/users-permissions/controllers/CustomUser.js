@@ -82,7 +82,12 @@ module.exports = {
       "role.name": "Customer",
     });
 
-    return customers;
+    let totalPage = Math.ceil(customers.length / _limit)
+
+    return {
+      customers: customers,
+      totalPage
+    };
   },
 
   async getStaffList(ctx) {
@@ -97,6 +102,11 @@ module.exports = {
       },
     });
 
-    return staffs;
+    let totalPage = Math.ceil(staffs.length / _limit)
+
+    return {
+      staffs: staffs,
+      totalPage
+    };
   },
 };
