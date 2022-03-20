@@ -1,5 +1,7 @@
 "use strict";
 
+const { create } = require("../../furlough/controllers/furlough");
+
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
  * to customize this controller
@@ -40,5 +42,41 @@ module.exports = {
       await strapi.query("payment").delete({ _id: order.payments[0]._id });
     }
     return ctx.send(204);
+  },
+  async create(ctx) {
+    const {
+      payer_name ="",
+      payer_phone="",
+      method = "",
+      order = "",
+      paid = 0,
+      time="",
+    } = ctx.request.body;
+
+    if(paid < 0){
+      return ctx.badRequest("Paid cannot be negative!");
+    }
+
+    let order_ = await strapi.query("order").findOne({
+      id: order,
+    });
+
+    if (order_.remain_fee >= paid) {
+      console.log("lon hon");
+      await strapi.query("order").update({id:order},{ remain_fee: order_.remain_fee - paid });
+      await strapi.services.payment.create({
+        payer_name:payer_name,
+        payer_phone:payer_phone,
+        method:method,
+        order:order,
+        paid:paid,
+        time:time,
+      });
+    }
+    else{
+      return ctx.badRequest("Paid is more than remain fee!");
+    }
+
+    return ctx.created();
   },
 };
