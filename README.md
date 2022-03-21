@@ -1,5 +1,3 @@
 # Strapi application
 
-A quick description of your strapi application
-
-GOOGLE_APPLICATION_CREDENTIALS: https://drive.google.com/file/d/1eqD3ReFv1tT8hzK464arsfol0IGRMYcK/view?usp=sharing
+Private Resources: https://drive.google.com/drive/folders/18Pp1ovwAZTFgY-vIQd1tRHtFOK5rCEc3?usp=sharing
