@@ -11,10 +11,14 @@ module.exports = {
   async findOne(ctx) {
     const { id } = ctx.params;
 
-    let shipment = await strapi.services.shipment.findOne({ id }, ["packages"]);
+    let shipment = await strapi.services.shipment.findOne({ id }, [
+      "packages",
+      "from_storage",
+      "to_storage",
+    ]);
     shipment = sanitizeEntity(shipment, {
       model: strapi.models.shipment,
-      includeFields: ["packages"],
+      includeFields: ["packages", "from_storage", "to_storage"],
     });
 
     if (
