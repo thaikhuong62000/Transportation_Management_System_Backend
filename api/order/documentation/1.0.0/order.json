@@ -1021,7 +1021,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -1050,7 +1050,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -1068,17 +1068,8 @@
                 "id": {
                   "type": "string"
                 },
-                "payer_name": {
-                  "type": "string"
-                },
-                "payer_phone": {
-                  "type": "string"
-                },
                 "paid": {
                   "type": "number"
-                },
-                "time": {
-                  "type": "string"
                 },
                 "order": {
                   "type": "string"
@@ -1091,7 +1082,16 @@
                     "banking"
                   ]
                 },
+                "driver": {
+                  "type": "string"
+                },
                 "receipt": {
+                  "type": "string"
+                },
+                "payer_name": {
+                  "type": "string"
+                },
+                "payer_phone": {
                   "type": "string"
                 },
                 "published_at": {
@@ -1190,7 +1190,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -1219,7 +1219,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }

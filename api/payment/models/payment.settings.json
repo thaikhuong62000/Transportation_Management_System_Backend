@@ -12,17 +12,8 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "payer_name": {
-      "type": "string"
-    },
-    "payer_phone": {
-      "type": "string"
-    },
     "paid": {
       "type": "decimal"
-    },
-    "time": {
-      "type": "datetime"
     },
     "order": {
       "via": "payments",
@@ -37,17 +28,25 @@
       ],
       "default": "direct"
     },
+    "driver": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
     "receipt": {
       "model": "file",
       "via": "related",
       "allowedTypes": [
-        "images",
-        "files",
-        "videos"
+        "images"
       ],
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "payer_name": {
+      "type": "string"
+    },
+    "payer_phone": {
+      "type": "string"
     }
   }
 }
