@@ -13865,17 +13865,8 @@
                 "id": {
                   "type": "string"
                 },
-                "payer_name": {
-                  "type": "string"
-                },
-                "payer_phone": {
-                  "type": "string"
-                },
                 "paid": {
                   "type": "number"
-                },
-                "time": {
-                  "type": "string"
                 },
                 "order": {
                   "type": "string"
@@ -13887,6 +13878,18 @@
                     "momo",
                     "banking"
                   ]
+                },
+                "driver": {
+                  "type": "string"
+                },
+                "receipt": {
+                  "type": "string"
+                },
+                "payer_name": {
+                  "type": "string"
+                },
+                "payer_phone": {
+                  "type": "string"
                 },
                 "published_at": {
                   "type": "string"
@@ -14773,18 +14776,8 @@
           "id": {
             "type": "string"
           },
-          "payer_name": {
-            "type": "string"
-          },
-          "payer_phone": {
-            "type": "string"
-          },
           "paid": {
             "type": "number"
-          },
-          "time": {
-            "type": "string",
-            "format": "date-time"
           },
           "order": {
             "required": [
@@ -14878,6 +14871,208 @@
               "banking"
             ]
           },
+          "driver": {
+            "required": [
+              "id",
+              "username",
+              "email",
+              "name",
+              "phone"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "car": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "birthday": {
+                "type": "string"
+              },
+              "point": {
+                "type": "integer"
+              },
+              "orders": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "shipments": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "address": {
+                "type": "component"
+              },
+              "storage": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Admin",
+                  "Stocker",
+                  "Driver",
+                  "Assistance",
+                  "User",
+                  "Iron",
+                  "Gold",
+                  "Diamond"
+                ]
+              },
+              "furloughs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "package_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "order_templates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "avatar": {
+                "type": "string"
+              },
+              "reports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "device_token": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "receipt": {
+            "required": [
+              "id",
+              "name",
+              "hash",
+              "mime",
+              "size",
+              "url",
+              "provider"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "alternativeText": {
+                "type": "string"
+              },
+              "caption": {
+                "type": "string"
+              },
+              "width": {
+                "type": "integer"
+              },
+              "height": {
+                "type": "integer"
+              },
+              "formats": {
+                "type": "object"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "ext": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string"
+              },
+              "size": {
+                "type": "number"
+              },
+              "url": {
+                "type": "string"
+              },
+              "previewUrl": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "provider_metadata": {
+                "type": "object"
+              },
+              "related": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "payer_name": {
+            "type": "string"
+          },
+          "payer_phone": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -14886,18 +15081,8 @@
       },
       "NewPayment": {
         "properties": {
-          "payer_name": {
-            "type": "string"
-          },
-          "payer_phone": {
-            "type": "string"
-          },
           "paid": {
             "type": "number"
-          },
-          "time": {
-            "type": "string",
-            "format": "date-time"
           },
           "order": {
             "type": "string"
@@ -14910,6 +15095,15 @@
               "momo",
               "banking"
             ]
+          },
+          "driver": {
+            "type": "string"
+          },
+          "payer_name": {
+            "type": "string"
+          },
+          "payer_phone": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

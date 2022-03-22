@@ -1068,17 +1068,8 @@
                 "id": {
                   "type": "string"
                 },
-                "payer_name": {
-                  "type": "string"
-                },
-                "payer_phone": {
-                  "type": "string"
-                },
                 "paid": {
                   "type": "number"
-                },
-                "time": {
-                  "type": "string"
                 },
                 "order": {
                   "type": "string"
@@ -1090,6 +1081,18 @@
                     "momo",
                     "banking"
                   ]
+                },
+                "driver": {
+                  "type": "string"
+                },
+                "receipt": {
+                  "type": "string"
+                },
+                "payer_name": {
+                  "type": "string"
+                },
+                "payer_phone": {
+                  "type": "string"
                 },
                 "published_at": {
                   "type": "string"
