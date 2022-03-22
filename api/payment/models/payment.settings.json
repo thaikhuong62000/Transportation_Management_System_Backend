@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "payments",
   "info": {
-    "name": "payment"
+    "name": "payment",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -11,17 +12,8 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "payer_name": {
-      "type": "string"
-    },
-    "payer_phone": {
-      "type": "string"
-    },
     "paid": {
       "type": "decimal"
-    },
-    "time": {
-      "type": "datetime"
     },
     "order": {
       "via": "payments",
@@ -35,6 +27,26 @@
         "banking"
       ],
       "default": "direct"
+    },
+    "driver": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "receipt": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "payer_name": {
+      "type": "string"
+    },
+    "payer_phone": {
+      "type": "string"
     }
   }
 }

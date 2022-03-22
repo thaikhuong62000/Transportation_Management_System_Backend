@@ -17,12 +17,15 @@ module.exports = {
       includeFields: ["packages"],
     });
 
-    if (shipment.packages.length > 0) {
+    if (
+      shipment.packages.length > 0 &&
+      !(shipment.from_storage && shipment.to_storage)
+    ) {
       const order = await strapi.services.order.findOne(
         { id: shipment.packages[0].order },
         []
       );
-      return { ...shipment, ...order };
+      return { ...shipment, ...order, order_id: shipment.packages[0].order };
     } else return shipment;
   },
 
