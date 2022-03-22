@@ -47,7 +47,11 @@ module.exports = {
       await strapi.plugins.upload.services.utils.getDataAndFile(ctx);
 
     try {
-      strapi.plugins.upload.services.utils.checkImage(receipt, false);
+      await strapi.plugins.upload.services.utils.checkImage(
+        receipt,
+        false,
+        false
+      );
     } catch (error) {
       return ctx.badRequest({
         errors: [
