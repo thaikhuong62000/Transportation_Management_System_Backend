@@ -41,7 +41,7 @@ module.exports = {
 
     const mime = require("mime");
     const type = mime.getType(_avatar.name);
-    if (type.split("/")[0] !== "image") {
+    if (Array.isArray(type) && type.split("/")[0] !== "image") {
       return ctx.badRequest(null, {
         errors: [
           {
@@ -55,6 +55,35 @@ module.exports = {
     const avatar = { ..._avatar, type: type };
     const userId = ctx.state.user.id;
     const avatarExist = ctx.state.user.avatar && ctx.state.user.avatar.id;
+    const isAdminUpdate = ctx.state.user.role.name === "Admin";
+
+    // For admin update avatar
+    if (isAdminUpdate) {
+      let { userId, avaId } = ctx.request.body;
+      if (!avaId) {
+        const image = await strapi.plugins.upload.services.upload.upload({
+          data: await validateUploadBody(body),
+          files: avatar,
+        });
+        return await strapi.plugins["users-permissions"].services.user.edit(
+          { id: userId },
+          { avatar: image[0].id }
+        );
+      } else {
+        const image = await strapi.plugins.upload.services.upload.replace(
+          avaId,
+          {
+            data: await validateUploadBody(body),
+            file: avatar,
+          }
+        );
+        const sanitizedImage = sanitizeEntity(image, {
+          model: strapi.getModel("file", "upload"),
+          includeFields: ["name", "url", "formats"],
+        });
+        return { avatar: sanitizedImage };
+      }
+    }
 
     // Replace Or Upload image
     if (avatarExist) {
