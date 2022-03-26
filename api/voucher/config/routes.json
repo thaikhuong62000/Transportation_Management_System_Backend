@@ -33,6 +33,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/vouchers/image",
+      "handler": "voucher.updateVoucherImage",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/vouchers/:id",
       "handler": "voucher.update",
