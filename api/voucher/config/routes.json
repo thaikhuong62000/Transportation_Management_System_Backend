@@ -5,7 +5,7 @@
       "path": "/vouchers",
       "handler": "voucher.find",
       "config": {
-        "policies": []
+        "policies": ["handle-find"]
       }
     },
     {
