@@ -645,12 +645,6 @@
                   "type": "string"
                 }
               },
-              "vouchers": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "device_token": {
                 "type": "string"
               },

@@ -747,8 +747,7 @@
               "id",
               "name",
               "sale",
-              "sale_max",
-              "type"
+              "sale_max"
             ],
             "properties": {
               "id": {
@@ -763,17 +762,33 @@
               "sale_max": {
                 "type": "number"
               },
-              "type": {
-                "type": "string"
-              },
               "expired": {
                 "type": "string"
               },
-              "users": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
+              "sale_type": {
+                "type": "string",
+                "enum": [
+                  "percentage",
+                  "value"
+                ]
+              },
+              "minimum_order": {
+                "type": "integer"
+              },
+              "voucher_img": {
+                "type": "string"
+              },
+              "customer_type": {
+                "type": "string",
+                "enum": [
+                  "All",
+                  "Iron",
+                  "Gold",
+                  "Diamond"
+                ]
+              },
+              "description": {
+                "type": "string"
               },
               "published_at": {
                 "type": "string"
@@ -893,12 +908,6 @@
                 "type": "string"
               },
               "reports": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "vouchers": {
                 "type": "array",
                 "items": {
                   "type": "string"

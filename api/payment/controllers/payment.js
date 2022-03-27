@@ -43,8 +43,10 @@ module.exports = {
   },
 
   async create(ctx) {
-    const { data, receipt } =
-      await strapi.plugins.upload.services.utils.getDataAndFile(ctx);
+    const {
+      data,
+      files: { receipt },
+    } = await strapi.plugins.upload.services.utils.getDataAndFile(ctx);
 
     try {
       await strapi.plugins.upload.services.utils.checkImage(

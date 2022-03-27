@@ -5,7 +5,7 @@
       "path": "/vouchers",
       "handler": "voucher.find",
       "config": {
-        "policies": []
+        "policies": ["handle-find"]
       }
     },
     {
@@ -28,6 +28,14 @@
       "method": "POST",
       "path": "/vouchers",
       "handler": "voucher.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/vouchers/image",
+      "handler": "voucher.updateVoucherImage",
       "config": {
         "policies": []
       }

@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/21/2022 8:52:09 PM"
+    "x-generation-date": "03/26/2022 10:01:34 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -9429,6 +9429,77 @@
         ]
       }
     },
+    "/vouchers/image": {
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Voucher"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/email/": {
       "post": {
         "deprecated": false,
@@ -12060,12 +12131,6 @@
                   "type": "string"
                 }
               },
-              "vouchers": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "device_token": {
                 "type": "string"
               },
@@ -12311,12 +12376,6 @@
                 "type": "string"
               },
               "reports": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "vouchers": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -12640,12 +12699,6 @@
                   "type": "string"
                 }
               },
-              "vouchers": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "device_token": {
                 "type": "string"
               },
@@ -12820,12 +12873,6 @@
                 "type": "string"
               },
               "reports": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "vouchers": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -13136,12 +13183,6 @@
                   "type": "string"
                 }
               },
-              "vouchers": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "device_token": {
                 "type": "string"
               },
@@ -13386,12 +13427,6 @@
                   "type": "string"
                 }
               },
-              "vouchers": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "device_token": {
                 "type": "string"
               },
@@ -13544,8 +13579,7 @@
               "id",
               "name",
               "sale",
-              "sale_max",
-              "type"
+              "sale_max"
             ],
             "properties": {
               "id": {
@@ -13560,17 +13594,33 @@
               "sale_max": {
                 "type": "number"
               },
-              "type": {
-                "type": "string"
-              },
               "expired": {
                 "type": "string"
               },
-              "users": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
+              "sale_type": {
+                "type": "string",
+                "enum": [
+                  "percentage",
+                  "value"
+                ]
+              },
+              "minimum_order": {
+                "type": "integer"
+              },
+              "voucher_img": {
+                "type": "string"
+              },
+              "customer_type": {
+                "type": "string",
+                "enum": [
+                  "All",
+                  "Iron",
+                  "Gold",
+                  "Diamond"
+                ]
+              },
+              "description": {
+                "type": "string"
               },
               "published_at": {
                 "type": "string"
@@ -13690,12 +13740,6 @@
                 "type": "string"
               },
               "reports": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "vouchers": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -14189,12 +14233,6 @@
                 "type": "string"
               },
               "reports": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "vouchers": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -14983,12 +15021,6 @@
                   "type": "string"
                 }
               },
-              "vouchers": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "device_token": {
                 "type": "string"
               },
@@ -15243,12 +15275,6 @@
                 "type": "string"
               },
               "reports": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "vouchers": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -15545,12 +15571,6 @@
                   "type": "string"
                 }
               },
-              "vouchers": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "device_token": {
                 "type": "string"
               },
@@ -15669,12 +15689,6 @@
                 "type": "string"
               },
               "reports": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "vouchers": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -15876,12 +15890,6 @@
                   "type": "string"
                 }
               },
-              "vouchers": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "device_token": {
                 "type": "string"
               },
@@ -16000,12 +16008,6 @@
                 "type": "string"
               },
               "reports": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "vouchers": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -16529,12 +16531,6 @@
                     "type": "string"
                   }
                 },
-                "vouchers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "device_token": {
                   "type": "string"
                 },
@@ -16747,8 +16743,7 @@
           "id",
           "name",
           "sale",
-          "sale_max",
-          "type"
+          "sale_max"
         ],
         "properties": {
           "id": {
@@ -16763,144 +16758,101 @@
           "sale_max": {
             "type": "number"
           },
-          "type": {
-            "type": "string"
-          },
           "expired": {
             "type": "string",
             "format": "date-time"
           },
-          "users": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "username",
-                "email",
-                "name",
-                "phone"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "username": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "provider": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                },
-                "resetPasswordToken": {
-                  "type": "string"
-                },
-                "confirmationToken": {
-                  "type": "string"
-                },
-                "confirmed": {
-                  "type": "boolean"
-                },
-                "blocked": {
-                  "type": "boolean"
-                },
-                "role": {
-                  "type": "string"
-                },
-                "car": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "phone": {
-                  "type": "string"
-                },
-                "birthday": {
-                  "type": "string"
-                },
-                "point": {
-                  "type": "integer"
-                },
-                "orders": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "shipments": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "address": {
-                  "type": "component"
-                },
-                "storage": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "Admin",
-                    "Stocker",
-                    "Driver",
-                    "Assistance",
-                    "User",
-                    "Iron",
-                    "Gold",
-                    "Diamond"
-                  ]
-                },
-                "furloughs": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "package_templates": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "order_templates": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "avatar": {
-                  "type": "string"
-                },
-                "reports": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "vouchers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "device_token": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
+          "sale_type": {
+            "type": "string",
+            "default": "percentage",
+            "enum": [
+              "percentage",
+              "value"
+            ]
+          },
+          "minimum_order": {
+            "type": "integer",
+            "default": "0"
+          },
+          "voucher_img": {
+            "required": [
+              "id",
+              "name",
+              "hash",
+              "mime",
+              "size",
+              "url",
+              "provider"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "alternativeText": {
+                "type": "string"
+              },
+              "caption": {
+                "type": "string"
+              },
+              "width": {
+                "type": "integer"
+              },
+              "height": {
+                "type": "integer"
+              },
+              "formats": {
+                "type": "object"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "ext": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string"
+              },
+              "size": {
+                "type": "number"
+              },
+              "url": {
+                "type": "string"
+              },
+              "previewUrl": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "provider_metadata": {
+                "type": "object"
+              },
+              "related": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
               }
             }
+          },
+          "customer_type": {
+            "type": "string",
+            "default": "All",
+            "enum": [
+              "All",
+              "Iron",
+              "Gold",
+              "Diamond"
+            ]
+          },
+          "description": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -16912,8 +16864,7 @@
         "required": [
           "name",
           "sale",
-          "sale_max",
-          "type"
+          "sale_max"
         ],
         "properties": {
           "name": {
@@ -16925,18 +16876,34 @@
           "sale_max": {
             "type": "number"
           },
-          "type": {
-            "type": "string"
-          },
           "expired": {
             "type": "string",
             "format": "date-time"
           },
-          "users": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "sale_type": {
+            "type": "string",
+            "default": "percentage",
+            "enum": [
+              "percentage",
+              "value"
+            ]
+          },
+          "minimum_order": {
+            "type": "integer",
+            "default": "0"
+          },
+          "customer_type": {
+            "type": "string",
+            "default": "All",
+            "enum": [
+              "All",
+              "Iron",
+              "Gold",
+              "Diamond"
+            ]
+          },
+          "description": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -17119,12 +17086,6 @@
                   "type": "string"
                 },
                 "reports": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "vouchers": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -17778,53 +17739,6 @@
                 }
               }
             }
-          },
-          "vouchers": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "name",
-                "sale",
-                "sale_max",
-                "type"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "sale": {
-                  "type": "number"
-                },
-                "sale_max": {
-                  "type": "number"
-                },
-                "type": {
-                  "type": "string"
-                },
-                "expired": {
-                  "type": "string"
-                },
-                "users": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
           }
         }
       },
@@ -17962,12 +17876,6 @@
             }
           },
           "reports": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "vouchers": {
             "type": "array",
             "items": {
               "type": "string"
