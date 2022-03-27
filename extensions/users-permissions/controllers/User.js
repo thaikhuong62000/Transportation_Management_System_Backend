@@ -1,6 +1,5 @@
 "use strict";
 const { sanitizeEntity } = require("strapi-utils");
-const validateUploadBody = require("strapi-plugin-upload/controllers/validation/upload");
 
 module.exports = {
   /**
