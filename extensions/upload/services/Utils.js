@@ -33,7 +33,7 @@ module.exports = {
       )
     ) {
       throw "Invalid file type";
-    } else if (!image || ("type" in image && getType(item.name) !== "image"))
+    } else if (!image || ("type" in image && getType(image) !== "image"))
       throw "Invalid file type";
   },
 
