@@ -5,7 +5,7 @@
       "path": "/orders",
       "handler": "order.find",
       "config": {
-        "policies": ["handle-find"]
+        "policies": ["handle-find", "global::pagination"]
       }
     },
     {
@@ -47,7 +47,7 @@
       "path": "/orders/:id",
       "handler": "order.findOne",
       "config": {
-        "policies": ["handle-find-one"]
+        "policies": ["handle-find"]
       }
     },
     {
