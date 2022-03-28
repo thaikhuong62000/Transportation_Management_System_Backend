@@ -5,7 +5,7 @@
       "path": "/storages",
       "handler": "storage.find",
       "config": {
-        "policies": ["handle-find"]
+        "policies": ["handle-find", "global::pagination"]
       }
     },
     {
@@ -21,7 +21,7 @@
       "path": "/storages/:id",
       "handler": "storage.findOne",
       "config": {
-        "policies": ["handle-find-one"]
+        "policies": ["handle-find"]
       }
     },
     {
