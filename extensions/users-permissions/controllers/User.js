@@ -33,13 +33,14 @@ module.exports = {
     const avatar = { ..._avatar, type: _avatar.type };
     const uploadMeta = getUploadUser(ctx);
 
-    const image =
-      await strapi.plugins.upload.services.utils.uploadOrReplaceImage(
-        avatar,
-        body,
-        uploadMeta.avatarId
-      );
-    
+    let image = await strapi.plugins.upload.services.utils.uploadOrReplaceImage(
+      avatar,
+      body,
+      uploadMeta.avatarId
+    );
+
+    if (Array.isArray(image)) image = image[0];
+
     const user = await strapi.plugins["users-permissions"].services.user.edit(
       { id: uploadMeta.userId },
       { avatar: image.id }

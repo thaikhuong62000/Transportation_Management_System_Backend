@@ -48,7 +48,7 @@ module.exports = {
       return await strapi.plugins.upload.services.upload.upload({
         data: await validateUploadBody(body),
         files: image,
-      })[0];
+      });
     }
   },
 };
