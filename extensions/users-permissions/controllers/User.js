@@ -30,7 +30,7 @@ module.exports = {
       });
     }
 
-    const avatar = { ..._avatar, type: type };
+    const avatar = { ..._avatar, type: _avatar.type };
     const uploadMeta = getUploadUser(ctx);
 
     const image =
@@ -39,9 +39,10 @@ module.exports = {
         body,
         uploadMeta.avatarId
       );
+    
     const user = await strapi.plugins["users-permissions"].services.user.edit(
       { id: uploadMeta.userId },
-      { avatar: image[0].id }
+      { avatar: image.id }
     );
     return sanitizeEntity(user, {
       model: strapi.query("user", "users-permissions").model,
