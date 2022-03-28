@@ -40,10 +40,12 @@ module.exports = {
   async uploadOrReplaceImage(image, body, imageId = null) {
     if (!image) return null;
     if (imageId) {
-      return await strapi.plugins.upload.services.upload.replace(imageId, {
-        data: await validateUploadBody(body),
-        file: image,
-      });
+      return [
+        await strapi.plugins.upload.services.upload.replace(imageId, {
+          data: await validateUploadBody(body),
+          file: image,
+        }),
+      ];
     } else {
       return await strapi.plugins.upload.services.upload.upload({
         data: await validateUploadBody(body),
