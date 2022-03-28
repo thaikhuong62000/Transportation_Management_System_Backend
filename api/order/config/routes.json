@@ -5,7 +5,7 @@
       "path": "/orders",
       "handler": "order.find",
       "config": {
-        "policies": ["handle-find", "global::pagination"]
+        "policies": ["handle-find", "global::pagination", "global::filter-address"]
       }
     },
     {
