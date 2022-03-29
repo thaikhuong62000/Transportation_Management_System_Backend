@@ -15,9 +15,6 @@
     "arrived_time": {
       "type": "datetime"
     },
-    "car": {
-      "model": "car"
-    },
     "driver": {
       "via": "shipments",
       "plugin": "users-permissions",

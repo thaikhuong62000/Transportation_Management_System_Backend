@@ -180,15 +180,12 @@ module.exports = {
       sender_name,
       receiver_phone,
       receiver_name,
-      method,
       fee,
       remain_fee,
       from_address,
       to_address,
       name,
       packages,
-      payer_name,
-      payer_phone,
       note = "",
     } = ctx.request.body;
 
@@ -206,8 +203,6 @@ module.exports = {
       !sender_name ||
       !receiver_phone ||
       !receiver_name ||
-      !payer_name ||
-      !payer_phone ||
       !packages.length ||
       typeof from_address !== "object" ||
       typeof to_address !== "object"
@@ -232,13 +227,6 @@ module.exports = {
       name,
       note,
       customer: id,
-    });
-
-    let payment = await strapi.query("payment").create({
-      method,
-      payer_name,
-      payer_phone,
-      order: order.id,
     });
 
     for (let pack of packages) {

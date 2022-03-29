@@ -38,6 +38,9 @@
       "type": "component",
       "repeatable": false,
       "component": "package.size"
+    },
+    "shipments": {
+      "collection": "shipment"
     }
   }
 }
