@@ -1,11 +1,5 @@
 "use strict";
 const { sanitizeEntity } = require("strapi-utils");
-var moment = require("moment");
-
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
- * to customize this controller
- */
 
 module.exports = {
   async findOne(ctx) {
@@ -34,21 +28,30 @@ module.exports = {
   },
 
   async getCurrentShipment(ctx) {
+    const { latitude, longitude } = ctx.query;
     const _shipments =
       await strapi.services.shipment.getUnfinishedShipmentByDriver(
         ctx.state.user.id
       );
     const shipments = await strapi.services.shipment.getNearbyShipment(
-      10.76,
-      106.64
+      latitude,
+      longitude
     );
 
     return [..._shipments, ...shipments].map((entity) =>
       sanitizeEntity(entity, {
         model: strapi.models.shipment,
-        includeFields: ["from_address", "arrived_time"],
+        includeFields: ["from_address", "arrived_time", "driver"],
       })
     );
+  },
+
+  async acceptShipment(ctx) {
+    const { shipment: _id } = ctx.params;
+    const { id: driver } = ctx.state.user;
+    return await strapi
+      .query("shipment")
+      .model.findOneAndUpdate({ _id, driver: null }, { driver }, { new: true });
   },
 
   async getFinishedShipment(ctx) {

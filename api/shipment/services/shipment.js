@@ -17,43 +17,48 @@ module.exports = {
     return entities;
   },
   async getNearbyShipment(lat, lng) {
-    const shipments = await strapi.query("shipment").model.aggregate([
-      {
-        $match: {
-          driver: {
-            $eq: null,
-          },
-          arrived_time: {
-            $eq: null,
-          },
-        },
-      },
-      {
-        $lookup: {
-          from: "components_address_addresses",
-          localField: "from_address.ref",
-          foreignField: "_id",
-          as: "from_address",
-        },
-      },
-      {
-        $unwind: {
-          path: "$from_address",
-        },
-      },
-      {
-        $match: {
-          "from_address.latitude": {
-            $gte: lat - 0.1,
-            $lte: lat + 0.1,
-          },
-          "from_address.longitude": {
-            $gte: lng - 0.1,
-            $lte: lng + 0.1,
+    let shipments;
+    let k = 0;
+    do {
+      k++;
+      shipments = await strapi.query("shipment").model.aggregate([
+        {
+          $match: {
+            driver: {
+              $eq: null,
+            },
+            arrived_time: {
+              $eq: null,
+            },
           },
         },
-      },
-    ]);
+        {
+          $lookup: {
+            from: "components_address_addresses",
+            localField: "from_address.ref",
+            foreignField: "_id",
+            as: "from_address",
+          },
+        },
+        {
+          $unwind: {
+            path: "$from_address",
+          },
+        },
+        {
+          $match: {
+            "from_address.latitude": {
+              $gte: lat - 0.05 * k,
+              $lte: lat + 0.05 * k,
+            },
+            "from_address.longitude": {
+              $gte: lng - 0.05 * k,
+              $lte: lng + 0.05 * k,
+            },
+          },
+        },
+      ]);
+    } while (shipments.length !== 0 || k === 5);
     return shipments.sort((a, b) => sortShipmentByDistance(lat, lng, a, b));
   },
   async getFinishedShipmentByDriverByMonth(driverId, month = 1) {
