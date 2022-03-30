@@ -11,7 +11,7 @@ module.exports = {
   async findOne(ctx) {
     const { id } = ctx.params;
 
-    let shipment = await strapi.services.shipment.findOne({ id }, [
+    const shipment = await strapi.services.shipment.findOne({ id }, [
       "packages",
       "from_storage",
       "to_storage",
@@ -34,26 +34,31 @@ module.exports = {
   },
 
   async getCurrentShipment(ctx) {
-    let shipments =
+    const _shipments =
       await strapi.services.shipment.getUnfinishedShipmentByDriver(
         ctx.state.user.id
       );
+    const shipments = await strapi.services.shipment.getNearbyShipment(
+      10.76,
+      106.64
+    );
 
-    return shipments.map((entity) =>
+    return [..._shipments, ...shipments].map((entity) =>
       sanitizeEntity(entity, {
         model: strapi.models.shipment,
-        includeFields: ["to_address", "arrived_time"],
+        includeFields: ["from_address", "arrived_time"],
       })
     );
   },
 
   async getFinishedShipment(ctx) {
     const { pageIndex = 0 } = ctx.query;
-    let shipments = await strapi.services.shipment.getFinishedShipmentByDriver(
-      ctx.state.user.id,
-      pageIndex * 10,
-      10
-    );
+    const shipments =
+      await strapi.services.shipment.getFinishedShipmentByDriver(
+        ctx.state.user.id,
+        pageIndex * 10,
+        10
+      );
 
     return shipments.map((entity) =>
       sanitizeEntity(entity, {
