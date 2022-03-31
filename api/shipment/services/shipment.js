@@ -6,15 +6,17 @@ var mongoose = require("mongoose");
  */
 
 module.exports = {
-  async getUnfinishedShipmentByDriver(driverId) {
-    let entities = strapi
+  async getUnfinishedShipmentByDriver(lat, lng, driverId) {
+    const shipments = await strapi
       .query("shipment")
       .model.find()
       .where("driver")
       .eq(driverId)
       .where("arrived_time")
-      .eq(null);
-    return entities;
+      .eq(null)
+      .populate("from_storage")
+      .populate("to_storage");
+    return shipments.sort((a, b) => sortShipmentByDistance(lat, lng, a, b));
   },
   async getNearbyShipment(lat, lng) {
     let shipments;
@@ -58,8 +60,10 @@ module.exports = {
           },
         },
       ]);
-    } while (shipments.length !== 0 || k === 5);
-    return shipments.sort((a, b) => sortShipmentByDistance(lat, lng, a, b));
+    } while (shipments.length === 0 && k <= 5);
+    return shipments.sort((a, b) =>
+      sortShipmentByDistance(lat, lng, a, b, true)
+    );
   },
   async getFinishedShipmentByDriverByMonth(driverId, month = 1) {
     let entities = strapi
@@ -129,9 +133,9 @@ module.exports = {
   },
 };
 
-function sortShipmentByDistance(lat, lng, item1, item2) {
-  const { latitude: lat1, longitude: lng1 } = item1.from_address;
-  const { latitude: lat2, longitude: lng2 } = item2.from_address;
+function sortShipmentByDistance(lat, lng, item1, item2, sort_fa = false) {
+  const { latitude: lat1, longitude: lng1 } = sortField(item1, sort_fa);
+  const { latitude: lat2, longitude: lng2 } = sortField(item2, sort_fa);
   return (
     coordToDistance(lat, lng, lat1, lng1) -
     coordToDistance(lat, lng, lat2, lng2)
@@ -155,4 +159,15 @@ function coordToDistance(lat1, lon1, lat2, lon2) {
 
 function deg2rad(deg) {
   return deg * (Math.PI / 180);
+}
+
+function sortField(item, sort_fa) {
+  if (sort_fa) return item.from_address;
+  if (item.from_storage && item.to_storage) {
+    return item.to_storage.address[0].ref;
+  } else if (item.to_storage) {
+    return item.from_address[0].ref;
+  } else if (item.from_storage) {
+    return item.to_address[0].ref;
+  }
 }

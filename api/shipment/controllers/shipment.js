@@ -5,14 +5,13 @@ module.exports = {
   async findOne(ctx) {
     const { id } = ctx.params;
 
-    const shipment = await strapi.services.shipment.findOne({ id }, [
+    let shipment = await strapi.services.shipment.findOne({ id }, [
       "packages",
       "from_storage",
       "to_storage",
     ]);
-    shipment = sanitizeEntity(shipment, {
+    shipment = await sanitizeEntity(shipment, {
       model: strapi.models.shipment,
-      includeFields: ["packages", "from_storage", "to_storage"],
     });
 
     if (
@@ -23,7 +22,7 @@ module.exports = {
         { id: shipment.packages[0].order },
         []
       );
-      return { ...shipment, ...order, order_id: shipment.packages[0].order };
+      return { ...order, order_id: shipment.packages[0].order, ...shipment };
     } else return shipment;
   },
 
@@ -31,17 +30,18 @@ module.exports = {
     const { latitude, longitude } = ctx.query;
     const _shipments =
       await strapi.services.shipment.getUnfinishedShipmentByDriver(
+        parseFloat(latitude),
+        parseFloat(longitude),
         ctx.state.user.id
       );
     const shipments = await strapi.services.shipment.getNearbyShipment(
-      latitude,
-      longitude
+      parseFloat(latitude),
+      parseFloat(longitude)
     );
 
     return [..._shipments, ...shipments].map((entity) =>
       sanitizeEntity(entity, {
         model: strapi.models.shipment,
-        includeFields: ["from_address", "arrived_time", "driver"],
       })
     );
   },
@@ -66,7 +66,6 @@ module.exports = {
     return shipments.map((entity) =>
       sanitizeEntity(entity, {
         model: strapi.models.shipment,
-        includeFields: ["to_address", "arrived_time"],
       })
     );
   },
