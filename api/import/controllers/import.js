@@ -16,16 +16,16 @@ module.exports = {
           { arrived_time_null: true },
         ],
       },
-      [{ path: "car" }]
+      [{ path: "driver", populate: "car" }]
     );
 
     return shipments.map((entity) => {
       const {
         from_address,
         id,
-        car: { licence },
+        driver: { car },
       } = entity;
-      return { id, from_address, licence };
+      return { id, from_address, licence: car.licence };
     });
   },
 
@@ -87,6 +87,16 @@ module.exports = {
     const { packageId, quantity } = ctx.request.body;
     const { storage, id } = ctx.state.user;
 
+    let pack = await strapi.services.package.findOne({ id: packageId });
+    if (!pack) {
+      return ctx.badRequest([
+        {
+          id: "import.updateImportQuantityByPackage",
+          message: "invalid QR code",
+        },
+      ]);
+    }
+
     if (!quantity && quantity < 0) {
       return ctx.badRequest([
         {
@@ -111,6 +121,23 @@ module.exports = {
         store_manager: id,
         storage: storage,
       });
+
+      // update package address
+      let store = await strapi.services.storage.findOne({ id: storage });
+      let { street, ward, city, province, longitude } = store.address;
+
+      await strapi.services.package.update(
+        { id: packageId },
+        {
+          current_address: {
+            street,
+            ward,
+            city,
+            province,
+            longitude,
+          },
+        }
+      );
 
       return sanitizeEntity(newImport, {
         model: strapi.query("import").model,
