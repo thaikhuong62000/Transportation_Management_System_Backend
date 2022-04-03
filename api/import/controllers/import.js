@@ -87,6 +87,9 @@ module.exports = {
     const { packageId, quantity } = ctx.request.body;
     const { storage, id } = ctx.state.user;
 
+    let store = await strapi.services.storage.findOne({ id: storage });
+    let { street, ward, city, province, longitude } = store.address;
+
     let pack = await strapi.services.package.findOne({ id: packageId });
     if (!pack) {
       return ctx.badRequest([
@@ -109,13 +112,13 @@ module.exports = {
     let importedPackage = await strapi
       .query("import")
       .model.findOneAndUpdate(
-        { package: packageId },
+        { package: packageId, storage: storage },
         { quantity: quantity },
         { new: true }
       );
 
     if (!importedPackage) {
-      let newImport = await strapi.query("import").create({
+      importedPackage = await strapi.query("import").create({
         package: packageId,
         quantity: quantity,
         store_manager: id,
@@ -123,9 +126,6 @@ module.exports = {
       });
 
       // update package address
-      let store = await strapi.services.storage.findOne({ id: storage });
-      let { street, ward, city, province, longitude } = store.address;
-
       await strapi.services.package.update(
         { id: packageId },
         {
@@ -138,11 +138,30 @@ module.exports = {
           },
         }
       );
+    }
 
-      return sanitizeEntity(newImport, {
-        model: strapi.query("import").model,
-        includeFields: ["quantity"],
-      });
+    // Update package and order state when import all pack quantity
+    if (quantity === pack.quantity) {
+      await strapi.services.package.update(
+        { id: packageId },
+        {
+          state:
+            pack.state === 1 ? 2 : pack.order.to_address.city === city ? 3 : 2,
+        }
+      );
+
+      let order = await strapi.services.order.findOne({ id: pack.order.id });
+      let minPackState = Math.min(...order.packages.map((item) => item.state));
+      let allPackDelivered = order.packages.every(
+        (item) => item.current_address.city === order.to_address.city
+      );
+
+      if (minPackState === order.state + 1) {
+        await strapi.services.order.update(
+          { id: order.id },
+          { state: order.state === 1 ? 2 : allPackDelivered ? 3 : 2 }
+        );
+      }
     }
 
     return sanitizeEntity(importedPackage, {

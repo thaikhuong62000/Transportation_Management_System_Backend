@@ -54,7 +54,7 @@ module.exports = {
     let exportedPackage = await strapi
       .query("export")
       .model.findOneAndUpdate(
-        { package: packageId },
+        { package: packageId, storage: storage },
         { quantity: quantity },
         { new: true }
       );
@@ -66,33 +66,6 @@ module.exports = {
         store_manager: id,
         storage: storage,
       });
-    }
-
-    // Update package and storage state when export
-    let store = await strapi.services.storage.findOne({ id: storage });
-    let { city } = store.address;
-    let order = await strapi.services.order.findOne({ id: pack.order.id });
-
-    if (quantity === pack.quantity) {
-      await strapi.services.package.update(
-        { id: packageId },
-        {
-          state:
-            pack.state === 1 ? 2 : order.to_address.city === city ? 3 : 2,
-        }
-      );
-
-      let orderState = Math.min(...order.packages.map((item) => item.state));
-      let endStorage = order.packages.every(
-        (item) => item.current_address.city === order.to_address.city
-      );
-
-      if (orderState === order.state + 1) {
-        await strapi.services.order.update(
-          { id: order.id },
-          { state: order.state === 1 ? 2 : endStorage ? 3 : 2 }
-        );
-      }
     }
 
     return sanitizeEntity(exportedPackage, {
