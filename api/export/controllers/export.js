@@ -15,22 +15,32 @@ module.exports = {
           { arrived_time_null: true },
         ],
       },
-      [{ path: "car" }]
+      [{ path: "driver", populate: "car" }]
     );
 
     return shipments.map((entity) => {
       const {
         from_address,
         id,
-        car: { licence },
+        driver: { car },
       } = entity;
-      return { id, from_address, licence };
+      return { id, from_address, licence: car.licence };
     });
   },
 
   async updateExportQuantityByPackage(ctx) {
     const { packageId, quantity } = ctx.request.body;
     const { id, storage } = ctx.state.user;
+
+    let pack = await strapi.services.package.findOne({ id: packageId });
+    if (!pack) {
+      return ctx.badRequest([
+        {
+          id: "import.updateẼportQuantityByPackage",
+          message: "invalid QR code",
+        },
+      ]);
+    }
 
     if (!quantity && quantity < 0) {
       return ctx.badRequest([
@@ -44,22 +54,17 @@ module.exports = {
     let exportedPackage = await strapi
       .query("export")
       .model.findOneAndUpdate(
-        { package: packageId },
+        { package: packageId, storage: storage },
         { quantity: quantity },
         { new: true }
       );
 
     if (!exportedPackage) {
-      let newExport = await strapi.query("export").create({
+      exportedPackage = await strapi.query("export").create({
         package: packageId,
         quantity: quantity,
         store_manager: id,
         storage: storage,
-      });
-
-      return sanitizeEntity(newExport, {
-        model: strapi.query("export").model,
-        includeFields: ["quantity"],
       });
     }
 

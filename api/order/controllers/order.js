@@ -174,7 +174,7 @@ module.exports = {
   },
 
   async create(ctx) {
-    const { id } = ctx.state.user;
+    const { id, role } = ctx.state.user;
     const {
       sender_phone,
       sender_name,
@@ -187,15 +187,17 @@ module.exports = {
       name,
       packages,
       note = "",
+      state = 0,
     } = ctx.request.body;
 
     if (!remain_fee || remain_fee < 0 || !fee || fee < 0) {
-      return ctx.badRequest([
-        {
-          id: "order.create",
-          message: "Invalid order fee",
-        },
-      ]);
+      if (role.name !== "Admin")
+        return ctx.badRequest([
+          {
+            id: "order.create",
+            message: "Invalid order fee",
+          },
+        ]);
     }
 
     if (
@@ -207,12 +209,13 @@ module.exports = {
       typeof from_address !== "object" ||
       typeof to_address !== "object"
     ) {
-      return ctx.badRequest([
-        {
-          id: "order.create",
-          message: "Invalid order information",
-        },
-      ]);
+      if (role.name !== "Admin")
+        return ctx.badRequest([
+          {
+            id: "order.create",
+            message: "Invalid order information",
+          },
+        ]);
     }
 
     let order = await strapi.query("order").create({
@@ -227,6 +230,7 @@ module.exports = {
       name,
       note,
       customer: id,
+      state: state
     });
 
     for (let pack of packages) {
