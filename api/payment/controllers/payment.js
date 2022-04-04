@@ -34,6 +34,7 @@ module.exports = {
             payer_phone: order.sender_phone,
             order: parsedId,
             paid: amount,
+            method: "momo"
           }
         );
       }
