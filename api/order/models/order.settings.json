@@ -14,11 +14,13 @@
   "attributes": {
     "fee": {
       "type": "decimal",
-      "required": true
+      "required": false,
+      "default": 0
     },
     "remain_fee": {
       "type": "decimal",
-      "required": true
+      "required": false,
+      "default": 0
     },
     "state": {
       "type": "integer",

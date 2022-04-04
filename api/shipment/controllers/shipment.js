@@ -82,4 +82,114 @@ module.exports = {
       ...shipmentDetail,
     };
   },
+
+  async create(ctx) {
+    let {
+      orderId,
+      vehicleId,
+      shipmentInfo,
+      newOrderInfo,
+      updateQuantityList = [], // {id, quantity}
+      updatePackageList = [], // {id},
+      removePackageList = [], // {id}
+      newPackageList = [],
+      orderState = null, // number
+    } = ctx.request.body;
+    let shipment = "";
+
+    if (newOrderInfo) {
+      // Update quantity of package for old order
+      if (updateQuantityList.length) {
+        for (let item of updateQuantityList) {
+          await strapi.services.package.update(
+            { id: item.id },
+            { quantity: item.quantity }
+          );
+        }
+      }
+
+      // Remove relation of package have full quantity for shipment
+      if (updatePackageList.length) {
+        await strapi.services.order.update(
+          { id: orderId },
+          { packages: updatePackageList }
+        );
+      }
+
+
+      // Create package for order
+      let newOrder = await strapi.services.order.create(newOrderInfo);
+      if (newPackageList) {
+        for (let pack of newPackageList) {
+          await strapi.services.package.create({
+            ...pack,
+            state: 1,
+            order: newOrder.id,
+          });
+        }
+      }
+
+      // Add package relation
+      let insertedOrder = await strapi.services.order.findOne({
+        id: newOrder.id,
+      });
+      if (removePackageList.length) {
+        insertedOrder = await strapi.services.order.update(
+          {
+            id: insertedOrder.id,
+          },
+          {
+            packages: [
+              ...insertedOrder.packages.map((item) => item.id),
+              ...removePackageList,
+            ],
+          }
+        );
+      }
+
+      // Create shipment
+      shipment = await strapi.services.shipment.create({
+        ...shipmentInfo,
+        packages: insertedOrder.packages.map((item) => item.id),
+      });
+
+      // Update car current shipments
+      await strapi.services.car.update(
+        {
+          id: vehicleId,
+        },
+        {
+          $push: {
+            shipments: shipment.id,
+          },
+        }
+      );
+    } else {
+      shipment = await strapi.services.shipment.create(shipmentInfo);
+      
+      //  Update current shipments for car
+      await strapi.services.car.update(
+        { id: vehicleId },
+        {
+          $push: {
+            shipments: shipment.id,
+          },
+        }
+      );
+
+      // Update order state and package state
+      if (orderState && orderState !== null) {
+        await strapi.services.order.update(
+          { id: orderId },
+          { state: orderState }
+        );
+        await strapi.services.package.update(
+          { order: orderId },
+          { state: orderState, multi: true }
+        );
+      }
+    }
+
+    return shipment;
+  },
 };
