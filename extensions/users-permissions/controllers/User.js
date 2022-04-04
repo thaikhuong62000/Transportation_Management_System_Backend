@@ -6,6 +6,8 @@ module.exports = {
    * Uploading new Image, remove old image
    * Set new Image to current user.
    *
+   * Precondition: Logined in
+   * @param {File: body} avatar
    * @return {Object}
    */
   async updateAvatar(ctx) {
@@ -48,6 +50,13 @@ module.exports = {
     });
   },
 
+  /**
+   * Update device token of user, which can be used for sending notification
+   *
+   * Precondition: Logined in
+   * @param {String: body} device_token unique device token generated from firebase
+   * @returns
+   */
   async updateDeviceToken(ctx) {
     const { device_token } = ctx.request.body;
     return await strapi.plugins["users-permissions"].services.user.edit(
@@ -56,6 +65,12 @@ module.exports = {
     );
   },
 
+  /**
+   * Test function: send notification to a specific device
+   *
+   * @param {*} ctx
+   * @returns
+   */
   async sendNoti(ctx) {
     const { device_token, ...message } = ctx.request.body;
     return await strapi.firebase.sendCloudMessage(device_token, message);

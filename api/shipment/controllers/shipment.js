@@ -8,6 +8,13 @@ var moment = require("moment");
  */
 
 module.exports = {
+  /**
+   * Return info of a shipment for driver (included sender/receiver info, some of order info)
+   *
+   * Precondition: Logined in as Driver
+   * @param {String: param} id of a shipment
+   * @returns
+   */
   async findOne(ctx) {
     const { id } = ctx.params;
 
@@ -33,6 +40,12 @@ module.exports = {
     } else return shipment;
   },
 
+  /**
+   * Get current shipment of a driver and nearby shipment
+   *
+   * Precondition: Logined in as Driver
+   * @returns
+   */
   async getCurrentShipment(ctx) {
     let shipments =
       await strapi.services.shipment.getUnfinishedShipmentByDriver(
@@ -47,6 +60,12 @@ module.exports = {
     );
   },
 
+  /**
+   * Get finished shipment of a driver
+   *
+   * Precondition: Logined in as Driver
+   * @returns
+   */
   async getFinishedShipment(ctx) {
     const { pageIndex = 0 } = ctx.query;
     let shipments = await strapi.services.shipment.getFinishedShipmentByDriver(
@@ -63,6 +82,11 @@ module.exports = {
     );
   },
 
+  /**
+   *
+   * @param {String: param} id of a shipment
+   * @returns
+   */
   async getVehicleDetailByShipment(ctx) {
     const { id } = ctx.params;
 
@@ -83,6 +107,15 @@ module.exports = {
     };
   },
 
+  /**
+   * Create shipment
+   * Split Order
+   * Update package, order state
+   * Update vehicle's shipment
+   *
+   * @param {...} ...
+   * @returns
+   */
   async create(ctx) {
     let {
       orderId,
@@ -115,7 +148,6 @@ module.exports = {
           { packages: updatePackageList }
         );
       }
-
 
       // Create package for order
       let newOrder = await strapi.services.order.create(newOrderInfo);
@@ -166,7 +198,7 @@ module.exports = {
       );
     } else {
       shipment = await strapi.services.shipment.create(shipmentInfo);
-      
+
       //  Update current shipments for car
       await strapi.services.car.update(
         { id: vehicleId },

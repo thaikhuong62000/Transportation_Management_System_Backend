@@ -6,6 +6,11 @@ const sanitizeUser = (user) =>
     model: strapi.query("user", "users-permissions").model,
   });
 
+/**
+ * Transfer +84 phone number to 0
+ * @param {Number} phone
+ * @returns phone
+ */
 const formatPhone = (phone) => {
   if (phone.slice(0, 3) === "+84") {
     return "0" + phone.slice(3);
@@ -13,6 +18,17 @@ const formatPhone = (phone) => {
 };
 
 module.exports = {
+  /**
+   * Authenticate user by using account token from firebase
+   * Account token is from an account register by phone in firebase database
+   *
+   * Preconditon: none
+   * @param {String: query} code Account token from firebase authenticated service
+   * @param {Bool: query} create Bool parameter indicate if user is create new Customer account
+   * @returns If code is valid (check by firebase), return an account
+   *          If create is true and user is not found, create new Customer user
+   *          Else return unauthorized
+   */
   async phoneAuth(ctx) {
     const { code, create = false } = ctx.query;
     try {
@@ -84,6 +100,14 @@ module.exports = {
     }
   },
 
+  /**
+   *
+   * Precondition: Logined in
+   * @param {String: json body} password
+   * @param {String: json body} newPassword
+   * @returns If password is match with user password, update
+   *          Else return Bad request
+   */
   async updatePassword(ctx) {
     const { password, newPassword } = ctx.request.body;
 
@@ -110,6 +134,15 @@ module.exports = {
     });
   },
 
+  /**
+   * Reset password using account token from firebase database
+   * Account token is from an account register by phone in firebase database
+   *
+   * Preconditon: none
+   * @param {String: json body} token Account token from firebase authenticated service
+   * @param {String: json body} newPassword
+   * @returns
+   */
   async resetPasswordPhone(ctx) {
     const { token, newPassword } = ctx.request.body;
     try {

@@ -3,6 +3,12 @@ const { sanitizeEntity } = require("strapi-utils");
 var moment = require("moment");
 
 module.exports = {
+  /**
+   * Get data to show in dashboard of driver's app
+   *
+   * Precondition: Logined in as Driver
+   * @returns
+   */
   async getDriverStatus(ctx) {
     let unfinishedShip =
       await strapi.services.shipment.getUnfinishedShipmentByDriver(
@@ -39,6 +45,12 @@ module.exports = {
     ];
   },
 
+  /**
+   * Get data to show in dashboard of storekeeper's app
+   *
+   * Precondition: Logined in as Storekeeper
+   * @returns
+   */
   async getStorekeeperStatus(ctx) {
     const { storage } = ctx.state.user;
 
@@ -56,6 +68,12 @@ module.exports = {
     };
   },
 
+  /**
+   * Get data of assistance to show in assistance screen of driver's app
+   *
+   * Precondition: Logined in as Driver
+   * @returns
+   */
   async getAssistanceInfo(ctx) {
     let shipments =
       await strapi.services.shipment.getUnfinishedShipmentByDriver(
@@ -82,11 +100,11 @@ module.exports = {
       "role.name": "Customer",
     });
 
-    let totalPage = Math.ceil(customers.length / _limit)
+    let totalPage = Math.ceil(customers.length / _limit);
 
     return {
       customers: customers,
-      totalPage
+      totalPage,
     };
   },
 
@@ -102,11 +120,11 @@ module.exports = {
       },
     });
 
-    let totalPage = Math.ceil(staffs.length / _limit)
+    let totalPage = Math.ceil(staffs.length / _limit);
 
     return {
       staffs: staffs,
-      totalPage
+      totalPage,
     };
   },
 };
