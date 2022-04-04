@@ -23,21 +23,19 @@ module.exports = {
 
     if (resultCode === 0) {
       if (order.fee >= amount) {
-        await strapi
+        let order = await strapi
           .query("order")
           .update({ id: parsedId }, { remain_fee: order.fee - amount });
 
-        await strapi.query("payment").update(
-          { order: parsedId },
+        await strapi.query("payment").create(
           {
+            payer_name: order.sender_name,
+            payer_phone: order.sender_phone,
+            order: parsedId,
             paid: amount,
-            time: new Date(),
           }
         );
       }
-    } else {
-      await strapi.query("order").delete({ id: parsedId });
-      await strapi.query("payment").delete({ _id: order.payments[0]._id });
     }
     return ctx.send(204);
   },
