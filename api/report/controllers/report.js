@@ -41,28 +41,4 @@ module.exports = {
       includeFields: ["total_export", "total_import", "note"],
     });
   },
-
-  async find(ctx) {
-    const { page = 0 } = ctx.query;
-    const { storage } = ctx.state.user;
-
-    let reports = await strapi.services.report.getReportByStorage(
-      storage,
-      5,
-      page * 5
-    );
-
-    return reports.map((report) =>
-      sanitizeEntity(report, {
-        model: strapi.query("report").model,
-        includeFields: [
-          "storage",
-          "stocker",
-          "total_import",
-          "total_export",
-          "note",
-        ],
-      })
-    );
-  },
 };

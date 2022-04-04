@@ -124,14 +124,40 @@ module.exports = {
   },
 
   async getPackagesInStorage(ctx) {
-    const { storage } = ctx.state.user;
-    const { page = 0, size = 5 } = ctx.query;
+    // Get package in storage and not exported yet (don't have shipment)
+    const { storage, role } = ctx.state.user;
+    const { page = 0, size = 5, storeId = "", state = 0 } = ctx.query;
+    let packages = []
 
-    let packages = await strapi.services.package.getPackagesInStorage(
-      storage,
-      size,
-      page * size
-    );
+    if (role.name === "Stocker") {
+      packages = await strapi.query("import").find({
+        // ...ctx.query,
+        _limit: Number.parseInt(size),
+        _start: page * Number.parseInt(size),
+        storage: storage,
+        "package.exports.storage": {
+          $ne: storage
+        }
+      })
+    } else if (role.name === "Admin") {
+      if (!storeId)
+        return ctx.badRequest([
+          {
+            id: "package.getPackagesInStorage",
+            message: "Invalid store id",
+          },
+        ]);
+
+      packages = await strapi.query("import").find({
+        _limit: size,
+        _start: page * size,
+        storage: storeId,
+        "package.state": state,
+        "package.exports.storage": {
+          $ne: storage
+        }
+      })
+    }
 
     return packages.map((package) =>
       sanitizeEntity(package, {
@@ -142,7 +168,6 @@ module.exports = {
           "size",
           "current_address",
           "note",
-          "code",
         ],
       })
     );

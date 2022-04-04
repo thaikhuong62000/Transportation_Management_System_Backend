@@ -311,6 +311,63 @@
         "parameters": []
       }
     },
+    "/orders/delivering": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Order"
+        ],
+        "parameters": []
+      }
+    },
     "/orders/delivered": {
       "get": {
         "deprecated": false,
@@ -690,8 +747,7 @@
               "id",
               "name",
               "sale",
-              "sale_max",
-              "type"
+              "sale_max"
             ],
             "properties": {
               "id": {
@@ -706,17 +762,33 @@
               "sale_max": {
                 "type": "number"
               },
-              "type": {
-                "type": "string"
-              },
               "expired": {
                 "type": "string"
               },
-              "users": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
+              "sale_type": {
+                "type": "string",
+                "enum": [
+                  "percentage",
+                  "value"
+                ]
+              },
+              "minimum_order": {
+                "type": "integer"
+              },
+              "voucher_img": {
+                "type": "string"
+              },
+              "customer_type": {
+                "type": "string",
+                "enum": [
+                  "All",
+                  "Iron",
+                  "Gold",
+                  "Diamond"
+                ]
+              },
+              "description": {
+                "type": "string"
               },
               "published_at": {
                 "type": "string"
@@ -841,12 +913,6 @@
                   "type": "string"
                 }
               },
-              "vouchers": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "device_token": {
                 "type": "string"
               },
@@ -964,7 +1030,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -993,7 +1059,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -1011,17 +1077,8 @@
                 "id": {
                   "type": "string"
                 },
-                "payer_name": {
-                  "type": "string"
-                },
-                "payer_phone": {
-                  "type": "string"
-                },
                 "paid": {
                   "type": "number"
-                },
-                "time": {
-                  "type": "string"
                 },
                 "order": {
                   "type": "string"
@@ -1033,6 +1090,18 @@
                     "momo",
                     "banking"
                   ]
+                },
+                "driver": {
+                  "type": "string"
+                },
+                "receipt": {
+                  "type": "string"
+                },
+                "payer_name": {
+                  "type": "string"
+                },
+                "payer_phone": {
+                  "type": "string"
                 },
                 "published_at": {
                   "type": "string"
@@ -1130,7 +1199,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -1159,7 +1228,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }

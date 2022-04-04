@@ -14,7 +14,7 @@ const formatPhone = (phone) => {
 
 module.exports = {
   async phoneAuth(ctx) {
-    const { code, create } = ctx.query;
+    const { code, create = false } = ctx.query;
     try {
       const decodedToken = await strapi.firebase.auth.verifyIdToken(code);
       if (decodedToken.phone_number) {

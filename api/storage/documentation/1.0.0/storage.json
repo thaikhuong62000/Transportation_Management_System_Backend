@@ -550,7 +550,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -667,12 +667,6 @@
                   "type": "string"
                 },
                 "reports": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "vouchers": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -841,7 +835,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }

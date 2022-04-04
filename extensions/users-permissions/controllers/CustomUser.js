@@ -71,4 +71,42 @@ module.exports = {
       includeFields: ["name", "phone"],
     });
   },
+
+  async getCustomerList(ctx) {
+    const { _start = 0, _limit = 5 } = ctx.query;
+
+    let customers = await strapi.query("user", "users-permissions").search({
+      ...ctx.query,
+      _start: _start * _limit,
+      _limit: _limit,
+      "role.name": "Customer",
+    });
+
+    let totalPage = Math.ceil(customers.length / _limit)
+
+    return {
+      customers: customers,
+      totalPage
+    };
+  },
+
+  async getStaffList(ctx) {
+    const { _start = 0, _limit = 5 } = ctx.query;
+
+    let staffs = await strapi.query("user", "users-permissions").search({
+      ...ctx.query,
+      _start: _start * _limit,
+      _limit: _limit,
+      "role.name": {
+        $in: ["Driver", "Assistance", "Stocker"],
+      },
+    });
+
+    let totalPage = Math.ceil(staffs.length / _limit)
+
+    return {
+      staffs: staffs,
+      totalPage
+    };
+  },
 };

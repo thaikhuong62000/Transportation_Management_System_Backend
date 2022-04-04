@@ -5,6 +5,7 @@ const phoneRegex = /^0[0-9]{9,10}$/g;
 module.exports = async (ctx, next) => {
   const { email, name, city, province, street, ward, password, phone } =
     ctx.request.body;
+  const username = email;
   const address = { city, province, street, ward };
   if (phoneRegex.test(phone))
     return ctx.badRequest(
@@ -14,6 +15,6 @@ module.exports = async (ctx, next) => {
         message: "Please provide valid phone.",
       })
     );
-  ctx.request.body = { email, name, password, phone, address };
+  ctx.request.body = { email, username, name, password, phone, address };
   await next();
 };

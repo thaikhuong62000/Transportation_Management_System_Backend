@@ -1,14 +1,33 @@
-module.exports = ({ env }) => ({
-  // upload: {
-  //   provider: "cloudinary",
-  //   providerOptions: {
-  //     cloud_name: env("CLOUDINARY_NAME", "dfnoohdaw"),
-  //     api_key: env("CLOUDINARY_KEY", 112164677597438),
-  //     api_secret: env("CLOUDINARY_SECRET", "iKHO6w77OmHhAuT4UEsEqigHkYM"),
-  //   },
-  //   actionOptions: {
-  //     upload: {},
-  //     delete: {},
-  //   },
-  // },
+module.exports = ({ env }) => {
+  if (env("NODE_ENV") === "development") {
+    return {
+      upload: {
+        ...defaultUploadConfig,
+      },
+    };
+  } else
+    return {
+      upload: {
+        ...s3UploadConfig(env),
+        ...defaultUploadConfig,
+      },
+    };
+};
+
+const s3UploadConfig = (env) => ({
+  provider: "aws-s3",
+  providerOptions: {
+    accessKeyId: env("AWS_ACCESS_KEY_ID"),
+    secretAccessKey: env("AWS_ACCESS_SECRET"),
+    region: env("AWS_REGION"),
+    params: {
+      Bucket: env("AWS_BUCKET_NAME"),
+    },
+  },
 });
+
+const defaultUploadConfig = {
+  breakpoints: {
+    small: 256,
+  },
+};

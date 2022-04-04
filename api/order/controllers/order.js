@@ -160,8 +160,8 @@ module.exports = {
     return orders;
   },
 
-  async find(ctx) {
-    const { page = 0, size = 5 } = ctx.query;
+  async getDeliveringOrder(ctx) {
+    const { page = 0, size = 10 } = ctx.query;
     const { id } = ctx.state.user;
 
     let orders = await strapi.services.order.getDeliveringOrder(
@@ -174,31 +174,30 @@ module.exports = {
   },
 
   async create(ctx) {
-    const { id } = ctx.state.user;
+    const { id, role } = ctx.state.user;
     const {
       sender_phone,
       sender_name,
       receiver_phone,
       receiver_name,
-      method,
       fee,
       remain_fee,
       from_address,
       to_address,
       name,
       packages,
-      payer_name,
-      payer_phone,
       note = "",
+      state = 0,
     } = ctx.request.body;
 
     if (!remain_fee || remain_fee < 0 || !fee || fee < 0) {
-      return ctx.badRequest([
-        {
-          id: "order.create",
-          message: "Invalid order fee",
-        },
-      ]);
+      if (role.name !== "Admin")
+        return ctx.badRequest([
+          {
+            id: "order.create",
+            message: "Invalid order fee",
+          },
+        ]);
     }
 
     if (
@@ -206,18 +205,17 @@ module.exports = {
       !sender_name ||
       !receiver_phone ||
       !receiver_name ||
-      !payer_name ||
-      !payer_phone ||
       !packages.length ||
       typeof from_address !== "object" ||
       typeof to_address !== "object"
     ) {
-      return ctx.badRequest([
-        {
-          id: "order.create",
-          message: "Invalid order information",
-        },
-      ]);
+      if (role.name !== "Admin")
+        return ctx.badRequest([
+          {
+            id: "order.create",
+            message: "Invalid order information",
+          },
+        ]);
     }
 
     let order = await strapi.query("order").create({
@@ -232,13 +230,7 @@ module.exports = {
       name,
       note,
       customer: id,
-    });
-
-    let payment = await strapi.query("payment").create({
-      method,
-      payer_name,
-      payer_phone,
-      order: order.id,
+      state: state
     });
 
     for (let pack of packages) {

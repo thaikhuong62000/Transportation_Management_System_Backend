@@ -24,18 +24,45 @@
       "type": "float",
       "required": true
     },
-    "type": {
-      "type": "string",
-      "required": true
-    },
     "expired": {
       "type": "datetime"
     },
-    "users": {
-      "via": "vouchers",
-      "plugin": "users-permissions",
-      "collection": "user",
-      "dominant": true
+    "sale_type": {
+      "type": "enumeration",
+      "enum": [
+        "percentage",
+        "value"
+      ],
+      "default": "percentage"
+    },
+    "minimum_order": {
+      "type": "biginteger",
+      "default": "0"
+    },
+    "voucher_img": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "customer_type": {
+      "type": "enumeration",
+      "enum": [
+        "All",
+        "Iron",
+        "Gold",
+        "Diamond"
+      ],
+      "default": "All"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }

@@ -863,12 +863,6 @@
                   "type": "string"
                 }
               },
-              "vouchers": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "device_token": {
                 "type": "string"
               },
@@ -992,12 +986,6 @@
                   "type": "string"
                 }
               },
-              "vouchers": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "device_token": {
                 "type": "string"
               },
@@ -1033,7 +1021,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -1062,7 +1050,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -1300,7 +1288,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
@@ -1329,7 +1317,7 @@
               "latitude": {
                 "type": "number"
               },
-              "longtitude": {
+              "longitude": {
                 "type": "number"
               }
             }
