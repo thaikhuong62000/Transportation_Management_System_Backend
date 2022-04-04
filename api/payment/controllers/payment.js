@@ -21,10 +21,10 @@ module.exports = {
       id: parsedId,
     });
 
-    
+
     if (resultCode === 0) {
       if (order.fee >= amount) {
-        let order = await strapi
+        order = await strapi
           .query("order")
           .update({ id: parsedId }, { remain_fee: order.fee - amount });
 
