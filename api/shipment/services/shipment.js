@@ -6,15 +6,64 @@ var mongoose = require("mongoose");
  */
 
 module.exports = {
-  async getUnfinishedShipmentByDriver(driverId) {
-    let entities = strapi
+  async getUnfinishedShipmentByDriver(lat, lng, driverId) {
+    const shipments = await strapi
       .query("shipment")
       .model.find()
       .where("driver")
       .eq(driverId)
       .where("arrived_time")
-      .eq(null);
-    return entities;
+      .eq(null)
+      .populate("from_storage")
+      .populate("to_storage");
+    return shipments.sort((a, b) => sortShipmentByDistance(lat, lng, a, b));
+  },
+  async getNearbyShipment(lat, lng) {
+    let shipments;
+    let k = 0;
+    do {
+      k++;
+      shipments = await strapi.query("shipment").model.aggregate([
+        {
+          $match: {
+            driver: {
+              $eq: null,
+            },
+            arrived_time: {
+              $eq: null,
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: "components_address_addresses",
+            localField: "from_address.ref",
+            foreignField: "_id",
+            as: "from_address",
+          },
+        },
+        {
+          $unwind: {
+            path: "$from_address",
+          },
+        },
+        {
+          $match: {
+            "from_address.latitude": {
+              $gte: lat - 0.05 * k,
+              $lte: lat + 0.05 * k,
+            },
+            "from_address.longitude": {
+              $gte: lng - 0.05 * k,
+              $lte: lng + 0.05 * k,
+            },
+          },
+        },
+      ]);
+    } while (shipments.length === 0 && k <= 5);
+    return shipments.sort((a, b) =>
+      sortShipmentByDistance(lat, lng, a, b, true)
+    );
   },
   async getFinishedShipmentByDriverByMonth(driverId, month = 1) {
     let entities = strapi
@@ -83,3 +132,42 @@ module.exports = {
     return totalPackage[0];
   },
 };
+
+function sortShipmentByDistance(lat, lng, item1, item2, sort_fa = false) {
+  const { latitude: lat1, longitude: lng1 } = sortField(item1, sort_fa);
+  const { latitude: lat2, longitude: lng2 } = sortField(item2, sort_fa);
+  return (
+    coordToDistance(lat, lng, lat1, lng1) -
+    coordToDistance(lat, lng, lat2, lng2)
+  );
+}
+
+function coordToDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Radius of the earth in km
+  const dLat = deg2rad(lat2 - lat1); // deg2rad below
+  const dLon = deg2rad(lon2 - lon1);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(lat1)) *
+      Math.cos(deg2rad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI / 180);
+}
+
+function sortField(item, sort_fa) {
+  if (sort_fa) return item.from_address;
+  if (item.from_storage && item.to_storage) {
+    return item.to_storage.address[0].ref;
+  } else if (item.to_storage) {
+    return item.from_address[0].ref;
+  } else if (item.from_storage) {
+    return item.to_address[0].ref;
+  }
+}
