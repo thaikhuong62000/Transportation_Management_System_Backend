@@ -163,8 +163,7 @@ module.exports = {
               },
               {
                 state: 1,
-              },
-              { new: true }
+              }
             ).session(session);
 
             if (!pack) throw "Cannot update old order's package state"
