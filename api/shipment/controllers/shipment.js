@@ -214,7 +214,7 @@ module.exports = {
           { _id: vehicleId },
           {
             $push: {
-              shipments: shipment._id,
+              shipments: shipment.id,
             },
           }
         ).session(session);
