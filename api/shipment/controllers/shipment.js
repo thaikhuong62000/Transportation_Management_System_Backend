@@ -107,7 +107,8 @@ module.exports = {
     const db = strapi.connections.default;
     const session = await db.startSession();
     session.startTransaction();
-    const { Package, Order, Shipment, Car } = db.models; // Models
+    const { Package, Order, Shipment, Car, ComponentAddressAddress, ComponentPackageSize } = db.models; // Models
+    console.log(db.models);
 
     try {
       if (newOrderInfo) {
@@ -135,6 +136,7 @@ module.exports = {
         let newOrder = await Order.create([newOrderInfo], {
           session: session,
         });
+        
         if (newPackageList) {
           for (let pack of newPackageList) {
             await Package.create(
@@ -142,7 +144,7 @@ module.exports = {
                 {
                   ...pack,
                   state: 1,
-                  order: newOrder._id,
+                  order: newOrder[0]._id,
                 },
               ],
               { session: session }
@@ -152,7 +154,7 @@ module.exports = {
 
         // Add package relation
         let insertedOrder = await Order.findOne({
-          _id: newOrder._id,
+          _id: newOrder[0]._id,
         }).session(session);
         if (!insertedOrder) throw "Not found order";
         if (removePackageList.length) {
@@ -214,7 +216,7 @@ module.exports = {
           { _id: vehicleId },
           {
             $push: {
-              shipments: shipment._id,
+              shipments: shipment[0]._id,
             },
           }
         ).session(session);
