@@ -2,11 +2,6 @@
 
 const { sanitizeEntity } = require("strapi-utils/lib");
 
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
- * to customize this controller
- */
-
 module.exports = {
   async getOrderTracing(ctx) {
     const { id } = ctx.params;
@@ -178,83 +173,95 @@ module.exports = {
     let { remain_fee, fee, from_address, to_address, packages, ...body } =
       ctx.request.body;
 
-    if (!remain_fee || remain_fee < 0 || !fee || fee < 0) {
-      if (role.name !== "Admin")
-        return ctx.badRequest([
-          {
-            id: "order.create",
-            message: "Invalid order fee",
-          },
-        ]);
-    }
-
-    if (
-      !body.sender_phone ||
-      !body.sender_name ||
-      !body.receiver_phone ||
-      !body.receiver_name ||
-      !packages ||
-      !packages.length ||
-      typeof from_address !== "object" ||
-      typeof to_address !== "object"
-    ) {
-      if (role.name !== "Admin")
-        return ctx.badRequest([
-          {
-            id: "order.create",
-            message: "Invalid order information",
-          },
-        ]);
-    }
+    const db = strapi.connections.default;
+    const session = await db.startSession();
+    session.startTransaction();
+    const { Package, Order, ComponentAddressAddress } = db.models;
 
     try {
-      if (!from_address.latitude || !from_address.longitude) {
-        const response = await strapi.geocode(mergeAddress(from_address));
-        const coord = response.data.results[0].geometry.location;
-        from_address.latitude = coord.lat;
-        from_address.longitude = coord.lng;
+      if (!remain_fee || remain_fee < 0 || !fee || fee < 0) {
+        if (role.name !== "Admin") throw "Invalid order fee";
       }
-      if (!to_address.latitude || !to_address.longitude) {
-        const response = await strapi.geocode(mergeAddress(to_address));
-        const coord = response.data.results[0].geometry.location;
-        to_address.latitude = coord.lat;
-        to_address.longitude = coord.lng;
+
+      if (
+        !body.sender_phone ||
+        !body.sender_name ||
+        !body.receiver_phone ||
+        !body.receiver_name ||
+        !packages ||
+        !packages.length ||
+        typeof from_address !== "object" ||
+        typeof to_address !== "object"
+      ) {
+        if (role.name !== "Admin") throw "Invalid order information";
       }
+
+      try {
+        if (!from_address.latitude || !from_address.longitude) {
+          const response = await strapi.geocode(mergeAddress(from_address));
+          const coord = response.data.results[0].geometry.location;
+          from_address.latitude = coord.lat;
+          from_address.longitude = coord.lng;
+        }
+        if (!to_address.latitude || !to_address.longitude) {
+          const response = await strapi.geocode(mergeAddress(to_address));
+          const coord = response.data.results[0].geometry.location;
+          to_address.latitude = coord.lat;
+          to_address.longitude = coord.lng;
+        }
+      } catch (error) {
+        // throw "Invalid address";
+      }
+
+      // TODO: Calculate Fee
+      fee = strapi.services.fee.calcFee(
+        from_address,
+        to_address,
+        packages,
+        ctx.state.user
+      );
+      remain_fee = fee;
+
+      const addresses = await ComponentAddressAddress.create(
+        [from_address, to_address],
+        { session: session }
+      );
+
+      const packages = await Package.create([...packages], {
+        session: session,
+      });
+
+      const order = await Order.create(
+        [
+          {
+            ...body,
+            from_address: addresses[0]._id,
+            to_address: addresses[1]._id,
+            fee,
+            remain_fee,
+            customer,
+            packages: packages.map((item) => item._id),
+          },
+        ],
+        { session: session }
+      );
+
+      if (!order) throw "Create order failed!";
+
+      await session.commitTransaction();
+      session.endSession();
+
+      return order;
     } catch (error) {
+      await session.abortTransaction();
+      session.endSession();
       return ctx.badRequest([
         {
           id: "order.create",
-          message: "Invalid address",
+          message: error,
         },
       ]);
     }
-
-    // TODO: Calculate Fee
-    fee = strapi.services.fee.calcFee(
-      from_address,
-      to_address,
-      packages,
-      ctx.state.user
-    );
-    remain_fee = fee;
-
-    const order = await strapi.query("order").create({
-      ...body,
-      from_address,
-      to_address,
-      fee,
-      remain_fee,
-      customer,
-    });
-
-    for (let pack of packages) {
-      await strapi.query("package").create({
-        ...pack,
-        order: order.id,
-      });
-    }
-
-    return order;
   },
 };
 
