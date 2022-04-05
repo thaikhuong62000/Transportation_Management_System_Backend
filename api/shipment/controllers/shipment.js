@@ -244,6 +244,7 @@ module.exports = {
           {
             id: "Shipment.create",
             message: "Bad Request",
+            error: error
           },
         ],
       });
