@@ -156,6 +156,20 @@ module.exports = {
         }).session(session);
         if (!insertedOrder) throw "Not found order";
         if (removePackageList.length) {
+          for (let item of removePackageList) {
+            let pack = await Package.findOneAndUpdate(
+              {
+                _id: item,
+              },
+              {
+                state: 1,
+              },
+              { new: true }
+            ).session(session);
+
+            if (!pack) throw "Cannot update old order's package state"
+          }
+
           insertedOrder = await Order.findOneAndUpdate(
             {
               _id: insertedOrder._id,
