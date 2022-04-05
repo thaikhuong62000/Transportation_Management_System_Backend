@@ -174,9 +174,9 @@ module.exports = {
       ctx.request.body;
 
     const db = strapi.connections.default;
-    const session = await db.startSession();
-    session.startTransaction();
-    const { Package, Order, ComponentAddressAddress } = db.models;
+    let session;
+    const { Package, Order, ComponentAddressAddress, ComponentPackageSize } =
+      db.models;
 
     try {
       if (!remain_fee || remain_fee < 0 || !fee || fee < 0) {
@@ -196,25 +196,25 @@ module.exports = {
         if (role.name !== "Admin") throw "Invalid order information";
       }
 
-      try {
-        if (!from_address.latitude || !from_address.longitude) {
-          const response = await strapi.geocode(mergeAddress(from_address));
-          const coord = response.data.results[0].geometry.location;
-          from_address.latitude = coord.lat;
-          from_address.longitude = coord.lng;
-        }
-        if (!to_address.latitude || !to_address.longitude) {
-          const response = await strapi.geocode(mergeAddress(to_address));
-          const coord = response.data.results[0].geometry.location;
-          to_address.latitude = coord.lat;
-          to_address.longitude = coord.lng;
-        }
-      } catch (error) {
-        // throw "Invalid address";
-      }
+      // try {
+      //   if (!from_address.latitude || !from_address.longitude) {
+      //     const response = await strapi.geocode(mergeAddress(from_address));
+      //     const coord = response.data.results[0].geometry.location;
+      //     from_address.latitude = coord.lat;
+      //     from_address.longitude = coord.lng;
+      //   }
+      //   if (!to_address.latitude || !to_address.longitude) {
+      //     const response = await strapi.geocode(mergeAddress(to_address));
+      //     const coord = response.data.results[0].geometry.location;
+      //     to_address.latitude = coord.lat;
+      //     to_address.longitude = coord.lng;
+      //   }
+      // } catch (error) {
+      //   throw "Invalid address";
+      // }
 
       // TODO: Calculate Fee
-      fee = strapi.services.fee.calcFee(
+      fee = await strapi.services.fee.calcFee(
         from_address,
         to_address,
         packages,
@@ -222,25 +222,29 @@ module.exports = {
       );
       remain_fee = fee;
 
+      session = await db.startSession();
+      session.startTransaction();
+
       const addresses = await ComponentAddressAddress.create(
         [from_address, to_address],
         { session: session }
       );
 
-      const packages = await Package.create([...packages], {
-        session: session,
-      });
-
-      const order = await Order.create(
+      let order = await Order.create(
         [
           {
             ...body,
-            from_address: addresses[0]._id,
-            to_address: addresses[1]._id,
+            from_address: {
+              kind: "ComponentAddressAddress",
+              ref: addresses[0]._id,
+            },
+            to_address: {
+              kind: "ComponentAddressAddress",
+              ref: addresses[1]._id,
+            },
             fee,
             remain_fee,
             customer,
-            packages: packages.map((item) => item._id),
           },
         ],
         { session: session }
@@ -248,17 +252,36 @@ module.exports = {
 
       if (!order) throw "Create order failed!";
 
+      const size = await ComponentPackageSize.create(
+        [...packages.map((item) => item.size)],
+        { session: session }
+      );
+
+      for (let index = 0; index < size.length; index++) {
+        packages[index] = {
+          ...packages[index],
+          size: { kind: "ComponentPackageSize", ref: size[index]._id },
+          order: order[0]._id,
+        };
+      }
+
+      packages = await Package.create([...packages], {
+        session: session,
+      });
+
+      if (!packages) throw "Create package failed!";
+
       await session.commitTransaction();
       session.endSession();
 
-      return order;
+      return order[0];
     } catch (error) {
       await session.abortTransaction();
       session.endSession();
       return ctx.badRequest([
         {
           id: "order.create",
-          message: error,
+          message: JSON.stringify(error),
         },
       ]);
     }
