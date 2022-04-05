@@ -1,11 +1,5 @@
 "use strict";
 const { sanitizeEntity } = require("strapi-utils");
-var moment = require("moment");
-
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
- * to customize this controller
- */
 
 module.exports = {
   async findOne(ctx) {
@@ -16,9 +10,8 @@ module.exports = {
       "from_storage",
       "to_storage",
     ]);
-    shipment = sanitizeEntity(shipment, {
+    shipment = await sanitizeEntity(shipment, {
       model: strapi.models.shipment,
-      includeFields: ["packages", "from_storage", "to_storage"],
     });
 
     if (
@@ -29,36 +22,50 @@ module.exports = {
         { id: shipment.packages[0].order },
         []
       );
-      return { ...shipment, ...order, order_id: shipment.packages[0].order };
+      return { ...order, order_id: shipment.packages[0].order, ...shipment };
     } else return shipment;
   },
 
   async getCurrentShipment(ctx) {
-    let shipments =
+    const { latitude, longitude } = ctx.query;
+    const _shipments =
       await strapi.services.shipment.getUnfinishedShipmentByDriver(
+        parseFloat(latitude),
+        parseFloat(longitude),
         ctx.state.user.id
+      );
+    const shipments = await strapi.services.shipment.getNearbyShipment(
+      parseFloat(latitude),
+      parseFloat(longitude)
+    );
+
+    return [..._shipments, ...shipments].map((entity) =>
+      sanitizeEntity(entity, {
+        model: strapi.models.shipment,
+      })
+    );
+  },
+
+  async acceptShipment(ctx) {
+    const { shipment: _id } = ctx.params;
+    const { id: driver } = ctx.state.user;
+    return await strapi
+      .query("shipment")
+      .model.findOneAndUpdate({ _id, driver: null }, { driver }, { new: true });
+  },
+
+  async getFinishedShipment(ctx) {
+    const { pageIndex = 0 } = ctx.query;
+    const shipments =
+      await strapi.services.shipment.getFinishedShipmentByDriver(
+        ctx.state.user.id,
+        pageIndex * 10,
+        10
       );
 
     return shipments.map((entity) =>
       sanitizeEntity(entity, {
         model: strapi.models.shipment,
-        includeFields: ["to_address", "arrived_time"],
-      })
-    );
-  },
-
-  async getFinishedShipment(ctx) {
-    const { pageIndex = 0 } = ctx.query;
-    let shipments = await strapi.services.shipment.getFinishedShipmentByDriver(
-      ctx.state.user.id,
-      pageIndex * 10,
-      10
-    );
-
-    return shipments.map((entity) =>
-      sanitizeEntity(entity, {
-        model: strapi.models.shipment,
-        includeFields: ["to_address", "arrived_time"],
       })
     );
   },
