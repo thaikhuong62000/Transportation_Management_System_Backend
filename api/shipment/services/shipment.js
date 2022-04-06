@@ -131,6 +131,29 @@ module.exports = {
 
     return totalPackage[0];
   },
+
+  async updateOrderState(shipment) {
+    if (shipment.packages.length > 0) {
+      const orders = shipment.packages.map((item) => item.order);
+      const packages = shipment.packages.map((item) => item._id);
+      await strapi.services.order.update(
+        {
+          _id: { $in: orders },
+          state: 0,
+        },
+        { state: 1 },
+        { multi: true }
+      );
+      await strapi.services.packages.update(
+        {
+          _id: { $in: packages },
+          state: 0,
+        },
+        { state: 1 },
+        { multi: true }
+      );
+    }
+  },
 };
 
 function sortShipmentByDistance(lat, lng, item1, item2, sort_fa = false) {
