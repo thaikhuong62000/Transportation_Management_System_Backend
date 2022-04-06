@@ -49,6 +49,7 @@ module.exports = {
   async acceptShipment(ctx) {
     const { shipment: _id } = ctx.params;
     const { id: driver } = ctx.state.user;
+    // TODO: Update package, order state to 1
     return await strapi
       .query("shipment")
       .model.findOneAndUpdate({ _id, driver: null }, { driver }, { new: true });
@@ -173,7 +174,7 @@ module.exports = {
               }
             ).session(session);
 
-            if (!pack) throw "Cannot update old order's package state"
+            if (!pack) throw "Cannot update old order's package state";
           }
 
           insertedOrder = await Order.findOneAndUpdate(
