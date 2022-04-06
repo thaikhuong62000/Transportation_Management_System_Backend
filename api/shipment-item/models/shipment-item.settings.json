@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shipment_items",
+  "info": {
+    "name": "Shipment Item",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "package": {
+      "model": "package"
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "received": {
+      "type": "integer"
+    },
+    "shipment": {
+      "model": "shipment",
+      "via": "shipment_items"
+    }
+  }
+}
