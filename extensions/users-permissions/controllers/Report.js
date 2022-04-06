@@ -10,11 +10,7 @@ module.exports = {
     let date = new Date();
     let result = "";
     if (type === "today") {
-      startTime = new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate()
-      );
+      startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate());
       endTime = new Date(
         date.getFullYear(),
         date.getMonth(),
@@ -47,7 +43,6 @@ module.exports = {
       result = await strapi.plugins[
         "users-permissions"
       ].services.report.generateReport(startTime, endTime, storage);
-
     }
 
     let temp = result["importes"].reduce((total, item) => {
@@ -61,7 +56,7 @@ module.exports = {
           imported: item.quantity,
           exported: exported.quantity,
           remain: item.quantity - exported.quantity,
-          ...item
+          ...item,
         });
       } else {
         total.push({
@@ -69,7 +64,7 @@ module.exports = {
           imported: item.quantity,
           exported: 0,
           remain: item.quantity,
-          ...item
+          ...item,
         });
       }
       return total;
@@ -85,16 +80,15 @@ module.exports = {
     );
 
     let store = await strapi.services.storage.findOne({
-      id: storage
-    })
+      id: storage,
+    });
 
     return {
       name: store.name,
       title: "Báo cáo nhập xuất " + store.name,
       startTime: moment(startTime).format("DD/MM/YYYY"),
       endTime: moment(endTime).format("DD/MM/YYYY"),
-      data: temp
+      data: temp,
     };
-
   },
 };
