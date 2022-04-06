@@ -56,6 +56,41 @@ module.exports = {
     };
   },
 
+  async getAdminStatus(ctx) {
+    let date = new Date();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+
+    let quarterlyIncome = await strapi.plugins[
+      "users-permissions"
+    ].services.user.getIncome(
+      (Math.ceil(month / 3) - 1 || 1) * 3 + 1,
+      (Math.ceil(month / 3) - 1 || 1) * 3 + 3,
+      year
+    );
+
+    let yearlyIncome = await strapi.plugins[
+      "users-permissions"
+    ].services.user.getIncome(1, 12, year);
+
+    let currentOrder = await strapi.services.order.count({
+      state: 0,
+    });
+
+    let unshipOrder = await strapi.services.order.count({
+      state_in: [1, 3],
+    });
+
+    // TDOD: calculate shipment count per month
+
+    return {
+      quarterlyIncome: quarterlyIncome ? quarterlyIncome.income : 0,
+      yearlyIncome: yearlyIncome ? yearlyIncome.income : 0,
+      currentOrder: currentOrder,
+      unshipOrder: unshipOrder,
+    };
+  },
+
   async getAssistanceInfo(ctx) {
     let shipments =
       await strapi.services.shipment.getUnfinishedShipmentByDriver(
@@ -82,11 +117,11 @@ module.exports = {
       "role.name": "Customer",
     });
 
-    let totalPage = Math.ceil(customers.length / _limit)
+    let totalPage = Math.ceil(customers.length / _limit);
 
     return {
       customers: customers,
-      totalPage
+      totalPage,
     };
   },
 
@@ -102,11 +137,11 @@ module.exports = {
       },
     });
 
-    let totalPage = Math.ceil(staffs.length / _limit)
+    let totalPage = Math.ceil(staffs.length / _limit);
 
     return {
       staffs: staffs,
-      totalPage
+      totalPage,
     };
   },
 };
