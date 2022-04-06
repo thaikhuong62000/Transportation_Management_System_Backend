@@ -114,8 +114,14 @@ module.exports = {
     const db = strapi.connections.default;
     const session = await db.startSession();
     session.startTransaction();
-    const { Package, Order, Shipment, Car, ComponentAddressAddress, ComponentPackageSize } = db.models; // Models
-    console.log(db.models);
+    const {
+      Package,
+      Order,
+      Shipment,
+      Car,
+      ComponentAddressAddress,
+      ComponentPackageSize,
+    } = db.models; // Models
 
     try {
       if (newOrderInfo) {
@@ -140,28 +146,64 @@ module.exports = {
         }
 
         // Create package for order
-        let newOrder = await Order.create([newOrderInfo], {
-          session: session,
-        });
-        
+        let addresses = await ComponentAddressAddress.create(
+          [newOrderInfo.from_address, newOrderInfo.to_address],
+          { session: session }
+        );
+
+        let newOrder = await Order.create(
+          [
+            {
+              ...newOrderInfo,
+              from_address: addresses[0]._id,
+              to_address: addresses[0]._id,
+            },
+          ],
+          { session: session }
+        );
+
+        // console.log(newOrder)
+
         if (newPackageList) {
           for (let pack of newPackageList) {
-            await Package.create(
+            let size = await ComponentPackageSize.create([pack.size], {
+              session: session,
+            });
+            // console.log(newOrder[0]._id)
+            // console.log(size[0]._id);
+            let insertedPack = await Package.create(
               [
                 {
                   ...pack,
                   state: 1,
-                  order: newOrder[0]._id,
                 },
               ],
               { session: session }
             );
+
+            // console.log(insertedPack, size)
+
+            insertedPack = await Package.findOneAndUpdate(
+              {
+                _id: insertedPack[0]._id,
+              },
+              {
+                size: size[0],
+                // order: newOrder[0].id,
+              }
+            ).session(session);
+
+            console.log(insertedPack);
+
+            if (!size || !insertedPack) {
+              throw "Cannot create new package";
+            }
           }
         }
 
         // Add package relation
         let insertedOrder = await Order.findOne({
-          _id: newOrder[0]._id,
+          _id: newOrder[0].id,
         }).session(session);
         if (!insertedOrder) throw "Not found order";
         if (removePackageList.length) {
@@ -175,7 +217,7 @@ module.exports = {
               }
             ).session(session);
 
-            if (!pack) throw "Cannot update old order's package state"
+            if (!pack) throw "Cannot update old order's package state";
           }
 
           insertedOrder = await Order.findOneAndUpdate(
@@ -191,7 +233,7 @@ module.exports = {
             { new: true }
           ).session(session);
         }
-
+        // console.log(insertedOrder)
         // Create shipment
         shipment = await Shipment.create(
           [
@@ -210,7 +252,7 @@ module.exports = {
           },
           {
             $push: {
-              shipments: shipment._id,
+              shipments: shipment[0]._id,
             },
           }
         ).session(session);
@@ -252,7 +294,7 @@ module.exports = {
         errors: [
           {
             id: "Shipment.create",
-            message: "Bad Request",
+            message: error,
           },
         ],
       });
