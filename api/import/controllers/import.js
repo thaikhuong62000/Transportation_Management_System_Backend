@@ -126,10 +126,10 @@ module.exports = {
   },
 };
 
-function getPackageState(package, store) {
-  return pack.state === 1
+function getPackageState(_package, store) {
+  return _package.state < 2
     ? 2
-    : pack.order.to_address.city === store.address.city
+    : _package.order.to_address.city === store.address.city
     ? 3
     : 2;
 }
