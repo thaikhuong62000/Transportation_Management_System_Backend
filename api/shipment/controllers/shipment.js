@@ -49,10 +49,31 @@ module.exports = {
   async acceptShipment(ctx) {
     const { shipment: _id } = ctx.params;
     const { id: driver } = ctx.state.user;
-    // TODO: Update package, order state to 1
-    return await strapi
+    const shipment = await strapi
       .query("shipment")
-      .model.findOneAndUpdate({ _id, driver: null }, { driver }, { new: true });
+      .model.findOneAndUpdate({ _id, driver: null }, { driver }, { new: true })
+      .populate("packages");
+    if (shipment.packages.length > 0) {
+      let orders = shipment.packages.map((item) => item.order);
+      let packages = shipment.packages.map((item) => item._id);
+      await strapi.services.order.update(
+        {
+          _id: { $in: orders },
+          state: 0,
+        },
+        { state: 1 },
+        { multi: true }
+      );
+      await strapi.services.packages.update(
+        {
+          _id: { $in: packages },
+          state: 0,
+        },
+        { state: 1 },
+        { multi: true }
+      );
+    }
+    return shipment;
   },
 
   async getFinishedShipment(ctx) {
