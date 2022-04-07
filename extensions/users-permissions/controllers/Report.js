@@ -70,12 +70,17 @@ module.exports = {
       return total;
     }, []);
 
+    let total_import = result["importes"].reduce((total, item) => (total + item.quantity), 0)
+    let total_export = result["exportes"].reduce((total, item) => (total + item.quantity), 0)
+
     await strapi.services.report.update(
       {
         storage: storage,
       },
       {
         report_file: JSON.stringify(temp),
+        total_import,
+        total_export
       }
     );
 
