@@ -32,6 +32,9 @@ module.exports = () => {
   // Init socket
   var io = require("socket.io")(strapi.server);
   require("./socket")(strapi, io);
+
+  // Init TMS Config
+  require("./process-config")(strapi);
 };
 
 function sendCloudMessage(token, message) {
