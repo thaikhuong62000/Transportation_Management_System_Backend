@@ -29,7 +29,7 @@
       "path": "/shipment-items",
       "handler": "shipment-item.create",
       "config": {
-        "policies": []
+        "policies": ["check-create-shipment"]
       }
     },
     {

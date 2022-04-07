@@ -9,6 +9,7 @@ module.exports = {
       "packages",
       "from_storage",
       "to_storage",
+      "shipment_items",
     ]);
     shipment = await sanitizeEntity(shipment, {
       model: strapi.models.shipment,
