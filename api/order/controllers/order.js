@@ -196,22 +196,22 @@ module.exports = {
         if (role.name !== "Admin") throw "Invalid order information";
       }
 
-      // try {
-      //   if (!from_address.latitude || !from_address.longitude) {
-      //     const response = await strapi.geocode(mergeAddress(from_address));
-      //     const coord = response.data.results[0].geometry.location;
-      //     from_address.latitude = coord.lat;
-      //     from_address.longitude = coord.lng;
-      //   }
-      //   if (!to_address.latitude || !to_address.longitude) {
-      //     const response = await strapi.geocode(mergeAddress(to_address));
-      //     const coord = response.data.results[0].geometry.location;
-      //     to_address.latitude = coord.lat;
-      //     to_address.longitude = coord.lng;
-      //   }
-      // } catch (error) {
-      //   throw "Invalid address";
-      // }
+      try {
+        if (!from_address.latitude || !from_address.longitude) {
+          const response = await strapi.geocode(mergeAddress(from_address));
+          const coord = response.data.results[0].geometry.location;
+          from_address.latitude = coord.lat;
+          from_address.longitude = coord.lng;
+        }
+        if (!to_address.latitude || !to_address.longitude) {
+          const response = await strapi.geocode(mergeAddress(to_address));
+          const coord = response.data.results[0].geometry.location;
+          to_address.latitude = coord.lat;
+          to_address.longitude = coord.lng;
+        }
+      } catch (error) {
+        throw "Invalid address";
+      }
 
       // TODO: Calculate Fee
       fee = await strapi.services.fee.calcFee(

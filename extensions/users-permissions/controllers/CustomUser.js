@@ -6,6 +6,8 @@ module.exports = {
   async getDriverStatus(ctx) {
     let unfinishedShip =
       await strapi.services.shipment.getUnfinishedShipmentByDriver(
+        0,
+        0,
         ctx.state.user.id
       );
 
