@@ -8,13 +8,14 @@ module.exports = {
     let { start_time, days, reason } = ctx.request.body;
 
     try {
+      days = parseInt(days);
       start_time = Date.parse(start_time);
       if (isNaN(start_time)) {
         throw "Wrong start time format";
       }
 
-      if (days) {
-        throw "Start time must not be larger than end time!";
+      if (days < 1) {
+        throw "Absence days must bigger than 0";
       }
 
       await strapi.services.furlough.create({
@@ -30,7 +31,7 @@ module.exports = {
         errors: [
           {
             id: "Furlough.create",
-            message: error,
+            message: JSON.stringify(error),
           },
         ],
       });
