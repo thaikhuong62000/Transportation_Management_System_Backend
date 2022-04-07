@@ -40,7 +40,8 @@
       "component": "package.size"
     },
     "shipments": {
-      "collection": "shipment"
+      "collection": "shipment",
+      "via": "car"
     }
   }
 }

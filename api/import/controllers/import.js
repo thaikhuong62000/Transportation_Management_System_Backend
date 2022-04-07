@@ -16,16 +16,12 @@ module.exports = {
           { arrived_time_null: true },
         ],
       },
-      [{ path: "driver", populate: "car" }]
+      ["car"]
     );
 
     return shipments.map((entity) => {
-      const {
-        from_address,
-        id,
-        driver: { car },
-      } = entity;
-      return { id, from_address, licence: car.licence };
+      const { from_address, id, car } = entity;
+      return { id, from_address, licence: car?.licence };
     });
   },
 

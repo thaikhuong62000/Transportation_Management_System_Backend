@@ -83,7 +83,13 @@ module.exports = {
 
     shipmentDetail = sanitizeEntity(shipmentDetail, {
       model: strapi.models.shipment,
-      includeFields: ["packages", "to_address", "driver", "assistance"],
+      includeFields: [
+        "packages",
+        "to_address",
+        "driver",
+        "assistance",
+        "shipment_items",
+      ],
     });
 
     const totalWeight = shipmentDetail.packages.reduce((total, item) => {
@@ -97,24 +103,27 @@ module.exports = {
   },
 
   async create(ctx) {
-    const { vehicleId, driver } = ctx.request.body;
-
     const shipment = await strapi.services.shipment.create(ctx.request.body);
 
     if (driver) {
       strapi.services.shipment.updateOrderState(shipment);
     }
 
-    //  Update current shipments for car
-    await strapi.services.car.findOneAndUpdate(
-      { _id: vehicleId },
-      {
-        $push: {
-          shipments: shipment._id,
-        },
-      }
-    );
-
     return shipment;
+  },
+
+  async finishShipment(ctx) {
+    const { _id } = ctx.params;
+    const shipment = await strapi
+      .query("shipment")
+      .model.findOneAndUpdate({ _id }, { arrived_time: new Date() });
+    if (!shipment)
+      return ctx.badRequest([
+        {
+          id: "Shipment.finishShipment",
+          message: "Update failed",
+        },
+      ]);
+    else return true;
   },
 };
