@@ -127,7 +127,7 @@ module.exports = {
     // Get package in storage and not exported yet (don't have shipment)
     const { storage, role } = ctx.state.user;
     const { page = 0, size = 5, storeId = "", state = 0 } = ctx.query;
-    let packages = []
+    let packages = [];
 
     if (role.name === "Stocker") {
       packages = await strapi.query("import").find({
@@ -136,9 +136,9 @@ module.exports = {
         _start: page * Number.parseInt(size),
         storage: storage,
         "package.exports.storage": {
-          $ne: storage
-        }
-      })
+          $ne: storage,
+        },
+      });
     } else if (role.name === "Admin") {
       if (!storeId)
         return ctx.badRequest([
@@ -154,9 +154,9 @@ module.exports = {
         storage: storeId,
         "package.state": state,
         "package.exports.storage": {
-          $ne: storage
-        }
-      })
+          $ne: storage,
+        },
+      });
     }
 
     return packages.map((package) =>
@@ -181,47 +181,22 @@ module.exports = {
     const { storage } = ctx.state.user;
     const { type } = ctx.request.query;
 
-    let remainingPackage = "";
-
-    let package = await strapi.query("package").findOne({
-      id: id,
-    });
+    let storedPackageQuantity = "";
 
     if (type === "0") {
-      let storedPackage = await strapi.query("import").findOne({
+      storedPackageQuantity = await strapi.services.import.count({
         storage: storage,
         package: id,
       });
-
-      remainingPackage = storedPackage
-        ? package.quantity - storedPackage.quantity
-        : package.quantity;
     } else if (type === "1") {
-      let awaitExportPackage = await strapi.query("export").findOne({
+      storedPackageQuantity = await strapi.services.export.count({
         storage: storage,
         package: id,
       });
-
-      remainingPackage = awaitExportPackage
-        ? package.quantity - awaitExportPackage.quantity
-        : package.quantity;
     }
 
-    package = sanitizeEntity(package, {
-      model: strapi.query("package").model,
-      includeFields: [
-        "name",
-        "weight",
-        "size",
-        "note",
-        "package_type",
-        "quantity",
-      ],
-    });
-
     return {
-      remainingPackage,
-      ...package,
+      storedPackageQuantity
     };
   },
 };

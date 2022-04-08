@@ -26,12 +26,12 @@ module.exports = {
   },
 
   async updateImportQuantityByPackage(ctx) {
-    const { packageId, quantity } = ctx.request.body;
+    const { packageId, quantity, shipmentItem } = ctx.request.body;
     const { storage, id } = ctx.state.user;
 
     const db = strapi.connections.default;
     let session;
-    const { Package, Import, Order } = db.models; // Models
+    const { Package, Import, Order, ShipmentItem } = db.models; // Models
 
     try {
       let store = await strapi.services.storage.findOne({ id: storage });
@@ -44,8 +44,6 @@ module.exports = {
       const totalImportedPackage = (
         await strapi.services.import.getImporstByPackages([packageId])
       ).reduce((pre, cur) => pre + cur.quantity, 0);
-
-      console.log(totalImportedPackage);
 
       const order = await strapi.services.order.findOne({
         id: pack.order.id,
@@ -69,6 +67,16 @@ module.exports = {
         ],
         { session: session }
       );
+
+      let shipment_item = await ShipmentItem.findOneAndUpdate({
+        _id: shipmentItem
+      }, {
+        received: quantity
+      })
+
+      if (!shipment_item) {
+        throw "Invalid shipment item"
+      }
 
       if (!importedPackage) throw "Create import failed";
 
