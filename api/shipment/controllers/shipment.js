@@ -107,7 +107,7 @@ module.exports = {
 
     if (driver) {
       strapi.services.shipment.updateOrderState(shipment);
-    }
+
 
     return shipment;
   },
