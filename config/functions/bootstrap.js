@@ -2,6 +2,7 @@
 const { initializeApp } = require("firebase-admin/app");
 const { getAuth } = require("firebase-admin/auth");
 const { getMessaging } = require("firebase-admin/messaging");
+const { Client } = require("@googlemaps/google-maps-services-js");
 
 /**
  * An asynchronous bootstrap function that runs before
@@ -21,9 +22,19 @@ module.exports = () => {
   strapi.firebase.auth = getAuth();
   strapi.firebase.sendCloudMessage = sendCloudMessage;
 
+  // Init Google Map Service
+  strapi.googleMap = new Client({});
+  strapi.geocode = async (address) =>
+    strapi.googleMap.geocode({
+      params: { key: process.env.GOOGLE_MAPS_API_KEY, address },
+    });
+
   // Init socket
   var io = require("socket.io")(strapi.server);
   require("./socket")(strapi, io);
+
+  // Init TMS Config
+  require("./process-config")(strapi);
 };
 
 function sendCloudMessage(token, message) {

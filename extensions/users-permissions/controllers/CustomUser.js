@@ -6,6 +6,8 @@ module.exports = {
   async getDriverStatus(ctx) {
     let unfinishedShip =
       await strapi.services.shipment.getUnfinishedShipmentByDriver(
+        0,
+        0,
         ctx.state.user.id
       );
 
@@ -82,11 +84,11 @@ module.exports = {
       "role.name": "Customer",
     });
 
-    let totalPage = Math.ceil(customers.length / _limit)
+    let totalPage = Math.ceil(customers.length / _limit);
 
     return {
       customers: customers,
-      totalPage
+      totalPage,
     };
   },
 
@@ -102,11 +104,11 @@ module.exports = {
       },
     });
 
-    let totalPage = Math.ceil(staffs.length / _limit)
+    let totalPage = Math.ceil(staffs.length / _limit);
 
     return {
       staffs: staffs,
-      totalPage
+      totalPage,
     };
   },
 };

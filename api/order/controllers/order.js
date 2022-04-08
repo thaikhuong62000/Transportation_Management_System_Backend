@@ -2,11 +2,6 @@
 
 const { sanitizeEntity } = require("strapi-utils/lib");
 
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
- * to customize this controller
- */
-
 module.exports = {
   async getOrderTracing(ctx) {
     const { id } = ctx.params;
@@ -174,72 +169,130 @@ module.exports = {
   },
 
   async create(ctx) {
-    const { id, role } = ctx.state.user;
-    const {
-      sender_phone,
-      sender_name,
-      receiver_phone,
-      receiver_name,
-      fee,
-      remain_fee,
-      from_address,
-      to_address,
-      name,
-      packages,
-      note = "",
-      state = 0,
-    } = ctx.request.body;
+    const { id: customer } = ctx.state.user;
+    let { remain_fee, fee, from_address, to_address, packages, ...body } =
+      ctx.request.body;
 
-    if (!remain_fee || remain_fee < 0 || !fee || fee < 0) {
-      if (role.name !== "Admin")
-        return ctx.badRequest([
+    const db = strapi.connections.default;
+    let session;
+    const { Package, Order, ComponentAddressAddress, ComponentPackageSize } =
+      db.models;
+
+    try {
+      if (!remain_fee || remain_fee < 0 || !fee || fee < 0) {
+        if (role.name !== "Admin") throw "Invalid order fee";
+      }
+
+      if (
+        !body.sender_phone ||
+        !body.sender_name ||
+        !body.receiver_phone ||
+        !body.receiver_name ||
+        !packages ||
+        !packages.length ||
+        typeof from_address !== "object" ||
+        typeof to_address !== "object"
+      ) {
+        if (role.name !== "Admin") throw "Invalid order information";
+      }
+
+      try {
+        if (!from_address.latitude || !from_address.longitude) {
+          const response = await strapi.geocode(mergeAddress(from_address));
+          const coord = response.data.results[0].geometry.location;
+          from_address.latitude = coord.lat;
+          from_address.longitude = coord.lng;
+        }
+        if (!to_address.latitude || !to_address.longitude) {
+          const response = await strapi.geocode(mergeAddress(to_address));
+          const coord = response.data.results[0].geometry.location;
+          to_address.latitude = coord.lat;
+          to_address.longitude = coord.lng;
+        }
+      } catch (error) {
+        throw "Invalid address";
+      }
+
+      // TODO: Calculate Fee
+      fee = await strapi.services.fee.calcFee(
+        from_address,
+        to_address,
+        packages,
+        ctx.state.user
+      );
+      remain_fee = fee;
+
+      session = await db.startSession();
+      session.startTransaction();
+
+      const addresses = await ComponentAddressAddress.create(
+        [from_address, to_address],
+        { session: session }
+      );
+
+      let order = await Order.create(
+        [
           {
-            id: "order.create",
-            message: "Invalid order fee",
+            ...body,
+            from_address: {
+              kind: "ComponentAddressAddress",
+              ref: addresses[0]._id,
+            },
+            to_address: {
+              kind: "ComponentAddressAddress",
+              ref: addresses[1]._id,
+            },
+            fee,
+            remain_fee,
+            customer,
           },
-        ]);
-    }
+        ],
+        { session: session }
+      );
 
-    if (
-      !sender_phone ||
-      !sender_name ||
-      !receiver_phone ||
-      !receiver_name ||
-      !packages.length ||
-      typeof from_address !== "object" ||
-      typeof to_address !== "object"
-    ) {
-      if (role.name !== "Admin")
-        return ctx.badRequest([
-          {
-            id: "order.create",
-            message: "Invalid order information",
-          },
-        ]);
-    }
+      if (!order) throw "Create order failed!";
 
-    let order = await strapi.query("order").create({
-      fee,
-      remain_fee,
-      sender_name,
-      sender_phone,
-      receiver_name,
-      receiver_phone,
-      from_address,
-      to_address,
-      name,
-      note,
-      customer: id,
-      state: state
-    });
+      const size = await ComponentPackageSize.create(
+        [...packages.map((item) => item.size)],
+        { session: session }
+      );
 
-    for (let pack of packages) {
-      await strapi.query("package").create({
-        ...pack,
-        order: order.id,
+      for (let index = 0; index < size.length; index++) {
+        packages[index] = {
+          ...packages[index],
+          size: { kind: "ComponentPackageSize", ref: size[index]._id },
+          order: order[0]._id,
+        };
+      }
+
+      packages = await Package.create([...packages], {
+        session: session,
       });
-    }
 
-    return order;
+      if (!packages) throw "Create package failed!";
+
+      await session.commitTransaction();
+      session.endSession();
+
+      return order[0];
+    } catch (error) {
+      await session.abortTransaction();
+      session.endSession();
+      return ctx.badRequest([
+        {
+          id: "order.create",
+          message: JSON.stringify(error),
+        },
+      ]);
+    }
   },
 };
+
+function mergeAddress(address) {
+  let newAddress = "";
+  ["street", "ward", "province", "city"].forEach((element) => {
+    if (address[element] && address[element] !== "")
+      newAddress = newAddress + `, ${address[element]}`;
+  });
+  return newAddress.slice(1);
+}
