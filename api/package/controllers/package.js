@@ -321,10 +321,45 @@ module.exports = {
 
     let arrangedPack = await strapi.services[
       "shipment-item"
-    ].getArrangedPackagesByStorage(storage, { state: 3 });
+    ].getArrangedPackagesByStorage(storage, { "package.state": 3 });
 
-    console.log(arrangedPack, importedPack);
+    let unShipPack = importedPack.reduce((total, item) => {
+      let temp = arrangedPack.find(
+        (item2) => item2._id.toString() === item._id.toString()
+      );
 
-    return 0;
+      if (temp) {
+        let quantity = item.quantity - temp.quantity;
+        if (quantity && quantity > 0) {
+          total.push({
+            ...item.package,
+            size: item.size,
+            quantity: quantity,
+          });
+        }
+      } else {
+        total.push({
+          ...item.package,
+          id: item._id,
+          size: item.size,
+          quantity: item.quantity,
+        });
+      }
+      return total;
+    }, []);
+
+
+    order = order.reduce((total, item) => {
+      let orderPacks = unShipPack.filter(item2 => item2.order.toString() === item.id.toString())
+      if (orderPacks.length) {
+        total.push({
+          ...item,
+          packages: orderPacks
+        })
+      }
+      return total
+    }, [])
+
+    return order;
   },
 };

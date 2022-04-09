@@ -57,7 +57,7 @@
       "path": "/packages/unship/:storage",
       "handler": "package.getUnShipPackage",
       "config": {
-        "policies": [],
+        "policies": ["global::filter-address"],
         "description": "Get packages that is scanned barcode"
       }
     },

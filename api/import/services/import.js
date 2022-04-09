@@ -75,7 +75,6 @@ module.exports = {
     let importes = await strapi.query("import").model.aggregate([
       {
         $match: {
-          ...queryOptions,
           storage: mongoose.Types.ObjectId(storage),
         },
       },
@@ -89,6 +88,11 @@ module.exports = {
       },
       {
         $unwind: "$package",
+      },
+      {
+        $match: {
+          ...queryOptions
+        }
       },
       {
         $group: {

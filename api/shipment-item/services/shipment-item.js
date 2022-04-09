@@ -22,7 +22,6 @@ module.exports = {
       },
       {
         $match: {
-          ...queryOptions,
           "shipment.from_storage": mongoose.Types.ObjectId(storage),
         },
       },
@@ -36,6 +35,11 @@ module.exports = {
       },
       {
         $unwind: "$package",
+      },
+      {
+        $match: {
+          ...queryOptions
+        }
       },
       {
         $group: {
