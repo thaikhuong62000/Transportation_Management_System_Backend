@@ -127,7 +127,7 @@ module.exports = {
     // Get package in storage and not exported yet (don't have shipment)
     const { storage, role } = ctx.state.user;
     const { page = 0, size = 5, storeId = "", state = 0 } = ctx.query;
-    let packages = []
+    let packages = [];
 
     if (role.name === "Stocker") {
       packages = await strapi.query("import").find({
@@ -136,9 +136,9 @@ module.exports = {
         _start: page * Number.parseInt(size),
         storage: storage,
         "package.exports.storage": {
-          $ne: storage
-        }
-      })
+          $ne: storage,
+        },
+      });
     } else if (role.name === "Admin") {
       if (!storeId)
         return ctx.badRequest([
@@ -154,9 +154,9 @@ module.exports = {
         storage: storeId,
         "package.state": state,
         "package.exports.storage": {
-          $ne: storage
-        }
-      })
+          $ne: storage,
+        },
+      });
     }
 
     return packages.map((package) =>
@@ -223,5 +223,48 @@ module.exports = {
       remainingPackage,
       ...package,
     };
+  },
+
+  async getUnArrangePackage(ctx) {
+    const { storage } = ctx.params;
+    const { state = 0 } = ctx.query
+
+    let importedPack = await strapi.services.import.getCurrentImports(storage);
+
+    let shipPack = await strapi.services[
+      "shipment-item"
+    ].getArrangedPackagesByStorage(storage);
+
+    let unArrangePack = importedPack.reduce(
+      (total, item) => {
+        let temp = shipPack.find(item2 => item2.package._id.toString() === item.package._id.toString())
+        if (temp) {
+          let quantity = item.quantity - temp.quantity
+          if (quantity && quantity > 0) {
+            total.push({
+              ...item.package,
+              id: item._id,
+              size: item.size,
+              quantity: quantity
+            })
+          } 
+        } else {
+          total.push({
+            ...item.package,
+            id: item._id,
+            size: item.size,
+            quantity: item.quantity
+          })
+        }
+        return total
+      },
+      []
+    );
+    
+    unArrangePack = unArrangePack.filter(item => {
+      return item.state === Number.parseInt(state)
+    })
+
+    return unArrangePack;
   },
 };
