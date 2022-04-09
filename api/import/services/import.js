@@ -71,10 +71,11 @@ module.exports = {
     return entites;
   },
 
-  async getCurrentImports(storage) {
+  async getCurrentImports(storage, queryOptions = {}) {
     let importes = await strapi.query("import").model.aggregate([
       {
         $match: {
+          ...queryOptions,
           storage: mongoose.Types.ObjectId(storage),
         },
       },

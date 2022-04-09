@@ -7,7 +7,7 @@ var mongoose = require("mongoose");
  */
 
 module.exports = {
-  async getArrangedPackagesByStorage(storage) {
+  async getArrangedPackagesByStorage(storage, queryOptions = {}) {
     let items = await strapi.query("shipment-item").model.aggregate([
       {
         $lookup: {
@@ -22,6 +22,7 @@ module.exports = {
       },
       {
         $match: {
+          ...queryOptions,
           "shipment.from_storage": mongoose.Types.ObjectId(storage),
         },
       },

@@ -45,6 +45,24 @@
     },
     {
       "method": "GET",
+      "path": "/packages/uncollect/:order",
+      "handler": "package.getUnCollectPackage",
+      "config": {
+        "policies": [],
+        "description": "Get packages that is scanned barcode"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/packages/unship/:storage",
+      "handler": "package.getUnShipPackage",
+      "config": {
+        "policies": [],
+        "description": "Get packages that is scanned barcode"
+      }
+    },
+    {
+      "method": "GET",
       "path": "/packages/:id",
       "handler": "package.findOne",
       "config": {

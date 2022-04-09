@@ -227,7 +227,7 @@ module.exports = {
 
   async getUnArrangePackage(ctx) {
     const { storage } = ctx.params;
-    const { state = 0 } = ctx.query
+    const { state = 0 } = ctx.query;
 
     let importedPack = await strapi.services.import.getCurrentImports(storage);
 
@@ -235,36 +235,96 @@ module.exports = {
       "shipment-item"
     ].getArrangedPackagesByStorage(storage);
 
-    let unArrangePack = importedPack.reduce(
-      (total, item) => {
-        let temp = shipPack.find(item2 => item2.package._id.toString() === item.package._id.toString())
-        if (temp) {
-          let quantity = item.quantity - temp.quantity
-          if (quantity && quantity > 0) {
-            total.push({
-              ...item.package,
-              id: item._id,
-              size: item.size,
-              quantity: quantity
-            })
-          } 
-        } else {
+    let unArrangePack = importedPack.reduce((total, item) => {
+      let temp = shipPack.find(
+        (item2) => item2.package._id.toString() === item.package._id.toString()
+      );
+      if (temp) {
+        let quantity = item.quantity - temp.quantity;
+        if (quantity && quantity > 0) {
           total.push({
             ...item.package,
             id: item._id,
             size: item.size,
-            quantity: item.quantity
-          })
+            quantity: quantity,
+          });
         }
-        return total
-      },
-      []
-    );
-    
-    unArrangePack = unArrangePack.filter(item => {
-      return item.state === Number.parseInt(state)
-    })
+      } else {
+        total.push({
+          ...item.package,
+          id: item._id,
+          size: item.size,
+          quantity: item.quantity,
+        });
+      }
+      return total;
+    }, []);
+
+    unArrangePack = unArrangePack.filter((item) => {
+      return item.state === Number.parseInt(state);
+    });
 
     return unArrangePack;
+  },
+
+  async getUnCollectPackage(ctx) {
+    const { order } = ctx.params;
+    const { storage } = ctx.query;
+
+    let packs = await strapi.services.package.find({
+      order: order,
+    });
+
+    let collectedPack = await strapi.services[
+      "shipment-item"
+    ].getArrangedPackagesByStorage(storage, {
+      package: {
+        $in: packs.map((item) => item._id),
+      },
+    });
+
+    let unCollectPack = packs.reduce((total, item) => {
+      let temp = collectedPack.find(
+        (item2) => item2._id.toString() === item._id.toString()
+      );
+
+      if (temp) {
+        let quantity = item.quantity - temp.quantity;
+        if (quantity && quantity > 0) {
+          total.push({
+            ...item,
+            size: item.size,
+            quantity: quantity,
+          });
+        }
+      } else {
+        total.push({
+          ...item,
+          id: item._id,
+          size: item.size,
+          quantity: item.quantity,
+        });
+      }
+      return total;
+    }, []);
+
+    return unCollectPack;
+  },
+
+  async getUnShipPackage(ctx) {
+    let { storage } = ctx.params;
+    let order = await strapi.services.order.find(ctx.query);
+
+    let importedPack = await strapi.services.import.getCurrentImports(storage, {
+      "package.state": 3,
+    });
+
+    let arrangedPack = await strapi.services[
+      "shipment-item"
+    ].getArrangedPackagesByStorage(storage, { state: 3 });
+
+    console.log(arrangedPack, importedPack);
+
+    return 0;
   },
 };
