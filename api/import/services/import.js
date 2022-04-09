@@ -70,4 +70,52 @@ module.exports = {
 
     return entites;
   },
+
+  async getCurrentImports(storage) {
+    let importes = await strapi.query("import").model.aggregate([
+      {
+        $match: {
+          storage: mongoose.Types.ObjectId(storage),
+        },
+      },
+      {
+        $lookup: {
+          from: "packages",
+          localField: "package",
+          foreignField: "_id",
+          as: "package",
+        },
+      },
+      {
+        $unwind: "$package",
+      },
+      {
+        $group: {
+          _id: "$package._id",
+          quantity: {
+            $sum: "$quantity",
+          },
+          package: {
+            $first: "$package",
+          },
+        },
+      },
+      {
+        $unwind: "$package.size",
+      },
+      {
+        $lookup: {
+          from: "components_package_sizes",
+          localField: "package.size.ref",
+          foreignField: "_id",
+          as: "size",
+        },
+      },
+      {
+        $unwind: "$size"
+      },
+    ]);
+
+    return importes
+  },
 };
