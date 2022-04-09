@@ -105,7 +105,7 @@ module.exports = {
   async create(ctx) {
     const shipment = await strapi.services.shipment.create(ctx.request.body);
 
-    if (driver) {
+    if (ctx.request.body.driver) {
       strapi.services.shipment.updateOrderState(shipment);
     }
 
