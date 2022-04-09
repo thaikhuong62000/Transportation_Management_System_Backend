@@ -24,6 +24,10 @@
     "shipment": {
       "model": "shipment",
       "via": "shipment_items"
+    },
+    "assmin": {
+      "type": "boolean",
+      "default": true
     }
   }
 }
