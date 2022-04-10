@@ -225,6 +225,7 @@ module.exports = {
     };
   },
 
+  // For interdepart
   async getUnArrangePackage(ctx) {
     const { storage } = ctx.params;
     const { state = 0 } = ctx.query;
@@ -267,23 +268,28 @@ module.exports = {
     return unArrangePack;
   },
 
+  // For collecting package
   async getUnCollectPackage(ctx) {
-    const { order } = ctx.params;
-    const { storage } = ctx.query;
+    const { storage } = ctx.params;
 
-    let packs = await strapi.services.package.find({
-      order: order,
-    });
+    let orders = await strapi.services.order.find(ctx.query);
+
+    let packs = orders.reduce((total, item) => {
+      total.push(...item.packages)
+      return total
+    }, [])
+
 
     let collectedPack = await strapi.services[
       "shipment-item"
     ].getArrangedPackagesByStorage(storage, {
-      package: {
-        $in: packs.map((item) => item._id),
-      },
+      "package.order": {
+        $in: orders.map(item => item._id)
+      }
     });
 
-    let unCollectPack = packs.reduce((total, item) => {
+
+    let uncollectPack = packs.reduce((total, item) => {
       let temp = collectedPack.find(
         (item2) => item2._id.toString() === item._id.toString()
       );
@@ -300,7 +306,6 @@ module.exports = {
       } else {
         total.push({
           ...item,
-          id: item._id,
           size: item.size,
           quantity: item.quantity,
         });
@@ -308,9 +313,23 @@ module.exports = {
       return total;
     }, []);
 
-    return unCollectPack;
+
+
+    orders = orders.reduce((total, item) => {
+      let orderPacks = uncollectPack.filter(item2 => item2.order.toString() === item.id.toString())
+      if (orderPacks.length) {
+        total.push({
+          ...item,
+          packages: orderPacks
+        })
+      }
+      return total
+    }, [])
+
+    return orders;
   },
 
+  // For shipping package
   async getUnShipPackage(ctx) {
     let { storage } = ctx.params;
     let order = await strapi.services.order.find(ctx.query);

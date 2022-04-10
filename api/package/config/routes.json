@@ -45,10 +45,10 @@
     },
     {
       "method": "GET",
-      "path": "/packages/uncollect/:order",
+      "path": "/packages/uncollect/:storage",
       "handler": "package.getUnCollectPackage",
       "config": {
-        "policies": [],
+        "policies": ["global::filter-address"],
         "description": "Get packages that is scanned barcode"
       }
     },
