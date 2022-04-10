@@ -82,7 +82,7 @@ module.exports = {
 
       // If all package imported
       if (totalImportedPackage + quantity === pack.quantity) {
-        const newPackageState = getPackageState(pack, storage);
+        const newPackageState = getPackageState(pack, store);
         // Update package address
         const _package = await Package.findOneAndUpdate(
           { _id: packageId },
