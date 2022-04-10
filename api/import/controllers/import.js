@@ -125,7 +125,9 @@ module.exports = {
 function getPackageState(_package, store) {
   return _package.state < 2
     ? 2
-    : _package.order.to_address.city === store.address.city
+    : store.provinces
+        .map((item) => item.name)
+        .includes(_package.order.to_address.city)
     ? 3
     : 2;
 }
