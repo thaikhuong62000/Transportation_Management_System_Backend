@@ -3,13 +3,18 @@ const moment = require("moment");
 module.exports = {
   async createReport(ctx) {
     let { storage } = ctx.params;
-    let { type } = ctx.query;
+    let { type, note = "" } = ctx.request.body;
+    let { id } = ctx.state.user;
+
+    let store = await strapi.services.storage.findOne({
+      id: storage,
+    });
 
     let startTime = "";
     let endTime = "";
     let date = new Date();
     let result = "";
-    if (type === "today") {
+    if (type === "day") {
       startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate());
       endTime = new Date(
         date.getFullYear(),
@@ -70,30 +75,31 @@ module.exports = {
       return total;
     }, []);
 
-    let total_import = result["importes"].reduce((total, item) => (total + item.quantity), 0)
-    let total_export = result["exportes"].reduce((total, item) => (total + item.quantity), 0)
-
-    await strapi.services.report.update(
-      {
-        storage: storage,
-      },
-      {
-        report_file: JSON.stringify(temp),
-        total_import,
-        total_export
-      }
+    let total_import = result["importes"].reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+    let total_export = result["exportes"].reduce(
+      (total, item) => total + item.quantity,
+      0
     );
 
-    let store = await strapi.services.storage.findOne({
-      id: storage,
+    let insertedReport = await strapi.services.report.create({
+      stocker: id,
+      storage: storage,
+      report: JSON.stringify({
+        name: store.name,
+        title: "Báo cáo nhập xuất " + store.name,
+        startTime: moment(startTime).format("DD/MM/YYYY"),
+        endTime: moment(endTime).format("DD/MM/YYYY"),
+        data: temp,
+      }),
+      total_import,
+      total_export,
+      note: note,
+      type: type
     });
 
-    return {
-      name: store.name,
-      title: "Báo cáo nhập xuất " + store.name,
-      startTime: moment(startTime).format("DD/MM/YYYY"),
-      endTime: moment(endTime).format("DD/MM/YYYY"),
-      data: temp,
-    };
+    return insertedReport;
   },
 };

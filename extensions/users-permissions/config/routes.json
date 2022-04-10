@@ -70,7 +70,7 @@
       }
     },
     {
-      "method": "GET",
+      "method": "POST",
       "path": "/report/:storage",
       "handler": "Report.createReport",
       "config": {

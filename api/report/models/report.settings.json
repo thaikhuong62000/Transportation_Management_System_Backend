@@ -36,6 +36,15 @@
     },
     "report": {
       "type": "json"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "day",
+        "week",
+        "month"
+      ],
+      "default": "day"
     }
   }
 }
