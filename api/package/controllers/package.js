@@ -275,19 +275,17 @@ module.exports = {
     let orders = await strapi.services.order.find(ctx.query);
 
     let packs = orders.reduce((total, item) => {
-      total.push(...item.packages)
-      return total
-    }, [])
-
+      total.push(...item.packages);
+      return total;
+    }, []);
 
     let collectedPack = await strapi.services[
       "shipment-item"
     ].getArrangedPackagesByStorage(storage, {
       "package.order": {
-        $in: orders.map(item => item._id)
-      }
+        $in: orders.map((item) => item._id),
+      },
     });
-
 
     let uncollectPack = packs.reduce((total, item) => {
       let temp = collectedPack.find(
@@ -313,18 +311,18 @@ module.exports = {
       return total;
     }, []);
 
-
-
     orders = orders.reduce((total, item) => {
-      let orderPacks = uncollectPack.filter(item2 => item2.order.toString() === item.id.toString())
+      let orderPacks = uncollectPack.filter(
+        (item2) => item2.order.toString() === item.id.toString()
+      );
       if (orderPacks.length) {
         total.push({
           ...item,
-          packages: orderPacks
-        })
+          packages: orderPacks,
+        });
       }
-      return total
-    }, [])
+      return total;
+    }, []);
 
     return orders;
   },
@@ -367,17 +365,18 @@ module.exports = {
       return total;
     }, []);
 
-
     order = order.reduce((total, item) => {
-      let orderPacks = unShipPack.filter(item2 => item2.order.toString() === item.id.toString())
+      let orderPacks = unShipPack.filter(
+        (item2) => item2.order.toString() === item.id.toString()
+      );
       if (orderPacks.length) {
         total.push({
           ...item,
-          packages: orderPacks
-        })
+          packages: orderPacks,
+        });
       }
-      return total
-    }, [])
+      return total;
+    }, []);
 
     return order;
   },
