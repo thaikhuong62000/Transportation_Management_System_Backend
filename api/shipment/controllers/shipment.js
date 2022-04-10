@@ -116,6 +116,8 @@ module.exports = {
         { session: session }
       );
 
+
+
       session = await db.startSession();
       session.startTransaction();
 
