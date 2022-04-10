@@ -138,10 +138,10 @@ module.exports = {
 
       if (!shipment) throw "Create shipment fail";
       
-      // if (shipmentData.driver) {
-      //   let ship = await Shipment.populate(shipment[0], {path:"packages"})
-      //   await strapi.services.shipment.updateOrderState(ship);
-      // }
+      if (shipmentData.driver) {
+        let ship = await Shipment.populate(shipment[0], {path:"packages"})
+        await strapi.services.shipment.updateOrderState(ship);
+      }
      
       if (shipmentItems && shipmentItems.length) {
         let _shipmentItems = shipmentItems.map((item) => ({

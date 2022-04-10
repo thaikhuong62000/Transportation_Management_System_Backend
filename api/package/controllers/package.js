@@ -1,5 +1,7 @@
 const { sanitizeEntity } = require("strapi-utils");
 const validateUploadBody = require("strapi-plugin-upload/controllers/validation/upload");
+var mongoose = require("mongoose");
+
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
  * to customize this controller
@@ -234,7 +236,9 @@ module.exports = {
 
     let shipPack = await strapi.services[
       "shipment-item"
-    ].getArrangedPackagesByStorage(storage);
+    ].getArrangedPackagesByStorage({
+      "shipment.from_storage": mongoose.Types.ObjectId(storage),
+    });
 
     let unArrangePack = importedPack.reduce((total, item) => {
       let temp = shipPack.find(
@@ -281,11 +285,16 @@ module.exports = {
 
     let collectedPack = await strapi.services[
       "shipment-item"
-    ].getArrangedPackagesByStorage(storage, {
-      "package.order": {
-        $in: orders.map((item) => item._id),
+    ].getArrangedPackagesByStorage(
+      {
+        "shipment.to_storage": mongoose.Types.ObjectId(storage),
       },
-    });
+      {
+        "package.order": {
+          $in: orders.map((item) => item._id),
+        },
+      }
+    );
 
     let uncollectPack = packs.reduce((total, item) => {
       let temp = collectedPack.find(
@@ -310,6 +319,8 @@ module.exports = {
       }
       return total;
     }, []);
+
+    console.log(packs, collectedPack, uncollectPack);
 
     orders = orders.reduce((total, item) => {
       let orderPacks = uncollectPack.filter(
@@ -338,7 +349,12 @@ module.exports = {
 
     let arrangedPack = await strapi.services[
       "shipment-item"
-    ].getArrangedPackagesByStorage(storage, { "package.state": 3 });
+    ].getArrangedPackagesByStorage(
+      {
+        "shipment.from_storage": mongoose.Types.ObjectId(storage),
+      },
+      { "package.state": 3 }
+    );
 
     let unShipPack = importedPack.reduce((total, item) => {
       let temp = arrangedPack.find(
