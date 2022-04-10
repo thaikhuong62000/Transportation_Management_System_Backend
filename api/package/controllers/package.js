@@ -199,4 +199,160 @@ module.exports = {
       storedPackageQuantity
     };
   },
+
+  // For interdepart
+  async getUnArrangePackage(ctx) {
+    const { storage } = ctx.params;
+    const { state = 0 } = ctx.query;
+
+    let importedPack = await strapi.services.import.getCurrentImports(storage);
+
+    let shipPack = await strapi.services[
+      "shipment-item"
+    ].getArrangedPackagesByStorage(storage);
+
+    let unArrangePack = importedPack.reduce((total, item) => {
+      let temp = shipPack.find(
+        (item2) => item2.package._id.toString() === item.package._id.toString()
+      );
+      if (temp) {
+        let quantity = item.quantity - temp.quantity;
+        if (quantity && quantity > 0) {
+          total.push({
+            ...item.package,
+            id: item._id,
+            size: item.size,
+            quantity: quantity,
+          });
+        }
+      } else {
+        total.push({
+          ...item.package,
+          id: item._id,
+          size: item.size,
+          quantity: item.quantity,
+        });
+      }
+      return total;
+    }, []);
+
+    unArrangePack = unArrangePack.filter((item) => {
+      return item.state === Number.parseInt(state);
+    });
+
+    return unArrangePack;
+  },
+
+  // For collecting package
+  async getUnCollectPackage(ctx) {
+    const { storage } = ctx.params;
+
+    let orders = await strapi.services.order.find(ctx.query);
+
+    let packs = orders.reduce((total, item) => {
+      total.push(...item.packages);
+      return total;
+    }, []);
+
+    let collectedPack = await strapi.services[
+      "shipment-item"
+    ].getArrangedPackagesByStorage(storage, {
+      "package.order": {
+        $in: orders.map((item) => item._id),
+      },
+    });
+
+    let uncollectPack = packs.reduce((total, item) => {
+      let temp = collectedPack.find(
+        (item2) => item2._id.toString() === item._id.toString()
+      );
+
+      if (temp) {
+        let quantity = item.quantity - temp.quantity;
+        if (quantity && quantity > 0) {
+          total.push({
+            ...item,
+            size: item.size,
+            quantity: quantity,
+          });
+        }
+      } else {
+        total.push({
+          ...item,
+          size: item.size,
+          quantity: item.quantity,
+        });
+      }
+      return total;
+    }, []);
+
+    orders = orders.reduce((total, item) => {
+      let orderPacks = uncollectPack.filter(
+        (item2) => item2.order.toString() === item.id.toString()
+      );
+      if (orderPacks.length) {
+        total.push({
+          ...item,
+          packages: orderPacks,
+        });
+      }
+      return total;
+    }, []);
+
+    return orders;
+  },
+
+  // For shipping package
+  async getUnShipPackage(ctx) {
+    let { storage } = ctx.params;
+    let order = await strapi.services.order.find(ctx.query);
+
+    let importedPack = await strapi.services.import.getCurrentImports(storage, {
+      "package.state": 3,
+    });
+
+    let arrangedPack = await strapi.services[
+      "shipment-item"
+    ].getArrangedPackagesByStorage(storage, { "package.state": 3 });
+
+    let unShipPack = importedPack.reduce((total, item) => {
+      let temp = arrangedPack.find(
+        (item2) => item2._id.toString() === item._id.toString()
+      );
+
+      if (temp) {
+        let quantity = item.quantity - temp.quantity;
+        if (quantity && quantity > 0) {
+          total.push({
+            ...item.package,
+            size: item.size,
+            quantity: quantity,
+          });
+        }
+      } else {
+        total.push({
+          ...item.package,
+          id: item._id,
+          size: item.size,
+          quantity: item.quantity,
+        });
+      }
+      return total;
+    }, []);
+
+    order = order.reduce((total, item) => {
+      let orderPacks = unShipPack.filter(
+        (item2) => item2.order.toString() === item.id.toString()
+      );
+      if (orderPacks.length) {
+        total.push({
+          ...item,
+          packages: orderPacks,
+        });
+      }
+      return total;
+    }, []);
+
+    return order;
+  },
 };

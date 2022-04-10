@@ -40,6 +40,10 @@
     "reports": {
       "via": "storage",
       "collection": "report"
+    },
+    "provinces": {
+      "via": "storage",
+      "collection": "province"
     }
   }
 }

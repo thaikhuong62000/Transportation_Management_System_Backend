@@ -70,6 +70,15 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/report/:storage",
+      "handler": "Report.createReport",
+      "config": {
+        "policies": [],
+        "prefix": ""
+      }
+    },
+    {
       "method": "PUT",
       "path": "/users/avatar",
       "handler": "User.updateAvatar",
@@ -92,6 +101,20 @@
         "policies": [],
         "prefix": "",
         "description": "Get assistance information",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/home-status",
+      "handler": "CustomUser.getAdminStatus",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Get admin homepage status",
         "tag": {
           "plugin": "users-permissions",
           "name": "User"
