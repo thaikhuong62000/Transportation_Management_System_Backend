@@ -136,18 +136,16 @@ module.exports = {
     if (shipment.packages.length > 0) {
       const orders = shipment.packages.map((item) => item.order);
       const packages = shipment.packages.map((item) => item._id);
-      // await strapi.services.order.update(
-      //   {
-      //     _id: orders[0],
-      //     state: 0,
-      //   },
-      //   { state: 1 },
-      //   { multi: true }
-      // );
+      await strapi.services.order.update(
+        {
+          _id: orders[0],
+        },
+        { state: 1 },
+        { multi: true }
+      );
       await strapi.services.package.update(
         {
           _id: { $in: packages },
-          state: 0,
         },
         { state: 1 },
         { multi: true }
