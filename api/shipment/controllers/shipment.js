@@ -103,13 +103,73 @@ module.exports = {
   },
 
   async create(ctx) {
-    const shipment = await strapi.services.shipment.create(ctx.request.body);
+    const { shipmentData, shipmentItems } = ctx.request.body;
+    let { from_address, to_address } = shipmentData;
 
-    if (driver) {
-      strapi.services.shipment.updateOrderState(shipment);
+    const db = strapi.connections.default;
+    let session;
+    const { ComponentAddressAddress, Shipment, ShipmentItem } = db.models;
+
+    try {
+      const addresses = await ComponentAddressAddress.create(
+        [from_address, to_address],
+        { session: session }
+      );
+
+      session = await db.startSession();
+      session.startTransaction();
+
+      const shipment = await Shipment.create(
+        [
+          {
+            ...shipmentData,
+            from_address: {
+              kind: "ComponentAddressAddress",
+              ref: addresses[0]._id,
+            },
+            to_address: {
+              kind: "ComponentAddressAddress",
+              ref: addresses[1]._id,
+            },
+          },
+        ],
+        { session: session }
+      );
+
+      if (!shipment) throw "Create shipment fail";
+      
+      // if (shipmentData.driver) {
+      //   let ship = await Shipment.populate(shipment[0], {path:"packages"})
+      //   await strapi.services.shipment.updateOrderState(ship);
+      // }
+     
+      if (shipmentItems && shipmentItems.length) {
+        let _shipmentItems = shipmentItems.map((item) => ({
+          ...item,
+          shipment: shipment[0]._id,
+        }));
+
+        let items = await ShipmentItem.create([..._shipmentItems], {
+          session: session,
+        });
+
+        if (!items) throw "Create shipment item failed";
+      }
+
+      await session.commitTransaction();
+      session.endSession();
+
+      return shipment;
+    } catch (error) {
+      await session.abortTransaction();
+      session.endSession();
+      return ctx.badRequest([
+        {
+          id: "shipment.create",
+          message: JSON.stringify(error),
+        },
+      ]);
     }
-
-    return shipment;
   },
 
   async finishShipment(ctx) {
