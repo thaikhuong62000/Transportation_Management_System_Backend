@@ -295,8 +295,6 @@ module.exports = {
       return total;
     }, []);
 
-    console.log(packs, collectedPack, uncollectPack);
-
     orders = orders.reduce((total, item) => {
       let orderPacks = uncollectPack.filter(
         (item2) => item2.order.toString() === item.id.toString()
