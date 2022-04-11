@@ -161,25 +161,28 @@ module.exports = {
             $month: "$createdAt",
           },
           day: {
-            $dayOfMonth: "$createdAt"
-          }
+            $dayOfMonth: "$createdAt",
+          },
         },
       },
       {
         $match: {
           month: {
-            $eq: month
-          }
-        }
+            $eq: month,
+          },
+        },
       },
       {
         $group: {
           _id: "$day",
           quantity: {
-            $sum: 1
-          }
-        }
-      }
+            $sum: 1,
+          },
+        },
+      },
+      {
+        $sort: { _id: 1 },
+      },
     ]);
     return shipments;
   },
