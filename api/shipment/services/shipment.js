@@ -138,21 +138,53 @@ module.exports = {
       const packages = shipment.packages.map((item) => item._id);
       await strapi.services.order.update(
         {
-          _id: { $in: orders },
-          state: 0,
+          _id: orders[0],
         },
         { state: 1 },
         { multi: true }
       );
-      await strapi.services.packages.update(
+      await strapi.services.package.update(
         {
           _id: { $in: packages },
-          state: 0,
         },
         { state: 1 },
         { multi: true }
       );
     }
+  },
+
+  async getShipmentByMonth(month) {
+    let shipments = await strapi.query("shipment").model.aggregate([
+      {
+        $addFields: {
+          month: {
+            $month: "$createdAt",
+          },
+          day: {
+            $dayOfMonth: "$createdAt",
+          },
+        },
+      },
+      {
+        $match: {
+          month: {
+            $eq: month,
+          },
+        },
+      },
+      {
+        $group: {
+          _id: "$day",
+          quantity: {
+            $sum: 1,
+          },
+        },
+      },
+      {
+        $sort: { _id: 1 },
+      },
+    ]);
+    return shipments;
   },
 };
 

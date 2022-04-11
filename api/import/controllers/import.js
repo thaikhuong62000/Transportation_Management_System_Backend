@@ -16,26 +16,22 @@ module.exports = {
           { arrived_time_null: true },
         ],
       },
-      [{ path: "driver", populate: "car" }]
+      ["car"]
     );
 
     return shipments.map((entity) => {
-      const {
-        from_address,
-        id,
-        driver: { car },
-      } = entity;
-      return { id, from_address, licence: car.licence };
+      const { from_address, id, car } = entity;
+      return { id, from_address, licence: car?.licence };
     });
   },
 
   async updateImportQuantityByPackage(ctx) {
-    const { packageId, quantity } = ctx.request.body;
+    const { packageId, quantity, shipmentItem } = ctx.request.body;
     const { storage, id } = ctx.state.user;
 
     const db = strapi.connections.default;
     let session;
-    const { Package, Import, Order } = db.models; // Models
+    const { Package, Import, Order, ShipmentItem } = db.models; // Models
 
     try {
       let store = await strapi.services.storage.findOne({ id: storage });
@@ -48,8 +44,6 @@ module.exports = {
       const totalImportedPackage = (
         await strapi.services.import.getImporstByPackages([packageId])
       ).reduce((pre, cur) => pre + cur.quantity, 0);
-
-      console.log(totalImportedPackage);
 
       const order = await strapi.services.order.findOne({
         id: pack.order.id,
@@ -74,11 +68,21 @@ module.exports = {
         { session: session }
       );
 
+      let shipment_item = await ShipmentItem.findOneAndUpdate({
+        _id: shipmentItem
+      }, {
+        received: quantity
+      })
+
+      if (!shipment_item) {
+        throw "Invalid shipment item"
+      }
+
       if (!importedPackage) throw "Create import failed";
 
       // If all package imported
       if (totalImportedPackage + quantity === pack.quantity) {
-        const newPackageState = getPackageState(pack, storage);
+        const newPackageState = getPackageState(pack, store);
         // Update package address
         const _package = await Package.findOneAndUpdate(
           { _id: packageId },
@@ -129,7 +133,9 @@ module.exports = {
 function getPackageState(_package, store) {
   return _package.state < 2
     ? 2
-    : _package.order.to_address.city === store.address.city
+    : store.provinces
+        .map((item) => item.name)
+        .includes(_package.order.to_address.city)
     ? 3
     : 2;
 }

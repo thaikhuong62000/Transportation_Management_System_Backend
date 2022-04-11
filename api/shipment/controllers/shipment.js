@@ -9,6 +9,7 @@ module.exports = {
       "packages",
       "from_storage",
       "to_storage",
+      "shipment_items",
     ]);
     shipment = await sanitizeEntity(shipment, {
       model: strapi.models.shipment,
@@ -82,7 +83,13 @@ module.exports = {
 
     shipmentDetail = sanitizeEntity(shipmentDetail, {
       model: strapi.models.shipment,
-      includeFields: ["packages", "to_address", "driver", "assistance"],
+      includeFields: [
+        "packages",
+        "to_address",
+        "driver",
+        "assistance",
+        "shipment_items",
+      ],
     });
 
     const totalWeight = shipmentDetail.packages.reduce((total, item) => {
@@ -96,24 +103,89 @@ module.exports = {
   },
 
   async create(ctx) {
-    const { vehicleId, driver } = ctx.request.body;
+    const { shipmentData, shipmentItems } = ctx.request.body;
+    let { from_address, to_address, from_storage = "", to_storage = "" } = shipmentData;
 
-    const shipment = await strapi.services.shipment.create(ctx.request.body);
+    const db = strapi.connections.default;
+    let session;
+    const { ComponentAddressAddress, Shipment, ShipmentItem } = db.models;
 
-    if (driver) {
-      strapi.services.shipment.updateOrderState(shipment);
-    }
+    try {
+      const addresses = await ComponentAddressAddress.create(
+        [from_address, to_address],
+        { session: session }
+      );
 
-    //  Update current shipments for car
-    await strapi.services.car.findOneAndUpdate(
-      { _id: vehicleId },
-      {
-        $push: {
-          shipments: shipment._id,
-        },
+
+
+      session = await db.startSession();
+      session.startTransaction();
+
+      const shipment = await Shipment.create(
+        [
+          {
+            ...shipmentData,
+            from_address: {
+              kind: "ComponentAddressAddress",
+              ref: addresses[0]._id,
+            },
+            to_address: {
+              kind: "ComponentAddressAddress",
+              ref: addresses[1]._id,
+            },
+          },
+        ],
+        { session: session }
+      );
+
+      if (!shipment) throw "Create shipment fail";
+      
+      if (to_storage && !from_storage) {
+        let ship = await Shipment.populate(shipment[0], {path:"packages"})
+        await strapi.services.shipment.updateOrderState(ship);
       }
-    );
+     
+      if (shipmentItems && shipmentItems.length) {
+        let _shipmentItems = shipmentItems.map((item) => ({
+          ...item,
+          shipment: shipment[0]._id,
+        }));
 
-    return shipment;
+        let items = await ShipmentItem.create([..._shipmentItems], {
+          session: session,
+        });
+
+        if (!items) throw "Create shipment item failed";
+      }
+
+      await session.commitTransaction();
+      session.endSession();
+
+      return shipment;
+    } catch (error) {
+      await session.abortTransaction();
+      session.endSession();
+      return ctx.badRequest([
+        {
+          id: "shipment.create",
+          message: JSON.stringify(error),
+        },
+      ]);
+    }
+  },
+
+  async finishShipment(ctx) {
+    const { _id } = ctx.params;
+    const shipment = await strapi
+      .query("shipment")
+      .model.findOneAndUpdate({ _id }, { arrived_time: new Date() });
+    if (!shipment)
+      return ctx.badRequest([
+        {
+          id: "Shipment.finishShipment",
+          message: "Update failed",
+        },
+      ]);
+    else return true;
   },
 };

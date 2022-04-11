@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/shipment-items",
-      "handler": "shipment-item.find",
+      "path": "/provinces",
+      "handler": "province.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/shipment-items/count",
-      "handler": "shipment-item.count",
+      "path": "/provinces/count",
+      "handler": "province.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/shipment-items/:id",
-      "handler": "shipment-item.findOne",
+      "path": "/provinces/:id",
+      "handler": "province.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/shipment-items",
-      "handler": "shipment-item.create",
+      "path": "/provinces",
+      "handler": "province.create",
       "config": {
-        "policies": ["check-create-shipment"]
+        "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/shipment-items/:id",
-      "handler": "shipment-item.update",
+      "path": "/provinces/:id",
+      "handler": "province.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/shipment-items/:id",
-      "handler": "shipment-item.delete",
+      "path": "/provinces/:id",
+      "handler": "province.delete",
       "config": {
         "policies": []
       }

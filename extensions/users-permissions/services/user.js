@@ -25,4 +25,51 @@ module.exports = {
       );
     return user;
   },
+
+  async getIncome(startTime, endTime, year) {
+    let income = await strapi.query("payment").model.aggregate([
+      {
+        $match: {},
+      },
+      {
+        $addFields: {
+          month: {
+            $month: "$createdAt",
+          },
+          year: {
+            $year: "$createdAt",
+          },
+        },
+      },
+      {
+        $match: {
+          month: {
+            $gte: startTime,
+          },
+          month: {
+            $lte: endTime,
+          },
+          year: {
+            $eq: year,
+          },
+        },
+      },
+      {
+        $group: {
+          _id: "1",
+          income: {
+            $sum: "$paid",
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          income: 1,
+        },
+      },
+    ]);
+
+    return income[0];
+  },
 };

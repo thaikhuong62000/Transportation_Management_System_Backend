@@ -48,6 +48,10 @@
     "shipment_items": {
       "via": "shipment",
       "collection": "shipment-item"
+    },
+    "car": {
+      "via": "shipments",
+      "model": "car"
     }
   }
 }

@@ -30,21 +30,21 @@
       "plugin": "users-permissions",
       "model": "user"
     },
-    "report_file": {
-      "collection": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {}
-    },
     "storage": {
       "via": "reports",
       "model": "storage"
+    },
+    "report": {
+      "type": "json"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "day",
+        "week",
+        "month"
+      ],
+      "default": "day"
     }
   }
 }

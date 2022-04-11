@@ -1,27 +1,41 @@
 "use strict";
 
+const msToDay = 1000 * 3600 * 24;
+
 module.exports = {
   /**
    *  Create a furlough
    */
   async create(ctx) {
     let { start_time, days, reason } = ctx.request.body;
+    const { days_before, days_limit } = strapi.tms.config.furlough;
 
     try {
+      days = parseInt(days);
+
+      if (days < 1) {
+        throw "Absence days must bigger than 0";
+      }
+
+      if (days > days_limit) {
+        throw "Too many absence days";
+      }
+
       start_time = Date.parse(start_time);
       if (isNaN(start_time)) {
         throw "Wrong start time format";
       }
 
-      if (days) {
-        throw "Start time must not be larger than end time!";
+      const toDay = Date.parse(new Date());
+      if (start_time > toDay + days_before * msToDay) {
+        throw "Too late";
       }
 
       await strapi.services.furlough.create({
         state: "pending",
         reason: reason,
         start_time: start_time,
-        end_time: new Date(start_time + days * 1000 * 3600 * 24),
+        end_time: new Date(start_time + days * msToDay),
         driver: ctx.state.user.id,
       });
       return ctx.created();
@@ -30,7 +44,7 @@ module.exports = {
         errors: [
           {
             id: "Furlough.create",
-            message: error,
+            message: JSON.stringify(error),
           },
         ],
       });
