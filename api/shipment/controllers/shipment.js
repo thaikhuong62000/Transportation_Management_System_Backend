@@ -104,7 +104,7 @@ module.exports = {
 
   async create(ctx) {
     const { shipmentData, shipmentItems } = ctx.request.body;
-    let { from_address, to_address } = shipmentData;
+    let { from_address, to_address, from_storage = "", to_storage = "" } = shipmentData;
 
     const db = strapi.connections.default;
     let session;
@@ -140,7 +140,7 @@ module.exports = {
 
       if (!shipment) throw "Create shipment fail";
       
-      if (shipmentData.driver) {
+      if (to_storage && !from_storage) {
         let ship = await Shipment.populate(shipment[0], {path:"packages"})
         await strapi.services.shipment.updateOrderState(ship);
       }
