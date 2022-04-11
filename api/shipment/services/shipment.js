@@ -152,6 +152,37 @@ module.exports = {
       );
     }
   },
+
+  async getShipmentByMonth(month) {
+    let shipments = await strapi.query("shipment").model.aggregate([
+      {
+        $addFields: {
+          month: {
+            $month: "$createdAt",
+          },
+          day: {
+            $dayOfMonth: "$createdAt"
+          }
+        },
+      },
+      {
+        $match: {
+          month: {
+            $eq: month
+          }
+        }
+      },
+      {
+        $group: {
+          _id: "$day",
+          quantity: {
+            $sum: 1
+          }
+        }
+      }
+    ]);
+    return shipments;
+  },
 };
 
 function sortShipmentByDistance(lat, lng, item1, item2, sort_fa = false) {

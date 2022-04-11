@@ -60,14 +60,14 @@ module.exports = {
 
   async getAdminStatus(ctx) {
     let date = new Date();
-    let month = date.getMonth();
+    let month = date.getMonth() + 1;
     let year = date.getFullYear();
 
     let quarterlyIncome = await strapi.plugins[
       "users-permissions"
     ].services.user.getIncome(
-      (Math.ceil(month / 3) - 1 || 1) * 3 + 1,
-      (Math.ceil(month / 3) - 1 || 1) * 3 + 3,
+      (Math.ceil(month / 3) - 1) * 3 + 1,
+      (Math.ceil(month / 3) - 1) * 3 + 3,
       year
     );
 
@@ -83,13 +83,14 @@ module.exports = {
       state_in: [1, 3],
     });
 
-    // TDOD: calculate shipment count per month
+    let shipments = await strapi.services.shipment.getShipmentByMonth(month)
 
     return {
       quarterlyIncome: quarterlyIncome ? quarterlyIncome.income : 0,
       yearlyIncome: yearlyIncome ? yearlyIncome.income : 0,
       currentOrder: currentOrder,
       unshipOrder: unshipOrder,
+      shipments
     };
   },
 
