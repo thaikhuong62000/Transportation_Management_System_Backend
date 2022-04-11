@@ -100,14 +100,18 @@ module.exports = {
         ctx.state.user.id
       );
 
-    let assistance = await strapi
-      .query("user", "users-permissions")
-      .findOne({ id: shipments[0].assistance });
+    if (shipments.length > 0) {
+      let assistance = await strapi
+        .query("user", "users-permissions")
+        .findOne({ id: shipments[0].assistance });
 
-    return sanitizeEntity(assistance, {
-      model: strapi.query("user", "users-permissions").model,
-      includeFields: ["name", "phone"],
-    });
+      return sanitizeEntity(assistance, {
+        model: strapi.query("user", "users-permissions").model,
+        includeFields: ["name", "phone"],
+      });
+    }
+
+    return {};
   },
 
   async getCustomerList(ctx) {
