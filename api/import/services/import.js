@@ -31,11 +31,6 @@ module.exports = {
         },
       },
       {
-        $sort: {
-          createdAt: 1,
-        },
-      },
-      {
         $lookup: {
           from: "packages",
           localField: "package",
@@ -58,12 +53,40 @@ module.exports = {
         $unwind: "$storage",
       },
       {
+        $group: {
+          _id: {
+            "storage": "$storage._id", 
+            "package": "$package._id" 
+          },
+          quantity: {
+            $sum: "$quantity"
+          },
+          storage: {
+            $first: "$storage"
+          },
+          package: {
+            $first: "$package"
+          },
+          createdAt: {
+            $first: "$createdAt"
+          },
+          updatedAt: {
+            $last: "$createdAt"
+          }
+        }
+      },
+      {
         $project: {
           quantity: 1,
           package: 1,
           storage: 1,
           createdAt: 1,
           updatedAt: 1,
+        },
+      },
+      {
+        $sort: {
+          createdAt: 1,
         },
       },
     ]);
