@@ -94,8 +94,8 @@ module.exports = {
     return entites;
   },
 
-  async getCurrentImports(storage, queryOptions = {}) {
-    let importes = await strapi.query("import").model.aggregate([
+  async getCurrentImports(storage, queryOptions = {}, skip = 0, limit = 0) {
+    let pipeLine = [
       {
         $match: {
           storage: mongoose.Types.ObjectId(storage),
@@ -142,7 +142,16 @@ module.exports = {
       {
         $unwind: "$size"
       },
-    ]);
+      {
+        $skip: skip,
+      },
+    ]
+
+    if (limit) {
+      pipeLine.push({$limit: limit})
+    }
+
+    let importes = await strapi.query("import").model.aggregate(pipeLine);
 
     return importes
   },

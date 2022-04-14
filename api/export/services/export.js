@@ -93,4 +93,66 @@ module.exports = {
 
     return entites;
   },
+
+  async getCurrentExports(storage, queryOptions = {}, skip = 0, limit = 0) {
+    let pipeLine = [
+      {
+        $match: {
+          storage: mongoose.Types.ObjectId(storage),
+        },
+      },
+      {
+        $lookup: {
+          from: "packages",
+          localField: "package",
+          foreignField: "_id",
+          as: "package",
+        },
+      },
+      {
+        $unwind: "$package",
+      },
+      {
+        $match: {
+          ...queryOptions
+        }
+      },
+      {
+        $group: {
+          _id: "$package._id",
+          quantity: {
+            $sum: "$quantity",
+          },
+          package: {
+            $first: "$package",
+          },
+        },
+      },
+      {
+        $unwind: "$package.size",
+      },
+      {
+        $lookup: {
+          from: "components_package_sizes",
+          localField: "package.size.ref",
+          foreignField: "_id",
+          as: "size",
+        },
+      },
+      {
+        $unwind: "$size"
+      },
+      {
+        $skip: skip,
+      },
+    ]
+
+    if (limit) {
+      pipeLine.push({$limit: limit})
+    }
+
+    let exports = await strapi.query("export").model.aggregate(pipeLine);
+
+    return exports
+  },
 };
