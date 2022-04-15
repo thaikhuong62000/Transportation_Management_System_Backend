@@ -19,7 +19,8 @@
       "type": "integer"
     },
     "received": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0
     },
     "shipment": {
       "model": "shipment",
