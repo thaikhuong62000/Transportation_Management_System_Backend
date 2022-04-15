@@ -29,6 +29,10 @@
     "assmin": {
       "type": "boolean",
       "default": true
+    },
+    "export_received": {
+      "type": "integer",
+      "default": 0
     }
   }
 }

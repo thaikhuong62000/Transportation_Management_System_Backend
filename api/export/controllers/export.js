@@ -29,50 +29,74 @@ module.exports = {
   },
 
   async updateExportQuantityByPackage(ctx) {
-    const { packageId, quantity } = ctx.request.body;
+    const { packageId, quantity, shipmentItem } = ctx.request.body;
     const { id, storage } = ctx.state.user;
 
-    let pack = await strapi.services.package.findOne({ id: packageId });
-    if (!pack) {
-      return ctx.badRequest([
-        {
-          id: "import.updateẼportQuantityByPackage",
-          message: "invalid QR code",
-        },
-      ]);
-    }
+    const db = strapi.connections.default;
+    let session;
+    const { Export, ShipmentItem, Storage } = db.models;
 
-    if (!quantity && quantity < 0) {
-      return ctx.badRequest([
-        {
-          id: "export.updateExportQuantityByPackage",
-          message: "Invalid package quantity",
-        },
-      ]);
-    }
+    try {
+      let pack = await strapi.services.package.findOne({ id: packageId });
+      if (!pack) {
+        throw "invalid QR code";
+      }
 
-    let exportedPackage = await strapi
-      .query("export")
-      .model.findOneAndUpdate(
-        { package: packageId, storage: storage },
-        { quantity: quantity },
-        { new: true }
+      let shipment_item = await strapi.services["shipment-item"].findOne({
+        id: shipmentItem,
+      });
+
+      if (!quantity && quantity < 0) {
+        throw "Invalid package quantity";
+      }
+
+      session = await db.startSession();
+      session.startTransaction();
+
+      let exportedPackage = await Export.create(
+        [
+          {
+            package: packageId,
+            quantity: Number.parseInt(quantity),
+            store_manager: id,
+            storage: storage,
+          },
+        ],
+        { session: session }
       );
 
-    if (!exportedPackage) {
-      exportedPackage = await strapi.query("export").create({
-        package: packageId,
-        quantity: quantity,
-        store_manager: id,
-        storage: storage,
+      if (!exportedPackage) throw "Create export failed";
+
+      shipment_item = await ShipmentItem.findOneAndUpdate(
+        {
+          _id: shipmentItem,
+        },
+        {
+          export_received:
+            Number.parseInt(shipment_item.export_received) + Number.parseInt(quantity),
+        }
+      ).session(session);
+
+      if (!shipment_item) {
+        throw "Invalid shipment item";
+      }
+
+      await session.commitTransaction();
+      session.endSession();
+
+      return sanitizeEntity(exportedPackage[0], {
+        model: strapi.query("export").model,
+        includeFields: ["quantity"],
       });
+    } catch (error) {
+      await session.abortTransaction();
+      session.endSession();
+      return ctx.badRequest([
+        {
+          id: "export.updatExportQuantityByPackage",
+          message: JSON.stringify(error),
+        },
+      ]);
     }
-
-    return sanitizeEntity(exportedPackage, {
-      model: strapi.query("export").model,
-      includeFields: ["quantity"],
-    });
   },
-
-  
 };
