@@ -132,15 +132,50 @@ module.exports = {
     let packages = [];
 
     if (role.name === "Stocker") {
-      packages = await strapi.query("import").find({
-        // ...ctx.query,
-        _limit: Number.parseInt(size),
-        _start: page * Number.parseInt(size),
-        storage: storage,
-        "package.exports.storage": {
-          $ne: storage,
-        },
-      });
+      let importedPack = await strapi.services.import.getCurrentImports(
+        storage,
+        {}
+      );
+
+      let exportedPack = await strapi.services.export.getCurrentExports(
+        storage,
+        {}
+      );
+
+      let unArrangePack = importedPack.reduce((total, item) => {
+        let temp = exportedPack.find(
+          (item2) =>
+            item2.package._id.toString() === item.package._id.toString()
+        );
+        if (temp) {
+          let quantity = item.quantity - temp.quantity;
+          if (quantity && quantity > 0) {
+            total.push({
+              id: item._id,
+              quantity: quantity,
+              package: {
+                ...item.package,
+                id: item._id,
+                size: item.size,
+              },
+            });
+          }
+        } else {
+          total.push({
+            id: item._id,
+            quantity: item.quantity,
+            package: {
+              ...item.package,
+              id: item._id,
+              size: item.size,
+            },
+          });
+        }
+        return total;
+      }, []);
+
+      return unArrangePack.slice(page * size, page * size + size);
+      
     } else if (role.name === "Admin") {
       if (!storeId)
         return ctx.badRequest([
@@ -198,7 +233,7 @@ module.exports = {
     }
 
     return {
-      storedPackageQuantity
+      storedPackageQuantity,
     };
   },
 

@@ -13,7 +13,7 @@ module.exports = {
     packages = packages.map((pack) => {
       return sanitizeEntity(pack, {
         model: strapi.query("package").model,
-        includeFields: ["quantity", "order", "current_address"],
+        includeFields: ["quantity", "order", "current_address", "state"],
       });
     });
 
@@ -32,7 +32,8 @@ module.exports = {
           storage: item.storage.name,
           quantity: item.package.quantity,
           importQuantity: item.quantity,
-          time: item.updatedAt,
+          timeUpdate: item.updatedAt,
+          timeCreate: item.createdAt,
         };
       })
       .reduce((total, item, index) => {
@@ -42,6 +43,7 @@ module.exports = {
         return total;
       }, {});
 
+
     exports = exports
       .map((item) => {
         return {
@@ -49,7 +51,8 @@ module.exports = {
           storage: item.storage.name,
           quantity: item.package.quantity,
           importQuantity: item.quantity,
-          time: item.updatedAt,
+          timeUpdate: item.updatedAt,
+          timeCreate: item.createdAt,
         };
       })
       .reduce((total, item) => {
@@ -67,7 +70,8 @@ module.exports = {
         if (item.quantity === item.importQuantity) {
           importResult[item.storage].push({
             id: item.id,
-            time: item.time,
+            timeUpdate: item.timeUpdate,
+            timeCreate: item.timeCreate,
           });
         }
       }
@@ -81,7 +85,8 @@ module.exports = {
         if (item.quantity === item.importQuantity) {
           exportResult[item.storage].push({
             id: item.id,
-            time: item.time,
+            timeUpdate: item.timeUpdate,
+            timeCreate: item.timeCreate,
           });
         }
       }
@@ -91,7 +96,7 @@ module.exports = {
 
     for (let item in importResult) {
       if (importResult && importResult[item]) {
-        if (exportResult[item]) {
+        if (exportResult[item].length) {
           if (
             importResult[item].length === packages.length &&
             exportResult[item].length === packages.length
@@ -99,7 +104,7 @@ module.exports = {
             tracingResult.push({
               storage: item,
               status: 3,
-              time: importResult[item][1].time,
+              time: exportResult[item][exportResult[item].length - 1].timeUpdate,
             });
           } else if (
             importResult[item].length === packages.length &&
@@ -112,7 +117,7 @@ module.exports = {
           } else {
             tracingResult.push({
               storage: item,
-              status: 5,
+              status: 0,
             });
           }
         } else {
@@ -120,7 +125,7 @@ module.exports = {
             tracingResult.push({
               storage: item,
               status: 1,
-              time: importResult[item][1].time,
+              time: importResult[item][importResult[item].length - 1].timeUpdate,
             });
           } else {
             tracingResult.push({
@@ -132,11 +137,11 @@ module.exports = {
       }
     }
 
-    let isLastStage = packages[0]?.current_address?.city
-      ? packages[0].current_address.city === packages[0].order.to_address.city
-      : false;
+    let isLastStage = packages.every(item => item.state === 3)
 
     return {
+      importResult,
+      exportResult,
       tracingResult,
       lastStage: isLastStage,
     };
