@@ -32,12 +32,23 @@ module.exports = {
       .query("order")
       .model.find({
         customer: mongoose.Types.ObjectId(id),
-        state: {
-          $in: Array.from({ length: 5 }, (_, index) => index),
-        },
-        remain_fee: {
-          $gt: 0,
-        },
+        $or: [
+          {
+            $and: [
+              { state: 4 },
+              {
+                remain_fee: {
+                  $gt: 0,
+                },
+              },
+            ],
+          },
+          {
+            state: {
+              $in: Array.from({ length: 4 }, (_, index) => index),
+            },
+          },
+        ],
       })
       .populate("packages", "current_address weight quantity name")
       .limit(limit)
