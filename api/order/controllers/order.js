@@ -43,7 +43,6 @@ module.exports = {
         return total;
       }, {});
 
-
     exports = exports
       .map((item) => {
         return {
@@ -104,7 +103,8 @@ module.exports = {
             tracingResult.push({
               storage: item,
               status: 3,
-              time: exportResult[item][exportResult[item].length - 1].timeUpdate,
+              time: exportResult[item][exportResult[item].length - 1]
+                .timeUpdate,
             });
           } else if (
             importResult[item].length === packages.length &&
@@ -125,7 +125,8 @@ module.exports = {
             tracingResult.push({
               storage: item,
               status: 1,
-              time: importResult[item][importResult[item].length - 1].timeUpdate,
+              time: importResult[item][importResult[item].length - 1]
+                .timeUpdate,
             });
           } else {
             tracingResult.push({
@@ -137,7 +138,7 @@ module.exports = {
       }
     }
 
-    let isLastStage = packages.every(item => item.state === 3)
+    let isLastStage = packages.every((item) => item.state === 3);
 
     return {
       importResult,
@@ -175,8 +176,15 @@ module.exports = {
 
   async create(ctx) {
     const { id: customer } = ctx.state.user;
-    let { remain_fee, fee, from_address, to_address, packages, ...body } =
-      ctx.request.body;
+    let {
+      remain_fee,
+      fee,
+      from_address,
+      to_address,
+      packages,
+      voucher = "",
+      ...body
+    } = ctx.request.body;
 
     const db = strapi.connections.default;
     let session;
@@ -218,13 +226,35 @@ module.exports = {
       //   throw "Invalid address";
       // }
 
-      // TODO: Calculate Fee
-      fee = await strapi.services.fee.calcFee(
-        from_address,
-        to_address,
-        packages,
-        ctx.state.user
-      );
+      // Temporary comment
+      // fee = await strapi.services.fee.calcFee(
+      //   from_address,
+      //   to_address,
+      //   packages,
+      //   ctx.state.user
+      // );
+
+      // Calculate fee from voucher and initial fee
+      if (voucher) {
+        let _voucher = await strapi.services.voucher.findOne({ id: voucher });
+        if (!_voucher) {
+          throw "Cannot find voucher";
+        }
+
+        let { sale_type, sale, sale_max } = _voucher;
+        if (sale_type === "value") {
+          if (fee >= sale) {
+            fee = fee - sale;
+          }
+        } else if (sale_type === "percentage") {
+          let discount = fee - (fee * sale) / 100;
+          if (discount > sale_max) {
+            discount = sale_max;
+          }
+          fee = fee - discount;
+        }
+      }
+
       remain_fee = fee;
 
       session = await db.startSession();
