@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = {
-  async calcFee(from_address, to_address, packages, user, voucher) {
+  async calcFee(from_address, to_address, packages, user) {
     const distance = calcDistance(from_address, to_address); //km
     const { base = 1, current = 1 } = strapi.tms.config.oil;
     const gtgt = current / base;
@@ -9,7 +9,7 @@ module.exports = {
       (pre, curr) => pre + curr.quantity * curr.weight,
       0
     );
-    // TODO: Apply Voucher
+    
     return calcFeeFromDistance(strapi, weight, distance) * gtgt;
   },
 };
