@@ -21,6 +21,7 @@ module.exports = {
           },
         ],
       })
+      .populate("packages", "current_address weight quantity name")
       .limit(limit)
       .skip(skip);
 
