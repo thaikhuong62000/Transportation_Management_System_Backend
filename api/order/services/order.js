@@ -12,7 +12,14 @@ module.exports = {
       .query("order")
       .model.find({
         customer: mongoose.Types.ObjectId(id),
-        state: 5,
+        $or: [
+          {
+            $and: [{ state: 4 }, { remain_fee: 0 }],
+          },
+          {
+            state: 5,
+          },
+        ],
       })
       .limit(limit)
       .skip(skip);
@@ -27,6 +34,9 @@ module.exports = {
         customer: mongoose.Types.ObjectId(id),
         state: {
           $in: Array.from({ length: 5 }, (_, index) => index),
+        },
+        remain_fee: {
+          $gt: 0,
         },
       })
       .populate("packages", "current_address weight quantity name")
