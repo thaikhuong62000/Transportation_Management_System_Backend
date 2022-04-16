@@ -223,7 +223,8 @@ module.exports = {
         from_address,
         to_address,
         packages,
-        ctx.state.user
+        ctx.state.user,
+        body.voucher
       );
       remain_fee = fee;
 
