@@ -82,7 +82,7 @@
       "path": "/packages/:id",
       "handler": "package.update",
       "config": {
-        "policies": []
+        "policies": ["remove-unaccept-field"]
       }
     },
     {
