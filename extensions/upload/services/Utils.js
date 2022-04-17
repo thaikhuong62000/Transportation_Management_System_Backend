@@ -10,6 +10,13 @@ const mime = require("mime");
  */
 
 module.exports = {
+  /**
+   * Utility to uniform body type since parseMultipartData throw lots of errors
+   *
+   * @param {JSON: body} data
+   * @param {Files: body} files
+   * @returns data & files
+   */
   async getDataAndFile(ctx) {
     if (ctx.is("multipart")) {
       const { data, files } = parseMultipartData(ctx);
@@ -19,6 +26,14 @@ module.exports = {
     }
   },
 
+  /**
+   * Utility to check constrain of input image
+   *
+   * @param {Image, null} image check if param image is image
+   * @param {Bool} isArray check if image is array or not
+   * @param {Bool} imageRequired check if image is required
+   * @returns Throw if error exist
+   */
   async checkImage(image, isArray, imageRequired = true) {
     if (imageRequired && !image) throw "Image Required";
     if (!image) return;
@@ -37,6 +52,13 @@ module.exports = {
       throw "Invalid file type";
   },
 
+  /**
+   *
+   * @param {Image, null} image to upload or replace
+   * @param {Object} body required for upload and replace function
+   * @param {Bool} imageId if exist image will be replace instead of upload
+   * @returns Array of 1 image
+   */
   async uploadOrReplaceImage(image, body, imageId = null) {
     if (!image) return null;
     if (imageId) {
@@ -55,6 +77,9 @@ module.exports = {
   },
 };
 
+/**
+ * Get extension of file then get mime type
+ */
 function getType(image) {
   return mime.getType(image.name).split("/")[0];
 }

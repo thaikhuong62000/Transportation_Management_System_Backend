@@ -1,6 +1,12 @@
 "use strict";
 const { sanitizeEntity } = require("strapi-utils");
 
+/**
+ * Unused policy
+ *
+ * @param {*} ctx
+ * @param {*} next
+ */
 module.exports = async (ctx, next) => {
   await next();
   const { provider } = ctx.params;

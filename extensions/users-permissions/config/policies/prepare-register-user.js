@@ -2,6 +2,10 @@
 
 const phoneRegex = /^0[0-9]{9,10}$/g;
 
+/**
+ * Filter out unaccepted fields from body
+ * Check and prepare data to create account
+ */
 module.exports = async (ctx, next) => {
   const { email, name, city, province, street, ward, password, phone } =
     ctx.request.body;
