@@ -13,7 +13,7 @@
       "path": "/cars/count",
       "handler": "car.count",
       "config": {
-        "policies": []
+        "policies": ["handle-find"]
       }
     },
     {

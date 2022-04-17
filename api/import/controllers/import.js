@@ -16,157 +16,142 @@ module.exports = {
           { arrived_time_null: true },
         ],
       },
-      [{ path: "driver", populate: "car" }]
+      ["car"]
     );
 
     return shipments.map((entity) => {
-      const {
-        from_address,
-        id,
-        driver: { car },
-      } = entity;
-      return { id, from_address, licence: car.licence };
+      const { from_address, id, car } = entity;
+      return { id, from_address, licence: car?.licence };
     });
-  },
-
-  async update(ctx) {
-    const { storage } = ctx.state.user;
-    const { quantity, packageId } = ctx.request.body;
-    const importedId = ctx.params.id;
-
-    if (quantity < 0 || !quantity) {
-      return ctx.badRequest([
-        {
-          id: "import.updateImportQuantityByPackage",
-          message: "Invalid package quantity",
-        },
-      ]);
-    }
-
-    let importedPackage = await strapi.query("import").findOne(
-      {
-        id: importedId,
-      },
-      ["package"]
-    );
-
-    // If imported package not exist, then create a new one
-    if (!importedPackage) {
-      let newImport = await strapi.query("import").create({
-        package: packageId,
-        quantity: quantity,
-        store_manager: ctx.state.user.id,
-        storage: storage,
-      });
-
-      return newImport;
-    }
-
-    if (quantity > importedPackage.package.quantity) {
-      return ctx.badRequest([
-        {
-          id: "import.updateImportQuantityByPackage",
-          message: "Invalid package quantity",
-        },
-      ]);
-    }
-
-    let updatedImport = await strapi.query("import").update(
-      {
-        id: importedId,
-      },
-      {
-        quantity: quantity,
-      }
-    );
-
-    return updatedImport;
   },
 
   async updateImportQuantityByPackage(ctx) {
-    const { packageId, quantity } = ctx.request.body;
+    const { packageId, quantity, shipmentItem } = ctx.request.body;
     const { storage, id } = ctx.state.user;
 
-    let store = await strapi.services.storage.findOne({ id: storage });
-    let { street, ward, city, province, longitude } = store.address;
+    const db = strapi.connections.default;
+    let session;
+    const { Package, Import, Order, ShipmentItem, Storage } = db.models; // Models
 
-    let pack = await strapi.services.package.findOne({ id: packageId });
-    if (!pack) {
-      return ctx.badRequest([
-        {
-          id: "import.updateImportQuantityByPackage",
-          message: "invalid QR code",
-        },
-      ]);
-    }
+    try {
+      let store = await Storage.findOne({ _id: storage });
+      store = await Storage.populate(store, { path: "provinces" });
 
-    if (!quantity && quantity < 0) {
-      return ctx.badRequest([
-        {
-          id: "import.updateImportQuantityByPackage",
-          message: "Invalid package quantity",
-        },
-      ]);
-    }
+      let pack = await strapi.services.package.findOne({ id: packageId });
+      if (!pack) {
+        throw "invalid QR code";
+      }
 
-    let importedPackage = await strapi
-      .query("import")
-      .model.findOneAndUpdate(
-        { package: packageId, storage: storage },
-        { quantity: quantity },
-        { new: true }
-      );
-
-    if (!importedPackage) {
-      importedPackage = await strapi.query("import").create({
-        package: packageId,
-        quantity: quantity,
-        store_manager: id,
-        storage: storage,
+      let shipment_item = await strapi.services["shipment-item"].findOne({
+        id: shipmentItem,
       });
 
-      // update package address
-      await strapi.services.package.update(
-        { id: packageId },
-        {
-          current_address: {
-            street,
-            ward,
-            city,
-            province,
-            longitude,
-          },
-        }
-      );
-    }
+      const totalImportedPackage = (
+        await strapi.services.import.getImporstByPackages([packageId])
+      ).reduce((prev, curr) => prev + curr.quantity, 0);
 
-    // Update package and order state when import all pack quantity
-    if (quantity === pack.quantity) {
-      await strapi.services.package.update(
-        { id: packageId },
-        {
-          state:
-            pack.state === 1 ? 2 : pack.order.to_address.city === city ? 3 : 2,
-        }
-      );
+      const order = await strapi.services.order.findOne({
+        id: pack.order.id,
+      });
 
-      let order = await strapi.services.order.findOne({ id: pack.order.id });
-      let minPackState = Math.min(...order.packages.map((item) => item.state));
-      let allPackDelivered = order.packages.every(
-        (item) => item.current_address.city === order.to_address.city
-      );
-
-      if (minPackState === order.state + 1) {
-        await strapi.services.order.update(
-          { id: order.id },
-          { state: order.state === 1 ? 2 : allPackDelivered ? 3 : 2 }
-        );
+      if (!quantity && quantity < 0) {
+        throw "Invalid package quantity";
       }
-    }
 
-    return sanitizeEntity(importedPackage, {
-      model: strapi.query("import").model,
-      includeFields: ["quantity"],
-    });
+      session = await db.startSession();
+      session.startTransaction();
+
+      let importedPackage = await Import.create(
+        [
+          {
+            package: packageId,
+            quantity: Number.parseInt(quantity),
+            store_manager: id,
+            storage: storage,
+          },
+        ],
+        { session: session }
+      );
+
+      if (!importedPackage) throw "Create import failed";
+
+      shipment_item = await ShipmentItem.findOneAndUpdate(
+        {
+          _id: shipmentItem,
+        },
+        {
+          received:
+            Number.parseInt(shipment_item.received) + Number.parseInt(quantity),
+        }
+      ).session(session);
+
+      if (!shipment_item) {
+        throw "Invalid shipment item";
+      }
+
+      // If all package imported
+      if (totalImportedPackage + Number.parseInt(quantity) === pack.quantity) {
+        const newPackageState = getPackageState(pack, store);
+
+        // Update package address
+        const _package = await Package.findOneAndUpdate(
+          { _id: packageId },
+          {
+            current_address: store.address,
+            state: newPackageState,
+          },
+          {
+            new: true,
+          }
+        ).session(session);
+
+        if (!_package) throw "Update package failed";
+
+        // If package state changed, update order state
+        if (newPackageState !== pack.state) {
+          order.packages.find((item) => item.id === packageId).state =
+            newPackageState;
+
+          const minPackState = Math.min(
+            ...order.packages.map((item) => Number.parseInt(item.state))
+          );
+
+          if (minPackState > order.state) {
+            let _order = await Order.findOneAndUpdate(
+              { _id: order._id },
+              { state: Number.parseInt(minPackState) }
+            ).session(session);
+            if (!_order) throw "Update order failed";
+          }
+        }
+      }
+
+      await session.commitTransaction();
+      session.endSession();
+
+      return sanitizeEntity(importedPackage[0], {
+        model: strapi.query("import").model,
+        includeFields: ["quantity"],
+      });
+    } catch (error) {
+      await session.abortTransaction();
+      session.endSession();
+      return ctx.badRequest([
+        {
+          id: "import.updateImportQuantityByPackage",
+          message: JSON.stringify(error),
+        },
+      ]);
+    }
   },
 };
+
+function getPackageState(_package, store) {
+  return Number.parseInt(_package.state) < 2
+    ? 2
+    : store.provinces
+        .map((item) => item.name)
+        .includes(_package.order.to_address.city)
+    ? 3
+    : 2;
+}

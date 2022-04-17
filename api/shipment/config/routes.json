@@ -71,6 +71,22 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "PUT",
+      "path": "/shipments/accept/:shipment",
+      "handler": "shipment.acceptShipment",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/shipments/finish/:_id",
+      "handler": "shipment.finishShipment",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

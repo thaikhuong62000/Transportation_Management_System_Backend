@@ -8,7 +8,7 @@
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -40,6 +40,10 @@
     "reports": {
       "via": "storage",
       "collection": "report"
+    },
+    "provinces": {
+      "via": "storage",
+      "collection": "province"
     }
   }
 }

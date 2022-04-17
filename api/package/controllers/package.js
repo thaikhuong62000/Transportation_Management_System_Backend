@@ -1,5 +1,7 @@
 const { sanitizeEntity } = require("strapi-utils");
 const validateUploadBody = require("strapi-plugin-upload/controllers/validation/upload");
+var mongoose = require("mongoose");
+
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
  * to customize this controller
@@ -127,18 +129,53 @@ module.exports = {
     // Get package in storage and not exported yet (don't have shipment)
     const { storage, role } = ctx.state.user;
     const { page = 0, size = 5, storeId = "", state = 0 } = ctx.query;
-    let packages = []
+    let packages = [];
 
     if (role.name === "Stocker") {
-      packages = await strapi.query("import").find({
-        // ...ctx.query,
-        _limit: Number.parseInt(size),
-        _start: page * Number.parseInt(size),
-        storage: storage,
-        "package.exports.storage": {
-          $ne: storage
+      let importedPack = await strapi.services.import.getCurrentImports(
+        storage,
+        {}
+      );
+
+      let exportedPack = await strapi.services.export.getCurrentExports(
+        storage,
+        {}
+      );
+
+      let unArrangePack = importedPack.reduce((total, item) => {
+        let temp = exportedPack.find(
+          (item2) =>
+            item2.package._id.toString() === item.package._id.toString()
+        );
+        if (temp) {
+          let quantity = item.quantity - temp.quantity;
+          if (quantity && quantity > 0) {
+            total.push({
+              id: item._id,
+              quantity: quantity,
+              package: {
+                ...item.package,
+                id: item._id,
+                size: item.size,
+              },
+            });
+          }
+        } else {
+          total.push({
+            id: item._id,
+            quantity: item.quantity,
+            package: {
+              ...item.package,
+              id: item._id,
+              size: item.size,
+            },
+          });
         }
-      })
+        return total;
+      }, []);
+
+      return unArrangePack.slice(page * size, page * size + size);
+      
     } else if (role.name === "Admin") {
       if (!storeId)
         return ctx.badRequest([
@@ -154,9 +191,9 @@ module.exports = {
         storage: storeId,
         "package.state": state,
         "package.exports.storage": {
-          $ne: storage
-        }
-      })
+          $ne: storage,
+        },
+      });
     }
 
     return packages.map((package) =>
@@ -181,47 +218,190 @@ module.exports = {
     const { storage } = ctx.state.user;
     const { type } = ctx.request.query;
 
-    let remainingPackage = "";
-
-    let package = await strapi.query("package").findOne({
-      id: id,
-    });
+    let storedPackageQuantity = "";
 
     if (type === "0") {
-      let storedPackage = await strapi.query("import").findOne({
+      storedPackageQuantity = await strapi.services.import.count({
         storage: storage,
         package: id,
       });
-
-      remainingPackage = storedPackage
-        ? package.quantity - storedPackage.quantity
-        : package.quantity;
     } else if (type === "1") {
-      let awaitExportPackage = await strapi.query("export").findOne({
+      storedPackageQuantity = await strapi.services.export.count({
         storage: storage,
         package: id,
       });
-
-      remainingPackage = awaitExportPackage
-        ? package.quantity - awaitExportPackage.quantity
-        : package.quantity;
     }
 
-    package = sanitizeEntity(package, {
-      model: strapi.query("package").model,
-      includeFields: [
-        "name",
-        "weight",
-        "size",
-        "note",
-        "package_type",
-        "quantity",
-      ],
+    return {
+      storedPackageQuantity,
+    };
+  },
+
+  // For interdepart
+  async getUnArrangePackage(ctx) {
+    const { storage } = ctx.params;
+    const { state = 0 } = ctx.query;
+
+    let importedPack = await strapi.services.import.getCurrentImports(storage);
+
+    let shipPack = await strapi.services[
+      "shipment-item"
+    ].getArrangedPackagesByStorage({
+      "shipment.from_storage": mongoose.Types.ObjectId(storage),
     });
 
-    return {
-      remainingPackage,
-      ...package,
-    };
+    let unArrangePack = importedPack.reduce((total, item) => {
+      let temp = shipPack.find(
+        (item2) => item2.package._id.toString() === item.package._id.toString()
+      );
+      if (temp) {
+        let quantity = item.quantity - temp.quantity;
+        if (quantity && quantity > 0) {
+          total.push({
+            ...item.package,
+            id: item._id,
+            size: item.size,
+            quantity: quantity,
+          });
+        }
+      } else {
+        total.push({
+          ...item.package,
+          id: item._id,
+          size: item.size,
+          quantity: item.quantity,
+        });
+      }
+      return total;
+    }, []);
+
+    unArrangePack = unArrangePack.filter((item) => {
+      return item.state === Number.parseInt(state);
+    });
+
+    return unArrangePack;
+  },
+
+  // For collecting package
+  async getUnCollectPackage(ctx) {
+    const { storage } = ctx.params;
+
+    let orders = await strapi.services.order.find(ctx.query);
+
+    let packs = orders.reduce((total, item) => {
+      total.push(...item.packages);
+      return total;
+    }, []);
+
+    let collectedPack = await strapi.services[
+      "shipment-item"
+    ].getArrangedPackagesByStorage(
+      {
+        "shipment.to_storage": mongoose.Types.ObjectId(storage),
+      },
+      {
+        "package.order": {
+          $in: orders.map((item) => item._id),
+        },
+      }
+    );
+
+    let uncollectPack = packs.reduce((total, item) => {
+      let temp = collectedPack.find(
+        (item2) => item2._id.toString() === item._id.toString()
+      );
+
+      if (temp) {
+        let quantity = item.quantity - temp.quantity;
+        if (quantity && quantity > 0) {
+          total.push({
+            ...item,
+            size: item.size,
+            quantity: quantity,
+          });
+        }
+      } else {
+        total.push({
+          ...item,
+          size: item.size,
+          quantity: item.quantity,
+        });
+      }
+      return total;
+    }, []);
+
+    orders = orders.reduce((total, item) => {
+      let orderPacks = uncollectPack.filter(
+        (item2) => item2.order.toString() === item.id.toString()
+      );
+      if (orderPacks.length) {
+        total.push({
+          ...item,
+          packages: orderPacks,
+        });
+      }
+      return total;
+    }, []);
+
+    return orders;
+  },
+
+  // For shipping package
+  async getUnShipPackage(ctx) {
+    let { storage } = ctx.params;
+    let order = await strapi.services.order.find(ctx.query);
+
+    let importedPack = await strapi.services.import.getCurrentImports(storage, {
+      "package.state": 3,
+    });
+
+    let arrangedPack = await strapi.services[
+      "shipment-item"
+    ].getArrangedPackagesByStorage(
+      {
+        "shipment.from_storage": mongoose.Types.ObjectId(storage),
+      },
+      { "package.state": 3 }
+    );
+
+    let unShipPack = importedPack.reduce((total, item) => {
+      let temp = arrangedPack.find(
+        (item2) => item2._id.toString() === item._id.toString()
+      );
+
+      if (temp) {
+        let quantity = item.quantity - temp.quantity;
+        if (quantity && quantity > 0) {
+          total.push({
+            ...item.package,
+            size: item.size,
+            quantity: quantity,
+          });
+        }
+      } else {
+        total.push({
+          ...item.package,
+          id: item._id,
+          size: item.size,
+          quantity: item.quantity,
+        });
+      }
+      return total;
+    }, []);
+
+    order = order.reduce((total, item) => {
+      let orderPacks = unShipPack.filter(
+        (item2) => item2.order.toString() === item.id.toString()
+      );
+      if (orderPacks.length) {
+        total.push({
+          ...item,
+          packages: orderPacks,
+        });
+      }
+      return total;
+    }, []);
+
+    return order;
   },
 };

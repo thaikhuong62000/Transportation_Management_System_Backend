@@ -36,6 +36,33 @@
     },
     {
       "method": "GET",
+      "path": "/packages/unarrange/:storage",
+      "handler": "package.getUnArrangePackage",
+      "config": {
+        "policies": [],
+        "description": "Get packages that is scanned barcode"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/packages/uncollect/:storage",
+      "handler": "package.getUnCollectPackage",
+      "config": {
+        "policies": ["global::filter-address"],
+        "description": "Get packages that is scanned barcode"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/packages/unship/:storage",
+      "handler": "package.getUnShipPackage",
+      "config": {
+        "policies": ["global::filter-address"],
+        "description": "Get packages that is scanned barcode"
+      }
+    },
+    {
+      "method": "GET",
       "path": "/packages/:id",
       "handler": "package.findOne",
       "config": {
@@ -55,7 +82,7 @@
       "path": "/packages/:id",
       "handler": "package.update",
       "config": {
-        "policies": []
+        "policies": ["remove-unaccept-field"]
       }
     },
     {

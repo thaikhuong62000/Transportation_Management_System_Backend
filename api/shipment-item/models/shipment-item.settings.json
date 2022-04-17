@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shipment_items",
+  "info": {
+    "name": "Shipment Item",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "package": {
+      "model": "package"
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "received": {
+      "type": "integer",
+      "default": 0
+    },
+    "shipment": {
+      "model": "shipment",
+      "via": "shipment_items"
+    },
+    "assmin": {
+      "type": "boolean",
+      "default": true
+    },
+    "export_received": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

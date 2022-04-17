@@ -14,8 +14,10 @@ function filterAddress(ctx, address, fieldName) {
   address = JSON.parse(address);
   let response = ctx.response.body;
   Object.keys(address).forEach((subAddress) => {
-    response = response.filter(
-      (item) => item?.[fieldName]?.[subAddress] == address[subAddress]
+    response = response.filter((item) =>
+      Array.isArray(address[subAddress])
+        ? address[subAddress].includes(item?.[fieldName]?.[subAddress])
+        : item?.[fieldName]?.[subAddress] == address[subAddress]
     );
   });
   ctx.response.body = response;

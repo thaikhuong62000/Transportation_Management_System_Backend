@@ -1,11 +1,5 @@
 "use strict";
 const { sanitizeEntity } = require("strapi-utils");
-var moment = require("moment");
-
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
- * to customize this controller
- */
 
 module.exports = {
   /**
@@ -22,10 +16,10 @@ module.exports = {
       "packages",
       "from_storage",
       "to_storage",
+      "shipment_items",
     ]);
-    shipment = sanitizeEntity(shipment, {
+    shipment = await sanitizeEntity(shipment, {
       model: strapi.models.shipment,
-      includeFields: ["packages", "from_storage", "to_storage"],
     });
 
     if (
@@ -36,7 +30,7 @@ module.exports = {
         { id: shipment.packages[0].order },
         []
       );
-      return { ...shipment, ...order, order_id: shipment.packages[0].order };
+      return { ...order, order_id: shipment.packages[0].order, ...shipment };
     } else return shipment;
   },
 
@@ -47,15 +41,21 @@ module.exports = {
    * @returns
    */
   async getCurrentShipment(ctx) {
-    let shipments =
+    const { latitude, longitude } = ctx.query;
+    const _shipments =
       await strapi.services.shipment.getUnfinishedShipmentByDriver(
+        parseFloat(latitude),
+        parseFloat(longitude),
         ctx.state.user.id
       );
+    const shipments = await strapi.services.shipment.getNearbyShipment(
+      parseFloat(latitude),
+      parseFloat(longitude)
+    );
 
-    return shipments.map((entity) =>
+    return [..._shipments, ...shipments].map((entity) =>
       sanitizeEntity(entity, {
         model: strapi.models.shipment,
-        includeFields: ["to_address", "arrived_time"],
       })
     );
   },
@@ -66,18 +66,31 @@ module.exports = {
    * Precondition: Logined in as Driver
    * @returns
    */
+  async acceptShipment(ctx) {
+    const { shipment: _id } = ctx.params;
+    const { id: driver } = ctx.state.user;
+    const shipment = await strapi
+      .query("shipment")
+      .model.findOneAndUpdate({ _id, driver: null }, { driver }, { new: true })
+      .populate("packages");
+
+    strapi.services.shipment.updateOrderState(shipment);
+
+    return shipment;
+  },
+
   async getFinishedShipment(ctx) {
     const { pageIndex = 0 } = ctx.query;
-    let shipments = await strapi.services.shipment.getFinishedShipmentByDriver(
-      ctx.state.user.id,
-      pageIndex * 10,
-      10
-    );
+    const shipments =
+      await strapi.services.shipment.getFinishedShipmentByDriver(
+        ctx.state.user.id,
+        pageIndex * 10,
+        10
+      );
 
     return shipments.map((entity) =>
       sanitizeEntity(entity, {
         model: strapi.models.shipment,
-        includeFields: ["to_address", "arrived_time"],
       })
     );
   },
@@ -94,7 +107,13 @@ module.exports = {
 
     shipmentDetail = sanitizeEntity(shipmentDetail, {
       model: strapi.models.shipment,
-      includeFields: ["packages", "to_address", "driver", "assistance"],
+      includeFields: [
+        "packages",
+        "to_address",
+        "driver",
+        "assistance",
+        "shipment_items",
+      ],
     });
 
     const totalWeight = shipmentDetail.packages.reduce((total, item) => {
@@ -117,111 +136,87 @@ module.exports = {
    * @returns
    */
   async create(ctx) {
-    let {
-      orderId,
-      vehicleId,
-      shipmentInfo,
-      newOrderInfo,
-      updateQuantityList = [], // {id, quantity}
-      updatePackageList = [], // {id},
-      removePackageList = [], // {id}
-      newPackageList = [],
-      orderState = null, // number
-    } = ctx.request.body;
-    let shipment = "";
+    const { shipmentData, shipmentItems } = ctx.request.body;
+    let { from_address, to_address, from_storage = "", to_storage = "" } = shipmentData;
 
-    if (newOrderInfo) {
-      // Update quantity of package for old order
-      if (updateQuantityList.length) {
-        for (let item of updateQuantityList) {
-          await strapi.services.package.update(
-            { id: item.id },
-            { quantity: item.quantity }
-          );
-        }
-      }
+    const db = strapi.connections.default;
+    let session;
+    const { ComponentAddressAddress, Shipment, ShipmentItem } = db.models;
 
-      // Remove relation of package have full quantity for shipment
-      if (updatePackageList.length) {
-        await strapi.services.order.update(
-          { id: orderId },
-          { packages: updatePackageList }
-        );
-      }
+    try {
+      const addresses = await ComponentAddressAddress.create(
+        [from_address, to_address],
+        { session: session }
+      );
 
-      // Create package for order
-      let newOrder = await strapi.services.order.create(newOrderInfo);
-      if (newPackageList) {
-        for (let pack of newPackageList) {
-          await strapi.services.package.create({
-            ...pack,
-            state: 1,
-            order: newOrder.id,
-          });
-        }
-      }
+      session = await db.startSession();
+      session.startTransaction();
 
-      // Add package relation
-      let insertedOrder = await strapi.services.order.findOne({
-        id: newOrder.id,
-      });
-      if (removePackageList.length) {
-        insertedOrder = await strapi.services.order.update(
+      const shipment = await Shipment.create(
+        [
           {
-            id: insertedOrder.id,
+            ...shipmentData,
+            from_address: {
+              kind: "ComponentAddressAddress",
+              ref: addresses[0]._id,
+            },
+            to_address: {
+              kind: "ComponentAddressAddress",
+              ref: addresses[1]._id,
+            },
           },
-          {
-            packages: [
-              ...insertedOrder.packages.map((item) => item.id),
-              ...removePackageList,
-            ],
-          }
-        );
+        ],
+        { session: session }
+      );
+
+      if (!shipment) throw "Create shipment fail";
+      
+      if (to_storage && !from_storage) {
+        let ship = await Shipment.populate(shipment[0], {path:"packages"})
+        await strapi.services.shipment.updateOrderState(ship);
+      }
+     
+      if (shipmentItems && shipmentItems.length) {
+        let _shipmentItems = shipmentItems.map((item) => ({
+          ...item,
+          shipment: shipment[0]._id,
+        }));
+
+        let items = await ShipmentItem.create([..._shipmentItems], {
+          session: session,
+        });
+
+        if (!items) throw "Create shipment item failed";
       }
 
-      // Create shipment
-      shipment = await strapi.services.shipment.create({
-        ...shipmentInfo,
-        packages: insertedOrder.packages.map((item) => item.id),
-      });
+      await session.commitTransaction();
+      session.endSession();
 
-      // Update car current shipments
-      await strapi.services.car.update(
+      return shipment;
+    } catch (error) {
+      await session.abortTransaction();
+      session.endSession();
+      return ctx.badRequest([
         {
-          id: vehicleId,
+          id: "shipment.create",
+          message: JSON.stringify(error),
         },
-        {
-          $push: {
-            shipments: shipment.id,
-          },
-        }
-      );
-    } else {
-      shipment = await strapi.services.shipment.create(shipmentInfo);
-
-      //  Update current shipments for car
-      await strapi.services.car.update(
-        { id: vehicleId },
-        {
-          $push: {
-            shipments: shipment.id,
-          },
-        }
-      );
-
-      // Update order state and package state
-      if (orderState && orderState !== null) {
-        await strapi.services.order.update(
-          { id: orderId },
-          { state: orderState }
-        );
-        await strapi.services.package.update(
-          { order: orderId },
-          { state: orderState, multi: true }
-        );
-      }
+      ]);
     }
+  },
 
-    return shipment;
+  async finishShipment(ctx) {
+    const { _id } = ctx.params;
+    const shipment = await strapi
+      .query("shipment")
+      .model.findOneAndUpdate({ _id }, { arrived_time: new Date() });
+    if (!shipment)
+      return ctx.badRequest([
+        {
+          id: "Shipment.finishShipment",
+          message: "Update failed",
+        },
+      ]);
+    else return true;
   },
 };

@@ -31,11 +31,6 @@ module.exports = {
         },
       },
       {
-        $sort: {
-          createdAt: 1,
-        },
-      },
-      {
         $lookup: {
           from: "packages",
           localField: "package",
@@ -58,6 +53,29 @@ module.exports = {
         $unwind: "$storage",
       },
       {
+        $group: {
+          _id: {
+            "storage": "$storage._id", 
+            "package": "$package._id" 
+          },
+          quantity: {
+            $sum: "$quantity"
+          },
+          storage: {
+            $first: "$storage"
+          },
+          package: {
+            $first: "$package"
+          },
+          createdAt: {
+            $first: "$createdAt"
+          },
+          updatedAt: {
+            $last: "$createdAt"
+          }
+        }
+      },
+      {
         $project: {
           quantity: 1,
           package: 1,
@@ -66,8 +84,75 @@ module.exports = {
           updatedAt: 1,
         },
       },
+      {
+        $sort: {
+          createdAt: 1,
+        },
+      },
     ]);
 
     return entites;
+  },
+
+  async getCurrentImports(storage, queryOptions = {}, skip = 0, limit = 0) {
+    let pipeLine = [
+      {
+        $match: {
+          storage: mongoose.Types.ObjectId(storage),
+        },
+      },
+      {
+        $lookup: {
+          from: "packages",
+          localField: "package",
+          foreignField: "_id",
+          as: "package",
+        },
+      },
+      {
+        $unwind: "$package",
+      },
+      {
+        $match: {
+          ...queryOptions
+        }
+      },
+      {
+        $group: {
+          _id: "$package._id",
+          quantity: {
+            $sum: "$quantity",
+          },
+          package: {
+            $first: "$package",
+          },
+        },
+      },
+      {
+        $unwind: "$package.size",
+      },
+      {
+        $lookup: {
+          from: "components_package_sizes",
+          localField: "package.size.ref",
+          foreignField: "_id",
+          as: "size",
+        },
+      },
+      {
+        $unwind: "$size"
+      },
+      {
+        $skip: skip,
+      },
+    ]
+
+    if (limit) {
+      pipeLine.push({$limit: limit})
+    }
+
+    let importes = await strapi.query("import").model.aggregate(pipeLine);
+
+    return importes
   },
 };
