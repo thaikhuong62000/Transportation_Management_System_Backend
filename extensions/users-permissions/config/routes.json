@@ -95,6 +95,36 @@
     },
     {
       "method": "GET",
+      "path": "/config/point",
+      "handler": "Setting.getPointLevel",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Get customer point level"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/config",
+      "handler": "Setting.getConfig",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Admin get config"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/config",
+      "handler": "Setting.updateConfig",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Admin update config"
+      }
+    },
+    {
+      "method": "GET",
       "path": "/assistance/status",
       "handler": "CustomUser.getAssistanceInfo",
       "config": {
