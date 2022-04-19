@@ -36,7 +36,7 @@ module.exports = {
       return ctx.badRequest("Invalid package state!");
     }
 
-    const package = await strapi.query("package").update(
+    const _package = await strapi.query("package").update(
       { _id: id },
       {
         name,
@@ -62,7 +62,7 @@ module.exports = {
       { new: true }
     );
 
-    return sanitizeEntity(package, {
+    return sanitizeEntity(_package, {
       model: strapi.query("package").model,
       includeFields: [
         "size",
@@ -175,7 +175,6 @@ module.exports = {
       }, []);
 
       return unArrangePack.slice(page * size, page * size + size);
-      
     } else if (role.name === "Admin") {
       if (!storeId)
         return ctx.badRequest([
@@ -196,8 +195,8 @@ module.exports = {
       });
     }
 
-    return packages.map((package) =>
-      sanitizeEntity(package, {
+    return packages.map((_package) =>
+      sanitizeEntity(_package, {
         model: strapi.query("import").model,
         includeFields: [
           "package",
