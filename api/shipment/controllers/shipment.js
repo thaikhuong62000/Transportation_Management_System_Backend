@@ -2,6 +2,13 @@
 const { sanitizeEntity } = require("strapi-utils");
 
 module.exports = {
+  /**
+   * Return info of a shipment for driver (included sender/receiver info, some of order info)
+   *
+   * Precondition: Logined in as Driver
+   * @param {String: param} id of a shipment
+   * @returns
+   */
   async findOne(ctx) {
     const { id } = ctx.params;
 
@@ -27,6 +34,12 @@ module.exports = {
     } else return shipment;
   },
 
+  /**
+   * Get current shipment of a driver and nearby shipment
+   *
+   * Precondition: Logined in as Driver
+   * @returns
+   */
   async getCurrentShipment(ctx) {
     const { latitude, longitude } = ctx.query;
     const _shipments =
@@ -47,6 +60,12 @@ module.exports = {
     );
   },
 
+  /**
+   * Get finished shipment of a driver
+   *
+   * Precondition: Logined in as Driver
+   * @returns
+   */
   async acceptShipment(ctx) {
     const { shipment: _id } = ctx.params;
     const { id: driver } = ctx.state.user;
@@ -76,6 +95,11 @@ module.exports = {
     );
   },
 
+  /**
+   *
+   * @param {String: param} id of a shipment
+   * @returns
+   */
   async getVehicleDetailByShipment(ctx) {
     const { id } = ctx.params;
 
@@ -102,6 +126,15 @@ module.exports = {
     };
   },
 
+  /**
+   * Create shipment
+   * Split Order
+   * Update package, order state
+   * Update vehicle's shipment
+   *
+   * @param {...} ...
+   * @returns
+   */
   async create(ctx) {
     const { shipmentData, shipmentItems } = ctx.request.body;
     let { from_address, to_address, from_storage = "", to_storage = "" } = shipmentData;
@@ -115,8 +148,6 @@ module.exports = {
         [from_address, to_address],
         { session: session }
       );
-
-
 
       session = await db.startSession();
       session.startTransaction();

@@ -6,6 +6,11 @@
  */
 
 module.exports = {
+  /**
+   *
+   * @param {Image: body} _image
+   * @returns
+   */
   async updateVoucherImage(ctx) {
     const {
       request: {

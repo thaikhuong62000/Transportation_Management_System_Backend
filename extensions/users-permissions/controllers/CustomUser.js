@@ -3,6 +3,12 @@ const { sanitizeEntity } = require("strapi-utils");
 var moment = require("moment");
 
 module.exports = {
+  /**
+   * Get data to show in dashboard of driver's app
+   *
+   * Precondition: Logined in as Driver
+   * @returns
+   */
   async getDriverStatus(ctx) {
     let unfinishedShip =
       await strapi.services.shipment.getUnfinishedShipmentByDriver(
@@ -41,6 +47,12 @@ module.exports = {
     ];
   },
 
+  /**
+   * Get data to show in dashboard of storekeeper's app
+   *
+   * Precondition: Logined in as Storekeeper
+   * @returns
+   */
   async getStorekeeperStatus(ctx) {
     const { storage } = ctx.state.user;
 
@@ -58,6 +70,12 @@ module.exports = {
     };
   },
 
+  /**
+   * Get data of assistance to show in assistance screen of driver's app
+   *
+   * Precondition: Logined in as Driver
+   * @returns
+   */
   async getAdminStatus(ctx) {
     let date = new Date();
     let month = date.getMonth() + 1;

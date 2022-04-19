@@ -1,11 +1,11 @@
 "use-strict";
 
 module.exports = async (ctx, next) => {
-  const { quantity, shipment, package } = ctx.request.body;
+  const { quantity, shipment, package: _package, assmin } = ctx.request.body;
   try {
     if (parseInt(quantity) < 1) throw "Invalid quantity";
     if (!shipment) throw "Invalid shipment";
-    if (!package) throw "Invalid package";
+    if (!_package) throw "Invalid package";
   } catch (error) {
     return ctx.badRequest([
       {
@@ -14,6 +14,6 @@ module.exports = async (ctx, next) => {
       },
     ]);
   }
-  ctx.request.body = { quantity, shipment, package };
+  ctx.request.body = { quantity, shipment, package: _package, assmin };
   await next();
 };

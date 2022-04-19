@@ -10,6 +10,12 @@ function getReceiver(room, userId) {
 }
 
 module.exports = {
+  /**
+   * Get rooms chat of a user (included user info)
+   *
+   * Precondition: Logined in
+   * @returns
+   */
   async getRooms(ctx) {
     const rooms = await strapi.services["room-chat"].findRoomsByUser(
       ctx.state.user.id
