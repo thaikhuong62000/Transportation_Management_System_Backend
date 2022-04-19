@@ -1,7 +1,7 @@
 "use-strict";
 
 module.exports = async (ctx, next) => {
-  const { quantity, shipment, package: _package } = ctx.request.body;
+  const { quantity, shipment, package: _package, assmin } = ctx.request.body;
   try {
     if (parseInt(quantity) < 1) throw "Invalid quantity";
     if (!shipment) throw "Invalid shipment";
@@ -14,6 +14,6 @@ module.exports = async (ctx, next) => {
       },
     ]);
   }
-  ctx.request.body = { quantity, shipment, package: _package };
+  ctx.request.body = { quantity, shipment, package: _package, assmin };
   await next();
 };
