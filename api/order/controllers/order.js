@@ -311,25 +311,11 @@ module.exports = {
 
       if (!packages) throw "Create package failed!";
 
-      let user_point = await UsersPermissionsUser.findOneAndUpdate(
-        {
-          _id: _id,
-        },
-        {
-          point: Number.parseInt(point) + Math.floor(fee / 100000),
-        }
-      ).session(session);
-
-      if (!user_point) {
-        throw "Cannot update user point";
-      }
-
       await session.commitTransaction();
       session.endSession();
 
       return order[0];
     } catch (error) {
-      console.log(error);
       await session.abortTransaction();
       session.endSession();
       return ctx.badRequest([
