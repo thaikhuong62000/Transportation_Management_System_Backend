@@ -12,24 +12,13 @@ module.exports = {
     const stockerId = ctx.state.user.id;
     const storageId = ctx.state.user.storage;
 
-    const { total_import, total_export, note = "" } = ctx.request.body;
-
-    if (
-      !total_import ||
-      total_import < 0 ||
-      !total_export ||
-      total_export < 0
-    ) {
-      return ctx.badRequest("Invalid parameter!");
-    }
+    const { note = "", ...props } = ctx.request.body;
 
     let report = await strapi.query("report").update(
       {
         id: id,
       },
       {
-        total_export,
-        total_import,
         note,
         stocker: stockerId,
         storage: storageId,
