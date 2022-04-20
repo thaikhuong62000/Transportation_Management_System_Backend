@@ -112,8 +112,6 @@ module.exports = {
     try {
       const { password, newPassword } = ctx.request.body;
 
-      if (newPassword.length < 8) throw "New password invalid!";
-
       const validPassword = await strapi.plugins[
         "users-permissions"
       ].services.user.validatePassword(password, ctx.state.user.password);

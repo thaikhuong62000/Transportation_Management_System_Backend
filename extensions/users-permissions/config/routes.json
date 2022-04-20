@@ -47,7 +47,7 @@
       "path": "/auth/password/update",
       "handler": "Auth.updatePassword",
       "config": {
-        "policies": [],
+        "policies": ["check-new-password"],
         "prefix": ""
       }
     },
@@ -56,7 +56,7 @@
       "path": "/auth/password/reset",
       "handler": "Auth.resetPasswordPhone",
       "config": {
-        "policies": [],
+        "policies": ["check-new-password"],
         "prefix": ""
       }
     },
