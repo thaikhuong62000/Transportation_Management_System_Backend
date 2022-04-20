@@ -109,29 +109,35 @@ module.exports = {
    *          Else return Bad request
    */
   async updatePassword(ctx) {
-    const { password, newPassword } = ctx.request.body;
+    try {
+      const { password, newPassword } = ctx.request.body;
 
-    const validPassword = await strapi.plugins[
-      "users-permissions"
-    ].services.user.validatePassword(password, ctx.state.user.password);
+      if (newPassword.length < 8) throw "New password invalid!";
 
-    if (!validPassword) {
-      return ctx.badRequest("Current password invalid!");
+      const validPassword = await strapi.plugins[
+        "users-permissions"
+      ].services.user.validatePassword(password, ctx.state.user.password);
+
+      if (!validPassword) {
+        throw "Current password invalid!";
+      }
+
+      const hashedPassword = await strapi.plugins[
+        "users-permissions"
+      ].services.user.hashPassword({
+        password: newPassword,
+      });
+
+      const updatedPassword = await strapi.plugins[
+        "users-permissions"
+      ].services.user.updatePassword(ctx.state.user.id, hashedPassword);
+
+      return sanitizeEntity(updatedPassword, {
+        model: strapi.query("user", "users-permissions").model,
+      });
+    } catch (error) {
+      return ctx.badRequest(null, error);
     }
-
-    const hashedPassword = await strapi.plugins[
-      "users-permissions"
-    ].services.user.hashPassword({
-      password: newPassword,
-    });
-
-    const updatedPassword = await strapi.plugins[
-      "users-permissions"
-    ].services.user.updatePassword(ctx.state.user.id, hashedPassword);
-
-    return sanitizeEntity(updatedPassword, {
-      model: strapi.query("user", "users-permissions").model,
-    });
   },
 
   /**
