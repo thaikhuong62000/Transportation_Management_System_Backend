@@ -7,9 +7,10 @@ module.exports = (strapi) => {
   if (!strapi.tms) strapi.tms = {};
   const reloadConfig = () => {
     strapi.tms.config = readConfig();
+    return strapi.tms.config
   };
-  const saveConfig = () => {
-    if (strapi?.tms?.config) writeConfig(strapi.tms.config);
+  const saveConfig = (config) => {
+    if (config) writeConfig(config);
   };
 
   reloadConfig(); // Set tms.config

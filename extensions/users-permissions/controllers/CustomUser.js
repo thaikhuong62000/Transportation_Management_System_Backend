@@ -142,7 +142,12 @@ module.exports = {
       "role.name": "Customer",
     });
 
-    let totalPage = Math.ceil(customers.length / _limit);
+    let count = await strapi.query("user", "users-permissions").count({
+      ...ctx.query,
+      "role.name": "Customer",
+    })
+
+    let totalPage = Math.ceil(count / _limit);
 
     return {
       customers: customers,
@@ -162,7 +167,14 @@ module.exports = {
       },
     });
 
-    let totalPage = Math.ceil(staffs.length / _limit);
+    let count = await strapi.query("user", "users-permissions").count({
+      ...ctx.query,
+      "role.name": {
+        $in: ["Driver", "Assistance", "Stocker"],
+      },
+    })
+
+    let totalPage = Math.ceil(count / _limit);
 
     return {
       staffs: staffs,
