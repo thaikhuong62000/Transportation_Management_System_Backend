@@ -109,7 +109,7 @@ module.exports = {
    *          Else return Bad request
    */
   async updatePassword(ctx) {
-    const { password, newPassword } = ctx.request.body;
+    const { password = "", newPassword = "" } = ctx.request.body;
 
     const validPassword = await strapi.plugins[
       "users-permissions"
@@ -117,6 +117,14 @@ module.exports = {
 
     if (!validPassword) {
       return ctx.badRequest("Current password invalid!");
+    }
+
+    let regex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/)
+    if (!regex.test(newPassword)) {
+      return ctx.badRequest([{
+        id: "Auth.updatePassword",
+        message: "Invalid password form"
+      }])
     }
 
     const hashedPassword = await strapi.plugins[
