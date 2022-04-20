@@ -205,6 +205,20 @@
       }
     },
     {
+      "method": "PUT",
+      "path": "/users/:id",
+      "handler": "User.update",
+      "config": {
+        "policies": ["validate-user", "remove-unaccept-field"],
+        "prefix": "",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User",
+          "actionType": "update"
+        }
+      }
+    },
+    {
       "method": "GET",
       "path": "/auth/phone",
       "handler": "Auth.phoneAuth",

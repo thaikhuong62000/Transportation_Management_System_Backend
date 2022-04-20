@@ -12,7 +12,14 @@ module.exports = async (ctx, next) => {
     ...props
   } = ctx.request.body;
   if (role.name === "Customer") {
-    ctx.request.body = props;
+    if (state === 5) {
+      ctx.request.body = {
+        ...props,
+        state,
+      };
+    } else {
+      ctx.request.body = props
+    }
   }
   await next();
 };
