@@ -11,8 +11,8 @@ module.exports = {
       _limit: _limit,
     });
 
-    let totalOrder = await strapi.services.order.count()
-    let totalPage = Math.ceil(totalOrder / _limit)
+    let totalOrder = await strapi.services.order.count(ctx.query);
+    let totalPage = Math.ceil(totalOrder / _limit);
 
     feedbacks = feedbacks.map((fb) => {
       return sanitizeEntity(fb, {
@@ -23,7 +23,7 @@ module.exports = {
 
     return {
       feedbacks: feedbacks,
-      totalPage: totalPage
-    }
+      totalPage: totalPage,
+    };
   },
 };
