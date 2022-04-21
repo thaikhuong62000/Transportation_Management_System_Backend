@@ -31,12 +31,12 @@ module.exports = {
 
       if (resultCode === 0) {
         if (order.fee >= amount) {
-          order = await Order.findOneAndUpdate(
+          let _order = await Order.findOneAndUpdate(
             { _id: parsedId },
             { remain_fee: order.fee - amount }
           ).session(session);
 
-          if (!order) {
+          if (!_order) {
             throw "Update order fee failed";
           }
 
@@ -62,7 +62,7 @@ module.exports = {
           let point_level = Object.keys(point)
             .filter(
               (item) =>
-                Number.parseInt(customer.point) + Math.floor(amount / 100000) >=
+                Number.parseInt(order.customer.point) + Math.floor(amount / 100000) >=
                 point[item]
             )
             .reverse()[0];
@@ -71,11 +71,11 @@ module.exports = {
 
           let user_point = await UsersPermissionsUser.findOneAndUpdate(
             {
-              _id: customer._id,
+              _id: order.customer._id,
             },
             {
               point:
-                Number.parseInt(customer.point) + Math.floor(amount / 100000),
+                Number.parseInt(order.customer.point) + Math.floor(amount / 100000),
               type: updated_level,
             }
           ).session(session);
