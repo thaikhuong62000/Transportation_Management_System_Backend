@@ -175,7 +175,7 @@ module.exports = {
   },
 
   async create(ctx) {
-    const { id: customer } = ctx.state.user;
+    const { id: customer, _id, point } = ctx.state.user;
     let {
       remain_fee,
       fee,
@@ -188,8 +188,13 @@ module.exports = {
 
     const db = strapi.connections.default;
     let session;
-    const { Package, Order, ComponentAddressAddress, ComponentPackageSize } =
-      db.models;
+    const {
+      Package,
+      Order,
+      ComponentAddressAddress,
+      ComponentPackageSize,
+      UsersPermissionsUser,
+    } = db.models;
 
     try {
       if (!remain_fee || remain_fee < 0 || !fee || fee < 0) {
@@ -306,11 +311,25 @@ module.exports = {
 
       if (!packages) throw "Create package failed!";
 
+      let user_point = await UsersPermissionsUser.findOneAndUpdate(
+        {
+          _id: _id,
+        },
+        {
+          point: Number.parseInt(point) + Math.floor(fee / 100000),
+        }
+      ).session(session);
+
+      if (!user_point) {
+        throw "Cannot update user point";
+      }
+
       await session.commitTransaction();
       session.endSession();
 
       return order[0];
     } catch (error) {
+      console.log(error);
       await session.abortTransaction();
       session.endSession();
       return ctx.badRequest([

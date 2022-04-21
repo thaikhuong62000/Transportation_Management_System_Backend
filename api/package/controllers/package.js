@@ -128,7 +128,7 @@ module.exports = {
   async getPackagesInStorage(ctx) {
     // Get package in storage and not exported yet (don't have shipment)
     const { storage, role } = ctx.state.user;
-    const { page = 0, size = 5, storeId = "", state = 0 } = ctx.query;
+    const { page = 0, size = 5, storeId = "", state = 0, _q = "" } = ctx.query;
     let packages = [];
 
     if (role.name === "Stocker") {
@@ -173,6 +173,15 @@ module.exports = {
         }
         return total;
       }, []);
+
+      if (_q) {
+        let regex = new RegExp(_q, "i");
+        unArrangePack = unArrangePack.filter((item) => {
+          return Object.values(item.package).some((field) =>
+            regex.test(field.toString())
+          );
+        });
+      }
 
       return unArrangePack.slice(page * size, page * size + size);
     } else if (role.name === "Admin") {
