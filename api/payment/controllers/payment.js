@@ -95,6 +95,7 @@ module.exports = {
       }
       return ctx.send(204);
     } catch (error) {
+      console.log(error)
       await session.abortTransaction();
       session.endSession();
       return ctx.send(204);
