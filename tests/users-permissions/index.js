@@ -1,2 +1,1 @@
-require("./Auth/updatePassword");
-require("./Auth/resetPasswordPhone");
+require("./Auth");
