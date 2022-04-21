@@ -21,22 +21,79 @@ module.exports = {
       id: parsedId,
     });
 
-    if (resultCode === 0) {
-      if (order.fee >= amount) {
-        order = await strapi
-          .query("order")
-          .update({ id: parsedId }, { remain_fee: order.fee - amount });
+    const db = strapi.connections.default;
+    let session;
+    const { Payment, UsersPermissionsUser, Order } = db.models;
 
-        await strapi.query("payment").create({
-          payer_name: order.sender_name,
-          payer_phone: order.sender_phone,
-          order: parsedId,
-          paid: amount,
-          method: "momo",
-        });
+    try {
+      session = await db.startSession();
+      session.startTransaction();
+
+      if (resultCode === 0) {
+        if (order.fee >= amount) {
+          order = await Order.findOneAndUpdate(
+            { _id: parsedId },
+            { remain_fee: order.fee - amount }
+          ).session(session);
+
+          if (!order) {
+            throw "Update order fee failed";
+          }
+
+          let created_payment = await Payment.create(
+            [
+              {
+                payer_name: order.sender_name,
+                payer_phone: order.sender_phone,
+                order: parsedId,
+                paid: amount,
+                method: "momo",
+              },
+            ],
+            { session: session }
+          );
+
+          if (!created_payment) {
+            throw "Created payment failed";
+          }
+
+          let { point } = strapi.tms.config;
+
+          let point_level = Object.keys(point)
+            .filter(
+              (item) =>
+                Number.parseInt(customer.point) + Math.floor(amount / 100000) >=
+                point[item]
+            )
+            .reverse()[0];
+
+          let updated_level = handlePointLevel(point_level);
+
+          let user_point = await UsersPermissionsUser.findOneAndUpdate(
+            {
+              _id: customer._id,
+            },
+            {
+              point:
+                Number.parseInt(customer.point) + Math.floor(amount / 100000),
+              type: updated_level,
+            }
+          ).session(session);
+
+          if (!user_point) {
+            throw "Cannot update user point";
+          }
+
+          await session.commitTransaction();
+          session.endSession();
+        }
       }
+      return ctx.send(204);
+    } catch (error) {
+      await session.abortTransaction();
+      session.endSession();
+      return ctx.send(204);
     }
-    return ctx.send(204);
   },
 
   async create(ctx) {
