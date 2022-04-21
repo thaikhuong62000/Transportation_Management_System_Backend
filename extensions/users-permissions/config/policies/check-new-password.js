@@ -6,9 +6,10 @@
  * @returns
  */
 module.exports = async (ctx, next) => {
-  const { newPassword } = ctx.request.body;
+  const { newPassword = "" } = ctx.request.body;
 
-  if (!newPassword || newPassword.length < 7) {
+  let regex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/);
+  if (!regex.test(newPassword)) {
     return ctx.badRequest([
       {
         message: "New password invalid!",
