@@ -30,10 +30,13 @@ module.exports = {
       session.startTransaction();
 
       if (resultCode === 0) {
-        if (order.fee >= amount) {
+        if (order.remain_fee >= amount) {
           let _order = await Order.findOneAndUpdate(
             { _id: parsedId },
-            { remain_fee: order.fee - amount }
+            {
+              remain_fee:
+                Number.parseInt(order.remain_fee) - Number.parseInt(amount),
+            }
           ).session(session);
 
           if (!_order) {
@@ -46,7 +49,7 @@ module.exports = {
                 payer_name: order.sender_name,
                 payer_phone: order.sender_phone,
                 order: parsedId,
-                paid: amount,
+                paid: Number.parseInt(amount),
                 method: "momo",
               },
             ],
@@ -62,7 +65,8 @@ module.exports = {
           let point_level = Object.keys(point)
             .filter(
               (item) =>
-                Number.parseInt(order.customer.point) + Math.floor(amount / 100000) >=
+                Number.parseInt(order.customer.point) +
+                  Math.floor(amount / 100000) >=
                 point[item]
             )
             .reverse()[0];
@@ -75,7 +79,8 @@ module.exports = {
             },
             {
               point:
-                Number.parseInt(order.customer.point) + Math.floor(amount / 100000),
+                Number.parseInt(order.customer.point) +
+                Math.floor(amount / 100000),
               type: updated_level,
             }
           ).session(session);
