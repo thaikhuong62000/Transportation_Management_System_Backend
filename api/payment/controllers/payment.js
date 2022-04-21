@@ -14,6 +14,8 @@ module.exports = {
       resultCode = 0,
     } = ctx.request.body;
 
+    console.log(ctx.request.body)
+
     let rawData = Buffer.from(extraData, "base64").toString("ascii");
     let parsedId = "";
 
@@ -36,7 +38,7 @@ module.exports = {
       session.startTransaction();
 
       if (resultCode === 0) {
-        if (Number.parseInt(order.remain_fee) >= amount) {
+        if (Number.parseInt(order.remain_fee) >= Number.parseInt(amount)) {
           let _order = await Order.findOneAndUpdate(
             { _id: order._id },
             {
@@ -101,6 +103,7 @@ module.exports = {
       }
       return ctx.send(204);
     } catch (error) {
+      console.log(error)
       await session.abortTransaction();
       session.endSession();
       return ctx.send(204);
