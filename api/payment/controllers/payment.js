@@ -15,7 +15,13 @@ module.exports = {
     } = ctx.request.body;
 
     let rawData = Buffer.from(extraData, "base64").toString("ascii");
-    let parsedId = JSON.parse(rawData).id;
+    let parsedId = "";
+
+    try {
+      parsedId = JSON.parse(rawData).id;
+    } catch (error) {
+      return ctx.send(204);
+    }
 
     let order = await strapi.query("order").findOne({
       id: parsedId,
@@ -95,7 +101,6 @@ module.exports = {
       }
       return ctx.send(204);
     } catch (error) {
-      console.log(error)
       await session.abortTransaction();
       session.endSession();
       return ctx.send(204);
