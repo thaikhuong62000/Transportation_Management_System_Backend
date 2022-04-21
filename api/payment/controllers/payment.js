@@ -38,7 +38,7 @@ module.exports = {
       if (resultCode === 0) {
         if (Number.parseInt(order.remain_fee) >= amount) {
           let _order = await Order.findOneAndUpdate(
-            { _id: parsedId },
+            { _id: order._id },
             {
               remain_fee:
                 Number.parseInt(order.remain_fee) - Number.parseInt(amount),
