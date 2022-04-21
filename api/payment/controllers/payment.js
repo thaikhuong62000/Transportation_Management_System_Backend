@@ -31,11 +31,11 @@ module.exports = {
 
       if (resultCode === 0) {
         if (Number.parseInt(order.remain_fee) >= Number.parseInt(amount)) {
+          let remain = Number.parseInt(order.remain_fee - amount);
           let _order = await Order.findOneAndUpdate(
             { _id: order._id },
             {
-              remain_fee:
-                Number.parseInt(order.remain_fee) - Number.parseInt(amount),
+              remain_fee: remain,
             }
           ).session(session);
 
@@ -95,7 +95,7 @@ module.exports = {
       }
       return ctx.send(204);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       await session.abortTransaction();
       session.endSession();
       return ctx.send(204);
