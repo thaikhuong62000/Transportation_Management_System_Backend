@@ -1,1 +1,2 @@
 require("./Auth");
+require("./User");

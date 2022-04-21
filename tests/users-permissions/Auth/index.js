@@ -1,3 +1,3 @@
-// require("./updatePassword")
-// require("./resetPasswordPhone");
+require("./updatePassword");
+require("./resetPasswordPhone");
 require("./phoneAuth");

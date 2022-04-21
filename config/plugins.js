@@ -1,14 +1,14 @@
 module.exports = ({ env }) => {
-  if (env("NODE_ENV") === "development") {
+  if (env("NODE_ENV") === "production") {
     return {
       upload: {
+        ...s3UploadConfig(env),
         ...defaultUploadConfig,
       },
     };
   } else
     return {
       upload: {
-        ...s3UploadConfig(env),
         ...defaultUploadConfig,
       },
     };
