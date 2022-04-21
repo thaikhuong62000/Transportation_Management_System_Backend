@@ -14,16 +14,8 @@ module.exports = {
       resultCode = 0,
     } = ctx.request.body;
 
-    console.log(ctx.request.body)
-
     let rawData = Buffer.from(extraData, "base64").toString("ascii");
-    let parsedId = "";
-
-    try {
-      parsedId = JSON.parse(rawData).id;
-    } catch (error) {
-      return ctx.send(204);
-    }
+    let parsedId = JSON.parse(rawData).id;
 
     let order = await strapi.query("order").findOne({
       id: parsedId,
