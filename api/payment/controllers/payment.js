@@ -1,4 +1,5 @@
 "use strict";
+var mongoose = require("mongoose");
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
@@ -33,7 +34,7 @@ module.exports = {
         if (Number.parseInt(order.remain_fee) >= Number.parseInt(amount)) {
           let remain = Number.parseInt(order.remain_fee - amount);
           let _order = await Order.findOneAndUpdate(
-            { _id: order._id },
+            { _id: mongoose.Types.ObjectId(parsedId) },
             {
               remain_fee: remain,
             }
