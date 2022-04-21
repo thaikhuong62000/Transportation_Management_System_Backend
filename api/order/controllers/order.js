@@ -49,7 +49,7 @@ module.exports = {
           id: item.package._id,
           storage: item.storage.name,
           quantity: item.package.quantity,
-          importQuantity: item.quantity,
+          exportQuantity: item.quantity,
           timeUpdate: item.updatedAt,
           timeCreate: item.createdAt,
         };
@@ -81,11 +81,18 @@ module.exports = {
     for (let ele of Object.values(exports)) {
       for (let item of ele) {
         exportResult[item.storage] = exportResult[item.storage] || [];
-        if (item.quantity === item.importQuantity) {
+        if (item.quantity === item.exportQuantity) {
           exportResult[item.storage].push({
             id: item.id,
             timeUpdate: item.timeUpdate,
             timeCreate: item.timeCreate,
+          });
+        } else {
+          exportResult[item.storage].push({
+            id: item.id,
+            timeUpdate: item.timeUpdate,
+            timeCreate: item.timeCreate,
+            remain: true,
           });
         }
       }
@@ -95,10 +102,11 @@ module.exports = {
 
     for (let item in importResult) {
       if (importResult && importResult[item]) {
-        if (exportResult[item].length) {
+        if (exportResult[item] && exportResult[item].length) {
           if (
             importResult[item].length === packages.length &&
-            exportResult[item].length === packages.length
+            exportResult[item].length === packages.length &&
+            !exportResult[item].some((pack) => pack.remain)
           ) {
             tracingResult.push({
               storage: item,
@@ -107,8 +115,11 @@ module.exports = {
                 .timeUpdate,
             });
           } else if (
-            importResult[item].length === packages.length &&
-            exportResult[item].length < packages.length
+            (importResult[item].length === packages.length &&
+              exportResult[item].length < packages.length) ||
+            (exportResult[item].some((pack) => pack.remain) &&
+              exportResult[item].length === packages.length &&
+              importResult[item].length === packages.length)
           ) {
             tracingResult.push({
               storage: item,
