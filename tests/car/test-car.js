@@ -18,6 +18,24 @@ it("should login user and return jwt token", async () => {
     .expect("Content-Type", /json/)
     .expect(200)
     .then((data) => {
-      expect(data.body.jwt).toBeDefined();
+      expect(data.jwt);
+      return data.jwt;
+    });
+  console.log(response);
+});
+
+it("should login user and return jwt token", async () => {
+  const response = await request(strapi.server) // app server is an instance of Class: http.Server
+    .post("/auth/local")
+    .set("accept", "application/json")
+    .set("Content-Type", "application/json")
+    .send({
+      identifier: mockUserData.username,
+      password: mockUserData.password,
+    })
+    .expect("Content-Type", /json/)
+    .expect(200)
+    .then((data) => {
+      expect(data.jwt).toBeDefined();
     });
 });

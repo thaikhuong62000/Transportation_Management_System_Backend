@@ -26,7 +26,7 @@ module.exports = {
     }
 
     // Add Car_broken
-    await strapi.services["car-broken"].create(data);
-    return ctx.created("Car_broken created.");
+    let car = await strapi.services["car-broken"].create(data);
+    return car;
   },
 };

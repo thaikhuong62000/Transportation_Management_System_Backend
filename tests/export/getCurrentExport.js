@@ -2,12 +2,12 @@ const request = require("supertest");
 
 // user mock data
 const mockUserData = {
-  username: "tuiladriver",
+  username: "sibe",
   password: "12345678",
 };
 
 it("should login user and return jwt token", async () => {
-  const response = await request(strapi.server) // app server is an instance of Class: http.Server
+  const auth = await request(strapi.server) // app server is an instance of Class: http.Server
     .post("/auth/local")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
@@ -18,16 +18,20 @@ it("should login user and return jwt token", async () => {
     .expect("Content-Type", /json/)
     .expect(200)
     .then((data) => {
-      expect(data.jwt);
+      // console.log(data);
+      expect(data.body.jwt).toBeDefined();
+      return data
     });
+
   await request(strapi.server) // app server is an instance of Class: http.Server
-    .get("/cars")
+    .get("/current-export")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + response.jwt)
+    .set("Authorization", "Bearer " + auth.body.jwt)
     .expect("Content-Type", /json/)
     .expect(200)
     .then((data) => {
-      expect(data.jwt).toBeDefined();
+      // test here, test date reponse
+      // expect(data.body.jwt).toBeDefined();
     });
 });
