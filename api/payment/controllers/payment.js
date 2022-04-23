@@ -1,4 +1,5 @@
 "use strict";
+var mongoose = require("mongoose");
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
@@ -21,25 +22,85 @@ module.exports = {
       id: parsedId,
     });
 
+    const db = strapi.connections.default;
+    let session;
+    const { Payment, UsersPermissionsUser, Order } = db.models;
 
-    if (resultCode === 0) {
-      if (order.fee >= amount) {
-        order = await strapi
-          .query("order")
-          .update({ id: parsedId }, { remain_fee: order.fee - amount });
+    try {
+      session = await db.startSession();
+      session.startTransaction();
 
-        await strapi.query("payment").create(
-          {
-            payer_name: order.sender_name,
-            payer_phone: order.sender_phone,
-            order: parsedId,
-            paid: amount,
-            method: "momo"
+      if (resultCode === 0) {
+        if (Number.parseInt(order.remain_fee) >= Number.parseInt(amount)) {
+          let remain = Number.parseInt(order.remain_fee - amount);
+          let _order = await Order.findOneAndUpdate(
+            { _id: mongoose.Types.ObjectId(parsedId) },
+            {
+              remain_fee: remain,
+            }
+          ).session(session);
+
+          if (!_order) {
+            throw "Update order fee failed";
           }
-        );
+
+          let created_payment = await Payment.create(
+            [
+              {
+                payer_name: order.sender_name,
+                payer_phone: order.sender_phone,
+                order: parsedId,
+                paid: Number.parseInt(amount),
+                method: "momo",
+              },
+            ],
+            { session: session }
+          );
+
+          if (!created_payment) {
+            throw "Created payment failed";
+          }
+
+          let { point } = strapi.tms.config;
+
+          let point_level = Object.keys(point)
+            .filter(
+              (item) =>
+                Number.parseInt(order.customer.point) +
+                  Math.floor(amount / 100000) >=
+                point[item]
+            )
+            .reverse()[0];
+
+          let updated_level = handlePointLevel(point_level);
+
+          let user_point = await UsersPermissionsUser.findOneAndUpdate(
+            {
+              _id: order.customer._id,
+            },
+            {
+              point:
+                Number.parseInt(order.customer.point) +
+                Math.floor(amount / 100000),
+              type: updated_level,
+            }
+          ).session(session);
+
+          if (!user_point) {
+            throw "Cannot update user point";
+          }
+
+          await session.commitTransaction();
+          session.endSession();
+        }
       }
+      return ctx.send(204);
+    } catch (error) {
+      console.log(error);
+      await session.abortTransaction();
+      session.endSession();
+      return ctx.send(204);
     }
-    return ctx.send(204);
   },
 
   async create(ctx) {
@@ -65,54 +126,134 @@ module.exports = {
       });
     }
 
-    const { payer_name = "", payer_phone = "", order = "", paid = 0 } = data;
+    const db = strapi.connections.default;
+    let session;
+    const { Payment, UsersPermissionsUser, Order } = db.models;
 
-    if (paid < 0) {
-      return ctx.badRequest({
-        errors: [
-          {
-            id: "Payment.create",
-            message: "Negative Payment",
-          },
-        ],
+    try {
+      const { payer_name = "", payer_phone = "", order = "", paid = 0 } = data;
+
+      session = await db.startSession();
+      session.startTransaction();
+
+      if (paid < 0) {
+        return ctx.badRequest({
+          errors: [
+            {
+              id: "Payment.create",
+              message: "Negative Payment",
+            },
+          ],
+        });
+      }
+
+      let order_ = await Order.findOne({
+        _id: order,
       });
-    }
 
-    const order_ = await strapi.query("order").findOne({
-      id: order,
-    });
+      let { customer } = await Order.populate(order_, {
+        path: "customer",
+      });
 
-    if (order_.remain_fee >= paid) {
-      await strapi
-        .query("order")
-        .update({ id: order }, { remain_fee: order_.remain_fee - paid });
+      if (order_.remain_fee >= paid) {
+        order_ = await Order.findOneAndUpdate(
+          { _id: order },
+          { remain_fee: order_.remain_fee - Number.parseInt(paid) }
+        ).session(session);
 
-      const image =
-        await strapi.plugins.upload.services.utils.uploadOrReplaceImage(
-          receipt,
-          ctx.request.body
+        if (!order_) {
+          throw "Update order failed";
+        }
+
+        const image =
+          await strapi.plugins.upload.services.utils.uploadOrReplaceImage(
+            receipt,
+            ctx.request.body
+          );
+
+        let created_payment = await Payment.create(
+          [
+            {
+              payer_name: payer_name,
+              payer_phone: payer_phone,
+              method: "direct",
+              order: order,
+              paid: paid,
+              receipt: image ? image[0].id : image,
+              driver: ctx.state.user.id,
+            },
+          ],
+          { session: session }
         );
 
-      await strapi.services.payment.create({
-        payer_name: payer_name,
-        payer_phone: payer_phone,
-        method: "direct",
-        order: order,
-        paid: paid,
-        receipt: image ? image[0].id : image,
-        driver: ctx.state.user.id,
-      });
+        if (!created_payment) {
+          throw "Create payment failed";
+        }
 
-      return ctx.created();
-    } else {
-      return ctx.badRequest({
-        errors: [
+        let { point } = strapi.tms.config;
+
+        let point_level = Object.keys(point)
+          .filter(
+            (item) =>
+              Number.parseInt(customer.point) + Math.floor(paid / 100000) >=
+              point[item]
+          )
+          .reverse()[0];
+
+        let updated_level = handlePointLevel(point_level);
+
+        let user_point = await UsersPermissionsUser.findOneAndUpdate(
           {
-            id: "Payment.create",
-            message: "Payment > Fee",
+            _id: customer._id,
           },
-        ],
-      });
+          {
+            point: Number.parseInt(customer.point) + Math.floor(paid / 100000),
+            type: updated_level,
+          }
+        ).session(session);
+
+        if (!user_point) {
+          throw "Cannot update user point";
+        }
+
+        await session.commitTransaction();
+        session.endSession();
+
+        return created_payment[0];
+      } else {
+        return ctx.badRequest({
+          errors: [
+            {
+              id: "Payment.create",
+              message: "Payment > Fee",
+            },
+          ],
+        });
+      }
+    } catch (error) {
+      await session.abortTransaction();
+      session.endSession();
+      return ctx.badRequest([
+        {
+          id: "payment.create",
+          message: JSON.stringify(error),
+        },
+      ]);
     }
   },
 };
+
+function handlePointLevel(level) {
+  switch (level) {
+    case "silver":
+      return "Iron";
+    case "gold":
+      return "Gold";
+    case "diamond":
+      return "Diamond";
+    case "platinum":
+      return "Platinum";
+    default:
+      return "User";
+  }
+}

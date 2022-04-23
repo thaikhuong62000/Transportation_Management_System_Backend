@@ -118,3 +118,4 @@ build
 ############################
 
 package-lock.json
+.config.json
