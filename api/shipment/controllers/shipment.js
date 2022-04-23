@@ -68,10 +68,14 @@ module.exports = {
    */
   async acceptShipment(ctx) {
     const { shipment: _id } = ctx.params;
-    const { id: driver } = ctx.state.user;
+    const { id: driver, car } = ctx.state.user;
     const shipment = await strapi
       .query("shipment")
-      .model.findOneAndUpdate({ _id, driver: null }, { driver }, { new: true })
+      .model.findOneAndUpdate(
+        { _id, driver: null },
+        { driver, car },
+        { new: true }
+      )
       .populate("packages");
 
     strapi.services.shipment.updateOrderState(shipment);
@@ -137,7 +141,12 @@ module.exports = {
    */
   async create(ctx) {
     const { shipmentData, shipmentItems } = ctx.request.body;
-    let { from_address, to_address, from_storage = "", to_storage = "" } = shipmentData;
+    let {
+      from_address,
+      to_address,
+      from_storage = "",
+      to_storage = "",
+    } = shipmentData;
 
     const db = strapi.connections.default;
     let session;
@@ -170,12 +179,12 @@ module.exports = {
       );
 
       if (!shipment) throw "Create shipment fail";
-      
+
       if (to_storage && !from_storage) {
-        let ship = await Shipment.populate(shipment[0], {path:"packages"})
+        let ship = await Shipment.populate(shipment[0], { path: "packages" });
         await strapi.services.shipment.updateOrderState(ship);
       }
-     
+
       if (shipmentItems && shipmentItems.length) {
         let _shipmentItems = shipmentItems.map((item) => ({
           ...item,

@@ -3,9 +3,9 @@ const request = require("supertest");
 const { firebaseToken } = require("../../__mocks__/AuthMocks");
 
 const mockPasswordData = [
-  { token: "", newPassword: "12345678", expected: "update" },
-  { token: "1", newPassword: "12345678", expected: "not update" },
-  { token: "", newPassword: "12345678", expected: "update" },
+  { token: "", newPassword: "LonghighThienQuy1", expected: "update" },
+  { token: "1", newPassword: "LonghighThienQuy1", expected: "not update" },
+  { token: "", newPassword: "LonghighThienQuy1", expected: "update" },
   { token: "", newPassword: "", expected: "not update" },
 ];
 

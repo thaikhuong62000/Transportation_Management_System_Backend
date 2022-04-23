@@ -66,8 +66,13 @@ module.exports = {
     };
   },
 
-  async getPointLevel() {
+  async getPointLevel(ctx) {
+    let { id } = ctx.state.user;
+    let { point: user_point } = await strapi
+      .query("user", "users-permissions")
+      .findOne({ id: id });
     return {
+      user_point,
       point: strapi.tms.config.point,
     };
   },
