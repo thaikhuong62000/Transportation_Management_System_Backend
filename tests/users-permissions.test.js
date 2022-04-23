@@ -56,9 +56,7 @@ beforeAll(async () => {
   const customToken = await strapi.firebase.auth.createCustomToken(user.uid);
 
   await request("https://identitytoolkit.googleapis.com")
-    .post(
-      `/v1/accounts:signInWithCustomToken?key=AIzaSyBjtDu2wvRzb9XUvbaJKQOinla7cIofqac`
-    )
+    .post(`/v1/accounts:signInWithCustomToken?key=` + process.env.FIREBASE_KEY)
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .send({
