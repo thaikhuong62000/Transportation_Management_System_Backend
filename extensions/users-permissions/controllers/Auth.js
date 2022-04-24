@@ -110,7 +110,7 @@ module.exports = {
    */
   async updatePassword(ctx) {
     try {
-      const { password, newPassword } = ctx.request.body;
+      const { password = "", newPassword = "" } = ctx.request.body;
 
       const validPassword = await strapi.plugins[
         "users-permissions"

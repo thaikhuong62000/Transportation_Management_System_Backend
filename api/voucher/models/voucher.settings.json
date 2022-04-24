@@ -57,7 +57,8 @@
         "All",
         "Iron",
         "Gold",
-        "Diamond"
+        "Diamond",
+        "Platinum"
       ],
       "default": "All"
     },

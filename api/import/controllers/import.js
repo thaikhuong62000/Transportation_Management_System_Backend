@@ -9,15 +9,34 @@ var mongoose = require("mongoose");
 
 module.exports = {
   async getCurrentImport(ctx) {
-    let shipments = await strapi.services.shipment.find(
-      {
-        _where: [
-          { to_storage: ctx.state.user.storage },
-          { arrived_time_null: true },
-        ],
-      },
-      ["car"]
-    );
+    let shipments;
+    if (ctx.query._q) {
+      shipments = await strapi.services.shipment.search(
+        {
+          _where: [
+            {
+              _or: [
+                { id: ctx.query._q },
+                { "car.licence_contains": ctx.query._q },
+              ],
+            },
+            { to_storage: ctx.state.user.storage },
+            { arrived_time_null: true },
+          ],
+        },
+        ["car"]
+      );
+    } else {
+      shipments = await strapi.services.shipment.find(
+        {
+          _where: [
+            { to_storage: ctx.state.user.storage },
+            { arrived_time_null: true },
+          ],
+        },
+        ["car"]
+      );
+    }
 
     return shipments.map((entity) => {
       const { from_address, id, car } = entity;

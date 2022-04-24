@@ -67,7 +67,7 @@ module.exports = (strapi, io) => {
     if (roomId) {
       return await strapi.services["room-chat"].findOne({ id: roomId });
     } else {
-      const room = await strapi.services["room-chat"].findRoomByUsers(
+      let room = await strapi.services["room-chat"].findRoomByUsers(
         senderId,
         receiverId
       );

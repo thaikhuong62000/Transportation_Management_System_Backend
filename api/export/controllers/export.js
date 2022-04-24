@@ -8,23 +8,38 @@ const { sanitizeEntity } = require("strapi-utils");
 
 module.exports = {
   async getCurrentExport(ctx) {
-    let shipments = await strapi.services.shipment.find(
-      {
-        _where: [
-          { from_storage: ctx.state.user.storage },
-          { arrived_time_null: true },
-        ],
-      },
-      [{ path: "driver", populate: "car" }]
-    );
+    let shipments;
+    if (ctx.query._q) {
+      shipments = await strapi.services.shipment.search(
+        {
+          _where: [
+            {
+              _or: [
+                { id: ctx.query._q },
+                { "car.licence_contains": ctx.query._q },
+              ]
+            },
+            { from_storage: ctx.state.user.storage },
+            { arrived_time_null: true },
+          ],
+        },
+        ["car"]
+      );
+    } else {
+      shipments = await strapi.services.shipment.find(
+        {
+          _where: [
+            { from_storage: ctx.state.user.storage },
+            { arrived_time_null: true },
+          ],
+        },
+        ["car"]
+      );
+    }
 
     return shipments.map((entity) => {
-      const {
-        from_address,
-        id,
-        driver: { car },
-      } = entity;
-      return { id, from_address, licence: car.licence };
+      const { from_address, id, car } = entity;
+      return { id, from_address, licence: car?.licence };
     });
   },
 
@@ -73,7 +88,8 @@ module.exports = {
         },
         {
           export_received:
-            Number.parseInt(shipment_item.export_received) + Number.parseInt(quantity),
+            Number.parseInt(shipment_item.export_received) +
+            Number.parseInt(quantity),
         }
       ).session(session);
 
