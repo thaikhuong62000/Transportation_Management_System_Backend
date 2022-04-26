@@ -15,7 +15,7 @@ const mockUserData = {
   role: "customer",
 };
 
-initUser(mockUserData);
+initUser("customer", mockUserData);
 
 // Get FirebaseToken
 beforeAll(async () => {

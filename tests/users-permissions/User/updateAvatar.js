@@ -9,7 +9,7 @@ it.each(mockAvatar)("should $expected avatar", async ({ avatar, expected }) => {
     await request(strapi.server)
       .put("/users/avatar")
       .set("accept", "*")
-      .set("Authorization", "Bearer " + jwtToken())
+      .set("Authorization", "Bearer " + jwtToken("customer"))
       .attach("avatar", avatar)
       .expect("Content-Type", /json/)
       .expect(expected === "update" ? 200 : 400)

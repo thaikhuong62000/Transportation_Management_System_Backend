@@ -1,7 +1,7 @@
 const request = require("supertest");
 const { createdUser, jwtToken } = require("../__mocks__/AuthMocks");
 
-module.exports = (userData) => {
+module.exports = (key, userData) => {
   // Create test user
   beforeAll(async () => {
     const role = await strapi
@@ -12,7 +12,7 @@ module.exports = (userData) => {
       role: role.id,
     });
     expect(data).toBeDefined();
-    createdUser.mockReturnValue(data);
+    createdUser({ key, value: data });
   });
 
   // Login
@@ -29,7 +29,7 @@ module.exports = (userData) => {
       .expect(200)
       .then((data) => {
         expect(data.body.jwt).toBeDefined();
-        jwtToken.mockReturnValue(data.body.jwt);
+        jwtToken({ key, value: data.body.jwt });
       });
   });
 
@@ -37,11 +37,11 @@ module.exports = (userData) => {
   afterAll(() => {
     return strapi.plugins["users-permissions"].services.user
       .remove({
-        id: createdUser().id,
+        id: createdUser(key).id,
       })
       .then((data) => {
         expect(data).toBeDefined();
-        createdUser.mockReset();
+        createdUser("CLEAN");
       });
   });
 };
