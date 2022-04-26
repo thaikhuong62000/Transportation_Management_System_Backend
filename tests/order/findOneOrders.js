@@ -19,16 +19,12 @@ const orderData = {
 };
 
 it.each(testCaseData)("$message", async ({ expect, type }) => {
-  const jwt =
-    type === "admin" ? jwtToken.mock.calls[1] : jwtToken.mock.calls[0];
+  const jwt = type === "admin" ? jwtToken("admin") : jwtToken("customer");
   await request(strapi.server)
     .get("/orders/" + orderData.id)
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwt)
-    .expect(
-      "Content-Type",
-      expect === 404 ? /text/ : /json/
-    )
+    .expect("Content-Type", expect === 404 ? /text/ : /json/)
     .expect(expect);
 });

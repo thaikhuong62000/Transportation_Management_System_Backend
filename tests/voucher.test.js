@@ -65,7 +65,6 @@ beforeAll(() => {
     .then((data) => {
       expect(data.body.jwt).toBeDefined();
       jwtToken(data.body.jwt);
-      console.log(jwtToken.mock.calls);
     });
 });
 

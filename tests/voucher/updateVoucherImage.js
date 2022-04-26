@@ -38,8 +38,7 @@ const images = [
 ];
 
 it.each(images)("$name", async ({ image, type, expected }) => {
-  const jwt =
-    type === "admin" ? jwtToken.mock.calls[1] : jwtToken.mock.calls[0];
+  const jwt = type === "admin" ? jwtToken("admin") : jwtToken("customer");
   const image_id = await request(strapi.server)
     .post("/vouchers/image")
     .set("accept", "*")

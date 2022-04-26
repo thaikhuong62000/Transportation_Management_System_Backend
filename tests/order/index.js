@@ -4,6 +4,6 @@ require("./countOrders");
 require("./findOneOrders");
 require("./ordersIsDelivered");
 require("./ordersIsDelivering");
-require("./tracingOrders");
+// require("./tracingOrders");
 // require("./put");
 // require("./delete");

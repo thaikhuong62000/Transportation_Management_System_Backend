@@ -1,7 +1,7 @@
 require("./helpers/initTestSuite");
 
-const { createdUser, jwtToken } = require("./__mocks__/AuthMocks");
-const { createdOrder } = require("./__mocks__/OrderMocks");
+const { jwtToken } = require("./__mocks__/AuthMocks");
+// const { createdOrder } = require("./__mocks__/OrderMocks");
 const request = require("supertest");
 
 const mockUserData = {
