@@ -8,25 +8,38 @@ module.exports = {
    */
   async create(ctx) {
     // Validation
-    const data = ctx.request.body;
-    const timestamp = Date.parse(data.time);
+    const { time, note, car } = ctx.request.body;
+    const { id } = ctx.state.user;
+    const timestamp = Date.parse(time);
     if (isNaN(timestamp)) {
       // Wrong time format
       return ctx.badRequest("Wrong time format");
     }
 
     try {
-      if (data.car === undefined) {
+      if (car === undefined) {
         throw "Car id undefined";
       }
-      await strapi.services.car.findOne({ id: data.car });
+
+      let insertedCar = await strapi.services.car.findOne({
+        id: car,
+        manager: id,
+      });
+
+      if (!insertedCar) {
+        throw "Invalid car's manager";
+      }
     } catch (error) {
       // Car not found
       return ctx.badRequest("Car not found");
     }
 
     // Add Car_broken
-    let car = await strapi.services["car-broken"].create(data);
-    return car;
+    let broken = await strapi.services["car-broken"].create({
+      time,
+      note,
+      car,
+    });
+    return broken;
   },
 };
