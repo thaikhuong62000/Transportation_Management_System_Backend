@@ -108,7 +108,7 @@ it.each(testCaseData)("$message", async ({ expect, send }) => {
     });
   if (idTemplate) {
     await request(strapi.server)
-      .post("/order-templates/delete/")
+      .post("/order-templates/delete")
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
       .set("Authorization", "Bearer " + jwtToken("customer"))

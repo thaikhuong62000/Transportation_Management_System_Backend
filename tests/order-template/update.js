@@ -137,7 +137,7 @@ it.each(testCaseData)("$message", async ({ expect, type, send }) => {
       .expect("Content-Type", expect === 404 ? /text/ : /json/)
       .expect(expect);
     await request(strapi.server)
-      .post("/order-templates/delete/")
+      .post("/order-templates/delete")
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
       .set("Authorization", "Bearer " + jwtToken("customer"))
