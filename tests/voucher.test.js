@@ -1,6 +1,6 @@
 require("./helpers/initTestSuite");
-
-const { createdUser, jwtToken } = require("./__mocks__/AuthMocks");
+const initUser = require("./helpers/initUser");
+const {jwtToken } = require("./__mocks__/AuthMocks");
 const request = require("supertest");
 
 const mockUserData = {
@@ -12,6 +12,7 @@ const mockUserData = {
   confirmed: true,
   blocked: null,
   type: "Platinum",
+  role: "customer",
 };
 
 const mockAdminData = {
@@ -19,37 +20,7 @@ const mockAdminData = {
   password: "12345678",
 };
 
-// Create test user
-beforeAll(async () => {
-  const role = await strapi
-    .query("role", "users-permissions")
-    .findOne({ type: "customer" }, []);
-  const data = await strapi.plugins["users-permissions"].services.user.add({
-    ...mockUserData,
-    role: role.id,
-  });
-  expect(data).toBeDefined();
-  createdUser.mockReturnValue(data);
-});
-
-// Login
-beforeAll(async () => {
-  await request(strapi.server)
-    .post("/auth/local")
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
-
-    .send({
-      identifier: mockUserData.email,
-      password: mockUserData.password,
-    })
-    .expect("Content-Type", /json/)
-    .expect(200)
-    .then((data) => {
-      expect(data.body.jwt).toBeDefined();
-      jwtToken(data.body.jwt);
-    });
-});
+initUser("customer", mockUserData);
 
 beforeAll(() => {
   return request(strapi.server)
@@ -64,19 +35,7 @@ beforeAll(() => {
     .expect(200)
     .then((data) => {
       expect(data.body.jwt).toBeDefined();
-      jwtToken(data.body.jwt);
-    });
-});
-
-// Delete test user
-afterAll(() => {
-  return strapi.plugins["users-permissions"].services.user
-    .remove({
-      id: createdUser().id,
-    })
-    .then((data) => {
-      expect(data).toBeDefined();
-      createdUser.mockReset();
+      jwtToken("admin", data.body.jwt);
     });
 });
 

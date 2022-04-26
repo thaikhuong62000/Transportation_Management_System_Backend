@@ -1,9 +1,6 @@
 const request = require("supertest");
 const { jwtToken } = require("../__mocks__/AuthMocks");
 
-const image = "public/uploads/voucher_pic0.jpg";
-const image_map_png = "public/uploads/map.png";
-
 const images = [
   {
     image: "public/uploads/voucher_pic0.jpg",
