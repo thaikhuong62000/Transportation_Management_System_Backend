@@ -14,8 +14,7 @@ const testCaseData = [
 ];
 
 it.each(testCaseData)("$message", async ({ expect, type }) => {
-  const jwt =
-    type === "admin" ? jwtToken.mock.calls[1] : jwtToken.mock.calls[0];
+  const jwt = type === "admin" ? jwtToken("admin") : jwtToken("customer");
   await request(strapi.server)
     .get("/orders")
     .set("accept", "application/json")

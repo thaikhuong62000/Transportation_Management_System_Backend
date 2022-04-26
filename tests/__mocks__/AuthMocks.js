@@ -21,10 +21,12 @@ function processData(data, variable) {
   }
 }
 
-const createdUser = jest.fn((data) => {
+const createdUser = jest.fn((data, value) => {
+  if (value) data = { key: data, value };
   return processData(data, "users");
 });
-const jwtToken = jest.fn((data) => {
+const jwtToken = jest.fn((data, value) => {
+  if (value) data = { key: data, value };
   return processData(data, "jwts");
 });
 const firebaseToken = jest.fn();

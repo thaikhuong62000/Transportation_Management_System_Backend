@@ -12,7 +12,7 @@ module.exports = (key, userData) => {
       role: role.id,
     });
     expect(data).toBeDefined();
-    createdUser({ key, value: data });
+    createdUser(key, data);
   });
 
   // Login
@@ -29,7 +29,7 @@ module.exports = (key, userData) => {
       .expect(200)
       .then((data) => {
         expect(data.body.jwt).toBeDefined();
-        jwtToken({ key, value: data.body.jwt });
+        jwtToken(key, data.body.jwt);
       });
   });
 
