@@ -1,33 +1,30 @@
 const request = require("supertest");
+const { jwtToken } = require("../__mocks__/AuthMocks");
 
-// user mock data
-const mockUserData = {
-  username: "tuiladriver",
-  password: "12345678",
-};
+const testCaseData = [
+  {
+    message: "get cars by driver",
+    type: "driver",
+    expect: 403,
+  },
+  {
+    message: "get cars by admin",
+    type: "admin",
+    expect: 200,
+  },
+  {
+    message: "get cars by stocker",
+    type: "stocker",
+    expect: 200,
+  },
+];
 
-it("should login user and return jwt token", async () => {
-  const response = await request(strapi.server) // app server is an instance of Class: http.Server
-    .post("/auth/local")
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
-    .send({
-      identifier: mockUserData.username,
-      password: mockUserData.password,
-    })
-    .expect("Content-Type", /json/)
-    .expect(200)
-    .then((data) => {
-      expect(data.jwt);
-    });
+it.each(testCaseData)("$message", async ({ expect,type }) => {
   await request(strapi.server) // app server is an instance of Class: http.Server
     .get("/cars")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + response.jwt)
+    .set("Authorization", "Bearer " + jwtToken(type))
     .expect("Content-Type", /json/)
-    .expect(200)
-    .then((data) => {
-      expect(data.jwt).toBeDefined();
-    });
+    .expect(expect);
 });
