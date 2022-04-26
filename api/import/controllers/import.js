@@ -1,11 +1,5 @@
 "use strict";
 const { sanitizeEntity } = require("strapi-utils");
-var mongoose = require("mongoose");
-
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
- * to customize this controller
- */
 
 module.exports = {
   async getCurrentImport(ctx) {
@@ -50,11 +44,12 @@ module.exports = {
 
     const db = strapi.connections.default;
     let session;
-    const { Package, Import, Order, ShipmentItem, Storage } = db.models; // Models
+    const { Package, Import, Order, ShipmentItem } = db.models; // Models
 
     try {
-      let store = await Storage.findOne({ _id: storage });
-      store = await Storage.populate(store, { path: "provinces" });
+      if (!quantity && quantity < 0) {
+        throw "Invalid package quantity";
+      }
 
       let pack = await strapi.services.package.findOne({ id: packageId });
       if (!pack) {
@@ -73,9 +68,15 @@ module.exports = {
         id: pack.order.id,
       });
 
-      if (!quantity && quantity < 0) {
-        throw "Invalid package quantity";
-      }
+      // Check if current storage is destination
+      const nearestStorage = await strapi.services.storage.getNearestStorage(
+        order.to_address
+      );
+      let store =
+        storage === nearestStorage.id
+          ? nearestStorage
+          : await strapi.services.storage.findOne({ id: storage }, []);
+      store.isDestination = storage === nearestStorage.id;
 
       session = await db.startSession();
       session.startTransaction();
@@ -166,11 +167,5 @@ module.exports = {
 };
 
 function getPackageState(_package, store) {
-  return Number.parseInt(_package.state) < 2
-    ? 2
-    : store.provinces
-        .map((item) => item.name)
-        .includes(_package.order.to_address.city)
-    ? 3
-    : 2;
+  return Number.parseInt(_package.state) < 2 ? 2 : store.isDestination ? 3 : 2;
 }
