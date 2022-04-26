@@ -13,11 +13,9 @@ module.exports = {
   async updateAvatar(ctx) {
     // Validate
     const {
-      request: {
-        body = {},
-        files: { avatar: _avatar },
-      },
+      request: { body = {} },
     } = ctx;
+    const _avatar = ctx?.request?.files?.avatar;
 
     try {
       await strapi.plugins.upload.services.utils.checkImage(_avatar, false);
