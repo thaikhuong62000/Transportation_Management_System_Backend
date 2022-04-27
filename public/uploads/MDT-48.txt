@@ -9,7 +9,7 @@ Ngành: (X) Khoa học máy tính ☐Kỹ thuật máy tính ☐Liên ngành KHM
 Số lượng sinh viên thực hiện: 2-3sv
 1812649	Nguyễn Anh        	Khoa   
 1812694	Phạm Nguyễn Thái  	Khương 
-1812847	Fujiwara		Chika
+1812847	Dương Minh Nhị      Long	
 
 Mô tả đề tài: Quá trình vận chuyển hàng hóa liên tỉnh sẽ bắt đầu từ giai đoạn thu gom hàng trong nội thành, 
 đến tập trung hàng hóa ở các kho bãi, chuyển lên các xe liên tỉnh; khi đến hàng hóa cũng được sắp xếp, 
