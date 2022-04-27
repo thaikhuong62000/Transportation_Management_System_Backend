@@ -193,25 +193,16 @@ module.exports = {
       from_address,
       to_address,
       packages,
-      voucher = "",
+      voucher,
       ...body
     } = ctx.request.body;
 
     const db = strapi.connections.default;
     let session;
-    const {
-      Package,
-      Order,
-      ComponentAddressAddress,
-      ComponentPackageSize,
-      UsersPermissionsUser,
-    } = db.models;
+    const { Package, Order, ComponentAddressAddress, ComponentPackageSize } =
+      db.models;
 
     try {
-      if (!remain_fee || remain_fee < 0 || !fee || fee < 0) {
-        if (role.name !== "Admin") throw "Invalid order fee";
-      }
-
       if (
         !body.sender_phone ||
         !body.sender_name ||
@@ -222,7 +213,7 @@ module.exports = {
         typeof from_address !== "object" ||
         typeof to_address !== "object"
       ) {
-        if (role.name !== "Admin") throw "Invalid order information";
+        throw "Invalid order information";
       }
 
       // try {
@@ -325,8 +316,9 @@ module.exports = {
       await session.commitTransaction();
       session.endSession();
 
-      return order[0];
+      return { ...order[0], packages };
     } catch (error) {
+      console.log(error);
       await session.abortTransaction();
       session.endSession();
       return ctx.badRequest([
