@@ -194,6 +194,7 @@ module.exports = {
       to_address,
       packages,
       voucher = "",
+      note = "",
       ...body
     } = ctx.request.body;
 
@@ -296,6 +297,7 @@ module.exports = {
             fee,
             remain_fee,
             customer,
+            note
           },
         ],
         { session: session }
