@@ -32,7 +32,7 @@ it.each(mockPasswordData)(
       .post("/auth/password/update")
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
-      .set("Authorization", "Bearer " + jwtToken())
+      .set("Authorization", "Bearer " + jwtToken("customer"))
       .send({ password, newPassword })
       .expect("Content-Type", /json/)
       .expect(expected === "update" ? 200 : 400);

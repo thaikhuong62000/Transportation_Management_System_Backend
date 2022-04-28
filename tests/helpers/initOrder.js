@@ -14,21 +14,22 @@ module.exports = (key, orderData) => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then((data) => {
-        console.log(data.body);
         expect(data.body).toBeDefined();
-        createdOrder(key, data.response.body);
+        createdOrder(key, data.body);
       });
   });
 
   // Delete order
   afterAll(async () => {
-    await strapi.services.order
-      .delete({
-        id: createdOrder(key).id,
-      })
-      .then((data) => {
-        expect(data).toBeDefined();
-      });
+    createdOrder(key).packages.forEach(async (item) => {
+      await strapi.services.package
+        .delete({
+          id: item.id,
+        })
+        .then((data) => {
+          expect(data).toBeDefined();
+        });
+    });
     await strapi.services.order
       .delete({
         id: createdOrder(key).id,

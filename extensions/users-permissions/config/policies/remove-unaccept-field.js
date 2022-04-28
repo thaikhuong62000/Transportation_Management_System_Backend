@@ -3,18 +3,18 @@
 module.exports = async (ctx, next) => {
   const { role } = ctx.state.user;
   const {
-    confirmed = false,
-    blocked = false,
-    username = "",
-    point = 0,
-    type = "",
-    device_token = "",
-    role: _role = "",
-    car = "",
-    orders = [],
-    shipments = [],
-    storage = [],
-    reports = [],
+    confirmed,
+    blocked,
+    username,
+    point,
+    type,
+    device_token,
+    role: _role,
+    car,
+    orders,
+    shipments,
+    storage,
+    reports,
     ...props
   } = ctx.request.body;
   if (role.name !== "Admin") {
