@@ -1,20 +1,22 @@
 "use strict";
 
 module.exports = {
-  async calcFee(from_address, to_address, packages, user) {
-    const distance = calcDistance(from_address, to_address); //km
+  async calcFee(from_address, to_address, packages, user, voucher) {
+    const distance = await strapi.services.distance.calcDistance(
+      from_address,
+      to_address
+    ); //km
     const { base = 1, current = 1 } = strapi.tms.config.oil;
     const gtgt = current / base;
-    const weight = packages.reduce(
-      (pre, curr) => pre + curr.quantity * curr.weight,
-      0
-    );
-    
-    return calcFeeFromDistance(strapi, weight, distance) * gtgt;
+    const weight =
+      packages.reduce((pre, curr) => pre + curr.quantity * curr.weight, 0) /
+      1000; // ton
+
+    let fee = calcFeeFromDistance(strapi, weight, distance) * gtgt;
+    fee = await strapi.services.voucher.applyVoucher(voucher, fee, user);
+    return fee;
   },
 };
-
-function calcDistance() {}
 
 function calcFeeFromDistance(strapi, weight, distance) {
   const fee_config = strapi.tms.config.fee;
@@ -36,6 +38,11 @@ function calcFeeFromDistance(strapi, weight, distance) {
           (_distance[i + 1] - _distance[i]) * weight_case[_distance[i + 1]];
       }
     }
+  }
+
+  // Weight Multplier
+  if (weight_case === fee_config.x) {
+    fee = fee * (weight / 10);
   }
   return fee;
 }
