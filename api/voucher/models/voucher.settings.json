@@ -55,6 +55,7 @@
       "type": "enumeration",
       "enum": [
         "All",
+        "User",
         "Iron",
         "Gold",
         "Diamond",
