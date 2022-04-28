@@ -1,0 +1,37 @@
+MDT-48:
+Tên đề tài:
+Tiếng việt: Xây dựng hệ thống quản lý vận chuyển hàng hóa liên tỉnh trên mobile
+Tiếng anh: Building transportation management system in mobile device
+CBHD1: ThS. Nguyễn Đình Thành
+Email1: dinhthanh@hcmut.edu.vn
+Ngành: (X) Khoa học máy tính ☐Kỹ thuật máy tính ☐Liên ngành KHMT-KTMT
+Đào tạo: (X) Chính quy ☐Không chính quy
+Số lượng sinh viên thực hiện: 2-3sv
+1812649	Nguyễn Anh        	Khoa   
+1812694	Phạm Nguyễn Thái  	Khương 
+1812847	Dương Minh Nhị      Long	
+
+Mô tả đề tài: Quá trình vận chuyển hàng hóa liên tỉnh sẽ bắt đầu từ giai đoạn thu gom hàng trong nội thành, 
+đến tập trung hàng hóa ở các kho bãi, chuyển lên các xe liên tỉnh; khi đến hàng hóa cũng được sắp xếp, 
+phân loại rồi sẽ có xe nội thành chuyển trực tiếp đến người nhận.
+Ứng dụng xây dựng sẽ hỗ trợ người quản lý và nhân viên phía công ty vận chuyển theo dõi quá trình hàng hóa
+được nhận từ người gởi và chuyển tới người nhận.
+
+Nhiệm vụ (yêu cầu về nội dung và số liệu ban đầu):
+Phân tích kĩ nghiệp vụ giao nhận hàng hóa
+Thiết kế dữ liệu và ứng dụng
+Hiện thực các chức năng hỗ trợ xử lý
+Thông tin người gởi hàng
+Thông tin người nhận hàng
+Hàng hóa: Loại hàng, cách đóng gói, số lượng, khối lượng
+Kho hàng ở các tỉnh: đi và đến
+Thông tin phương tiện, tài xế (nội thành và liên tỉnh)
+Giám sát quá trình di chuyển của hàng hóa: ngày nhận hàng, ngày chuyển hàng đi liên tỉnh, ngày hàng đến,…
+Giám sát kho hàng
+Tính cước phí quá trình vận chuyển
+Chức năng chat giữa người gửi, người nhận, tài xế vận chuyển
+Chức năng khuyến mãi, voucher.
+Thử nghiệm và đánh giá hệ thống.
+Tài liệu tham khảo:
+GVHD cung cấp
+Internet

@@ -1,8 +1,6 @@
 require("./helpers/initTestSuite");
-
-const { jwtToken } = require("./__mocks__/AuthMocks");
-// const { createdOrder } = require("./__mocks__/OrderMocks");
-const request = require("supertest");
+const initUser = require("./helpers/initUser");
+const loginUser = require("./helpers/loginUser");
 
 const mockUserData = {
   username: "acustomer",
@@ -16,28 +14,13 @@ const mockUserData = {
   role: "customer",
 };
 
-require("./helpers/initUser")("customer", mockUserData);
+initUser("customer", mockUserData);
 
 const mockAdminData = {
   email: "admin",
   password: "12345678",
 };
 
-beforeAll(() => {
-  return request(strapi.server)
-    .post("/auth/local")
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
-    .send({
-      identifier: mockAdminData.email,
-      password: mockAdminData.password,
-    })
-    .expect("Content-Type", /json/)
-    .expect(200)
-    .then((data) => {
-      expect(data.body.jwt).toBeDefined();
-      jwtToken("admin", data.body.jwt);
-    });
-});
+loginUser("admin", mockAdminData);
 
 require("./order");
