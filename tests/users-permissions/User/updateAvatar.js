@@ -2,14 +2,18 @@ const request = require("supertest");
 
 const { jwtToken } = require("../../__mocks__/AuthMocks");
 
-const mockAvatar = [{ avatar: "public/uploads/map.png", expected: "update" }];
+const mockAvatar = [
+  { avatar: "public/uploads/map.png", expected: "update" },
+  { avatar: "public/uploads/MDT-48.txt", expected: "not update" },
+  { avatar: "", expected: "not update" },
+];
 
 it.each(mockAvatar)("should $expected avatar", async ({ avatar, expected }) => {
   const user = (
     await request(strapi.server)
       .put("/users/avatar")
       .set("accept", "*")
-      .set("Authorization", "Bearer " + jwtToken())
+      .set("Authorization", "Bearer " + jwtToken("customer"))
       .attach("avatar", avatar)
       .expect("Content-Type", /json/)
       .expect(expected === "update" ? 200 : 400)

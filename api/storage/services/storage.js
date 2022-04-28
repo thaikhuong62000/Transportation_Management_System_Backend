@@ -1,8 +1,22 @@
-'use strict';
+"use strict";
 
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-services)
- * to customize this service
- */
+module.exports = {
+  async getNearestStorage(address) {
+    let storages = await strapi.services.storage.find({}, []);
 
-module.exports = {};
+    if (storages.length === 0) return null;
+
+    if (!address.latitude || !address.longitude) return storages[0];
+
+    storages = storages.map((item) => {
+      return {
+        ...item,
+        distance: strapi.services.distance.calcDistance(address, item.address),
+      };
+    });
+
+    storages.sort((a, b) => a.distance - b.distance);
+
+    return storages;
+  },
+};

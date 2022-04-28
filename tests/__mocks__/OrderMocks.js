@@ -1,6 +1,5 @@
 let mockData = {
-  users: {},
-  jwts: {},
+  orders: {},
 };
 
 function processData(data, variable) {
@@ -21,14 +20,9 @@ function processData(data, variable) {
   }
 }
 
-const createdUser = jest.fn((data, value) => {
+const createdOrder = jest.fn((data, value) => {
   if (value) data = { key: data, value };
-  return processData(data, "users");
+  return processData(data, "orders");
 });
-const jwtToken = jest.fn((data, value) => {
-  if (value) data = { key: data, value };
-  return processData(data, "jwts");
-});
-const firebaseToken = jest.fn();
 
-module.exports = { createdUser, jwtToken, firebaseToken };
+module.exports = { createdOrder };

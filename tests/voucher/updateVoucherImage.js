@@ -1,61 +1,52 @@
 const request = require("supertest");
-const mockUserData = {
-  username: "FujiwaraChika",
-  password: "12345678",
-  adminUsername:"admin",
-  adminPassword:"12345678"
-};
+const { jwtToken } = require("../__mocks__/AuthMocks");
 
-it("kiểm tra quyền user không dc update voucher", async () => {
-  const jwt = await request(strapi.server)
-    .post("/auth/local")
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
-    .send({
-      identifier: mockUserData.username,
-      password: mockUserData.password,
-    })
-    .expect("Content-Type", /json/)
-    .expect(200)
-    .then((data) => {
-      expect(data.body.jwt).toBeDefined();
-      return data.body.jwt;
-    });
-  await request(strapi.server)
+const images = [
+  {
+    image: "public/uploads/voucher_pic0.jpg",
+    type: "admin",
+    name: "kiểm tra quyền admin update voucher .jpg file",
+    expected: 200,
+  },
+  {
+    image: "public/uploads/voucher_pic0.jpg",
+    type: "user",
+    name: "kiểm tra quyền user không dc update voucher",
+    expected: 403,
+  },
+  {
+    image: "public/uploads/voucher_pic0.jpg",
+    type: "admin",
+    name: "kiểm tra quyền admin update voucher .jpg file",
+    expected: 200,
+  },
+  {
+    image: "public/uploads/map.png",
+    type: "admin",
+    name: "kiểm tra quyền admin update voucher .png file",
+    expected: 200,
+  },
+  {
+    image: ".gitignore",
+    type: "admin",
+    name: "kiểm tra quyền admin update image nhưng không phải file hình voucher",
+    expected: 400,
+  },
+];
+
+it.each(images)("$name", async ({ image, type, expected }) => {
+  const jwt = type === "admin" ? jwtToken("admin") : jwtToken("customer");
+  const image_id = await request(strapi.server)
     .post("/vouchers/image")
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
+    .set("accept", "*")
     .set("Authorization", "Bearer " + jwt)
-    .send({
-        files: { image: "_image" },
-    })
+    .attach("image", image)
     .expect("Content-Type", /json/)
-    .expect(403);
+    .expect(expected)
+    .then((data) => {
+      return expected === 200 ? data.body[0]._id : undefined;
+    });
+  if (image_id) {
+    await strapi.query("file", "upload").model.deleteOne({ _id: image_id });
+  }
 });
-
-// it("kiểm tra quyền user không dc update voucher", async () => {
-//     const jwt = await request(strapi.server)
-//       .post("/auth/local")
-//       .set("accept", "application/json")
-//       .set("Content-Type", "application/json")
-//       .send({
-//         identifier: mockUserData.adminUsername,
-//         password: mockUserData.adminPassword,
-//       })
-//       .expect("Content-Type", /json/)
-//       .expect(200)
-//       .then((data) => {
-//         expect(data.body.jwt).toBeDefined();
-//         return data.body.jwt;
-//       });
-//     await request(strapi.server)
-//       .post("/vouchers/image")
-//       .set("accept", "application/json")
-//       .set("Content-Type", "application/json")
-//       .set("Authorization", "Bearer " + jwt)
-//       .send({},{
-//           image: 'Pictures/278455850_566423334621521_1622723246964081647_n.jpg' ,
-//       })
-//       .expect("Content-Type", /json/)
-//       .expect(200);
-//   });

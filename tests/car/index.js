@@ -1,2 +1,1 @@
-require("./test-car");
-require("./policy");
+require("./getCar");
