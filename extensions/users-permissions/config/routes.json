@@ -235,6 +235,16 @@
         "policies": [],
         "prefix": ""
       }
+    },
+    {
+      "method": "POST",
+      "path": "/fees",
+      "handler": "Fee.getFeeFromOrder",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Calculate fee from order"
+      }
     }
   ]
 }
