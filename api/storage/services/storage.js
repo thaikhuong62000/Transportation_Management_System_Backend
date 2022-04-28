@@ -11,12 +11,7 @@ module.exports = {
     storages = storages.map((item) => {
       return {
         ...item,
-        distance: strapi.services.shipment.coordToDistance(
-          address.latitude,
-          address.longitude,
-          item.address.latitude,
-          item.address.longitude
-        ),
+        distance: strapi.services.distance.calcDistance(address, item.address),
       };
     });
 

@@ -6,6 +6,7 @@ module.exports = {
       from_address,
       to_address
     ); //km
+    if (!distance) throw "Invalid distance";
     const { base = 1, current = 1 } = strapi.tms.config.oil;
     const gtgt = current / base;
     const weight =
