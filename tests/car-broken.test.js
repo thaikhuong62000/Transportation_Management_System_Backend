@@ -1,6 +1,4 @@
 require("./helpers/initTestSuite");
-
-require("./helpers/initTestSuite");
 const initUser = require("./helpers/initUser");
 const { jwtToken } = require("./__mocks__/AuthMocks");
 const { variable } = require("./__mocks__/Global");
