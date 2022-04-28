@@ -5,7 +5,7 @@ const testCaseData = [
   {
     message: "get cars by driver",
     type: "driver",
-    expect: 403,
+    expect: 200,
   },
   {
     message: "get cars by admin",
@@ -19,7 +19,7 @@ const testCaseData = [
   },
 ];
 
-it.each(testCaseData)("$message", async ({ expect,type }) => {
+it.each(testCaseData)("$message", async ({ expect, type }) => {
   await request(strapi.server) // app server is an instance of Class: http.Server
     .get("/cars")
     .set("accept", "application/json")
