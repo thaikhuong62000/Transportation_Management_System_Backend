@@ -194,6 +194,7 @@ module.exports = {
       to_address,
       packages,
       voucher,
+      note = "",
       ...body
     } = ctx.request.body;
 
@@ -216,53 +217,22 @@ module.exports = {
         throw "Invalid order information";
       }
 
-      // try {
-      //   if (!from_address.latitude || !from_address.longitude) {
-      //     const response = await strapi.geocode(mergeAddress(from_address));
-      //     const coord = response.data.results[0].geometry.location;
-      //     from_address.latitude = coord.lat;
-      //     from_address.longitude = coord.lng;
-      //   }
-      //   if (!to_address.latitude || !to_address.longitude) {
-      //     const response = await strapi.geocode(mergeAddress(to_address));
-      //     const coord = response.data.results[0].geometry.location;
-      //     to_address.latitude = coord.lat;
-      //     to_address.longitude = coord.lng;
-      //   }
-      // } catch (error) {
-      //   throw "Invalid address";
-      // }
-
-      // Temporary comment
-      // fee = await strapi.services.fee.calcFee(
-      //   from_address,
-      //   to_address,
-      //   packages,
-      //   ctx.state.user
-      // );
-
-      // Calculate fee from voucher and initial fee
-      if (voucher) {
-        let _voucher = await strapi.services.voucher.findOne({ id: voucher });
-        if (!_voucher) {
-          throw "Cannot find voucher";
-        }
-
-        let { sale_type, sale, sale_max } = _voucher;
-        if (sale_type === "value") {
-          if (fee >= sale) {
-            fee = fee - sale;
-          }
-        } else if (sale_type === "percentage") {
-          let discount = fee - (fee * sale) / 100;
-          if (discount > sale_max) {
-            discount = sale_max;
-          }
-          fee = fee - discount;
-        }
+      // Check coords of addresses
+      // Calculate fee
+      // Apply voucher
+      try {
+        fee = await strapi.services.fee.calcFee(
+          from_address,
+          to_address,
+          packages,
+          ctx.state.user,
+          voucher
+        );
+        fee = Math.ceil(fee)
+        remain_fee = fee;
+      } catch (error) {
+        throw error;
       }
-
-      remain_fee = fee;
 
       session = await db.startSession();
       session.startTransaction();
@@ -287,6 +257,7 @@ module.exports = {
             fee,
             remain_fee,
             customer,
+            note,
           },
         ],
         { session: session }
@@ -316,7 +287,9 @@ module.exports = {
       await session.commitTransaction();
       session.endSession();
 
-      return { ...order[0], packages };
+      return await strapi.services.order.findOne({ id: order[0].id }, [
+        "packages",
+      ]);
     } catch (error) {
       console.log(error);
       await session.abortTransaction();
@@ -330,12 +303,3 @@ module.exports = {
     }
   },
 };
-
-function mergeAddress(address) {
-  let newAddress = "";
-  ["street", "ward", "province", "city"].forEach((element) => {
-    if (address[element] && address[element] !== "")
-      newAddress = newAddress + `, ${address[element]}`;
-  });
-  return newAddress.slice(1);
-}
