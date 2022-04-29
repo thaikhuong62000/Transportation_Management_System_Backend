@@ -64,27 +64,15 @@ it.each(testCaseData)("$message", async ({ expect, type, send }) => {
     .post("/exports")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + jwtToken("stocker"))
-    .send({
-      quantity: 10,
-      package: variable("package"),
-    })
+    .set("Authorization", "Bearer " + jwtToken(type))
+    .send(send)
     .expect("Content-Type", /json/)
-    .expect(200)
+    .expect(expect)
     .then((data) => {
       return data.body.id;
     });
 
   if (idExport) {
-    await request(strapi.server) // app server is an instance of Class: http.Server
-      .put("/exports/" + idExport)
-      .set("accept", "application/json")
-      .set("Content-Type", "application/json")
-      .set("Authorization", "Bearer " + jwtToken(type))
-      .send(send)
-      .expect("Content-Type", /json/)
-      .expect(expect);
-
     await request(strapi.server) // app server is an instance of Class: http.Server
       .delete("/exports/" + idExport)
       .set("accept", "application/json")
@@ -94,3 +82,4 @@ it.each(testCaseData)("$message", async ({ expect, type, send }) => {
       .expect(200);
   }
 });
+
