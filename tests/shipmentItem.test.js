@@ -100,4 +100,4 @@ afterAll(async () => {
     .expect("Content-Type", /json/)
     .expect(200);
 });
-require("./shimentItem");
+require("./shipmentItem");
