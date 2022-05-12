@@ -3,8 +3,8 @@ require("./helpers/initTestSuite");
 const initUser = require("./helpers/initUser");
 
 const mockUserData = {
-  username: "atester",
-  email: "atester@strapi.com",
+  username: "atesterot",
+  email: "atesterot@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987654321",

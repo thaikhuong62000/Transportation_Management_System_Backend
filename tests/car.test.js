@@ -6,8 +6,8 @@ const { jwtToken } = require("./__mocks__/AuthMocks");
 const request = require("supertest");
 
 const mockUserData = {
-  username: "atester",
-  email: "atester@strapi.com",
+  username: "atesterc",
+  email: "atesterc@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987654321",
@@ -18,8 +18,8 @@ const mockUserData = {
 };
 
 const stockerData = {
-  username: "atester2",
-  email: "atester2@strapi.com",
+  username: "atester2c",
+  email: "atester2c@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987654821",

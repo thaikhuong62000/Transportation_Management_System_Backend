@@ -1,4 +1,3 @@
-const { before } = require("strapi-connector-mongoose/lib/migrations/draft-publish");
 const request = require("supertest");
 const { jwtToken } = require("../__mocks__/AuthMocks");
 const { variable } = require("../__mocks__/Global");
