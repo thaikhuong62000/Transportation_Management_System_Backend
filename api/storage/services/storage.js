@@ -17,6 +17,6 @@ module.exports = {
 
     storages.sort((a, b) => a.distance - b.distance);
 
-    return storages;
+    return storages[0];
   },
 };
