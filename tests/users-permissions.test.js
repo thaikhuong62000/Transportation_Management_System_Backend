@@ -5,8 +5,8 @@ const getFirebaseToken = require("./helpers/getFirebaseToken");
 const { firebaseToken } = require("./__mocks__/AuthMocks");
 
 const mockUserData = {
-  username: "atester",
-  email: "atester@strapi.com",
+  username: "atesterup",
+  email: "atesterup@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987654321",

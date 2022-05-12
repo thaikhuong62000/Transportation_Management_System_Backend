@@ -4,9 +4,13 @@ module.exports = {
   async calcDistance(from_address, to_address) {
     try {
       await strapi.services.address.prepareAddress(from_address);
+    } catch (error) {
+      throw "Invalid from_address";
+    }
+    try {
       await strapi.services.address.prepareAddress(to_address);
     } catch (error) {
-      throw "Invalid addresses";
+      throw "Invalid to_address";
     }
     return strapi.services.distance.addressToDistance(from_address, to_address);
   },

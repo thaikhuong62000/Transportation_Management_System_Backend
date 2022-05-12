@@ -7,8 +7,8 @@ const { variable } = require("./__mocks__/Global");
 const request = require("supertest");
 
 const mockStockerData = {
-  username: "atesterep",
-  email: "atesterep@strapi.com",
+  username: "atesterfl",
+  email: "atesterfl@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987654321",
@@ -20,8 +20,8 @@ const mockStockerData = {
 };
 
 const mockDriverData = {
-  username: "atester3ep",
-  email: "ateste3rep@strapi.com",
+  username: "atester3fl",
+  email: "ateste3rfl@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987333321",
@@ -32,8 +32,8 @@ const mockDriverData = {
 };
 
 const mockCustomerData = {
-  username: "atester4ep",
-  email: "atester4ep@strapi.com",
+  username: "atester4fl",
+  email: "atester4fl@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987444421",
@@ -45,19 +45,6 @@ const mockCustomerData = {
 const mockAdminData = {
   email: "admin",
   password: "12345678",
-};
-
-const packageData = {
-  package_type: "normal",
-  name: "atest package",
-  quantity: 1,
-  weight: 50,
-  note: "tét ",
-  size: {
-    len: 35,
-    width: 20,
-    height: 165,
-  },
 };
 
 initUser("stocker", mockStockerData);
@@ -79,28 +66,6 @@ beforeAll(async () => {
       expect(data.body.jwt).toBeDefined();
       jwtToken("admin", data.body.jwt);
     });
-  await request(strapi.server)
-    .post("/packages")
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + jwtToken("admin"))
-    .send(packageData)
-    .expect("Content-Type", /json/)
-    .expect(200)
-    .then((data) => {
-      expect(data.body.id).toBeDefined();
-      variable("package", data.body.id);
-    });
 });
 
-afterAll(async () => {
-  await request(strapi.server) // app server is an instance of Class: http.Server
-    .delete("/packages/" + variable("package"))
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + jwtToken("admin"))
-    .expect("Content-Type", /json/)
-    .expect(200);
-});
-
-require("./export");
+require("./furlough");

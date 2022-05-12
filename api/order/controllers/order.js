@@ -220,19 +220,14 @@ module.exports = {
       // Check coords of addresses
       // Calculate fee
       // Apply voucher
-      try {
-        fee = await strapi.services.fee.calcFee(
-          from_address,
-          to_address,
-          packages,
-          ctx.state.user,
-          voucher
-        );
-        fee = Math.ceil(fee)
-        remain_fee = fee;
-      } catch (error) {
-        throw error;
-      }
+      fee = await strapi.services.fee.calcFee(
+        from_address,
+        to_address,
+        packages,
+        ctx.state.user,
+        voucher
+      );
+      remain_fee = fee;
 
       session = await db.startSession();
       session.startTransaction();
@@ -292,12 +287,14 @@ module.exports = {
       ]);
     } catch (error) {
       console.log(error);
-      await session.abortTransaction();
-      session.endSession();
+      if (session) {
+        await session.abortTransaction();
+        session.endSession();
+      }
       return ctx.badRequest([
         {
           id: "order.create",
-          message: JSON.stringify(error),
+          message: error,
         },
       ]);
     }
