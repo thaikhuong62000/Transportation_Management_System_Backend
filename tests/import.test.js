@@ -8,7 +8,7 @@ const request = require("supertest");
 
 const mockStockerData = {
   username: "atesterimport",
-  email: "atester@strapi.com",
+  email: "atesterimport@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987654321",
@@ -21,7 +21,7 @@ const mockStockerData = {
 
 const mockDriverData = {
   username: "atester3import",
-  email: "ateste3r@strapi.com",
+  email: "ateste3rimport@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987333321",
@@ -33,7 +33,7 @@ const mockDriverData = {
 
 const mockCustomerData = {
   username: "atester4import",
-  email: "atester4@strapi.com",
+  email: "atester4import@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987444421",
