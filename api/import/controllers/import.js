@@ -136,6 +136,8 @@ module.exports = {
             ...order.packages.map((item) => Number.parseInt(item.state))
           );
 
+          if (minPackState === 3) ctx.createShipment = { order, store };
+
           if (minPackState > order.state) {
             let _order = await Order.findOneAndUpdate(
               { _id: order._id },

@@ -5,7 +5,7 @@ module.exports = async (ctx, next) => {
   if (ctx.response.status === 200) {
     const order = ctx.response.body;
     strapi.services.storage
-      .getNearestStorage(order.to_address)
+      .getNearestStorage(order.from_address)
       .then((storage) => {
         const { _id: _fid, id: fid, ...from_address } = order.from_address;
         const { _id: _tid, id: tid, ...to_address } = storage.address;
