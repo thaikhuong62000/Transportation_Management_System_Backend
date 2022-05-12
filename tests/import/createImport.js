@@ -11,24 +11,6 @@ const testCaseData = [
     expect: 200,
   },
   {
-    message: "stocker create import without package response 400",
-    type: "stocker",
-    send: { quantity: 1, package: 2 },
-    expect: 400,
-  },
-  {
-    message: "stocker create import with 0 quantity response 400",
-    type: "stocker",
-    send: { quantity: 0, package: 1 },
-    expect: 400,
-  },
-  {
-    message: "stocker create import with negative quantity response 400",
-    type: "stocker",
-    send: { quantity: -10, package: 1 },
-    expect: 400,
-  },
-  {
     message: "admin create import response 200",
     type: "admin",
     send: { quantity: 1, package: 1 },
