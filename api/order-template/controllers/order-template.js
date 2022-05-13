@@ -25,6 +25,8 @@ module.exports = {
       name = "",
       receiver_name,
       receiver_phone,
+      sender_name = "",
+      sender_phone = "",
       from_address,
       to_address,
     } = ctx.request.body;
@@ -45,6 +47,8 @@ module.exports = {
       name,
       receiver_name,
       receiver_phone,
+      sender_name,
+      sender_phone,
       from_address,
       to_address,
     });
@@ -59,6 +63,8 @@ module.exports = {
       receiver_phone,
       from_address,
       to_address,
+      sender_name = "",
+      sender_phone = "",
     } = ctx.request.body;
 
     const { id } = ctx.params;
@@ -80,6 +86,8 @@ module.exports = {
         receiver_phone,
         from_address,
         to_address,
+        sender_name,
+        sender_phone,
       }
     );
 
