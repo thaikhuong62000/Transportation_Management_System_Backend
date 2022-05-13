@@ -35,6 +35,12 @@
       "via": "order_templates",
       "plugin": "users-permissions",
       "model": "user"
+    },
+    "sender_name": {
+      "type": "string"
+    },
+    "sender_phone": {
+      "type": "string"
     }
   }
 }

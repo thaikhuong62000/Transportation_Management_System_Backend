@@ -5,7 +5,7 @@
       "path": "/imports",
       "handler": "import.find",
       "config": {
-        "policies": ["handle-find", "global::pagination"]
+        "policies": ["handle-find", "global::pagination", "create-shipment"]
       }
     },
     {

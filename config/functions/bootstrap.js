@@ -29,6 +29,16 @@ module.exports = () => {
       params: { key: process.env.GOOGLE_MAPS_API_KEY, address },
     });
 
+  strapi.distance = async (from_address, to_address) =>
+    strapi.googleMap.distancematrix({
+      params: {
+        key: process.env.GOOGLE_MAPS_API_KEY,
+        origins: [from_address],
+        destinations: [to_address],
+        mode: "driving",
+      },
+    });
+
   // Init socket
   var io = require("socket.io")(strapi.server);
   require("./socket")(strapi, io);
