@@ -227,6 +227,7 @@ module.exports = {
         ctx.state.user,
         voucher
       );
+      fee = Math.ceil(fee)
       remain_fee = fee;
 
       session = await db.startSession();
