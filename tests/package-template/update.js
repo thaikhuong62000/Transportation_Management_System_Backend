@@ -16,40 +16,12 @@ const constData = {
 
 const testCaseData = [
   {
-    message: "update mẫu",
+    message: "update mẫu package response 200",
     expect: 200,
     send: {
       name: "test",
       package_type: "normal",
       quantity: 10,
-      weight: 10,
-      len: 10,
-      width: 10,
-      height: 10,
-      note: "ko co note",
-    },
-  },
-  {
-    message: "update mẫu len âm",
-    expect: 400,
-    send: {
-      name: "test",
-      package_type: "normal",
-      quantity: 10,
-      weight: 10,
-      len: -10,
-      width: 10,
-      height: 10,
-      note: "ko co note",
-    },
-  },
-  {
-    message: "update mẫu quantity âm",
-    expect: 400,
-    send: {
-      name: "test",
-      package_type: "normal",
-      quantity: -10,
       weight: 10,
       len: 10,
       width: 10,
