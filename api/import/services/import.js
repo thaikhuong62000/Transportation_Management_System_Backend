@@ -145,8 +145,8 @@ module.exports = {
       {
         $lookup: {
           from: "orders",
-          localField: "package._id",
-          foreignField: "package",
+          localField: "package.order",
+          foreignField: "_id",
           as: "order",
         },
       },
