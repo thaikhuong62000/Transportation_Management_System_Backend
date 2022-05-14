@@ -7,8 +7,8 @@ const { variable } = require("./__mocks__/Global");
 const request = require("supertest");
 
 const mockStockerData = {
-  username: "atester",
-  email: "atester@strapi.com",
+  username: "atesterimport",
+  email: "atesterimport@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987654321",
@@ -20,8 +20,8 @@ const mockStockerData = {
 };
 
 const mockDriverData = {
-  username: "atester3",
-  email: "ateste3r@strapi.com",
+  username: "atester3import",
+  email: "ateste3rimport@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987333321",
@@ -32,8 +32,8 @@ const mockDriverData = {
 };
 
 const mockCustomerData = {
-  username: "atester4",
-  email: "atester4@strapi.com",
+  username: "atester4import",
+  email: "atester4import@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987444421",

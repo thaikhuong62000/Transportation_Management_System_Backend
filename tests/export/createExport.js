@@ -11,24 +11,6 @@ const testCaseData = [
     expect: 200,
   },
   {
-    message: "stocker create export without package response 400",
-    type: "stocker",
-    send: { quantity: 1, package: 2 },
-    expect: 400,
-  },
-  {
-    message: "stocker create export with 0 quantity response 400",
-    type: "stocker",
-    send: { quantity: 0, package: 1 },
-    expect: 400,
-  },
-  {
-    message: "stocker create export with negative quantity response 400",
-    type: "stocker",
-    send: { quantity: -10, package: 1 },
-    expect: 400,
-  },
-  {
     message: "admin create export response 200",
     type: "admin",
     send: { quantity: 1, package: 1 },
@@ -82,4 +64,3 @@ it.each(testCaseData)("$message", async ({ expect, type, send }) => {
       .expect(200);
   }
 });
-

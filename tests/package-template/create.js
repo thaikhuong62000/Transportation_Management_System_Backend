@@ -3,40 +3,12 @@ const { jwtToken } = require("../__mocks__/AuthMocks");
 
 const testCaseData = [
   {
-    message: "tạo mẫu mới",
+    message: "tạo mẫu package mới response 200",
     expect: 200,
     send: {
       name: "test",
       package_type: "normal",
       quantity: 10,
-      weight: 10,
-      len: 10,
-      width: 10,
-      height: 10,
-      note: "ko co note",
-    },
-  },
-  {
-    message: "tạo mẫu mới len âm",
-    expect: 400,
-    send: {
-      name: "test",
-      package_type: "normal",
-      quantity: 10,
-      weight: 10,
-      len: -10,
-      width: 10,
-      height: 10,
-      note: "ko co note",
-    },
-  },
-  {
-    message: "tạo mẫu mới quantity âm",
-    expect: 400,
-    send: {
-      name: "test",
-      package_type: "normal",
-      quantity: -10,
       weight: 10,
       len: 10,
       width: 10,

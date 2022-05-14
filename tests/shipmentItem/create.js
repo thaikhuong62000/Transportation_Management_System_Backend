@@ -39,11 +39,11 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
     case 1:
       send.package = variable("package");
       break;
-    case 2:
-      send.package = "";
-      break;
-    default:
-      send.package = variable("package");
+    // case 2:
+    //   send.package = "";
+    //   break;
+    // default:
+    //   send.package = variable("package");
   }
   const idSI = await request(strapi.server)
     .post("/shipment-items")
@@ -51,7 +51,7 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken(type))
     .send(send)
-    .expect("Content-Type", expect === 404 ? /text/ : /json/)
+    .expect("Content-Type", /json/)
     .expect(expect)
     .then((data) => {
       if (data?.body?.id) {
@@ -65,7 +65,7 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
       .set("Authorization", "Bearer " + jwtToken("admin"))
-      .expect("Content-Type", expect === 404 ? /text/ : /json/)
+      .expect("Content-Type", /json/)
       .expect(200);
   }
 });
