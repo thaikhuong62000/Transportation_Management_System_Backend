@@ -1,5 +1,6 @@
 const { sanitizeEntity } = require("strapi-utils");
 const validateUploadBody = require("strapi-plugin-upload/controllers/validation/upload");
+const { getCurrentImports } = require("../../import/services/import");
 var ObjectId = require("mongoose").Types.ObjectId;
 
 /**
@@ -257,7 +258,7 @@ module.exports = {
     ].getArrangedPackagesByStorage({
       "shipment.from_storage": ObjectId(storage),
     });
-
+    
     let unArrangePack = importedPack.reduce((total, item) => {
       let temp = shipPack.find(
         (item2) => item2.package._id.toString() === item.package._id.toString()
@@ -270,6 +271,8 @@ module.exports = {
             id: item._id,
             size: item.size,
             quantity: quantity,
+            order: item.order,
+            to_address: item.to_address
           });
         }
       } else {
@@ -278,6 +281,8 @@ module.exports = {
           id: item._id,
           size: item.size,
           quantity: item.quantity,
+          order: item.order,
+          to_address: item.to_address
         });
       }
       return total;
