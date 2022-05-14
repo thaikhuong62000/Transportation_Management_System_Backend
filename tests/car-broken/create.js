@@ -1,22 +1,27 @@
 const request = require("supertest");
 const { jwtToken } = require("../__mocks__/AuthMocks");
 const { variable } = require("../__mocks__/Global");
-
 const testCaseData = [
   {
-    message: "create car-broken",
+    message: "create car-broken response 200",
     type: "driver",
     expect: 200,
     day: Date(),
   },
   {
-    message: "create car-broken wrong time format",
+    message: "create car-broken car not found response 400",
+    type: "driver2",
+    expect: 400,
+    day: Date(),
+  },
+  {
+    message: "create car-broken wrong time format response 400",
     type: "driver",
     expect: 400,
     day: "123123/123123/123123",
   },
   {
-    message: "create car-broken not owner car",
+    message: "create car-broken not owner car response 400",
     type: "driver2",
     expect: 400,
     day: Date(),

@@ -53,12 +53,28 @@ beforeAll(async () => {
       jwtToken("admin", data.body.jwt);
     });
 
+  await request(strapi.server)
+    .get("/users/me")
+    .set("accept", "application/json")
+    .set("Content-Type", "application/json")
+    .set("Authorization", "Bearer " + jwtToken("driver"))
+    .expect("Content-Type", /json/)
+    .expect(200)
+    .then((data) => {
+      variable("driver", data.body.id);
+    });
+
   await request(strapi.server) // app server is an instance of Class: http.Server
     .post("/cars")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken("admin"))
-    .send({ licence: "3123", type: "Asdas", load: 1 })
+    .send({
+      licence: "3123",
+      type: "Asdas",
+      load: 1,
+      manager: variable("driver"),
+    })
     .expect("Content-Type", /json/)
     .expect(200)
     .then((data) => {
