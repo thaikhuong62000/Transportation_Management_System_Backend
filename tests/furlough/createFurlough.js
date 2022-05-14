@@ -1,7 +1,6 @@
 const request = require("supertest");
 
 const { jwtToken } = require("../__mocks__/AuthMocks");
-const { variable } = require("../__mocks__/Global");
 
 const testCaseData = [
   {
@@ -49,16 +48,6 @@ const testCaseData = [
     type: "driver",
     send: {
       start_time: "October 13, 2200 11:13:00",
-      days: 1,
-      reason: "",
-    },
-    expect: 400,
-  },
-  {
-    message: "driver create furlough, start_time at 1900 response 400",
-    type: "driver",
-    send: {
-      start_time: "October 13, 1900 11:13:00",
       days: 1,
       reason: "",
     },
