@@ -143,6 +143,17 @@ module.exports = {
         $unwind: "$size"
       },
       {
+        $lookup: {
+          from: "orders",
+          localField: "package._id",
+          foreignField: "package",
+          as: "order",
+        },
+      },
+      {
+        $unwind: "$order"
+      },
+      {
         $skip: skip,
       },
     ]
