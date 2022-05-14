@@ -265,19 +265,23 @@ module.exports = {
       if (temp) {
         let quantity = item.quantity - temp.quantity;
         if (quantity && quantity > 0) {
+          let order = await strapi.services.order.findOne({ id: temp.id })
           total.push({
             ...item.package,
             id: item._id,
             size: item.size,
             quantity: quantity,
+            address: order.to_address
           });
         }
       } else {
+        let order = await strapi.services.order.findOne({ id: temp.id })
         total.push({
           ...item.package,
           id: item._id,
           size: item.size,
           quantity: item.quantity,
+          address: order.to_address
         });
       }
       return total;
