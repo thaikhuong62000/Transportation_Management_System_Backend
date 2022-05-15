@@ -10,10 +10,10 @@ module.exports = async (ctx, next) => {
       if (
         quantity <= 0 ||
         weight <= 0 ||
-        size.len ||
-        size.width ||
-        size.height ||
-        package_type
+        !size.len ||
+        !size.width ||
+        !size.height ||
+        !package_type
       )
         throw "Invalid Package";
       if (size.len <= 0 || size.width <= 0 || size.height <= 0)
