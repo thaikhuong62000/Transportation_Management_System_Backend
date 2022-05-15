@@ -33,8 +33,8 @@ const testCaseData = [
     type: "driver",
     send: {
       shipmentData: {
-        to_storage: 1,
-        from_storage: 1,
+        to_storage: 2,
+        from_storage: 2,
         to_address: {
           street: "942/2 Kha Vạn Cân",
           ward: "Trường Thọ",

@@ -3,23 +3,26 @@ const { jwtToken } = require("../__mocks__/AuthMocks");
 const { variable } = require("../__mocks__/Global");
 const testCaseData = [
   {
-    message: "lấy một orders by admin",
+    message: "sửa orders by admin",
     expect: 200,
     type: "admin",
+    send: { sender_name: "a" },
   },
   {
-    message: "lấy một orders by user",
+    message: "sửa orders by customer",
     expect: 200,
     type: "customer",
+    send: { sender_name: "a" },
   },
 ];
 
-it.each(testCaseData)("$message", async ({ expect, type }) => {
+it.each(testCaseData)("$message", async ({ expect, type, send }) => {
   await request(strapi.server)
-    .get("/orders/" + variable("order"))
+    .put("/orders/" + variable("order"))
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken(type))
+    .send(send)
     .expect("Content-Type", /json/)
     .expect(expect);
 });
