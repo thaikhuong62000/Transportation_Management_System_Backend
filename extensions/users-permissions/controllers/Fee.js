@@ -23,10 +23,6 @@ module.exports = {
         throw "Invalid address";
       }
 
-      if (!packages || (Array.isArray(packages) && !packages.length)) {
-        throw "Invalid packages";
-      }
-
       let fee = await strapi.services.fee.calcFee(
         from_address,
         to_address,

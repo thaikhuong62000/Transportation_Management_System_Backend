@@ -209,8 +209,6 @@ module.exports = {
         !body.sender_name ||
         !body.receiver_phone ||
         !body.receiver_name ||
-        !packages ||
-        !packages.length ||
         typeof from_address !== "object" ||
         typeof to_address !== "object"
       ) {
@@ -227,7 +225,7 @@ module.exports = {
         ctx.state.user,
         voucher
       );
-      fee = Math.ceil(fee)
+      fee = Math.ceil(fee);
       remain_fee = fee;
 
       session = await db.startSession();

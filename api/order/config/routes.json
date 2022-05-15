@@ -59,7 +59,7 @@
       "path": "/orders",
       "handler": "order.create",
       "config": {
-        "policies": ["create-shipment"]
+        "policies": ["check-packages", "create-shipment"]
       }
     },
     {

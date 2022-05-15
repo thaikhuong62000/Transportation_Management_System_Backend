@@ -254,7 +254,7 @@
       "path": "/fees",
       "handler": "Fee.getFeeFromOrder",
       "config": {
-        "policies": [],
+        "policies": ["order::check-packages"],
         "prefix": "",
         "description": "Calculate fee from order"
       }
