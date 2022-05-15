@@ -6,6 +6,8 @@ const constData = {
     name: "vẫn là testing",
     receiver_name: "Pham Nguyen Thai Khuong",
     receiver_phone: "0937236128",
+    sender_name: "Fujiwara Chika",
+    sender_phone: "0122324572",
     from_address: {
       street: "135 Nguyễn Cửu Đàm",
       ward: "Tân Sơn Nhì",
@@ -23,37 +25,41 @@ const constData = {
 
 const testCaseData = [
   {
-    message: "update mẫu",
+    message: "update mẫu order response 200",
     expect: 200,
     send: {
       name: "testing",
       receiver_name: "Pham Nguyen Thai Khuong",
       receiver_phone: "0937236128",
+      sender_name: "Fujiwara Chika",
+      sender_phone: "0122324572",
       from_address: {
         street: "135 Nguyễn Cửu Đàm",
         ward: "Tân Sơn Nhì",
         province: "Tân Phú",
         city: "Thành phố Hồ Chí Minh",
-        Latitude: 11111,
-        Longitude: 22222,
+        latitude: 11111,
+        longitude: 22222,
       },
       to_address: {
         street: "Đ. 3/2",
         ward: "Xuân Khánh",
         province: "Ninh Kiều",
         city: "Cần Thơ",
-        Latitude: 12311,
-        Longitude: 12312,
+        latitude: 11111,
+        longitude: 22222,
       },
     },
   },
   {
-    message: "update mẫu ko có tọa độ",
+    message: "update mẫu order ko có tọa độ response 200",
     expect: 200,
     send: {
       name: "vẫn là testing",
       receiver_name: "Pham Nguyen Thai Khuong",
       receiver_phone: "0937236128",
+      sender_name: "Fujiwara Chika",
+      sender_phone: "0122324572",
       from_address: {
         street: "135 Nguyễn Cửu Đàm",
         ward: "Tân Sơn Nhì",
@@ -69,44 +75,56 @@ const testCaseData = [
     },
   },
   {
-    message: "update mẫu ko ten ng nhận",
+    message: "update mẫu order ko ten ng nhận response 400",
     expect: 400,
     send: {
       name: "vẫn là testing",
       receiver_name: "",
       receiver_phone: "0937236128",
+      sender_name: "Fujiwara Chika",
+      sender_phone: "0122324572",
       from_address: {
         street: "135 Nguyễn Cửu Đàm",
         ward: "Tân Sơn Nhì",
         province: "Tân Phú",
         city: "Thành phố Hồ Chí Minh",
+        latitude: 11111,
+        longitude: 22222,
       },
       to_address: {
         street: "Đ. 3/2",
         ward: "Xuân Khánh",
         province: "Ninh Kiều",
         city: "Cần Thơ",
+        latitude: 11111,
+        longitude: 22222,
       },
     },
   },
   {
-    message: "update mẫu ko phone ng nhận",
+    message: "update mẫu order ko phone ng nhận response 400",
     expect: 400,
     send: {
       name: "vẫn là testing",
-      receiver_name: "",
-      receiver_phone: "0937236128",
+      receiver_name: "a",
+      receiver_phone: "",
+      sender_name: "Fujiwara Chika",
+      sender_phone: "0122324572",
       from_address: {
         street: "135 Nguyễn Cửu Đàm",
         ward: "Tân Sơn Nhì",
         province: "Tân Phú",
         city: "Thành phố Hồ Chí Minh",
+        latitude: 11111,
+        longitude: 22222,
       },
       to_address: {
         street: "Đ. 3/2",
         ward: "Xuân Khánh",
         province: "Ninh Kiều",
         city: "Cần Thơ",
+        latitude: 11111,
+        longitude: 22222,
       },
     },
   },
@@ -142,7 +160,7 @@ it.each(testCaseData)("$message", async ({ expect, type, send }) => {
       .set("Content-Type", "application/json")
       .set("Authorization", "Bearer " + jwtToken("customer"))
       .send({
-        deleteList:[idTemplate]
+        deleteList: [idTemplate],
       })
       .expect("Content-Type", expect === 404 ? /text/ : /json/)
       .expect(200);

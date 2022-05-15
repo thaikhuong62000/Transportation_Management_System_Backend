@@ -191,6 +191,19 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/address/nearest-storage",
+      "handler": "Address.getNearestStorageFromAddress",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
+    },
+    {
       "method": "PUT",
       "path": "/users/device_token",
       "handler": "User.updateDeviceToken",

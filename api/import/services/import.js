@@ -143,6 +143,30 @@ module.exports = {
         $unwind: "$size"
       },
       {
+        $lookup: {
+          from: "orders",
+          localField: "package.order",
+          foreignField: "_id",
+          as: "order",
+        },
+      },
+      {
+        $unwind: "$order"
+      },
+      {
+        $lookup: {
+          from: "components_address_addresses",
+          localField: "order.to_address.ref",
+          foreignField: "_id",
+          as: "to_address",
+        },
+      },
+      {
+        $unwind: {
+          path: "$to_address",
+        },
+      },
+      {
         $skip: skip,
       },
     ]

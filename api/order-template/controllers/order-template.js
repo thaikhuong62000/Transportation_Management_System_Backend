@@ -25,13 +25,15 @@ module.exports = {
       name = "",
       receiver_name,
       receiver_phone,
+      sender_name = "",
+      sender_phone = "",
       from_address,
       to_address,
     } = ctx.request.body;
 
     const { id } = ctx.state.user;
 
-    if (!receiver_name || !receiver_phone) {
+    if (!receiver_name || !receiver_phone || !sender_name || !sender_phone) {
       return ctx.badRequest([
         {
           id: "order-template.create",
@@ -45,6 +47,8 @@ module.exports = {
       name,
       receiver_name,
       receiver_phone,
+      sender_name,
+      sender_phone,
       from_address,
       to_address,
     });
@@ -59,11 +63,13 @@ module.exports = {
       receiver_phone,
       from_address,
       to_address,
+      sender_name = "",
+      sender_phone = "",
     } = ctx.request.body;
 
     const { id } = ctx.params;
 
-    if (!receiver_name || !receiver_phone) {
+    if (!receiver_name || !receiver_phone || !sender_name || !sender_phone) {
       return ctx.badRequest([
         {
           id: "order-template.update",
@@ -80,6 +86,8 @@ module.exports = {
         receiver_phone,
         from_address,
         to_address,
+        sender_name,
+        sender_phone,
       }
     );
 

@@ -7,8 +7,8 @@ const { variable } = require("./__mocks__/Global");
 const request = require("supertest");
 
 const mockStockerData = {
-  username: "atesterfl",
-  email: "atesterfl@strapi.com",
+  username: "atesterflfl",
+  email: "atesterflfl@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987654321",
