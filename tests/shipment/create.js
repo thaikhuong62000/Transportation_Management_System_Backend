@@ -183,7 +183,7 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
     default:
       send.shipmentData.from_storage = variable("storage");
   }
-  const idSI = await request(strapi.server)
+  const idS = await request(strapi.server)
     .post("/shipments")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
@@ -197,9 +197,9 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
       }
     });
 
-  if (idSI) {
+  if (idS) {
     await request(strapi.server)
-      .delete("/shipments/" + idSI)
+      .delete("/shipments/" + idS)
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
       .set("Authorization", "Bearer " + jwtToken("admin"))
