@@ -1,20 +1,9 @@
 const request = require("supertest");
 const { createdUser, jwtToken } = require("../__mocks__/AuthMocks");
 const { variable } = require("../__mocks__/Global");
-const login = require("./loginUser");
-
-const mockAdminData = {
-  email: "admin",
-  password: "12345678",
-};
 
 module.exports = (car, driver) => {
-  // Check admin
-  if (!jwtToken("admin")) login("admin", mockAdminData);
-
-  // Add car
   beforeAll(async () => {
-    if (typeof driver === "string") driver = createdUser(driver);
     await request(strapi.server)
       .post("/cars")
       .set("accept", "application/json")
@@ -22,7 +11,7 @@ module.exports = (car, driver) => {
       .set("Authorization", "Bearer " + jwtToken("admin"))
       .send({
         ...car,
-        manager: driver.id,
+        manager: createdUser(driver).id,
       })
       .expect("Content-Type", /json/)
       .expect(200)
@@ -33,14 +22,13 @@ module.exports = (car, driver) => {
       });
   });
 
-  // Delete test car
   afterAll(() => {
-    return request(strapi.server)
-      .delete("/cars/" + variable("idCar"))
-      .set("accept", "application/json")
-      .set("Content-Type", "application/json")
-      .set("Authorization", "Bearer " + jwtToken("admin"))
-      .expect("Content-Type", /json/)
-      .expect(200);
+    return strapi.services.car
+      .delete({
+        id: variable("idCar"),
+      })
+      .then((data) => {
+        expect(data).toBeDefined();
+      });
   });
 };

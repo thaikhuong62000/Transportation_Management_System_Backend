@@ -1,10 +1,6 @@
 require("./helpers/initTestSuite");
 
 const initUser = require("./helpers/initUser");
-const { jwtToken } = require("./__mocks__/AuthMocks");
-const { variable } = require("./__mocks__/Global");
-
-const request = require("supertest");
 
 const mockStockerData = {
   username: "atestereport",
@@ -15,6 +11,18 @@ const mockStockerData = {
   confirmed: true,
   blocked: null,
   storage: "6252b6055eedf42d04bd514e",
+  type: "Stocker",
+  role: "stocker",
+};
+
+const mockStocker2Data = {
+  username: "atestereport2",
+  email: "atestereport2@strapi.com",
+  provider: "local",
+  password: "12345678",
+  phone: "0987654322",
+  confirmed: true,
+  blocked: null,
   type: "Stocker",
   role: "stocker",
 };
@@ -60,47 +68,13 @@ const packageData = {
   },
 };
 
+const shipmentItemData = { quantity: 10, assmin: false };
+
 initUser("stocker", mockStockerData);
+initUser("stocker2", mockStocker2Data);
 initUser("driver", mockDriverData);
 initUser("customer", mockCustomerData);
-
-beforeAll(async () => {
-  await request(strapi.server)
-    .post("/auth/local")
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
-    .send({
-      identifier: mockAdminData.email,
-      password: mockAdminData.password,
-    })
-    .expect("Content-Type", /json/)
-    .expect(200)
-    .then((data) => {
-      expect(data.body.jwt).toBeDefined();
-      jwtToken("admin", data.body.jwt);
-    });
-  await request(strapi.server)
-    .post("/packages")
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + jwtToken("admin"))
-    .send(packageData)
-    .expect("Content-Type", /json/)
-    .expect(200)
-    .then((data) => {
-      expect(data.body.id).toBeDefined();
-      variable("package", data.body.id);
-    });
-});
-
-afterAll(async () => {
-  await request(strapi.server) // app server is an instance of Class: http.Server
-    .delete("/packages/" + variable("package"))
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + jwtToken("admin"))
-    .expect("Content-Type", /json/)
-    .expect(200);
-});
+require("./helpers/loginUser")("admin", mockAdminData);
+require("./helpers/initPackage")("package", packageData);
 
 require("./export");
