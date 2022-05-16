@@ -5,19 +5,18 @@ const { variable } = require("../__mocks__/Global");
 
 const testCaseData = [
   {
-    message: "stocker update import response 200",
+    message: "stocker update import response 403",
     type: "stocker",
     send: { quantity: 1, package: 1 },
-    expect: 200,
+    expect: 403,
   },
   {
-    message: "admin update import response 200",
+    message: "admin update import response 403",
     type: "admin",
     send: { quantity: 1, package: 1 },
-    expect: 200,
+    expect: 403,
   },
 ];
-
 
 it.each(testCaseData)("$message", async ({ expect, type, send }) => {
   switch (send.package) {
@@ -41,7 +40,7 @@ it.each(testCaseData)("$message", async ({ expect, type, send }) => {
       package: variable("package"),
     })
     .expect("Content-Type", /json/)
-    .expect(200)
+    .expect(expect)
     .then((data) => {
       return data.body.id;
     });

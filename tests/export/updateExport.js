@@ -11,10 +11,10 @@ const testCaseData = [
     expect: 403,
   },
   {
-    message: "admin update export response 200",
+    message: "admin update export response 403",
     type: "admin",
     send: { quantity: 1, package: 1 },
-    expect: 200,
+    expect: 403,
   },
 ];
 
