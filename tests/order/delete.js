@@ -1,16 +1,16 @@
 const request = require("supertest");
-const { variable } = require("../__mocks__/Global");
+const { createdOrder } = require("../__mocks__/OrderMocks");
 const { jwtToken } = require("../__mocks__/AuthMocks");
 const testCaseData = [
   {
-    message: "customer delete orders",
-    expect: 200,
+    message: "customer delete orders fail",
+    expect: 403,
     type: "customer",
   },
 ];
 it.each(testCaseData)("$message", async ({ expect, type }) => {
   await request(strapi.server)
-    .put("/orders/" + variable("order"))
+    .delete("/orders/" + createdOrder("order").id)
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken(type))

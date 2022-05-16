@@ -1,15 +1,16 @@
 const request = require("supertest");
 const { createdOrder } = require("../__mocks__/OrderMocks");
 const { jwtToken } = require("../__mocks__/AuthMocks");
+const { REMOTE_URL } = require("../helpers/constant");
 
 module.exports = (key, orderData) => {
   // Create test order
   beforeAll(() => {
-    return request("https://dev-cms.pntk.one")
+    return request(REMOTE_URL)
       .post("/orders")
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
-      .set("Authorization", "Bearer " + jwtToken("customer"))
+      .set("Authorization", "Bearer " + jwtToken("customer_remote"))
       .send(orderData)
       .expect("Content-Type", /json/)
       .expect(200)
@@ -35,7 +36,6 @@ module.exports = (key, orderData) => {
       .then((data) => {
         expect(data).toBeDefined();
       });
-
     await strapi.services.order
       .delete({
         id: createdOrder(key).id,

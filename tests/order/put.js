@@ -1,6 +1,6 @@
 const request = require("supertest");
 const { jwtToken } = require("../__mocks__/AuthMocks");
-const { variable } = require("../__mocks__/Global");
+const { createdOrder } = require("../__mocks__/OrderMocks");
 const testCaseData = [
   {
     message: "sửa orders by admin",
@@ -18,7 +18,7 @@ const testCaseData = [
 
 it.each(testCaseData)("$message", async ({ expect, type, send }) => {
   await request(strapi.server)
-    .put("/orders/" + variable("order"))
+    .put("/orders/" + createdOrder("order").id)
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken(type))
