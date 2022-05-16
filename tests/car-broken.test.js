@@ -1,9 +1,7 @@
 require("./helpers/initTestSuite");
 const initUser = require("./helpers/initUser");
-const { jwtToken } = require("./__mocks__/AuthMocks");
-const { variable } = require("./__mocks__/Global");
-
-const request = require("supertest");
+const login = require("./helpers/loginUser");
+const initCar = require("./helpers/initCar");
 
 const mockUserData = {
   username: "atestercb",
@@ -34,64 +32,15 @@ const mockAdminData = {
   password: "12345678",
 };
 
+const car = {
+  licence: "3123",
+  type: "Asdas",
+  load: 1,
+};
+
 initUser("driver", mockUserData);
 initUser("driver2", mockUserData2);
-
-beforeAll(async () => {
-  await request(strapi.server)
-    .post("/auth/local")
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
-    .send({
-      identifier: mockAdminData.email,
-      password: mockAdminData.password,
-    })
-    .expect("Content-Type", /json/)
-    .expect(200)
-    .then((data) => {
-      expect(data.body.jwt).toBeDefined();
-      jwtToken("admin", data.body.jwt);
-    });
-
-  await request(strapi.server)
-    .get("/users/me")
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + jwtToken("driver"))
-    .expect("Content-Type", /json/)
-    .expect(200)
-    .then((data) => {
-      variable("driver", data.body.id);
-    });
-
-  await request(strapi.server) // app server is an instance of Class: http.Server
-    .post("/cars")
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + jwtToken("admin"))
-    .send({
-      licence: "3123",
-      type: "Asdas",
-      load: 1,
-      manager: variable("driver"),
-    })
-    .expect("Content-Type", /json/)
-    .expect(200)
-    .then((data) => {
-      if (data?.body?.id) {
-        variable("idCar", data.body.id);
-      }
-    });
-});
-
-afterAll(async () => {
-  await request(strapi.server) // app server is an instance of Class: http.Server
-    .delete("/cars/" + variable("idCar"))
-    .set("accept", "application/json")
-    .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + jwtToken("admin"))
-    .expect("Content-Type", /json/)
-    .expect(200);
-});
+login("admin", mockAdminData);
+initCar(car, "driver");
 
 require("./car-broken");

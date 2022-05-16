@@ -1,10 +1,10 @@
 const request = require("supertest");
-const { jwtToken } = require("../__mocks__/AuthMocks");
+const { createdUser, jwtToken } = require("../__mocks__/AuthMocks");
 
-module.exports = (key, userData) => {
+module.exports = (key, userData, url) => {
   // Login
   beforeAll(() => {
-    return request(strapi.server)
+    return request(url ? url : strapi.server)
       .post("/auth/local")
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
@@ -17,6 +17,7 @@ module.exports = (key, userData) => {
       .then((data) => {
         expect(data.body.jwt).toBeDefined();
         jwtToken({ key, value: data.body.jwt });
+        createdUser(key, data.body.user);
       });
   });
 };
