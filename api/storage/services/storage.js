@@ -11,12 +11,15 @@ module.exports = {
     storages = storages.map((item) => {
       return {
         ...item,
-        distance: strapi.services.distance.calcDistance(address, item.address),
+        distance: strapi.services.distance.addressToDistance(
+          address,
+          item.address
+        ),
       };
     });
 
     storages.sort((a, b) => a.distance - b.distance);
 
-    return storages;
+    return storages[0];
   },
 };

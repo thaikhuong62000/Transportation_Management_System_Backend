@@ -1,5 +1,4 @@
-'use strict';
-var mongoose = require("mongoose");
+"use strict";
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-services)
@@ -8,7 +7,7 @@ var mongoose = require("mongoose");
 
 module.exports = {
   async getArrangedPackagesByStorage(storageQuery, queryOptions = {}) {
-    let items = await strapi.query("shipment-item").model.aggregate([
+    return await strapi.query("shipment-item").model.aggregate([
       {
         $lookup: {
           from: "shipments",
@@ -18,7 +17,7 @@ module.exports = {
         },
       },
       {
-        $unwind: "$shipment"
+        $unwind: "$shipment",
       },
       {
         $match: {
@@ -38,8 +37,9 @@ module.exports = {
       },
       {
         $match: {
-          ...queryOptions
-        }
+          assmin: true,
+          ...queryOptions,
+        },
       },
       {
         $group: {
@@ -56,7 +56,5 @@ module.exports = {
         $unwind: "$package.size",
       },
     ]);
-
-    return items
-  }
+  },
 };

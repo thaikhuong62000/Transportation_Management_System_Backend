@@ -1,6 +1,7 @@
 const { sanitizeEntity } = require("strapi-utils");
 const validateUploadBody = require("strapi-plugin-upload/controllers/validation/upload");
-var mongoose = require("mongoose");
+const { getCurrentImports } = require("../../import/services/import");
+var ObjectId = require("mongoose").Types.ObjectId;
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
@@ -255,9 +256,9 @@ module.exports = {
     let shipPack = await strapi.services[
       "shipment-item"
     ].getArrangedPackagesByStorage({
-      "shipment.from_storage": mongoose.Types.ObjectId(storage),
+      "shipment.from_storage": ObjectId(storage),
     });
-
+    
     let unArrangePack = importedPack.reduce((total, item) => {
       let temp = shipPack.find(
         (item2) => item2.package._id.toString() === item.package._id.toString()
@@ -270,6 +271,8 @@ module.exports = {
             id: item._id,
             size: item.size,
             quantity: quantity,
+            order: item.order,
+            to_address: item.to_address
           });
         }
       } else {
@@ -278,6 +281,8 @@ module.exports = {
           id: item._id,
           size: item.size,
           quantity: item.quantity,
+          order: item.order,
+          to_address: item.to_address
         });
       }
       return total;
@@ -294,27 +299,22 @@ module.exports = {
   async getUnCollectPackage(ctx) {
     const { storage } = ctx.params;
 
-    let orders = await strapi.services.order.find(ctx.query);
-
-    let packs = orders.reduce((total, item) => {
-      total.push(...item.packages);
-      return total;
-    }, []);
+    let order = await strapi.services.order.find(ctx.query);
+    if (order.length) order = order[0];
+    else return {};
 
     let collectedPack = await strapi.services[
       "shipment-item"
     ].getArrangedPackagesByStorage(
       {
-        "shipment.to_storage": mongoose.Types.ObjectId(storage),
+        "shipment.to_storage": ObjectId(storage),
       },
       {
-        "package.order": {
-          $in: orders.map((item) => item._id),
-        },
+        "package.order": ObjectId(order.id),
       }
     );
 
-    let uncollectPack = packs.reduce((total, item) => {
+    let uncollectPack = order.packages.reduce((total, item) => {
       let temp = collectedPack.find(
         (item2) => item2._id.toString() === item._id.toString()
       );
@@ -338,39 +338,31 @@ module.exports = {
       return total;
     }, []);
 
-    orders = orders.reduce((total, item) => {
-      let orderPacks = uncollectPack.filter(
-        (item2) => item2.order.toString() === item.id.toString()
-      );
-      if (orderPacks.length) {
-        total.push({
-          ...item,
-          packages: orderPacks,
-        });
-      }
-      return total;
-    }, []);
-
-    return orders;
+    return { ...order, packages: uncollectPack };
   },
 
   // For shipping package
   async getUnShipPackage(ctx) {
     let { storage } = ctx.params;
     let order = await strapi.services.order.find(ctx.query);
-
-    let importedPack = await strapi.services.import.getCurrentImports(storage, {
-      "package.state": 3,
-    });
+    if (order.length) order = order[0];
+    else return {};
 
     let arrangedPack = await strapi.services[
       "shipment-item"
     ].getArrangedPackagesByStorage(
       {
-        "shipment.from_storage": mongoose.Types.ObjectId(storage),
+        "shipment.from_storage": ObjectId(storage),
       },
-      { "package.state": 3 }
+      {
+        "package.state": 3,
+        "package.order": ObjectId(order.id),
+      }
     );
+
+    let importedPack = await strapi.services.import.getCurrentImports(storage, {
+      "package.order": order.id,
+    });
 
     let unShipPack = importedPack.reduce((total, item) => {
       let temp = arrangedPack.find(
@@ -397,19 +389,9 @@ module.exports = {
       return total;
     }, []);
 
-    order = order.reduce((total, item) => {
-      let orderPacks = unShipPack.filter(
-        (item2) => item2.order.toString() === item.id.toString()
-      );
-      if (orderPacks.length) {
-        total.push({
-          ...item,
-          packages: orderPacks,
-        });
-      }
-      return total;
-    }, []);
-
-    return order;
+    return {
+      ...order,
+      packages: unShipPack,
+    };
   },
 };

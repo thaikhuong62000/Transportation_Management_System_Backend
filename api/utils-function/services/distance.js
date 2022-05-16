@@ -4,11 +4,32 @@ module.exports = {
   async calcDistance(from_address, to_address) {
     try {
       await strapi.services.address.prepareAddress(from_address);
+    } catch (error) {
+      throw "Invalid from_address";
+    }
+    try {
       await strapi.services.address.prepareAddress(to_address);
     } catch (error) {
-      throw "Invalid addresses";
+      throw "Invalid to_address";
     }
-    return strapi.services.distance.addressToDistance(from_address, to_address);
+    return strapi.services.distance.exactAddressToDistance(
+      from_address,
+      to_address
+    );
+  },
+
+  async exactAddressToDistance(from_address, to_address) {
+    try {
+      const response = await strapi.distance(from_address, to_address);
+      return response.data.rows[0].elements[0].distance.value / 1000;
+    } catch (error) {
+      return strapi.services.distance.coordToDistance(
+        from_address.latitude,
+        from_address.longitude,
+        to_address.latitude,
+        to_address.longitude
+      );
+    }
   },
 
   addressToDistance(from_address, to_address) {

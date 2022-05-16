@@ -191,6 +191,19 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/address/nearest-storage",
+      "handler": "Address.getNearestStorageFromAddress",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
+    },
+    {
       "method": "PUT",
       "path": "/users/device_token",
       "handler": "User.updateDeviceToken",
@@ -234,6 +247,16 @@
       "config": {
         "policies": [],
         "prefix": ""
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/fees",
+      "handler": "Fee.getFeeFromOrder",
+      "config": {
+        "policies": ["order.check-packages"],
+        "prefix": "",
+        "description": "Calculate fee from order"
       }
     }
   ]

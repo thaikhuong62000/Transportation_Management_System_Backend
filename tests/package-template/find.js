@@ -3,7 +3,7 @@ const { jwtToken } = require("../__mocks__/AuthMocks");
 
 const testCaseData = [
   {
-    message: "get mẫu",
+    message: "get mẫu packages response 200",
     expect: 200,
   },
 ];

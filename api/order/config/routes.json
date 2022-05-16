@@ -5,7 +5,11 @@
       "path": "/orders",
       "handler": "order.find",
       "config": {
-        "policies": ["handle-find", "global::pagination", "global::filter-address"]
+        "policies": [
+          "handle-find",
+          "global::pagination",
+          "global::filter-address"
+        ]
       }
     },
     {
@@ -55,7 +59,7 @@
       "path": "/orders",
       "handler": "order.create",
       "config": {
-        "policies": []
+        "policies": ["check-packages", "create-shipment"]
       }
     },
     {

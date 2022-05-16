@@ -6,8 +6,8 @@ const { variable } = require("./__mocks__/Global");
 const request = require("supertest");
 
 const mockUserData = {
-  username: "atester",
-  email: "atester@strapi.com",
+  username: "atestercb",
+  email: "atestercb@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987654321",
@@ -18,8 +18,8 @@ const mockUserData = {
 };
 
 const mockUserData2 = {
-  username: "atester2",
-  email: "atester2@strapi.com",
+  username: "atester2cb",
+  email: "atester2cb@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0989786321",
@@ -53,12 +53,28 @@ beforeAll(async () => {
       jwtToken("admin", data.body.jwt);
     });
 
+  await request(strapi.server)
+    .get("/users/me")
+    .set("accept", "application/json")
+    .set("Content-Type", "application/json")
+    .set("Authorization", "Bearer " + jwtToken("driver"))
+    .expect("Content-Type", /json/)
+    .expect(200)
+    .then((data) => {
+      variable("driver", data.body.id);
+    });
+
   await request(strapi.server) // app server is an instance of Class: http.Server
     .post("/cars")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken("admin"))
-    .send({ licence: "3123", type: "Asdas", load: 1 })
+    .send({
+      licence: "3123",
+      type: "Asdas",
+      load: 1,
+      manager: variable("driver"),
+    })
     .expect("Content-Type", /json/)
     .expect(200)
     .then((data) => {
