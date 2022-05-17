@@ -17,7 +17,7 @@ module.exports = {
               _or: [
                 { id: ctx.query._q },
                 { "car.licence_contains": ctx.query._q },
-              ]
+              ],
             },
             { from_storage: ctx.state.user.storage },
             { arrived_time_null: true },
@@ -44,7 +44,7 @@ module.exports = {
   },
 
   async updateExportQuantityByPackage(ctx) {
-    const { packageId, quantity, shipmentItem } = ctx.request.body;
+    let { packageId, quantity, shipmentItem, shipment } = ctx.request.body;
     const { id, storage } = ctx.state.user;
 
     const db = strapi.connections.default;
@@ -57,9 +57,21 @@ module.exports = {
         throw "invalid QR code";
       }
 
-      let shipment_item = await strapi.services["shipment-item"].findOne({
-        id: shipmentItem,
-      });
+      let shipment_item;
+      if (shipmentItem)
+        shipment_item = await strapi.services["shipment-item"].findOne({
+          id: shipmentItem,
+        });
+      else {
+        shipment_item = await strapi.services["shipment-item"].create({
+          export_received: 0,
+          quantity: 0,
+          assmin: true,
+          package: packageId,
+          shipment: shipment,
+        });
+        shipmentItem = shipment_item.id;
+      }
 
       if (!quantity && quantity < 0) {
         throw "Invalid package quantity";

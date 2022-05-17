@@ -15,6 +15,14 @@ const mockAddress = [
     latitude: 20.9521162,
     longitude: 107.0219849,
   },
+  {
+    street: "2 Đại Cồ Việt",
+    ward: "Lê Đại Hành",
+    province: "Hai Bà Trưng",
+    city: "Hà Nội",
+    latitude: 21.0092066,
+    longitude: 105.8508869,
+  },
 ];
 
 const mockPackage = [
@@ -100,6 +108,16 @@ const mockOrder = [
     name: "Test order",
     from_address: mockAddress[0],
     to_address: mockAddress[1],
+    packages: [mockPackage[0]],
+  },
+  {
+    name: "Test order",
+    sender_phone: "0968059020",
+    sender_name: "Thái Khương",
+    receiver_phone: "012345678",
+    receiver_name: "Nhi Long",
+    from_address: mockAddress[0],
+    to_address: mockAddress[2],
     packages: [mockPackage[0]],
   },
 ];

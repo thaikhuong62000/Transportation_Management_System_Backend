@@ -7,13 +7,14 @@ var mongoose = require("mongoose");
  */
 
 module.exports = {
-  async getImporstByPackages(packagesIdList) {
+  async getImporstByPackages(packagesIdList, matchCond = {}) {
     let entites = await strapi.query("import").model.aggregate([
       {
         $match: {
           package: {
             $in: packagesIdList.map((item) => mongoose.Types.ObjectId(item)),
           },
+          ...matchCond,
         },
       },
       {
@@ -37,29 +38,6 @@ module.exports = {
       },
       {
         $unwind: "$storage",
-      },
-      {
-        $group: {
-          _id: {
-            storage: "$storage._id",
-            package: "$package._id",
-          },
-          quantity: {
-            $sum: "$quantity",
-          },
-          storage: {
-            $first: "$storage",
-          },
-          package: {
-            $first: "$package",
-          },
-          createdAt: {
-            $first: "$createdAt",
-          },
-          updatedAt: {
-            $last: "$createdAt",
-          },
-        },
       },
       {
         $project: {

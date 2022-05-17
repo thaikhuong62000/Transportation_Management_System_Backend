@@ -133,7 +133,7 @@ module.exports = {
   },
 
   async updateOrderState(shipment) {
-    if (shipment.packages.length > 0) {
+    if (shipment.packages && shipment.packages.length > 0) {
       const orders = shipment.packages.map((item) => item.order);
       const packages = shipment.packages.map((item) => item._id);
       await strapi.services.order.update(
