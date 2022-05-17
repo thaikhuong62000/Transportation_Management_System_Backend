@@ -7,20 +7,6 @@ var mongoose = require("mongoose");
  */
 
 module.exports = {
-  async getExportByStorage(id, limit, skip) {
-    let entities = await strapi
-      .query("export")
-      .model.find({
-        storage: mongoose.Types.ObjectId(id),
-      })
-      .populate("store_manager")
-      .populate("package")
-      .limit(limit)
-      .skip(skip);
-
-    return entities;
-  },
-
   async getExportsByPackages(packagesIdList) {
     let entites = await strapi.query("export").model.aggregate([
       {
@@ -54,26 +40,26 @@ module.exports = {
       },
       {
         $group: {
-          _id:  {
-            "storage": "$storage._id", 
-            "package": "$package._id" 
+          _id: {
+            storage: "$storage._id",
+            package: "$package._id",
           },
           quantity: {
-            $sum: "$quantity"
+            $sum: "$quantity",
           },
           storage: {
-            $first: "$storage"
+            $first: "$storage",
           },
           package: {
-            $first: "$package"
+            $first: "$package",
           },
           createdAt: {
-            $first: "$createdAt"
+            $first: "$createdAt",
           },
           updatedAt: {
-            $last: "$createdAt"
-          }
-        }
+            $last: "$createdAt",
+          },
+        },
       },
       {
         $project: {
@@ -114,8 +100,8 @@ module.exports = {
       },
       {
         $match: {
-          ...queryOptions
-        }
+          ...queryOptions,
+        },
       },
       {
         $group: {
@@ -140,19 +126,19 @@ module.exports = {
         },
       },
       {
-        $unwind: "$size"
+        $unwind: "$size",
       },
       {
         $skip: skip,
       },
-    ]
+    ];
 
     if (limit) {
-      pipeLine.push({$limit: limit})
+      pipeLine.push({ $limit: limit });
     }
 
     let exports = await strapi.query("export").model.aggregate(pipeLine);
 
-    return exports
+    return exports;
   },
 };

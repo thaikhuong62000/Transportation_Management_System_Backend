@@ -3,6 +3,12 @@ const { jwtToken } = require("../__mocks__/AuthMocks");
 const { createdOrder } = require("../__mocks__/OrderMocks");
 const testCaseData = [
   {
+    message: "sửa orders by customer",
+    expect: 200,
+    type: "customer",
+    send: { sender_name: "a" },
+  },
+  {
     message: "sửa orders by admin",
     expect: 200,
     type: "admin",
@@ -12,7 +18,7 @@ const testCaseData = [
     message: "sửa orders by customer",
     expect: 200,
     type: "customer",
-    send: { sender_name: "a" },
+    send: { sender_name: "a", state: 5 },
   },
 ];
 

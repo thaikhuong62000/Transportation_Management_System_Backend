@@ -5,16 +5,4 @@
  * to customize this service
  */
 
-module.exports = {
-  async getOrderTemplatesByUser(id, skip, limit) {
-    let entities = await strapi
-      .query("order-template")
-      .model.find({
-        user: id,
-      })
-      .skip(skip)
-      .limit(limit);
-
-    return entities;
-  },
-};
+module.exports = {};

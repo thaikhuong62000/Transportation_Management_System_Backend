@@ -1,16 +1,15 @@
 const request = require("supertest");
 const { createdOrder } = require("../__mocks__/OrderMocks");
 const { jwtToken } = require("../__mocks__/AuthMocks");
-const { REMOTE_URL } = require("../helpers/constant");
 
 module.exports = (key, orderData) => {
   // Create test order
   beforeAll(() => {
-    return request(REMOTE_URL)
+    return request(strapi.server)
       .post("/orders")
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
-      .set("Authorization", "Bearer " + jwtToken("customer_remote"))
+      .set("Authorization", "Bearer " + jwtToken("customer"))
       .send(orderData)
       .expect("Content-Type", /json/)
       .expect(200)
