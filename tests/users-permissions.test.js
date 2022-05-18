@@ -1,10 +1,10 @@
 require("./helpers/initTestSuite");
 const initUser = require("./helpers/initUser");
 const getFirebaseToken = require("./helpers/getFirebaseToken");
-
+const { mockUserData } = require("./testsuite1/mockData");
 const { firebaseToken } = require("./__mocks__/AuthMocks");
-
-const mockUserData = {
+const loginUser = require("./helpers/loginUser");
+const mockCustomerData = {
   username: "atesterup",
   email: "atesterup@strapi.com",
   provider: "local",
@@ -14,12 +14,12 @@ const mockUserData = {
   blocked: null,
   role: "customer",
 };
-
-initUser("customer", mockUserData);
+loginUser("admin", mockUserData.admin);
+initUser("customer", mockCustomerData);
 
 // Get FirebaseToken
 beforeAll(async () => {
-  const token = await getFirebaseToken(mockUserData.phone, true);
+  const token = await getFirebaseToken(mockCustomerData.phone, true);
   firebaseToken.mockReturnValue(token);
 });
 
