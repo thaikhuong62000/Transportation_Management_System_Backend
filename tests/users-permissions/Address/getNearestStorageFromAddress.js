@@ -1,5 +1,9 @@
 const request = require("supertest");
+<<<<<<< HEAD
 // const { mockAddress } = require("../../order/mockOrder");
+=======
+const { mockAddress } = require("../../order/mockOrder");
+>>>>>>> b8468e95cc4f1d995ed41d25d5d4245f88a42bbd
 const { jwtToken } = require("../../__mocks__/AuthMocks");
 
 const mockPasswordData = [
@@ -7,6 +11,7 @@ const mockPasswordData = [
     messeger: "get nearest storage from address by admin response 200",
     expected: 200,
     type: "admin",
+<<<<<<< HEAD
     send: {
       address: {
         street: "942/2 Kha Vạn Cân",
@@ -17,6 +22,9 @@ const mockPasswordData = [
         longitude: 106.7534891,
       },
     },
+=======
+    send: { address: mockAddress[0] },
+>>>>>>> b8468e95cc4f1d995ed41d25d5d4245f88a42bbd
   },
   {
     messeger: "get nearest storage from wrong address by admin response 400",

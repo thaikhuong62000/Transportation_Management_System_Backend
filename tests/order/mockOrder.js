@@ -122,4 +122,4 @@ const mockOrder = [
   },
 ];
 
-module.exports = mockOrder;
+module.exports = { mockOrder, mockAddress };

@@ -14,6 +14,7 @@ const mockUserData = {
   blocked: null,
   role: "customer",
 };
+<<<<<<< HEAD
 
 const adminData = {
   email: "admin",
@@ -21,10 +22,14 @@ const adminData = {
 };
 loginUser("admin", adminData);
 initUser("customer", mockUserData);
+=======
+loginUser("admin", mockUserData.admin);
+initUser("customer", mockCustomerData);
+>>>>>>> b8468e95cc4f1d995ed41d25d5d4245f88a42bbd
 
 // Get FirebaseToken
 beforeAll(async () => {
-  const token = await getFirebaseToken(mockUserData.phone, true);
+  const token = await getFirebaseToken(mockCustomerData.phone, true);
   firebaseToken.mockReturnValue(token);
 });
 
