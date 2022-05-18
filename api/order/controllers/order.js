@@ -258,4 +258,41 @@ module.exports = {
       ]);
     }
   },
+
+  async update(ctx) {
+    let { id } = ctx.params;
+    let { state = 0 } = ctx.request.body;
+    let order = await strapi.services.order.update(
+      { id: id },
+      ctx.request.body
+    );
+    if (state === 5) {
+      let shipments = await strapi.services.shipment.update(
+        {
+          packages: {
+            $in: order.packages.map((item) => item.id),
+          },
+        },
+        {
+          arrived_time: new Date().toISOString(),
+          $unset: {
+            driver: undefined
+          }
+        }
+      );
+
+      shipments = await strapi.services.shipment.find({
+        packages: {
+          $in: order.packages.map((item) => item.id),
+        },
+      });
+
+      await strapi.services["shipment-item"].delete({
+        shipment: {
+          $in: shipments.map((item) => item.id)
+        },
+      });
+    }
+    return order;
+  },
 };
