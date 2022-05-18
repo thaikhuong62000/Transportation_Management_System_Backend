@@ -77,7 +77,7 @@
       "path": "/shipments/accept/:shipment",
       "handler": "shipment.acceptShipment",
       "config": {
-        "policies": []
+        "policies": ["message-to-user"]
       }
     },
     {

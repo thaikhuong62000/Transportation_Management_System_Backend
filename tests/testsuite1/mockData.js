@@ -4,6 +4,10 @@ const userDefault = {
   phone: "0987654322",
   confirmed: true,
   blocked: null,
+  name: "test user",
+  avatar: "6252e8b4ea1e034ff2ad3e02",
+  device_token:
+    "u49zhc8RBqAoptvZtJnue:APA91bGuqOL0Cpo93MeWN-CCMAMjqfagOfQpqiEqPeEqNu9Vo1Y_yhP4lIFOFqTXiQm11JHKRjvytl2cXw1EirFLRExBMHS-FaGqxqIOoyv-XUQxa8Az_NbvvqkT3mp9xqPSl3NG4ji9",
 };
 
 const mockUserData = {

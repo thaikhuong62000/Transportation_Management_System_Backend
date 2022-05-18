@@ -19,12 +19,12 @@ module.exports = {
       .populate("user2");
   },
 
-  async findRoomsByUser(user) {
-    return strapi
+  async findRoomsByUser(user, populate = true) {
+    const rooms = strapi
       .query("room-chat")
       .model.find()
-      .or([{ user1: user }, { user2: user }])
-      .populate("user1")
-      .populate("user2");
+      .or([{ user1: user }, { user2: user }]);
+    if (populate) return rooms.populate("user1").populate("user2");
+    else return rooms;
   },
 };
