@@ -24,7 +24,7 @@ initUser("customer", mockUserData);
 
 // Get FirebaseToken
 beforeAll(async () => {
-  const token = await getFirebaseToken(mockCustomerData.phone, true);
+  const token = await getFirebaseToken(mockUserData.phone, true);
   firebaseToken.mockReturnValue(token);
 });
 
