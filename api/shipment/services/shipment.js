@@ -48,6 +48,19 @@ module.exports = {
           },
         },
         {
+          $lookup: {
+            from: "components_address_addresses",
+            localField: "to_address.ref",
+            foreignField: "_id",
+            as: "to_address",
+          },
+        },
+        {
+          $unwind: {
+            path: "$to_address",
+          },
+        },
+        {
           $match: {
             "from_address.latitude": {
               $gte: lat - 0.05 * k,

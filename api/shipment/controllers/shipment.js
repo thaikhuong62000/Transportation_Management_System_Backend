@@ -216,9 +216,12 @@ module.exports = {
 
   async finishShipment(ctx) {
     const { _id } = ctx.params;
+    let condition = { _id };
+    const role = ctx.state.user?.role?.type;
+    if (role === "driver") condition = { _id, driver: ctx.state.user?.id };
     const shipment = await strapi
       .query("shipment")
-      .model.findOneAndUpdate({ _id }, { arrived_time: new Date() });
+      .model.findOneAndUpdate(condition, { arrived_time: new Date() });
     if (!shipment)
       return ctx.badRequest([
         {
