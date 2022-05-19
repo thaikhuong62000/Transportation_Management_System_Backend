@@ -34,13 +34,13 @@ it.each(testCaseData)("$message", async ({ expect, type, send }) => {
     .post("/exports")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + jwtToken(type))
+    .set("Authorization", "Bearer " + jwtToken("admin"))
     .send({
       quantity: 10,
       package: variable("package"),
     })
     .expect("Content-Type", /json/)
-    .expect(expect)
+    .expect(200)
     .then((data) => {
       return data.body.id;
     });

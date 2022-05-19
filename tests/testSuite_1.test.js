@@ -196,6 +196,16 @@ it("driver throw packages", async () => {
     .then((data) => data.body);
 });
 
+it("from testSui get orders tracing ", async () => {
+  await request(strapi.server)
+    .get("/orders/tracing/" + createdOrder("order").id)
+    .set("accept", "application/json")
+    .set("Content-Type", "application/json")
+    .set("Authorization", "Bearer " + jwtToken("customer"))
+    .expect("Content-Type", /json/)
+    .expect(200);
+});
+
 afterAll(() => {
   // return strapi.services["shipment-item"]
   //   .delete({
