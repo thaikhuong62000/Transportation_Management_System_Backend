@@ -210,12 +210,18 @@ it("from testSui get orders tracing ", async () => {
 // borrow data to test
 require("./users-permissions/CustomUser/getStorekeeperStatus");
 
-afterAll(() => {
-  // return strapi.services["shipment-item"]
-  //   .delete({
-  //     package_in: createdOrder("order").packages.map((item) => item.id),
-  //   })
-  //   .then((data) => {
-  //     expect(data).toBeDefined();
-  //   });
+afterAll(async () => {
+  const rooms = await strapi.services["room-chat"].findRoomsByUser(
+    createdUser("driver").id,
+    false
+  );
+  await strapi.services.message.delete({
+    room_in: rooms.map((item) => item.id),
+  });
+  await strapi.services["room-chat"].delete({
+    id_in: rooms.map((item) => item.id),
+  });
+  await strapi.services["shipment-item"].delete({
+    package_in: createdOrder("order").packages.map((item) => item.id),
+  });
 });

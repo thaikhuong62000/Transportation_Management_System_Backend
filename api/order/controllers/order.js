@@ -234,6 +234,7 @@ module.exports = {
         to_address,
         fee,
         remain_fee,
+        customer,
       });
 
       const size = await ComponentPackageSize.create([
