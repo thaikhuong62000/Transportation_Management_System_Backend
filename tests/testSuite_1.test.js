@@ -172,7 +172,7 @@ it("stocker2 export packages", async () => {
     .set("Authorization", "Bearer " + jwtToken("stocker2"))
     .send({
       packageId: createdOrder("order").packages[0].id,
-      quantity: 12,
+      quantity: 11,
       shipment: shipment.id,
     })
     .expect("Content-Type", /json/)
@@ -186,7 +186,7 @@ it("driver throw packages", async () => {
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken("driver"))
     .send({
-      quantity: 12,
+      quantity: 11,
       shipment: shipment.id,
       package: createdOrder("order").packages[0].id,
       assmin: false,
