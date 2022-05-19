@@ -206,6 +206,10 @@ it("from testSui get orders tracing ", async () => {
     .expect(200);
 });
 
+// from users-permissions / CustomUser / getStorekeeperStatus
+// borrow data to test
+require("./users-permissions/CustomUser/getStorekeeperStatus");
+
 afterAll(() => {
   // return strapi.services["shipment-item"]
   //   .delete({

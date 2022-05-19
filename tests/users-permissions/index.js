@@ -1,3 +1,4 @@
-require("./Auth");
-require("./User");
 require("./Address");
+require("./Auth");
+require("./CustomUser");
+require("./User");
