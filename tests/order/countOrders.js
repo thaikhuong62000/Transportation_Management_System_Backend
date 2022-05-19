@@ -9,17 +9,16 @@ const testCaseData = [
   {
     message: "đếm danh sách orders by user",
     expect: 200,
-    type: "user",
+    type: "customer",
   },
 ];
 
 it.each(testCaseData)("$message", async ({ expect, type }) => {
-  const jwt = type === "admin" ? jwtToken("admin") : jwtToken("customer");
   await request(strapi.server)
     .get("/orders/count")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + jwt)
+    .set("Authorization", "Bearer " + jwtToken(type))
     .expect("Content-Type", /json/)
     .expect(expect);
 });

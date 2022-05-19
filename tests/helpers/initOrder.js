@@ -21,15 +21,20 @@ module.exports = (key, orderData) => {
 
   // Delete order
   afterAll(async () => {
-    createdOrder(key).packages.forEach(async (item) => {
-      await strapi.services.package
-        .delete({
-          id: item.id,
-        })
-        .then((data) => {
-          expect(data).toBeDefined();
-        });
-    });
+    await strapi.services.shipment
+      .delete({
+        packages_in: createdOrder(key).packages.map((item) => item.id),
+      })
+      .then((data) => {
+        expect(data).toBeDefined();
+      });
+    await strapi.services.package
+      .delete({
+        order: createdOrder(key).id,
+      })
+      .then((data) => {
+        expect(data).toBeDefined();
+      });
     await strapi.services.order
       .delete({
         id: createdOrder(key).id,

@@ -96,7 +96,7 @@ const testCaseData = [
 ];
 
 it.each(testCaseData)("$message", async ({ expect, type, send }) => {
-  const idFurlough = await request(strapi.server) // app server is an instance of Class: http.Server
+  const idFurlough = await request(strapi.server)
     .post("/furloughs")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
@@ -110,7 +110,7 @@ it.each(testCaseData)("$message", async ({ expect, type, send }) => {
       }
     });
   if (idFurlough) {
-    await request(strapi.server) // app server is an instance of Class: http.Server
+    await request(strapi.server)
       .delete("/furloughs/" + idFurlough)
       .set("accept", "application/json")
       .set("Content-Type", "application/json")

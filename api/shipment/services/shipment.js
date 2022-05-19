@@ -48,6 +48,19 @@ module.exports = {
           },
         },
         {
+          $lookup: {
+            from: "components_address_addresses",
+            localField: "to_address.ref",
+            foreignField: "_id",
+            as: "to_address",
+          },
+        },
+        {
+          $unwind: {
+            path: "$to_address",
+          },
+        },
+        {
           $match: {
             "from_address.latitude": {
               $gte: lat - 0.05 * k,
@@ -133,7 +146,7 @@ module.exports = {
   },
 
   async updateOrderState(shipment) {
-    if (shipment.packages.length > 0) {
+    if (shipment.packages && shipment.packages.length > 0) {
       const orders = shipment.packages.map((item) => item.order);
       const packages = shipment.packages.map((item) => item._id);
       await strapi.services.order.update(

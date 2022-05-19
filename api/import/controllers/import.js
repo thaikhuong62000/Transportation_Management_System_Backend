@@ -44,7 +44,8 @@ module.exports = {
 
     const db = strapi.connections.default;
     let session;
-    const { Package, Import, Order, ShipmentItem } = db.models; // Models
+    const { Package, Import, Order, ShipmentItem, ComponentAddressAddress } =
+      db.models; // Models
 
     try {
       if (!quantity && quantity < 0) {
@@ -61,7 +62,9 @@ module.exports = {
       });
 
       const totalImportedPackage = (
-        await strapi.services.import.getImporstByPackages([packageId])
+        await strapi.services.import.getImporstByPackages([packageId], {
+          storage,
+        })
       ).reduce((prev, curr) => prev + curr.quantity, 0);
 
       const order = await strapi.services.order.findOne({
@@ -111,13 +114,22 @@ module.exports = {
 
       // If all package imported
       if (totalImportedPackage + Number.parseInt(quantity) === pack.quantity) {
-        const newPackageState = getPackageState(pack, store);
+        const newPackageState = getPackageState(store);
+        let { id: xid, _id: _xid, ...address } = store.address;
 
         // Update package address
+        address = (
+          await ComponentAddressAddress.create([address], {
+            session: session,
+          })
+        )[0];
         const _package = await Package.findOneAndUpdate(
           { _id: packageId },
           {
-            current_address: store.address,
+            current_address: {
+              kind: "ComponentAddressAddress",
+              ref: address._id,
+            },
             state: newPackageState,
           },
           {
@@ -168,6 +180,6 @@ module.exports = {
   },
 };
 
-function getPackageState(_package, store) {
-  return Number.parseInt(_package.state) < 2 ? 2 : store.isDestination ? 3 : 2;
+function getPackageState(store) {
+  return store.isDestination ? 3 : 2;
 }

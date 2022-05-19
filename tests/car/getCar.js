@@ -20,7 +20,7 @@ const testCaseData = [
 ];
 
 it.each(testCaseData)("$message", async ({ expect, type }) => {
-  await request(strapi.server) // app server is an instance of Class: http.Server
+  await request(strapi.server)
     .get("/cars")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")

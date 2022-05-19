@@ -174,3 +174,4 @@ afterAll(async () => {
     .expect(200);
 });
 require("./shipment");
+require("./users-permissions/CustomUser/getDriverStatus"); // borrow data

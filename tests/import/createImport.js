@@ -5,10 +5,10 @@ const { variable } = require("../__mocks__/Global");
 
 const testCaseData = [
   {
-    message: "stocker create import response 200",
+    message: "stocker create import response 403",
     type: "stocker",
     send: { quantity: 1, package: 1 },
-    expect: 200,
+    expect: 403,
   },
   {
     message: "admin create import response 200",

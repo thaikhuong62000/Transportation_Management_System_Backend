@@ -8,16 +8,16 @@ module.exports = async (ctx, next) => {
     const newPackages = packages.map((_package) => {
       const { quantity, weight, name, size, package_type } = _package;
       if (
+        !quantity ||
         quantity <= 0 ||
+        !weight ||
         weight <= 0 ||
-        !size.len ||
-        !size.width ||
-        !size.height ||
+        !size ||
         !package_type
       )
-        throw "Invalid Package";
+        throw "Invalid Package Info";
       if (size.len <= 0 || size.width <= 0 || size.height <= 0)
-        throw "Invalid Package";
+        throw "Invalid Package Size";
       return { quantity, weight, name, size, package_type };
     });
     ctx.request.body.packages = newPackages;
