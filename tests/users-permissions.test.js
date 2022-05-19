@@ -1,9 +1,9 @@
 require("./helpers/initTestSuite");
 const initUser = require("./helpers/initUser");
 const getFirebaseToken = require("./helpers/getFirebaseToken");
-
+const loginUser = require("./helpers/loginUser");
 const { firebaseToken } = require("./__mocks__/AuthMocks");
-
+const { jwtToken } = require("./__mocks__/AuthMocks");
 const mockUserData = {
   username: "atesterup",
   email: "atesterup@strapi.com",
@@ -15,6 +15,11 @@ const mockUserData = {
   role: "customer",
 };
 
+const adminData = {
+  email: "admin",
+  password: "12345678",
+};
+loginUser("admin", adminData);
 initUser("customer", mockUserData);
 
 // Get FirebaseToken

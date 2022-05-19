@@ -172,7 +172,7 @@ it("stocker2 export packages", async () => {
     .set("Authorization", "Bearer " + jwtToken("stocker2"))
     .send({
       packageId: createdOrder("order").packages[0].id,
-      quantity: 12,
+      quantity: 11,
       shipment: shipment.id,
     })
     .expect("Content-Type", /json/)
@@ -186,7 +186,7 @@ it("driver throw packages", async () => {
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken("driver"))
     .send({
-      quantity: 12,
+      quantity: 11,
       shipment: shipment.id,
       package: createdOrder("order").packages[0].id,
       assmin: false,
@@ -195,6 +195,20 @@ it("driver throw packages", async () => {
     .expect(200)
     .then((data) => data.body);
 });
+
+it("from testSui get orders tracing ", async () => {
+  await request(strapi.server)
+    .get("/orders/tracing/" + createdOrder("order").id)
+    .set("accept", "application/json")
+    .set("Content-Type", "application/json")
+    .set("Authorization", "Bearer " + jwtToken("customer"))
+    .expect("Content-Type", /json/)
+    .expect(200);
+});
+
+// from users-permissions / CustomUser / getStorekeeperStatus
+// borrow data to test
+require("./users-permissions/CustomUser/getStorekeeperStatus");
 
 afterAll(async () => {
   const rooms = await strapi.services["room-chat"].findRoomsByUser(
