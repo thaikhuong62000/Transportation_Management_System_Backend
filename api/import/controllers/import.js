@@ -1,5 +1,6 @@
 "use strict";
 const { sanitizeEntity } = require("strapi-utils");
+var ObjectId = require("mongoose").Types.ObjectId;
 
 module.exports = {
   async getCurrentImport(ctx) {
@@ -39,7 +40,7 @@ module.exports = {
   },
 
   async updateImportQuantityByPackage(ctx) {
-    const { packageId, quantity, shipmentItem } = ctx.request.body;
+    const { packageId, quantity, shipment } = ctx.request.body;
     const { storage, id } = ctx.state.user;
 
     const db = strapi.connections.default;
@@ -58,12 +59,18 @@ module.exports = {
       }
 
       let shipment_item = await strapi.services["shipment-item"].findOne({
-        id: shipmentItem,
+        assmin: false,
+        package: packageId,
+        shipment,
       });
+
+      if (!shipment_item) {
+        throw "Invalid shipment item";
+      }
 
       const totalImportedPackage = (
         await strapi.services.import.getImporstByPackages([packageId], {
-          storage,
+          storage: ObjectId(storage),
         })
       ).reduce((prev, curr) => prev + curr.quantity, 0);
 
@@ -100,7 +107,7 @@ module.exports = {
 
       shipment_item = await ShipmentItem.findOneAndUpdate(
         {
-          _id: shipmentItem,
+          _id: shipment_item.id,
         },
         {
           received:

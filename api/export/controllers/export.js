@@ -44,12 +44,12 @@ module.exports = {
   },
 
   async updateExportQuantityByPackage(ctx) {
-    let { packageId, quantity, shipmentItem, shipment } = ctx.request.body;
+    let { packageId, quantity, shipment } = ctx.request.body;
     const { id, storage } = ctx.state.user;
 
     const db = strapi.connections.default;
     let session;
-    const { Export, ShipmentItem, Storage } = db.models;
+    const { Export, ShipmentItem } = db.models;
 
     try {
       let pack = await strapi.services.package.findOne({ id: packageId });
@@ -57,12 +57,12 @@ module.exports = {
         throw "invalid QR code";
       }
 
-      let shipment_item;
-      if (shipmentItem)
-        shipment_item = await strapi.services["shipment-item"].findOne({
-          id: shipmentItem,
-        });
-      else {
+      let shipment_item = await strapi.services["shipment-item"].findOne({
+        assmin: true,
+        package: packageId,
+        shipment: shipment,
+      });
+      if (!shipment_item)
         shipment_item = await strapi.services["shipment-item"].create({
           export_received: 0,
           quantity: 0,
@@ -70,8 +70,6 @@ module.exports = {
           package: packageId,
           shipment: shipment,
         });
-        shipmentItem = shipment_item.id;
-      }
 
       if (!quantity && quantity < 0) {
         throw "Invalid package quantity";
@@ -96,7 +94,7 @@ module.exports = {
 
       shipment_item = await ShipmentItem.findOneAndUpdate(
         {
-          _id: shipmentItem,
+          _id: shipment_item.id,
         },
         {
           export_received:
