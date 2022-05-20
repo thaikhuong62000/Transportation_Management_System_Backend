@@ -118,6 +118,9 @@ module.exports = {
       },
     ]);
 
+    let totalImportedPackage =
+      await strapi.services.import.getCurrentImports(storage)
+
     let totalPackage = await strapi.query("package").model.aggregate([
       {
         $match: {
@@ -126,23 +129,12 @@ module.exports = {
           },
         },
       },
-      {
-        $group: {
-          _id: null,
-          total_packages: {
-            $sum: "$quantity",
-          },
-        },
-      },
-      {
-        $project: {
-          _id: 0,
-          total_packages: 1,
-        },
-      },
     ]);
 
-    return totalPackage[0];
+    return {
+      totalImportedPackage,
+      totalPackage
+    };
   },
 
   async updateOrderState(shipment) {
