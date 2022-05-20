@@ -152,6 +152,7 @@ module.exports = {
       await strapi.services.order.update(
         {
           _id: orders[0],
+          state: 0,
         },
         { state: 1 },
         { multi: true }
@@ -159,6 +160,7 @@ module.exports = {
       await strapi.services.package.update(
         {
           _id: { $in: packages },
+          state: 0,
         },
         { state: 1 },
         { multi: true }
