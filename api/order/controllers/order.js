@@ -186,7 +186,7 @@ module.exports = {
   },
 
   async create(ctx) {
-    const { id: customer, _id, point } = ctx.state.user;
+    const { id: customer } = ctx.state.user;
     let {
       remain_fee,
       fee,
@@ -194,14 +194,13 @@ module.exports = {
       to_address,
       packages,
       voucher,
-      note = "",
+      state,
+      payments,
       ...body
     } = ctx.request.body;
 
     const db = strapi.connections.default;
-    let session;
-    const { Package, Order, ComponentAddressAddress, ComponentPackageSize } =
-      db.models;
+    const { Package, ComponentPackageSize } = db.models;
 
     try {
       if (
@@ -223,73 +222,35 @@ module.exports = {
         to_address,
         packages,
         ctx.state.user,
-        voucher
+        voucher,
+        customer
       );
       fee = Math.ceil(fee);
       remain_fee = fee;
 
-      session = await db.startSession();
-      session.startTransaction();
+      const order = await strapi.services.order.create({
+        ...body,
+        from_address,
+        to_address,
+        fee,
+        remain_fee,
+        customer,
+      });
 
-      const addresses = await ComponentAddressAddress.create(
-        [from_address, to_address],
-        { session: session }
-      );
-
-      let order = await Order.create(
-        [
-          {
-            ...body,
-            from_address: {
-              kind: "ComponentAddressAddress",
-              ref: addresses[0]._id,
-            },
-            to_address: {
-              kind: "ComponentAddressAddress",
-              ref: addresses[1]._id,
-            },
-            fee,
-            remain_fee,
-            customer,
-            note,
-          },
-        ],
-        { session: session }
-      );
-
-      if (!order) throw "Create order failed!";
-
-      const size = await ComponentPackageSize.create(
-        [...packages.map((item) => item.size)],
-        { session: session }
-      );
-
+      const size = await ComponentPackageSize.create([
+        ...packages.map((item) => item.size),
+      ]);
       for (let index = 0; index < size.length; index++) {
         packages[index] = {
           ...packages[index],
           size: { kind: "ComponentPackageSize", ref: size[index]._id },
-          order: order[0]._id,
+          order: order._id,
         };
       }
+      packages = await Package.create([...packages]);
 
-      packages = await Package.create([...packages], {
-        session: session,
-      });
-
-      if (!packages) throw "Create package failed!";
-
-      await session.commitTransaction();
-      session.endSession();
-
-      return await strapi.services.order.findOne({ id: order[0].id }, [
-        "packages",
-      ]);
+      return { ...order, packages };
     } catch (error) {
-      console.log(error);
-      if (session) {
-        await session.abortTransaction();
-        session.endSession();
-      }
       return ctx.badRequest([
         {
           id: "order.create",
@@ -297,5 +258,42 @@ module.exports = {
         },
       ]);
     }
+  },
+
+  async update(ctx) {
+    let { id } = ctx.params;
+    let { state = 0 } = ctx.request.body;
+    let order = await strapi.services.order.update(
+      { id: id },
+      ctx.request.body
+    );
+    if (state === 5) {
+      let shipments = await strapi.services.shipment.update(
+        {
+          packages: {
+            $in: order.packages.map((item) => item.id),
+          },
+        },
+        {
+          arrived_time: new Date().toISOString(),
+          $unset: {
+            driver: undefined
+          }
+        }
+      );
+
+      shipments = await strapi.services.shipment.find({
+        packages: {
+          $in: order.packages.map((item) => item.id),
+        },
+      });
+
+      await strapi.services["shipment-item"].delete({
+        shipment: {
+          $in: shipments.map((item) => item.id)
+        },
+      });
+    }
+    return order;
   },
 };

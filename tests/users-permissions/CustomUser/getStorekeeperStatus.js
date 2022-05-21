@@ -1,23 +1,22 @@
 const request = require("supertest");
-const { jwtToken } = require("../__mocks__/AuthMocks");
-const { createdOrder } = require("../__mocks__/OrderMocks");
+const { jwtToken } = require("../../__mocks__/AuthMocks");
 
 const testCaseData = [
   {
-    message: "lấy đường đi orders by admin",
+    message: "admin get stocker status response 200 ",
     expect: 200,
     type: "admin",
   },
   {
-    message: "lấy đường đi orders by user",
+    message: "stocker get stocker status response 200 ",
     expect: 200,
-    type: "customer",
+    type: "stocker1",
   },
 ];
 
 it.each(testCaseData)("$message", async ({ expect, type }) => {
   await request(strapi.server)
-    .get("/orders/tracing/" + createdOrder("order").id)
+    .get("/storekeeper/status")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken(type))

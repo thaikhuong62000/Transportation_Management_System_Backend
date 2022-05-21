@@ -26,11 +26,22 @@ const testCaseData = [
 ];
 
 it.each(testCaseData)("$message", async ({ expect, type }) => {
-  await request(strapi.server) // app server is an instance of Class: http.Server
+  await request(strapi.server)
     .get("/current-export")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken(type))
     .expect("Content-Type", /json/)
     .expect(expect);
+});
+
+it("stocker search current-export by car licence response 200", async () => {
+  await request(strapi.server)
+    .get("/current-export")
+    .set("accept", "application/json")
+    .set("Content-Type", "application/json")
+    .set("Authorization", "Bearer " + jwtToken("stocker"))
+    .query({ _q: "C" })
+    .expect("Content-Type", /json/)
+    .expect(200);
 });

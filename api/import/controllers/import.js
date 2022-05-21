@@ -1,5 +1,6 @@
 "use strict";
 const { sanitizeEntity } = require("strapi-utils");
+var ObjectId = require("mongoose").Types.ObjectId;
 
 module.exports = {
   async getCurrentImport(ctx) {
@@ -39,12 +40,13 @@ module.exports = {
   },
 
   async updateImportQuantityByPackage(ctx) {
-    const { packageId, quantity, shipmentItem } = ctx.request.body;
+    const { packageId, quantity, shipment } = ctx.request.body;
     const { storage, id } = ctx.state.user;
 
     const db = strapi.connections.default;
     let session;
-    const { Package, Import, Order, ShipmentItem } = db.models; // Models
+    const { Package, Import, Order, ShipmentItem, ComponentAddressAddress } =
+      db.models; // Models
 
     try {
       if (!quantity && quantity < 0) {
@@ -57,11 +59,19 @@ module.exports = {
       }
 
       let shipment_item = await strapi.services["shipment-item"].findOne({
-        id: shipmentItem,
+        assmin: false,
+        package: packageId,
+        shipment,
       });
 
+      if (!shipment_item) {
+        throw "Invalid shipment item";
+      }
+
       const totalImportedPackage = (
-        await strapi.services.import.getImporstByPackages([packageId])
+        await strapi.services.import.getImporstByPackages([packageId], {
+          storage: ObjectId(storage),
+        })
       ).reduce((prev, curr) => prev + curr.quantity, 0);
 
       const order = await strapi.services.order.findOne({
@@ -97,7 +107,7 @@ module.exports = {
 
       shipment_item = await ShipmentItem.findOneAndUpdate(
         {
-          _id: shipmentItem,
+          _id: shipment_item.id,
         },
         {
           received:
@@ -111,13 +121,22 @@ module.exports = {
 
       // If all package imported
       if (totalImportedPackage + Number.parseInt(quantity) === pack.quantity) {
-        const newPackageState = getPackageState(pack, store);
+        const newPackageState = getPackageState(store);
+        let { id: xid, _id: _xid, ...address } = store.address;
 
         // Update package address
+        address = (
+          await ComponentAddressAddress.create([address], {
+            session: session,
+          })
+        )[0];
         const _package = await Package.findOneAndUpdate(
           { _id: packageId },
           {
-            current_address: store.address,
+            current_address: {
+              kind: "ComponentAddressAddress",
+              ref: address._id,
+            },
             state: newPackageState,
           },
           {
@@ -168,6 +187,6 @@ module.exports = {
   },
 };
 
-function getPackageState(_package, store) {
-  return Number.parseInt(_package.state) < 2 ? 2 : store.isDestination ? 3 : 2;
+function getPackageState(store) {
+  return store.isDestination ? 3 : 2;
 }

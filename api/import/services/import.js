@@ -7,27 +7,14 @@ var mongoose = require("mongoose");
  */
 
 module.exports = {
-  async getImportByStorage(id, limit, skip) {
-    let entities = await strapi
-      .query("import")
-      .model.find({
-        storage: mongoose.Types.ObjectId(id),
-      })
-      .populate("store_manager")
-      .populate("package")
-      .limit(limit)
-      .skip(skip);
-
-    return entities;
-  },
-
-  async getImporstByPackages(packagesIdList) {
+  async getImporstByPackages(packagesIdList, matchCond = {}) {
     let entites = await strapi.query("import").model.aggregate([
       {
         $match: {
           package: {
             $in: packagesIdList.map((item) => mongoose.Types.ObjectId(item)),
           },
+          ...matchCond,
         },
       },
       {
@@ -51,29 +38,6 @@ module.exports = {
       },
       {
         $unwind: "$storage",
-      },
-      {
-        $group: {
-          _id: {
-            "storage": "$storage._id", 
-            "package": "$package._id" 
-          },
-          quantity: {
-            $sum: "$quantity"
-          },
-          storage: {
-            $first: "$storage"
-          },
-          package: {
-            $first: "$package"
-          },
-          createdAt: {
-            $first: "$createdAt"
-          },
-          updatedAt: {
-            $last: "$createdAt"
-          }
-        }
       },
       {
         $project: {
@@ -114,8 +78,8 @@ module.exports = {
       },
       {
         $match: {
-          ...queryOptions
-        }
+          ...queryOptions,
+        },
       },
       {
         $group: {
@@ -140,7 +104,7 @@ module.exports = {
         },
       },
       {
-        $unwind: "$size"
+        $unwind: "$size",
       },
       {
         $lookup: {
@@ -151,7 +115,7 @@ module.exports = {
         },
       },
       {
-        $unwind: "$order"
+        $unwind: "$order",
       },
       {
         $lookup: {
@@ -169,14 +133,14 @@ module.exports = {
       {
         $skip: skip,
       },
-    ]
+    ];
 
     if (limit) {
-      pipeLine.push({$limit: limit})
+      pipeLine.push({ $limit: limit });
     }
 
     let importes = await strapi.query("import").model.aggregate(pipeLine);
 
-    return importes
+    return importes;
   },
 };

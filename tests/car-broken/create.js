@@ -29,7 +29,7 @@ const testCaseData = [
 ];
 
 it.each(testCaseData)("$message", async ({ expect, type, day }) => {
-  const idCarBroken = await request(strapi.server) // app server is an instance of Class: http.Server
+  const idCarBroken = await request(strapi.server)
     .post("/car-brokens")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
@@ -44,7 +44,7 @@ it.each(testCaseData)("$message", async ({ expect, type, day }) => {
       return data?.body?.id;
     });
   if (idCarBroken) {
-    await request(strapi.server) // app server is an instance of Class: http.Server
+    await request(strapi.server)
       .delete("/car-brokens/" + idCarBroken)
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
@@ -52,4 +52,17 @@ it.each(testCaseData)("$message", async ({ expect, type, day }) => {
       .expect("Content-Type", /json/)
       .expect(200);
   }
+});
+
+it("cannot create car-broken, undefined car", async () => {
+  await request(strapi.server)
+    .post("/car-brokens")
+    .set("accept", "application/json")
+    .set("Content-Type", "application/json")
+    .set("Authorization", "Bearer " + jwtToken("driver"))
+    .send({
+      time: Date(),
+    })
+    .expect("Content-Type", /json/)
+    .expect(400);
 });

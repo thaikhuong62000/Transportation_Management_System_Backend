@@ -27,31 +27,6 @@ const testCaseData = [
       shipmentitem: "",
     },
   },
-  {
-    message: "get Vehicle Detail By Shipment false response 400 ",
-    expect: 400,
-    type: "driver",
-    send: {
-      shipmentData: {
-        to_storage: 2,
-        from_storage: 2,
-        to_address: {
-          street: "942/2 Kha Vạn Cân",
-          ward: "Trường Thọ",
-          province: "Thủ Đức",
-          city: "Hồ Chí Minh",
-        },
-        from_address: {
-          street: "475A Điện Biên Phủ",
-          ward: "Phường 25",
-          province: "Bình Thạnh",
-          city: "Thành phố Hồ Chí Minh",
-        },
-        packages: 2,
-      },
-      shipmentitem: "",
-    },
-  },
 ];
 
 it.each(testCaseData)("$message", async ({ expect, send, type }) => {
@@ -89,7 +64,7 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
     .post("/shipments")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + jwtToken(type))
+    .set("Authorization", "Bearer " + jwtToken("admin"))
     .send(send)
     .expect("Content-Type", expect === 404 ? /text/ : /json/)
     .expect(expect)

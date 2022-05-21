@@ -48,6 +48,19 @@ module.exports = {
           },
         },
         {
+          $lookup: {
+            from: "components_address_addresses",
+            localField: "to_address.ref",
+            foreignField: "_id",
+            as: "to_address",
+          },
+        },
+        {
+          $unwind: {
+            path: "$to_address",
+          },
+        },
+        {
           $match: {
             "from_address.latitude": {
               $gte: lat - 0.05 * k,
@@ -105,6 +118,9 @@ module.exports = {
       },
     ]);
 
+    let totalImportedPackage =
+      await strapi.services.import.getCurrentImports(storage)
+
     let totalPackage = await strapi.query("package").model.aggregate([
       {
         $match: {
@@ -113,32 +129,22 @@ module.exports = {
           },
         },
       },
-      {
-        $group: {
-          _id: null,
-          total_packages: {
-            $sum: "$quantity",
-          },
-        },
-      },
-      {
-        $project: {
-          _id: 0,
-          total_packages: 1,
-        },
-      },
     ]);
 
-    return totalPackage[0];
+    return {
+      totalImportedPackage,
+      totalPackage
+    };
   },
 
   async updateOrderState(shipment) {
-    if (shipment.packages.length > 0) {
+    if (shipment.packages && shipment.packages.length > 0) {
       const orders = shipment.packages.map((item) => item.order);
       const packages = shipment.packages.map((item) => item._id);
       await strapi.services.order.update(
         {
           _id: orders[0],
+          state: 0,
         },
         { state: 1 },
         { multi: true }
@@ -146,6 +152,7 @@ module.exports = {
       await strapi.services.package.update(
         {
           _id: { $in: packages },
+          state: 0,
         },
         { state: 1 },
         { multi: true }

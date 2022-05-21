@@ -22,11 +22,11 @@ module.exports = {
 
   async create(ctx) {
     const {
-      name = "",
+      name,
       receiver_name,
       receiver_phone,
-      sender_name = "",
-      sender_phone = "",
+      sender_name,
+      sender_phone,
       from_address,
       to_address,
     } = ctx.request.body;
@@ -58,13 +58,13 @@ module.exports = {
 
   async update(ctx) {
     const {
-      name = "",
+      name,
       receiver_name,
       receiver_phone,
       from_address,
       to_address,
-      sender_name = "",
-      sender_phone = "",
+      sender_name,
+      sender_phone,
     } = ctx.request.body;
 
     const { id } = ctx.params;

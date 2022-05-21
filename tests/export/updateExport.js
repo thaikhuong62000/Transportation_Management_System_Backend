@@ -5,19 +5,18 @@ const { variable } = require("../__mocks__/Global");
 
 const testCaseData = [
   {
-    message: "stocker update export response 200",
+    message: "stocker update export response 403",
     type: "stocker",
     send: { quantity: 1, package: 1 },
-    expect: 200,
+    expect: 403,
   },
   {
-    message: "admin update export response 200",
+    message: "admin update export response 403",
     type: "admin",
     send: { quantity: 1, package: 1 },
-    expect: 200,
+    expect: 403,
   },
 ];
-
 
 it.each(testCaseData)("$message", async ({ expect, type, send }) => {
   switch (send.package) {
@@ -35,7 +34,7 @@ it.each(testCaseData)("$message", async ({ expect, type, send }) => {
     .post("/exports")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + jwtToken("stocker"))
+    .set("Authorization", "Bearer " + jwtToken("admin"))
     .send({
       quantity: 10,
       package: variable("package"),

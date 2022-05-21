@@ -3,9 +3,9 @@ const { jwtToken } = require("../__mocks__/AuthMocks");
 const { variable } = require("../__mocks__/Global");
 const testCaseData = [
   {
-    message: "driver create new shiment response 200 ",
+    message: "admin create new shiment response 200 ",
     expect: 200,
-    type: "driver",
+    type: "admin",
     send: {
       shipmentData: {
         to_storage: 1,
@@ -28,9 +28,9 @@ const testCaseData = [
     },
   },
   {
-    message: "driver create new shiment without packages response 400 ",
+    message: "admin create new shiment without packages response 400 ",
     expect: 400,
-    type: "driver",
+    type: "admin",
     send: {
       shipmentData: {
         to_storage: 1,
@@ -53,9 +53,9 @@ const testCaseData = [
     },
   },
   {
-    message: "driver create new shiment without to_storage response 400 ",
+    message: "admin create new shiment without to_storage response 400 ",
     expect: 400,
-    type: "driver",
+    type: "admin",
     send: {
       shipmentData: {
         to_storage: 2,
@@ -78,9 +78,9 @@ const testCaseData = [
     },
   },
   {
-    message: "driver create new shiment without from_storage response 400 ",
+    message: "admin create new shiment without from_storage response 400 ",
     expect: 400,
-    type: "driver",
+    type: "admin",
     send: {
       shipmentData: {
         to_storage: 1,

@@ -17,7 +17,7 @@ module.exports = {
               _or: [
                 { id: ctx.query._q },
                 { "car.licence_contains": ctx.query._q },
-              ]
+              ],
             },
             { from_storage: ctx.state.user.storage },
             { arrived_time_null: true },
@@ -44,12 +44,12 @@ module.exports = {
   },
 
   async updateExportQuantityByPackage(ctx) {
-    const { packageId, quantity, shipmentItem } = ctx.request.body;
+    let { packageId, quantity, shipment } = ctx.request.body;
     const { id, storage } = ctx.state.user;
 
     const db = strapi.connections.default;
     let session;
-    const { Export, ShipmentItem, Storage } = db.models;
+    const { Export, ShipmentItem } = db.models;
 
     try {
       let pack = await strapi.services.package.findOne({ id: packageId });
@@ -58,8 +58,18 @@ module.exports = {
       }
 
       let shipment_item = await strapi.services["shipment-item"].findOne({
-        id: shipmentItem,
+        assmin: true,
+        package: packageId,
+        shipment: shipment,
       });
+      if (!shipment_item)
+        shipment_item = await strapi.services["shipment-item"].create({
+          export_received: 0,
+          quantity: 0,
+          assmin: true,
+          package: packageId,
+          shipment: shipment,
+        });
 
       if (!quantity && quantity < 0) {
         throw "Invalid package quantity";
@@ -84,7 +94,7 @@ module.exports = {
 
       shipment_item = await ShipmentItem.findOneAndUpdate(
         {
-          _id: shipmentItem,
+          _id: shipment_item.id,
         },
         {
           export_received:

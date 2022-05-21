@@ -1,13 +1,17 @@
 const request = require("supertest");
 
 const { jwtToken } = require("../__mocks__/AuthMocks");
-const { variable } = require("../__mocks__/Global");
 
 const testCaseData = [
   {
     message: "stocker get export response 200",
     type: "stocker",
     expect: 200,
+  },
+  {
+    message: "stocker dont have storage response 200",
+    type: "stocker2",
+    expect: 404,
   },
   {
     message: "admin get export response 200",
@@ -32,6 +36,5 @@ it.each(testCaseData)("$message", async ({ expect, type }) => {
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken(type))
-    .expect("Content-Type", /json/)
     .expect(expect);
 });

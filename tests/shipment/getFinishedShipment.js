@@ -64,7 +64,7 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
     .post("/shipments")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
-    .set("Authorization", "Bearer " + jwtToken(type))
+    .set("Authorization", "Bearer " + jwtToken("admin"))
     .send(send)
     .expect("Content-Type", expect === 404 ? /text/ : /json/)
     .expect(expect)
