@@ -1,5 +1,4 @@
 require("./helpers/initTestSuite");
-
 require("./helpers/initTestSuite");
 const initUser = require("./helpers/initUser");
 
