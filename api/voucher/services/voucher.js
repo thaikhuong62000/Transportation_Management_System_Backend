@@ -32,7 +32,7 @@ module.exports = {
           fee = fee - sale;
           break;
         case "percentage":
-          let discount = fee - (fee * sale) / 100;
+          let discount = (fee * sale) / 100;
           if (discount > sale_max) {
             discount = sale_max;
           }

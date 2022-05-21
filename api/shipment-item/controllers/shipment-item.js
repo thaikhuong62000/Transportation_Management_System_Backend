@@ -12,12 +12,16 @@ module.exports = {
    * @return {Object}
    */
   async create(ctx) {
-    const { shipment, assmin } = ctx.request.body;
+    const { shipment, assmin, package: _package } = ctx.request.body;
     return await strapi
       .query("shipment-item")
-      .model.findOneAndUpdate({ shipment, assmin }, ctx.request.body, {
-        new: true,
-        upsert: true,
-      });
+      .model.findOneAndUpdate(
+        { shipment, assmin, package: _package },
+        ctx.request.body,
+        {
+          new: true,
+          upsert: true,
+        }
+      );
   },
 };
