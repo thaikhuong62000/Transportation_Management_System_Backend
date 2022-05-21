@@ -78,7 +78,8 @@ module.exports = {
       )
       .populate("packages");
 
-    strapi.services.shipment.updateOrderState(shipment);
+    if (!shipment.from_storage)
+      strapi.services.shipment.updateOrderState(shipment);
 
     return shipment;
   },
