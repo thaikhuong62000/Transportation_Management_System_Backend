@@ -5,8 +5,8 @@ const mockOrder = require("./order/mockOrder");
 const { mockUserData } = require("./testsuite1/mockData");
 const { createdOrder } = require("./__mocks__/OrderMocks");
 
-initUser("customer", mockUserData.customer);
-initUser("driver", mockUserData.driver);
+initUser("customer", mockUserData.customerPayment);
+initUser("driver", mockUserData.driverPayment);
 initOrder("order", mockOrder[0]);
 
 require("./payment");
