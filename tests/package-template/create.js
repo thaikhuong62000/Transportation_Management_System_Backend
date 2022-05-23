@@ -16,6 +16,19 @@ const testCaseData = [
       note: "ko co note",
     },
   },
+  {
+    message: "tạo mẫu package mới response 400",
+    expect: 400,
+    send: {
+      name: "test",
+      quantity: 10,
+      weight: 10,
+      len: 10,
+      width: 10,
+      height: 10,
+      note: "ko co note",
+    },
+  },
 ];
 
 it.each(testCaseData)("$message", async ({ expect, send }) => {
@@ -39,7 +52,7 @@ it.each(testCaseData)("$message", async ({ expect, send }) => {
       .set("Content-Type", "application/json")
       .set("Authorization", "Bearer " + jwtToken("customer"))
       .send({
-        deleteList:[idTemplate]
+        deleteList: [idTemplate],
       })
       .expect("Content-Type", expect === 404 ? /text/ : /json/)
       .expect(200);

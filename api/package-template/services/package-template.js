@@ -5,16 +5,4 @@
  * to customize this service
  */
 
-module.exports = {
-  async getPackageTemplatesByUser(id, skip, limit) {
-    let entities = await strapi
-      .query("package-template")
-      .model.find({
-        user: id,
-      })
-      .skip(skip)
-      .limit(limit);
-
-    return entities;
-  },
-};
+module.exports = {};
