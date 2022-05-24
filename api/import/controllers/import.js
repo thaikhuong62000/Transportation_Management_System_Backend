@@ -65,6 +65,13 @@ module.exports = {
       });
 
       if (!shipment_item) {
+        shipment_item = await strapi.services["shipment-item"].findOne({
+          package: packageId,
+          shipment,
+        });
+      }
+
+      if (!shipment_item) {
         throw "Invalid shipment item";
       }
 
@@ -175,8 +182,10 @@ module.exports = {
         includeFields: ["quantity"],
       });
     } catch (error) {
-      await session.abortTransaction();
-      session.endSession();
+      if (session) {
+        await session.abortTransaction();
+        session.endSession();
+      }
       return ctx.badRequest([
         {
           id: "import.updateImportQuantityByPackage",
