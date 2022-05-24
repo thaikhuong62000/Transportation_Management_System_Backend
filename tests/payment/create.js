@@ -2,7 +2,7 @@ const request = require("supertest");
 const { jwtToken } = require("../__mocks__/AuthMocks");
 const { createdOrder } = require("../__mocks__/OrderMocks");
 
-const picture = "public/uploads/map.png";
+// const picture = "public/uploads/map.png";
 
 const testCaseData = [
   {
