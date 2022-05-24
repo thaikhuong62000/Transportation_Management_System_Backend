@@ -175,8 +175,10 @@ module.exports = {
         includeFields: ["quantity"],
       });
     } catch (error) {
-      await session.abortTransaction();
-      session.endSession();
+      if (session) {
+        await session.abortTransaction();
+        session.endSession();
+      }
       return ctx.badRequest([
         {
           id: "import.updateImportQuantityByPackage",
