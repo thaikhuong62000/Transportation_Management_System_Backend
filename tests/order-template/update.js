@@ -137,7 +137,7 @@ it.each(testCaseData)("$message", async ({ expect, type, send }) => {
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken("customer"))
     .send(constData.send)
-    .expect("Content-Type", expect === 404 ? /text/ : /json/)
+    .expect("Content-Type", /json/)
     .expect(200)
     .then((data) => {
       if (data?.body?.id) {
@@ -162,7 +162,7 @@ it.each(testCaseData)("$message", async ({ expect, type, send }) => {
       .send({
         deleteList: [idTemplate],
       })
-      .expect("Content-Type", expect === 404 ? /text/ : /json/)
+      .expect("Content-Type", /json/)
       .expect(200);
   }
 });

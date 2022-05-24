@@ -72,7 +72,7 @@ beforeAll(async () => {
       identifier: mockAdminData.email,
       password: mockAdminData.password,
     })
-    .expect("Content-Type", expect === 404 ? /text/ : /json/)
+    .expect("Content-Type", /json/)
     .expect(200)
     .then((data) => {
       expect(data.body.jwt).toBeDefined();
@@ -84,7 +84,7 @@ beforeAll(async () => {
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken("admin"))
     .send(packageData)
-    .expect("Content-Type", expect === 404 ? /text/ : /json/)
+    .expect("Content-Type", /json/)
     .expect(200)
     .then((data) => {
       expect(data.body.id).toBeDefined();
