@@ -65,6 +65,13 @@ module.exports = {
       });
 
       if (!shipment_item) {
+        shipment_item = await strapi.services["shipment-item"].findOne({
+          package: packageId,
+          shipment,
+        });
+      }
+
+      if (!shipment_item) {
         throw "Invalid shipment item";
       }
 
