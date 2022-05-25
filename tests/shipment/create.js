@@ -160,8 +160,6 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
     case 2:
       send.shipmentData.packages = "";
       break;
-    default:
-      send.shipmentData.packages = variable("package");
   }
   switch (send.shipmentData.to_storage) {
     case 1:
@@ -170,8 +168,6 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
     case 2:
       send.shipmentData.to_storage = "";
       break;
-    default:
-      send.shipmentData.to_storage = variable("storage");
   }
   switch (send.shipmentData.from_storage) {
     case 1:
@@ -180,8 +176,6 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
     case 2:
       send.shipmentData.from_storage = "";
       break;
-    default:
-      send.shipmentData.from_storage = variable("storage");
   }
   const idS = await request(strapi.server)
     .post("/shipments")
