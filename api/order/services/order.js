@@ -21,6 +21,7 @@ module.exports = {
           },
         ],
       })
+      .sort({ createdAt: -1 })
       .populate("packages", "current_address weight quantity name")
       .limit(limit)
       .skip(skip);
@@ -51,6 +52,7 @@ module.exports = {
           },
         ],
       })
+      .sort({ createdAt: -1 })
       .populate("packages", "current_address weight quantity name")
       .limit(limit)
       .skip(skip);
