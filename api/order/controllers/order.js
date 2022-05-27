@@ -6,155 +6,156 @@ module.exports = {
   async getOrderTracing(ctx) {
     const { id } = ctx.params;
 
-    let packages = await strapi.query("package").find({
-      order: id,
-    });
+    const order = await strapi.query("order").findOne({ id }, [
+      {
+        path: "packages",
+        populate: [
+          { path: "imports", populate: "storage" },
+          { path: "exports", populate: "storage" },
+        ],
+      },
+    ]);
 
-    packages = packages.map((pack) => {
-      return sanitizeEntity(pack, {
-        model: strapi.query("package").model,
-        includeFields: ["quantity", "order", "current_address", "state"],
+    const packages = order.packages;
+
+    let importResult = {};
+    let exportResult = {};
+
+    // Sort importResult's storage by import time
+    packages
+      .reduce((pre, curr) => pre.concat(curr.imports), [])
+      .sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt))
+      .map((_import) => _import.storage.name)
+      .forEach((item) => (importResult[item] = []));
+
+    packages.forEach((_pack) => {
+      let sumImport = {};
+      let sumExport = {};
+      // Sum import and export
+      _pack.imports.forEach((_import) => {
+        let quantity = _import.quantity;
+        if (sumImport[_import.storage.name]) {
+          quantity += sumImport[_import.storage.name].quantity;
+        }
+        sumImport[_import.storage.name] = {
+          quantity,
+          timeUpdate: _import.updatedAt,
+          timeCreate: _import.createdAt,
+          address: _import.storage.address,
+        };
+      });
+      _pack["exports"].forEach((_export) => {
+        let quantity = _export.quantity;
+        if (sumExport[_export.storage.name]) {
+          quantity += sumExport[_export.storage.name].quantity;
+        }
+        sumExport[_export.storage.name] = {
+          quantity,
+          timeUpdate: _export.updatedAt,
+          timeCreate: _export.createdAt,
+        };
+      });
+      // Add data to importResult & exportResult
+      Object.keys(sumImport).forEach((_storage) => {
+        let remain = sumImport[_storage].quantity;
+        if (sumExport[_storage]?.quantity)
+          remain -= sumExport[_storage].quantity;
+        importResult[_storage].push({
+          id: _pack.id,
+          ...sumImport[_storage],
+          imported: sumImport[_storage].quantity,
+          remain,
+          quantity: _pack.quantity,
+        });
+      });
+      Object.keys(sumExport).forEach((_storage) => {
+        if (!exportResult[_storage]) exportResult[_storage] = [];
+        exportResult[_storage].push({
+          id: _pack.id,
+          ...sumExport[_storage],
+          exported: sumExport[_storage].quantity,
+          quantity: _pack.quantity,
+        });
       });
     });
 
-    let imports = await strapi.services.import.getImporstByPackages(
-      packages.map((item) => item.id)
-    );
-
-    let exports = await strapi.services.export.getExportsByPackages(
-      packages.map((item) => item.id)
-    );
-
-    imports = imports
-      .map((item) => {
-        return {
-          id: item.package._id,
-          storage: item.storage.name,
-          quantity: item.package.quantity,
-          importQuantity: item.quantity,
-          timeUpdate: item.updatedAt,
-          timeCreate: item.createdAt,
-        };
-      })
-      .reduce((total, item, index) => {
-        total[item.storage] = total[item.storage] || [];
-        total[item.storage].push(item);
-
-        return total;
-      }, {});
-
-    exports = exports
-      .map((item) => {
-        return {
-          id: item.package._id,
-          storage: item.storage.name,
-          quantity: item.package.quantity,
-          exportQuantity: item.quantity,
-          timeUpdate: item.updatedAt,
-          timeCreate: item.createdAt,
-        };
-      })
-      .reduce((total, item) => {
-        total[item.storage] = total[item.storage] || [];
-        total[item.storage].push(item);
-
-        return total;
-      }, {});
-
-    let importResult = {};
-
-    for (let ele of Object.values(imports)) {
-      for (let item of ele) {
-        importResult[item.storage] = importResult[item.storage] || [];
-        if (item.quantity === item.importQuantity) {
-          importResult[item.storage].push({
-            id: item.id,
-            timeUpdate: item.timeUpdate,
-            timeCreate: item.timeCreate,
-          });
-        }
-      }
-    }
-
-    let exportResult = {};
-
-    for (let ele of Object.values(exports)) {
-      for (let item of ele) {
-        exportResult[item.storage] = exportResult[item.storage] || [];
-        if (item.quantity === item.exportQuantity) {
-          exportResult[item.storage].push({
-            id: item.id,
-            timeUpdate: item.timeUpdate,
-            timeCreate: item.timeCreate,
-          });
-        } else {
-          exportResult[item.storage].push({
-            id: item.id,
-            timeUpdate: item.timeUpdate,
-            timeCreate: item.timeCreate,
-            remain: true,
-          });
-        }
-      }
-    }
-
     let tracingResult = [];
 
-    for (let item in importResult) {
-      if (importResult && importResult[item]) {
-        if (exportResult[item] && exportResult[item].length) {
-          if (
-            importResult[item].length === packages.length &&
-            exportResult[item].length === packages.length &&
-            !exportResult[item].some((pack) => pack.remain)
-          ) {
-            tracingResult.push({
-              storage: item,
-              status: 3,
-              time: exportResult[item][exportResult[item].length - 1]
-                .timeUpdate,
-            });
-          } else if (
-            (importResult[item].length === packages.length &&
-              exportResult[item].length < packages.length) ||
-            (exportResult[item].some((pack) => pack.remain) &&
-              exportResult[item].length === packages.length &&
-              importResult[item].length === packages.length)
-          ) {
-            tracingResult.push({
-              storage: item,
-              status: 2,
-            });
-          } else {
-            tracingResult.push({
-              storage: item,
-              status: 0,
-            });
-          }
-        } else {
-          if (importResult[item].length === packages.length) {
-            tracingResult.push({
-              storage: item,
-              status: 1,
-              time: importResult[item][importResult[item].length - 1]
-                .timeUpdate,
-            });
-          } else {
-            tracingResult.push({
-              storage: item,
-              status: 0,
-            });
-          }
+    Object.keys(importResult).forEach((storage) => {
+      let state = 3;
+      let isExported = false;
+      for (let i in importResult[storage]) {
+        const pack = importResult[storage][i];
+        if (pack.remain) {
+          state = 2;
+        }
+        if (pack.remain < pack.imported) {
+          isExported = true;
+        }
+        if (pack.quantity !== pack.imported) {
+          state = 0;
+          break;
         }
       }
-    }
+      if (!isExported && state) state = 1;
+      let time;
+      if (state === 1) time = importResult[storage][0].timeCreate;
+      if (state === 3) time = exportResult[storage][0].timeCreate;
+      tracingResult.push({
+        storage,
+        status: state,
+        time,
+      });
+    });
 
     let isLastStage = packages.every((item) => item.state === 3);
+
+    // Find currently transport package
+    let shipments = await strapi.services.shipment.find(
+      {
+        packages_in: packages.map((item) => item.id),
+        driver_null: false,
+      },
+      ["shipment_items", "driver"]
+    );
+
+    shipments = await sanitizeEntity(shipments, {
+      model: strapi.query("shipment").model,
+      includeFields: ["shipment_items", "driver"],
+    });
+
+    let currentShipment = [];
+
+    shipments.forEach((shipment) => {
+      // Filter active shipment item
+      let items = {};
+      shipment.shipment_items.forEach((item) => {
+        if (item.assmin === false && item.quantity - item.received > 0)
+          items[item.package] = item.quantity - item.received;
+        if (item.assmin === true && item.export_received - item.received > 0)
+          items[item.package] = item.export_received - item.received;
+      });
+      // Get filter items
+      let _packages = {};
+      packages.forEach((pack) => {
+        if (items[pack.id]) _packages[pack.id] = items[pack.id];
+      });
+
+      if (Object.keys(_packages).length)
+        currentShipment.push({
+          coord: {
+            latitude: shipment.driver.latitude,
+            longitude: shipment.driver.longitude,
+          },
+          packages: _packages,
+        });
+    });
 
     return {
       importResult,
       exportResult,
       tracingResult,
+      currentShipment,
       lastStage: isLastStage,
     };
   },
@@ -277,8 +278,8 @@ module.exports = {
         {
           arrived_time: new Date().toISOString(),
           $unset: {
-            driver: undefined
-          }
+            driver: undefined,
+          },
         }
       );
 
@@ -290,7 +291,7 @@ module.exports = {
 
       await strapi.services["shipment-item"].delete({
         shipment: {
-          $in: shipments.map((item) => item.id)
+          $in: shipments.map((item) => item.id),
         },
       });
     }
