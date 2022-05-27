@@ -249,6 +249,8 @@ module.exports = {
       }
       packages = await Package.create([...packages]);
 
+      // Notify to admin web
+      await strapi.plugins["users-permissions"].services.noti.handleNoti("order", order)
       return { ...order, packages };
     } catch (error) {
       return ctx.badRequest([
@@ -277,8 +279,8 @@ module.exports = {
         {
           arrived_time: new Date().toISOString(),
           $unset: {
-            driver: undefined
-          }
+            driver: undefined,
+          },
         }
       );
 
@@ -290,7 +292,7 @@ module.exports = {
 
       await strapi.services["shipment-item"].delete({
         shipment: {
-          $in: shipments.map((item) => item.id)
+          $in: shipments.map((item) => item.id),
         },
       });
     }

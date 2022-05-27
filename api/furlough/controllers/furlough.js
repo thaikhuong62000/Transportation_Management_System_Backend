@@ -31,13 +31,18 @@ module.exports = {
         throw "Too late";
       }
 
-      return await strapi.services.furlough.create({
+      let furlough = await strapi.services.furlough.create({
         state: "pending",
         reason: reason,
         start_time: start_time,
         end_time: new Date(start_time + days * msToDay),
         driver: ctx.state.user.id,
       });
+
+      // Notify to admin web
+      await strapi.plugins["users-permissions"].services.noti.handleNoti("furlough", furlough)
+      
+      return furlough;
     } catch (error) {
       return ctx.badRequest(null, {
         errors: [

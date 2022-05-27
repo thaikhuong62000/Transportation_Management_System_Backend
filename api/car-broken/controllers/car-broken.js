@@ -40,6 +40,9 @@ module.exports = {
       note,
       car,
     });
+    
+    // Notify to admin web
+    await strapi.plugins["users-permissions"].services.noti.handleNoti("broken", broken)
     return broken;
   },
 };
