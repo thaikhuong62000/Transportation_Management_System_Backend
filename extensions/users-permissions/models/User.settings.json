@@ -139,6 +139,12 @@
     "device_token": {
       "type": "string",
       "private": true
+    },
+    "latitude": {
+      "type": "float"
+    },
+    "longitude": {
+      "type": "float"
     }
   }
 }

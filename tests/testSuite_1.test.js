@@ -6,6 +6,7 @@ const initOrder = require("./helpers/initOrder");
 const loginUser = require("./helpers/loginUser");
 const { createdUser, jwtToken } = require("./__mocks__/AuthMocks");
 const { createdOrder } = require("./__mocks__/OrderMocks");
+const { variable } = require("./__mocks__/Global");
 
 const mockOrder = require("./order/mockOrder");
 const { mockUserData } = require("./testsuite1/mockData");
@@ -152,6 +153,7 @@ it("driver accept shipment", async () => {
     []
   );
   shipment = shipment.find((item) => !item.to_storage && item.from_storage);
+  variable("shipment", shipment);
   await request(strapi.server)
     .put("/shipments/accept/" + shipment.id)
     .set("accept", "application/json")
@@ -207,8 +209,8 @@ it("from testSui get orders tracing ", async () => {
 });
 
 // from users-permissions / CustomUser / getStorekeeperStatus
-// borrow data to test
 require("./users-permissions/CustomUser/getStorekeeperStatus");
+require("./testsuite1/export");
 
 afterAll(async () => {
   const rooms = await strapi.services["room-chat"].findRoomsByUser(

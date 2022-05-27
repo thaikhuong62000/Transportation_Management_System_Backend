@@ -1,14 +1,13 @@
 require("./helpers/initTestSuite");
 
 const initUser = require("./helpers/initUser");
-const { jwtToken } = require("./__mocks__/AuthMocks");
+const { createdUser, jwtToken } = require("./__mocks__/AuthMocks");
 const { variable } = require("./__mocks__/Global");
-
 const request = require("supertest");
-
+const loginUser = require("./helpers/loginUser");
 const mockStockerData = {
-  username: "atestersi",
-  email: "atestersi@strapi.com",
+  username: "atesterreport",
+  email: "atesterreport@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987654321",
@@ -18,10 +17,9 @@ const mockStockerData = {
   type: "Stocker",
   role: "stocker",
 };
-
 const mockDriverData = {
-  username: "atester3si",
-  email: "ateste3rsi@strapi.com",
+  username: "atester3report",
+  email: "ateste3rreport@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987333321",
@@ -32,8 +30,8 @@ const mockDriverData = {
 };
 
 const mockCustomerData = {
-  username: "atester4si",
-  email: "atester4si@strapi.com",
+  username: "atester4report",
+  email: "atester4report@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987444421",
@@ -45,18 +43,6 @@ const mockCustomerData = {
 const mockAdminData = {
   email: "admin",
   password: "12345678",
-};
-const packageData = {
-  package_type: "normal",
-  name: "atest package",
-  quantity: 1,
-  weight: 50,
-  note: "tét ",
-  size: {
-    len: 35,
-    width: 20,
-    height: 165,
-  },
 };
 
 initUser("stocker", mockStockerData);
@@ -79,25 +65,46 @@ beforeAll(async () => {
       jwtToken("admin", data.body.jwt);
     });
   await request(strapi.server)
-    .post("/packages")
+    .post("/storages")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken("admin"))
-    .send(packageData)
+    .send({
+      name: "areport",
+      address: { street: "A", ward: "a", province: "a", city: "A" },
+      size: "66666",
+      store_managers: [createdUser("stocker").id],
+    })
     .expect("Content-Type", /json/)
     .expect(200)
     .then((data) => {
-      expect(data.body.id).toBeDefined();
-      variable("package", data.body.id);
+      variable("storage", data.body.id);
+    });
+  await request(strapi.server)
+    .post("/reports")
+    .set("accept", "application/json")
+    .set("Content-Type", "application/json")
+    .set("Authorization", "Bearer " + jwtToken("admin"))
+    .expect("Content-Type", /json/)
+    .expect(200)
+    .then((data) => {
+      variable("report", data.body.id);
     });
 });
 afterAll(async () => {
   await request(strapi.server) // app server is an instance of Class: http.Server
-    .delete("/packages/" + variable("package"))
+    .delete("/storages/" + variable("storage"))
+    .set("accept", "application/json")
+    .set("Content-Type", "application/json")
+    .set("Authorization", "Bearer " + jwtToken("admin"))
+    .expect("Content-Type", /json/)
+    .expect(200);
+  await request(strapi.server) // app server is an instance of Class: http.Server
+    .delete("/reports/" + variable("report"))
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken("admin"))
     .expect("Content-Type", /json/)
     .expect(200);
 });
-require("./shipmentItem");
+require("./report");

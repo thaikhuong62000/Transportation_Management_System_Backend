@@ -1,16 +1,17 @@
 const request = require("supertest");
-const { jwtToken } = require("../__mocks__/AuthMocks");
+const { jwtToken } = require("../../__mocks__/AuthMocks");
+
 const testCaseData = [
   {
-    message: "get Current Shipment response 200 ",
+    message: "admin get point response 200 ",
     expect: 200,
-    type: "driver",
+    type: "admin",
   },
 ];
 
-it.each(testCaseData)("$message", async ({ expect, type }) => {
+it.each(testCaseData)("$message", async ({ expect, type, send }) => {
   await request(strapi.server)
-    .get("/current-shipments")
+    .get("/config/point")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken(type))

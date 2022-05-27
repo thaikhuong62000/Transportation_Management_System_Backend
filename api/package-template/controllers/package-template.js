@@ -21,16 +21,8 @@ module.exports = {
   },
 
   async create(ctx) {
-    const {
-      name = "",
-      package_type,
-      quantity,
-      weight,
-      len,
-      width,
-      height,
-      note = "",
-    } = ctx.request.body;
+    const { name, package_type, quantity, weight, len, width, height, note } =
+      ctx.request.body;
 
     const { id } = ctx.state.user;
 
@@ -62,14 +54,14 @@ module.exports = {
 
   async update(ctx) {
     const {
-      name = "",
+      name,
       package_type,
       quantity,
       weight,
       len,
       width,
       height,
-      note = "",
+      note,
       size,
     } = ctx.request.body;
 
