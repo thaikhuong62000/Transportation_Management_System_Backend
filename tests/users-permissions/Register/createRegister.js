@@ -26,7 +26,6 @@ it.each(testCaseData)("$message", async ({ expect, send }) => {
     .expect("Content-Type", /json/)
     .expect(expect)
     .then((data) => {
-      console.log(data.body.user.id);
       return data.body.user.id;
     });
   await request(strapi.server) // app server is an instance of Class: http.Server

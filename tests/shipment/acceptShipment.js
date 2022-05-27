@@ -87,7 +87,6 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
   }
   send.car = variable("idCar");
   send.driver = variable("driver");
-  console.log(send);
   const idSI = await request(strapi.server)
     .post("/shipments")
     .set("accept", "application/json")
