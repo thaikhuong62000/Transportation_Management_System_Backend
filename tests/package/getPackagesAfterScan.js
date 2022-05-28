@@ -22,7 +22,7 @@ it.each(testCaseData)("$message", async ({ expect, type, typeCall }) => {
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken(type))
-    .query({ typeCall: typeCall })
+    .query({ type: typeCall })
     .expect("Content-Type", /json/)
     .expect(expect);
 });

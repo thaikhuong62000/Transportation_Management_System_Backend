@@ -211,6 +211,7 @@ it("from testSui get orders tracing ", async () => {
 // from users-permissions / CustomUser / getStorekeeperStatus
 require("./users-permissions/CustomUser/getStorekeeperStatus");
 require("./testsuite1/export");
+require("./testsuite1/packages");
 
 afterAll(async () => {
   const rooms = await strapi.services["room-chat"].findRoomsByUser(
