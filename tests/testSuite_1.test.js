@@ -6,6 +6,7 @@ const initOrder = require("./helpers/initOrder");
 const loginUser = require("./helpers/loginUser");
 const { createdUser, jwtToken } = require("./__mocks__/AuthMocks");
 const { createdOrder } = require("./__mocks__/OrderMocks");
+const { variable } = require("./__mocks__/Global");
 
 const mockOrder = require("./order/mockOrder");
 const { mockUserData } = require("./testsuite1/mockData");
@@ -19,7 +20,7 @@ loginUser("admin", mockUserData.admin);
 initOrder("order", mockOrder[5]);
 
 it("driver accept shipment", async () => {
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait for creating shipment
+  await new Promise((resolve) => setTimeout(resolve, 4000)); // Wait for creating shipment
   shipment = await strapi.services.shipment.findOne(
     {
       packages_in: createdOrder("order").packages.map((item) => item.id),
@@ -144,7 +145,7 @@ it("stocker2 import packages", async () => {
 });
 
 it("driver accept shipment", async () => {
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait for creating shipment
+  await new Promise((resolve) => setTimeout(resolve, 4000)); // Wait for creating shipment
   shipment = await strapi.services.shipment.find(
     {
       packages_in: createdOrder("order").packages.map((item) => item.id),
@@ -152,6 +153,7 @@ it("driver accept shipment", async () => {
     []
   );
   shipment = shipment.find((item) => !item.to_storage && item.from_storage);
+  variable("shipment", shipment);
   await request(strapi.server)
     .put("/shipments/accept/" + shipment.id)
     .set("accept", "application/json")
@@ -207,8 +209,8 @@ it("from testSui get orders tracing ", async () => {
 });
 
 // from users-permissions / CustomUser / getStorekeeperStatus
-// borrow data to test
 require("./users-permissions/CustomUser/getStorekeeperStatus");
+require("./testsuite1/export");
 
 afterAll(async () => {
   const rooms = await strapi.services["room-chat"].findRoomsByUser(

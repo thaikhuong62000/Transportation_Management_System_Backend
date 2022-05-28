@@ -18,10 +18,23 @@ const mockUserData = {
     type: "Platinum",
     role: "customer",
   },
+  customerPayment: {
+    ...userDefault,
+    username: "ts1_cpm",
+    email: "ts1_cpm@strapi.com",
+    type: "Platinum",
+    role: "customer",
+  },
   driver: {
     ...userDefault,
     username: "ts1_2",
     email: "ts1_2@strapi.com",
+    role: "driver",
+  },
+  driverPayment: {
+    ...userDefault,
+    username: "ts1_dpm",
+    email: "ts1_dpm@strapi.com",
     role: "driver",
   },
   stocker1: {

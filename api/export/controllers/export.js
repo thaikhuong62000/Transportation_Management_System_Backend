@@ -52,9 +52,12 @@ module.exports = {
     const { Export, ShipmentItem } = db.models;
 
     try {
-      let pack = await strapi.services.package.findOne({ id: packageId });
-      if (!pack) {
+      if (!packageId) {
         throw "invalid QR code";
+      }
+
+      if (!quantity || quantity <= 0) {
+        throw "Invalid package quantity";
       }
 
       let shipment_item = await strapi.services["shipment-item"].findOne({
@@ -70,10 +73,6 @@ module.exports = {
           package: packageId,
           shipment: shipment,
         });
-
-      if (!quantity && quantity < 0) {
-        throw "Invalid package quantity";
-      }
 
       session = await db.startSession();
       session.startTransaction();
@@ -115,8 +114,10 @@ module.exports = {
         includeFields: ["quantity"],
       });
     } catch (error) {
-      await session.abortTransaction();
-      session.endSession();
+      if (session) {
+        await session.abortTransaction();
+        session.endSession();
+      }
       return ctx.badRequest([
         {
           id: "export.updatExportQuantityByPackage",

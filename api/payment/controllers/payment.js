@@ -9,24 +9,24 @@ var mongoose = require("mongoose");
 module.exports = {
   async momoNotification(ctx) {
     const {
-      amount = 0,
-      extraData = "",
-      message = "",
-      resultCode = 0,
+      amount,
+      extraData,
+      // message = "",
+      resultCode,
     } = ctx.request.body;
-
-    let rawData = Buffer.from(extraData, "base64").toString("ascii");
-    let parsedId = JSON.parse(rawData).id;
-
-    let order = await strapi.query("order").findOne({
-      id: parsedId,
-    });
 
     const db = strapi.connections.default;
     let session;
     const { Payment, UsersPermissionsUser, Order } = db.models;
 
     try {
+      let rawData = Buffer.from(extraData, "base64").toString("ascii");
+      let parsedId = JSON.parse(rawData).id;
+
+      let order = await strapi.query("order").findOne({
+        id: parsedId,
+      });
+
       session = await db.startSession();
       session.startTransaction();
 
@@ -96,10 +96,18 @@ module.exports = {
       }
       return ctx.send(204);
     } catch (error) {
-      console.log(error);
-      await session.abortTransaction();
-      session.endSession();
-      return ctx.send(204);
+      if (session) {
+        await session.abortTransaction();
+        session.endSession();
+      }
+      return ctx.badRequest({
+        errors: [
+          {
+            id: "Payment.momoNotification",
+            message: error,
+          },
+        ],
+      });
     }
   },
 
@@ -109,42 +117,23 @@ module.exports = {
       files: { receipt },
     } = await strapi.plugins.upload.services.utils.getDataAndFile(ctx);
 
+    const db = strapi.connections.default;
+    let session;
+    const { Payment, UsersPermissionsUser, Order } = db.models;
+
     try {
       await strapi.plugins.upload.services.utils.checkImage(
         receipt,
         false,
         false
       );
-    } catch (error) {
-      return ctx.badRequest({
-        errors: [
-          {
-            id: "Payment.create",
-            message: "Image error",
-          },
-        ],
-      });
-    }
-
-    const db = strapi.connections.default;
-    let session;
-    const { Payment, UsersPermissionsUser, Order } = db.models;
-
-    try {
-      const { payer_name = "", payer_phone = "", order = "", paid = 0 } = data;
+      const { payer_name, payer_phone, order, paid } = data;
 
       session = await db.startSession();
       session.startTransaction();
 
       if (paid < 0) {
-        return ctx.badRequest({
-          errors: [
-            {
-              id: "Payment.create",
-              message: "Negative Payment",
-            },
-          ],
-        });
+        throw "Negative Payment";
       }
 
       let order_ = await Order.findOne({
@@ -221,22 +210,17 @@ module.exports = {
 
         return created_payment[0];
       } else {
-        return ctx.badRequest({
-          errors: [
-            {
-              id: "Payment.create",
-              message: "Payment > Fee",
-            },
-          ],
-        });
+        throw "Payment > Fee";
       }
     } catch (error) {
-      await session.abortTransaction();
-      session.endSession();
+      if (session) {
+        await session.abortTransaction();
+        session.endSession();
+      }
       return ctx.badRequest([
         {
           id: "payment.create",
-          message: JSON.stringify(error),
+          message: error,
         },
       ]);
     }

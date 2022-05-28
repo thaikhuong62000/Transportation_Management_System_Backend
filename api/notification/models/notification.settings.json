@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notifications",
+  "info": {
+    "name": "Notification",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "sub_title": {
+      "type": "string"
+    },
+    "message_type": {
+      "type": "enumeration",
+      "enum": [
+        "order",
+        "broken",
+        "furlough"
+      ]
+    },
+    "reference_id": {
+      "type": "string"
+    }
+  }
+}

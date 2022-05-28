@@ -14,6 +14,6 @@ it.each(testCaseData)("$message", async ({ expect }) => {
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken("customer"))
-    .expect("Content-Type", expect === 404 ? /text/ : /json/)
+    .expect("Content-Type", /json/)
     .expect(expect);
 });

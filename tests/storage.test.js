@@ -8,7 +8,7 @@ const request = require("supertest");
 
 const mockStockerData = {
   username: "atesterstorage",
-  email: "atesterfl@strapi.com",
+  email: "atesterstorage@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987654321",
@@ -20,7 +20,7 @@ const mockStockerData = {
 };
 const mockDriverData = {
   username: "atester3storage",
-  email: "ateste3rep@strapi.com",
+  email: "ateste3rstorage@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987333321",
@@ -32,7 +32,7 @@ const mockDriverData = {
 
 const mockCustomerData = {
   username: "atester4storage",
-  email: "atester4ep@strapi.com",
+  email: "atester4storagep@strapi.com",
   provider: "local",
   password: "12345678",
   phone: "0987444421",
@@ -59,7 +59,7 @@ beforeAll(async () => {
       identifier: mockAdminData.email,
       password: mockAdminData.password,
     })
-    .expect("Content-Type", expect === 404 ? /text/ : /json/)
+    .expect("Content-Type", /json/)
     .expect(200)
     .then((data) => {
       expect(data.body.jwt).toBeDefined();

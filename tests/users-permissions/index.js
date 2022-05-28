@@ -1,4 +1,9 @@
 require("./Address");
 require("./Auth");
 require("./CustomUser");
+require("./Fee");
+require("./Feedback");
+require("./Register");
+require("./Report");
+require("./SettingTest");
 require("./User");

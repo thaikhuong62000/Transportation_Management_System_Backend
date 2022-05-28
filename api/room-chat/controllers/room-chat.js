@@ -21,12 +21,9 @@ module.exports = {
       ctx.state.user.id
     );
     return rooms.map((room) => {
-      const {
-        id,
-        name,
-        phone,
-        avatar: { url: avatar },
-      } = getReceiver(room, ctx.state.user.id);
+      const receiver = getReceiver(room, ctx.state.user.id);
+      const { id, name, phone } = receiver;
+      const avatar = receiver?.avatar?.url;
       return { id, name, phone, avatar, room: room.id };
     });
   },

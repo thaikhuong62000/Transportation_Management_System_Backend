@@ -40,8 +40,13 @@ module.exports = () => {
     });
 
   // Init socket
-  var io = require("socket.io")(strapi.server);
+  var io = require("socket.io")(strapi.server, {
+    cors: {
+      origin: "*",
+    }
+  });
   require("./socket")(strapi, io);
+  global.io = io
 
   // Init TMS Config
   require("./process-config")(strapi);

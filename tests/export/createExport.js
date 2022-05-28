@@ -35,11 +35,6 @@ it.each(testCaseData)("$message", async ({ expect, type, send }) => {
     case 1:
       send.package = variable("package");
       break;
-    case 2:
-      send.package = "";
-      break;
-    default:
-      send.package = variable("package");
   }
 
   const idExport = await request(strapi.server) // app server is an instance of Class: http.Server

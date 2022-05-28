@@ -160,8 +160,6 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
     case 2:
       send.shipmentData.packages = "";
       break;
-    default:
-      send.shipmentData.packages = variable("package");
   }
   switch (send.shipmentData.to_storage) {
     case 1:
@@ -170,8 +168,6 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
     case 2:
       send.shipmentData.to_storage = "";
       break;
-    default:
-      send.shipmentData.to_storage = variable("storage");
   }
   switch (send.shipmentData.from_storage) {
     case 1:
@@ -180,8 +176,6 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
     case 2:
       send.shipmentData.from_storage = "";
       break;
-    default:
-      send.shipmentData.from_storage = variable("storage");
   }
   const idS = await request(strapi.server)
     .post("/shipments")
@@ -189,7 +183,7 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken(type))
     .send(send)
-    .expect("Content-Type", expect === 404 ? /text/ : /json/)
+    .expect("Content-Type", /json/)
     .expect(expect)
     .then((data) => {
       if (data?.body[0]?.id) {
@@ -203,7 +197,7 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
       .set("Authorization", "Bearer " + jwtToken("admin"))
-      .expect("Content-Type", expect === 404 ? /text/ : /json/)
+      .expect("Content-Type", /json/)
       .expect(200);
   }
 });

@@ -25,6 +25,7 @@ module.exports = {
       shipments = await strapi.services.shipment.find(
         {
           _where: [
+            { driver_null: false },
             { to_storage: ctx.state.user.storage },
             { arrived_time_null: true },
           ],
@@ -63,6 +64,13 @@ module.exports = {
         package: packageId,
         shipment,
       });
+
+      if (!shipment_item) {
+        shipment_item = await strapi.services["shipment-item"].findOne({
+          package: packageId,
+          shipment,
+        });
+      }
 
       if (!shipment_item) {
         throw "Invalid shipment item";
@@ -175,8 +183,10 @@ module.exports = {
         includeFields: ["quantity"],
       });
     } catch (error) {
-      await session.abortTransaction();
-      session.endSession();
+      if (session) {
+        await session.abortTransaction();
+        session.endSession();
+      }
       return ctx.badRequest([
         {
           id: "import.updateImportQuantityByPackage",

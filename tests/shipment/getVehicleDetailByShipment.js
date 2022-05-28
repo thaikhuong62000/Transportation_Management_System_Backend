@@ -30,43 +30,17 @@ const testCaseData = [
 ];
 
 it.each(testCaseData)("$message", async ({ expect, send, type }) => {
-  switch (send.shipmentData.packages) {
-    case 1:
-      send.shipmentData.packages = variable("package");
-      break;
-    case 2:
-      send.shipmentData.packages = "";
-      break;
-    default:
-      send.shipmentData.packages = variable("package");
-  }
-  switch (send.shipmentData.to_storage) {
-    case 1:
-      send.shipmentData.to_storage = variable("storage");
-      break;
-    case 2:
-      send.shipmentData.to_storage = "";
-      break;
-    default:
-      send.shipmentData.to_storage = variable("storage");
-  }
-  switch (send.shipmentData.from_storage) {
-    case 1:
-      send.shipmentData.from_storage = variable("storage");
-      break;
-    case 2:
-      send.shipmentData.from_storage = "";
-      break;
-    default:
-      send.shipmentData.from_storage = variable("storage");
-  }
+  send.shipmentData.packages = variable("package");
+  send.shipmentData.to_storage = variable("storage");
+  send.shipmentData.from_storage = variable("storage");
+
   const idSI = await request(strapi.server)
     .post("/shipments")
     .set("accept", "application/json")
     .set("Content-Type", "application/json")
     .set("Authorization", "Bearer " + jwtToken("admin"))
     .send(send)
-    .expect("Content-Type", expect === 404 ? /text/ : /json/)
+    .expect("Content-Type", /json/)
     .expect(expect)
     .then((data) => {
       if (data?.body[0]?.id) {
@@ -80,14 +54,14 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
       .set("Authorization", "Bearer " + jwtToken("admin"))
-      .expect("Content-Type", expect === 404 ? /text/ : /json/)
+      .expect("Content-Type", /json/)
       .expect(200);
     await request(strapi.server)
       .delete("/shipments/" + idSI)
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
       .set("Authorization", "Bearer " + jwtToken("admin"))
-      .expect("Content-Type", expect === 404 ? /text/ : /json/)
+      .expect("Content-Type", /json/)
       .expect(200);
   } else {
     await request(strapi.server)
@@ -95,7 +69,7 @@ it.each(testCaseData)("$message", async ({ expect, send, type }) => {
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
       .set("Authorization", "Bearer " + jwtToken("admin"))
-      .expect("Content-Type", expect === 404 ? /text/ : /json/)
+      .expect("Content-Type", /json/)
       .expect(400);
   }
 });
