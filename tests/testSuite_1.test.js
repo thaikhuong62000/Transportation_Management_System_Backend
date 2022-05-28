@@ -20,7 +20,7 @@ loginUser("admin", mockUserData.admin);
 initOrder("order", mockOrder[5]);
 
 it("driver accept shipment", async () => {
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait for creating shipment
+  await new Promise((resolve) => setTimeout(resolve, 4000)); // Wait for creating shipment
   shipment = await strapi.services.shipment.findOne(
     {
       packages_in: createdOrder("order").packages.map((item) => item.id),
@@ -145,7 +145,7 @@ it("stocker2 import packages", async () => {
 });
 
 it("driver accept shipment", async () => {
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait for creating shipment
+  await new Promise((resolve) => setTimeout(resolve, 4000)); // Wait for creating shipment
   shipment = await strapi.services.shipment.find(
     {
       packages_in: createdOrder("order").packages.map((item) => item.id),

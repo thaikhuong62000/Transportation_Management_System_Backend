@@ -25,6 +25,7 @@ module.exports = {
       shipments = await strapi.services.shipment.find(
         {
           _where: [
+            { driver_null: false },
             { to_storage: ctx.state.user.storage },
             { arrived_time_null: true },
           ],
